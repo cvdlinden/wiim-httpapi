@@ -9,3 +9,14 @@ Idea: Turn the documentation into a sort of [Graph Explorer](https://developer.m
 * <https://github.com/n4archive/LinkPlayAPI/blob/master/api.md>
 
 * <https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/>
+
+Swagger Editor
+
+* <https://editor-next.swagger.io/>
+
+Import json > Edit > Generate server > nodejs-server
+
+OpenAPI GUI (editor):
+
+* <https://github.com/Mermade/openapi-gui>
+* <https://mermade.github.io/openapi-gui/>
