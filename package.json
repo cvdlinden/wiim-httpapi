@@ -1,0 +1,26 @@
+{
+  "name": "wiim-httpapi",
+  "version": "1.0.0",
+  "description": "Exploring the HTTP API for WiiM products. Work in progress...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cvdlinden/wiim-httpapi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cvdlinden/wiim-httpapi/issues"
+  },
+  "homepage": "https://github.com/cvdlinden/wiim-httpapi#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
+  }
+}

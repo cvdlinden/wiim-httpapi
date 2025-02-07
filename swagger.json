@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "My API",
+      "description": "My API description",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/": {
+        "get": {
+          "summary": "Root endpoint",
+          "description": "Returns 'Hello, World!'",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
