@@ -2,7 +2,7 @@
 
 Exploring the HTTP API for WiiM products. Work in progress...
 
-Idea: Use Swagger UI to document the Linkplay HTTP API, that is used by WiiM.
+Idea: Use [Swagger UI](https://swagger.io/tools/swagger-ui/) to document the Linkplay HTTP API, that is used by WiiM.
 Swagger/OpenAPI has a nice documentation format, with try out functions so you can test to see what the responses are.
 
 Note: The WiiM device has a self-signed certificate, which is blocked by any modern browser. This solution uses a reverse proxy that ignores the certificate.
@@ -14,13 +14,16 @@ Note: The WiiM device has a self-signed certificate, which is blocked by any mod
 3. ```node .\index.js```
 4. You will find the interactive documentation at <http://localhost:3000/>
 
-## Linkplay API sources
+## Linkplay/WiiM HTTP API sources
+
+In no particular order:
 
 * <https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf>
 * <https://github.com/DanBrezeanu/wiim-extended-http-api>
 * <https://github.com/n4archive/LinkPlayAPI/blob/master/api.md>
+* <https://developer.arylic.com/httpapi/#http-api>
 
-* <https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/>
+<https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/>
 
 ## OpenAPI/Swagger sources
 
