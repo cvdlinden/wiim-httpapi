@@ -1,50 +1,54 @@
-// index.js
-const express = require('express');
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const https = require("https");
+// Description: This file is the entry point for the application. 
+// It creates an express app that serves the Swagger UI and proxies requests to the WiiM/Linkplay device.
+
+// Load required modules
+const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
 const http = require("http");
+const https = require("https");
 
-// const swaggerDocument = require('./swagger.json');
-// const swaggerDocument = YAML.load('openapi.yaml');
-const swaggerDocument = YAML.load('linkplay.yaml');
-// console.log(swaggerDocument);
+// Load config and swagger document
+const config = YAML.load("config.yaml");
+const swaggerDocument = YAML.load("linkplay.yaml");
 
+// Create express app on port 3000
 const app = express();
 const port = 3000;
 
-const deviceHost = "192.168.1.196";
-
 // Redirect root to /api-docs
-app.get('/', (req, res) => {
-  res.redirect('/api-docs');
+app.get("/", (req, res) => {
+  res.redirect("/api-docs");
 });
 
 // Serve Swagger UI at /api-docs
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Proxy requests to WiiM/Linkplay device
 app.use("/proxy", (req, res) => {
-  console.log(deviceHost);
+  // Translate the /proxy uri to the corresponding /httpapi.asp?command=
   let reqUrl = req.url;
   reqUrl = reqUrl.replace("/", "/httpapi.asp?command=");
-  console.log(reqUrl);
+  console.log("Call:", "https://" + config.deviceHost + reqUrl);
+
   const http_client = https.request({
-    host: deviceHost,
+    host: config.deviceHost,
     path: reqUrl,
     method: req.method,
     rejectUnauthorized: false,
     headers: req.headers,
     body: req.body
   }, (resp) => {
+    // Forward the header response from the WiiM/Linkplay device
     res.writeHead(resp.statusCode, resp.headers);
     resp.pipe(res);
   });
 
+  // Forward the body of the request to the WiiM/Linkplay device
   req.pipe(http_client);
+  
 });
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
-  console.log(`Swagger UI is running on http://localhost:${port}/api-docs`);
 });

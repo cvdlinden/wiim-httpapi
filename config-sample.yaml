@@ -1,0 +1,5 @@
+deviceHost: 
+  10.10.10.254
+description: Make a copy of this file and rename it to config.yaml. 
+  Replace deviceHost with the IP address of your device.
+  The IP address of the device can be found in the device's settings.

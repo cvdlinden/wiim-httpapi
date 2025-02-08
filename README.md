@@ -1,23 +1,35 @@
 # wiim-httpapi
 
-Exploring the HTTP API for WiiM products. Work in progress...
+Exploring the HTTP API (/httpapi.asp) for WiiM products.
+
+Status: Work in progress...
 
 Idea: Use [Swagger UI](https://swagger.io/tools/swagger-ui/) to document the Linkplay HTTP API, that is used by WiiM.
-Swagger/OpenAPI has a nice documentation format, with try out functions so you can test to see what the responses are.
+Swagger/OpenAPI has a nice documentation format, with a 'try it out' option so you can test to see what the responses are.
 
-Note: The WiiM device has a self-signed certificate, which is blocked by any modern browser. This solution uses a reverse proxy that ignores the certificate.
+![Swagger UI](./assets/Screenshot%202025-02-08%20030405.jpg)
+
+Note: The WiiM device has a self-signed certificate, which is deemed unsafe by any modern browser. Therefore this solution uses a reverse proxy that ignores the certificate.
 
 ## How to use
 
 1. Clone this repo
-2. ```npm install```
-3. ```node .\index.js```
-4. You will find the interactive documentation at <http://localhost:3000/>
+
+   ```shell
+   git clone https://github.com/cvdlinden/wiim-httpapi.git
+   ```  
+
+   or download the ZIP file and unpack to a folder
+2. Do an ```npm install``` to install the required packages
+3. Copy the ```config-sample.yaml``` file to ```config.yaml```
+4. Edit ```config.yaml``` in your favorite text editor and replace the ip-address with the address of your WiiM device
+5. Run ```node .\index.js```
+6. You will find the interactive documentation at <http://localhost:3000/>
 
 Requirements:
 
-* Git, in order to clone. Although you can download the ZIP file.
-* Nodejs, in order to run this documentation.
+* [Git](https://git-scm.com/): in order to clone this repo. Although you can just download the ZIP file as well.
+* [Nodejs](https://nodejs.org/): in order to run this documentation.
 
 ## Linkplay/WiiM HTTP API sources
 
