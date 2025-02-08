@@ -14,6 +14,11 @@ Note: The WiiM device has a self-signed certificate, which is blocked by any mod
 3. ```node .\index.js```
 4. You will find the interactive documentation at <http://localhost:3000/>
 
+Requirements:
+
+* Git, in order to clone. Although you can download the ZIP file.
+* Nodejs, in order to run this documentation.
+
 ## Linkplay/WiiM HTTP API sources
 
 In no particular order:
