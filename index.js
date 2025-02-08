@@ -10,7 +10,7 @@ const https = require("https");
 
 // Load config and swagger document
 const config = YAML.load("config.yaml");
-const swaggerDocument = YAML.load("linkplay.yaml");
+const swaggerDocument = YAML.load("openapi.yaml");
 
 // Create express app on port 3000
 const app = express();

@@ -70,3 +70,5 @@ Best to use nodemon, with a watch on the yaml changes. If you change the documen
 ```shell
 nodemon -e yaml
 ```
+
+Note: You'll find an openapi.json file as well in this source. It isn't used and only here for reference.
