@@ -7,13 +7,22 @@ Swagger/OpenAPI has a nice documentation format, with try out functions so you c
 
 Note: The WiiM device has a self-signed certificate, which is blocked by any modern browser. This solution uses a reverse proxy that ignores the certificate.
 
-API Documentation:
+## How to use
+
+1. Clone this repo
+2. ```npm install```
+3. ```node .\index.js```
+4. You will find the interactive documentation at <http://localhost:3000/>
+
+## Linkplay API sources
 
 * <https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf>
 * <https://github.com/DanBrezeanu/wiim-extended-http-api>
 * <https://github.com/n4archive/LinkPlayAPI/blob/master/api.md>
 
 * <https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/>
+
+## OpenAPI/Swagger sources
 
 Swagger Editor:
 
@@ -33,3 +42,11 @@ Add it to your copy of linkplay.yaml and try it out.
 
 Then make a PR or create an Issue. Tell us what the command does AND where you found it.  
 I don't want to sacrifice my own device or anyone elses. ;)
+
+## Adding changes to the YAML doc
+
+Best to use nodemon, with a watch on the yaml changes. If you change the documentation you will only need to refresh the browser, instead of restarting node again.
+
+```shell
+nodemon -e yaml
+```

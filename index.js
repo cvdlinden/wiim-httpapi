@@ -26,14 +26,12 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Proxy requests to WiiM/Linkplay device
 app.use("/proxy", (req, res) => {
   console.log(deviceHost);
-  console.log(req.url);
-  console.log(req.method);
-  console.log(req.headers);
-  console.log(req.body);
-  // const http_handler = getProtocol(req) == 'http' ? http : https;
+  let reqUrl = req.url;
+  reqUrl = reqUrl.replace("/", "/httpapi.asp?command=");
+  console.log(reqUrl);
   const http_client = https.request({
     host: deviceHost,
-    path: req.url,
+    path: reqUrl,
     method: req.method,
     rejectUnauthorized: false,
     headers: req.headers,

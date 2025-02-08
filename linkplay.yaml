@@ -1,16 +1,37 @@
 openapi: 3.0.0
 info:
-  title: LinkPlay HTTP API
-  description: My API description
-  version: 1.0.0
+  title: Linkplay/WiiM HTTP API
+  description: HTTP API for Linkplay/WiiM devices.  
+    You can send 'HTTPs Get' request to the device, most of the response is in the JSON format.
+  
+    Request format is https://x.x.x.x/httpapi.asp?command=********
+  
+    x.x.x.x is the IP address of the device (Below, we assume the IP of the device is 10.10.10.254)  
+    ******* is the actual command.
+
+    Commands can contain both integers and strings, denoted as '%d' for integers and '%s' for
+    strings, respectively. 
+
+    This Swagger doc uses a reverse proxy to access the device. See the description for the actual command.
+
+  version: 1.2.0
 servers:
   - url: http://localhost:3000/proxy
-    description: WiiM device
+    description: Reverse proxy to access the device. See the README for more information.
+tags:
+- name: Device information
+  description: Get the device information
+- name: Network
+  description: Get the network status
+- name: Playback control
+  description: Get and set playback controls
 paths:
-  /httpapi.asp?command=getStatusEx:
+  /getStatusEx:
     get:
-      summary: Root endpoint
-      description: Returns 'Hello, World!'
+      tags:
+        - Device information
+      summary: Get device information
+      description: Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx
       responses:
         "200":
           description: Successful response
@@ -19,11 +40,60 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  language:
                     type: string
-            application/json:
+                  ssid:
+                    type: string
+                    description: Name of the device
+                  ...:
+                    type: string
+  /wlanGetConnectState:
+    get:
+      tags:
+      - Network
+      summary: Get the connection status
+      description: Makes a call to https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
+        Note the return result is not in json.
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                oneOf:
+                - type: string
+                  example: "PROCESS"
+                  description: In progress
+                - type: string
+                  example: "PAIRFAIL"
+                  description: Wrong password
+                - type: string
+                  example: "FAIL"
+                  description: Connection failed
+                - type: string
+                  example: "OK"
+                  description: Connected
+  /getPlayerStatus:
+    get:
+      tags:
+        - Playback control
+      summary: Get the playback status
+      description: Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
               schema:
                 type: object
                 properties:
-                  message:
+                  status:
+                    type: string
+                    description: Playback status
+                    enum:
+                      - "PLAYING"
+                      - "PAUSE"
+                      - "STOP"
+                      - "BUFFERING"
+                  ...:
                     type: string
