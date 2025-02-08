@@ -33,6 +33,20 @@ tags:
     description: Get the network status
   - name: Playback control
     description: Get and set playback controls
+  - name: EQ
+    description: Get and set equalizer settings
+  - name: Device control
+    description: Control the device
+  - name: Alarm clock
+    description: Get and set alarm clock
+  - name: Source Input Switch
+    description: Switch between inputs
+  - name: Presets
+    description: Manage presets
+  - name: Track Metadata
+    description: Get Current Track Metadata
+  - name: Audio Output Control
+    description: Get and set audio output mode
 paths:
   /getStatusEx:
     get:
@@ -110,8 +124,305 @@ paths:
                   ...:
                     type: string
       parameters: []
+  '/setPlayerCmd:play:url':
+    get:
+      summary: Play audio URL
+      description: |-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
+        Play the URL. URL points to an audio stream address.
+        Response is always 'OK' now
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:playlist:url:<index>':
+    get:
+      summary: Play audio playlist
+      description: >-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
+
+        Play the playlist with the URL (URL points to the m3u or ASX playlist
+        link, index is the start
+
+        index).
+
+        Response is always 'OK' now.
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:hex_playlist:url:<index>':
+    get:
+      summary: ''
+      description: >
+        http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>
+
+        Play the URl (URI is the m3u or ASX playlist link, index is the start
+        index), here, url should be
+
+        hexed (please refer to 1.3)
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+      deprecated: true
+  '/setPlayerCmd:pause':
+    get:
+      summary: Pause
+      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause'
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:resume':
+    get:
+      summary: Resume
+      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume'
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:onepause':
+    get:
+      summary: Toggle pause/play
+      description: |-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause
+        If the state is paused, resume it; otherwise, pause it.
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:prev':
+    get:
+      summary: Previous
+      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev'
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:next':
+    get:
+      summary: Next
+      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next'
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:seek:position':
+    get:
+      summary: Seek
+      description: |-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:seek:position
+        Position is from 0 to duration in second.
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:stop':
+    get:
+      summary: Stop
+      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop'
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:vol:{value}':
+    get:
+      summary: Set volume
+      description: |-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:vol:value
+        Value can be 0 to 100.
+      parameters:
+        - name: value
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Value can be 0 to 100.
+          minLength: '0'
+          maxLength: '100'
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:mute:{n}':
+    get:
+      summary: Mute
+      description: >-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:mute:n
+
+        Mute: n=1
+
+        Unmute: n=0
+
+        The slave mute state will be set at the same time when it's in group
+        play.
+      parameters:
+        - name: 'n'
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - '1'
+              - '0'
+            default: '1'
+          description: |-
+            Mute: n=1
+            Unmute: n=0
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:loopmode:{n}':
+    get:
+      summary: Loop mode set
+      description: |
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:loopmode:n
+
+        n = 
+        0 - Sequence, no loop
+        1 - Single loop
+        2 - Shuffle loop
+        -1 - Sequence loop
+      parameters:
+        - name: 'n'
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - '0'
+              - '1'
+              - '2'
+              - '-1'
+          description: |-
+            0 Sequence, no loop
+            1 Single loop
+            2 Shuffle loop
+            -1 Sequence loop
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  /getNewAudioOutputHardwareMode:
+    get:
+      summary: Get audio output mode
+      description: |-
+        JSON Response：
+        {"hardware":"2","source":"0","audiocast":"0"}
+        Description：
+        Field Description
+        hardware Hardware Interface output mode:
+        1: AUDIO_OUTPUT_SPDIF_MODE
+        2: AUDIO_OUTPUT_AUX_MODE
+        3: AUDIO_OUTPUT_COAX_MODE
+        source BT source output mode:
+        0: disable
+        1: active
+        audiocast Audio cast output mode:
+        0: disable
+        1: active
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Audio Output Control
+  '/setAudioOutputHardwareMode:{n}':
+    get:
+      summary: Set audio output mode
+      description: |-
+        Field Description
+        Hardware Interface output mode:
+        1: AUDIO_OUTPUT_SPDIF_MODE
+        2: AUDIO_OUTPUT_AUX_MODE
+        3: AUDIO_OUTPUT_COAX_MODE
+        Response is 'OK'
+      parameters:
+        - name: 'n'
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - '1'
+              - '2'
+              - '3'
+          description: |-
+            Hardware Interface output mode:
+            1: AUDIO_OUTPUT_SPDIF_MODE
+            2: AUDIO_OUTPUT_AUX_MODE
+            3: AUDIO_OUTPUT_COAX_MODE
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Audio Output Control
+  /getMetaInfo:
+    get:
+      summary: Get Current Track Metadata
+      description: |-
+        JSON Response
+        {
+         "metaData": {
+         "album": "Country Heat",
+         "title": "Old Dirt Roads",
+         "artist": "Owen Riegling",
+         "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
+         "sampleRate ": "44100",
+         "bitDepth": "16"
+         }
+        }
+      parameters: []
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Track Metadata
 security: []
 components:
   links: {}
   callbacks: {}
   schemas: {}
+externalDocs:
+  url: 'https://github.com/cvdlinden/wiim-httpapi'
