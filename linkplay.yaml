@@ -4,7 +4,7 @@ info:
   description: My API description
   version: 1.0.0
 servers:
-  - url: https://192.168.1.196
+  - url: http://localhost:3000/proxy
     description: WiiM device
 paths:
   /httpapi.asp?command=getStatusEx:
@@ -12,9 +12,15 @@ paths:
       summary: Root endpoint
       description: Returns 'Hello, World!'
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
             application/json:
               schema:
                 type: object
