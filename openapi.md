@@ -170,6 +170,12 @@ Play the playlist with the URL (URL points to the m3u or ASX playlist link, inde
 index).
 Response is always 'OK' now.
 
+<h3 id="get__setplayercmd:playlist:url:{index}-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|index|path|string|true|none|
+
 <h3 id="get__setplayercmd:playlist:url:{index}-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -187,6 +193,12 @@ This operation does not require authentication
 http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>
 Play the URl (URI is the m3u or ASX playlist link, index is the start index), here, url should be
 hexed (please refer to 1.3)
+
+<h3 id="get__setplayercmd:hex_playlist:url:{index}-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|index|path|string|true|none|
 
 <h3 id="get__setplayercmd:hex_playlist:url:{index}-responses">Responses</h3>
 

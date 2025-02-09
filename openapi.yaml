@@ -149,7 +149,12 @@ paths:
         index).
 
         Response is always 'OK' now.
-      parameters: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         default:
           description: Default response
@@ -165,7 +170,12 @@ paths:
         index), here, url should be
 
         hexed (please refer to 1.3)
-      parameters: []
+      parameters:
+        - name: index
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         default:
           description: Default response
@@ -259,8 +269,8 @@ paths:
           schema:
             type: string
           description: Value can be 0 to 100.
-          minLength: '0'
-          maxLength: '100'
+          minLength: ''
+          maxLength: ''
       responses:
         default:
           description: Default response
