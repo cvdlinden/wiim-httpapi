@@ -132,7 +132,6 @@ paths:
         Play the URL. URL points to an audio stream address.
         Response is always 'OK' now
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -151,7 +150,6 @@ paths:
 
         Response is always 'OK' now.
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -168,7 +166,6 @@ paths:
 
         hexed (please refer to 1.3)
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -180,7 +177,6 @@ paths:
       summary: Pause
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause'
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -191,7 +187,6 @@ paths:
       summary: Resume
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume'
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -204,7 +199,6 @@ paths:
         https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause
         If the state is paused, resume it; otherwise, pause it.
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -215,7 +209,6 @@ paths:
       summary: Previous
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev'
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -226,7 +219,6 @@ paths:
       summary: Next
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next'
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -239,7 +231,6 @@ paths:
         https://10.10.10.254/httpapi.asp?command=setPlayerCmd:seek:position
         Position is from 0 to duration in second.
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -250,7 +241,6 @@ paths:
       summary: Stop
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop'
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -271,7 +261,6 @@ paths:
           description: Value can be 0 to 100.
           minLength: '0'
           maxLength: '100'
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -302,7 +291,6 @@ paths:
           description: |-
             Mute: n=1
             Unmute: n=0
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -335,7 +323,6 @@ paths:
             1 Single loop
             2 Shuffle loop
             -1 Sequence loop
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -360,7 +347,6 @@ paths:
         0: disable
         1: active
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -391,7 +377,6 @@ paths:
             1: AUDIO_OUTPUT_SPDIF_MODE
             2: AUDIO_OUTPUT_AUX_MODE
             3: AUDIO_OUTPUT_COAX_MODE
-      operationId: ''
       responses:
         default:
           description: Default response
@@ -413,7 +398,6 @@ paths:
          }
         }
       parameters: []
-      operationId: ''
       responses:
         default:
           description: Default response
