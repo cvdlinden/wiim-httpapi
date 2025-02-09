@@ -19,6 +19,8 @@ Base URLs:
 
 * <a href="http://localhost:3000/proxy">http://localhost:3000/proxy</a>
 
+# Authentication
+
 <h1 id="linkplay-wiim-http-api-device-information">Device information</h1>
 
 Get the device information
@@ -69,14 +71,23 @@ Get the network status
 
 *Get the connection status*
 
-Makes a call to https://10.10.10.254/httpapi.asp?command=wlanGetConnectState Note the return result is not in json.
+Makes a call to https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
+
+Note the return result is not in json.
+
+Return string：
+Return string Description
+PROCESS In progress
+PAIRFAIL Wrong password
+FAIL Connect fail
+OK connected
 
 > Example responses
 
 > 200 Response
 
 ```
-"PROCESS"
+null
 ```
 
 <h3 id="get__wlangetconnectstate-responses">Responses</h3>
@@ -134,53 +145,6 @@ Status Code **200**
 |status|PAUSE|
 |status|STOP|
 |status|BUFFERING|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## get__setPlayerCmd:play:url
-
-`GET /setPlayerCmd:play:url`
-
-*Play audio URL*
-
-https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
-Play the URL. URL points to an audio stream address.
-Response is always 'OK' now
-
-<h3 id="get__setplayercmd:play:url-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|Default response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## get__setPlayerCmd:playlist:url:{index}
-
-`GET /setPlayerCmd:playlist:url:{index}`
-
-*Play audio playlist*
-
-https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
-Play the playlist with the URL (URL points to the m3u or ASX playlist link, index is the start
-index).
-Response is always 'OK' now.
-
-<h3 id="get__setplayercmd:playlist:url:{index}-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|index|path|string|true|none|
-
-<h3 id="get__setplayercmd:playlist:url:{index}-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|Default response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -443,6 +407,256 @@ n =
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |default|Default|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setPlayerCmd:play:{url}
+
+`GET /setPlayerCmd:play:{url}`
+
+*Play audio URL*
+
+https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
+Play the URL. URL points to an audio stream address.
+Response is always 'OK' now
+
+<h3 id="get__setplayercmd:play:{url}-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|url|path|string|true|URL points to an audio stream address|
+
+<h3 id="get__setplayercmd:play:{url}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setPlayerCmd:playlist:{url}:{index}
+
+`GET /setPlayerCmd:playlist:{url}:{index}`
+
+*Play audio playlist*
+
+https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
+Play the playlist with the URL (URL points to the m3u or ASX playlist link, index is the start
+index).
+Response is always 'OK' now.
+
+<h3 id="get__setplayercmd:playlist:{url}:{index}-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|index|path|string|true|none|
+|url|path|string|true|none|
+
+<h3 id="get__setplayercmd:playlist:{url}:{index}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="linkplay-wiim-http-api-eq">EQ</h1>
+
+Get and set equalizer settings
+
+## get__EQOn
+
+`GET /EQOn`
+
+*Turn on the EQ*
+
+https://10.10.10.254/httpapi.asp?command=EQOn
+
+JSON Response:
+{"status":"OK"} or {"status":"Failed"}
+
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
+<h3 id="get__eqon-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="get__eqon-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__EQOff
+
+`GET /EQOff`
+
+*Turn off the EQ setting*
+
+https://10.10.10.254/httpapi.asp?command=EQOff
+
+JSON Response:
+{"status":"OK"} or {"status":"Failed"}
+
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
+<h3 id="get__eqoff-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="get__eqoff-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__EQGetStat
+
+`GET /EQGetStat`
+
+*Check if the EQ is ON or OFF*
+
+http://10.10.10.254/httpapi.asp?command=EQGetStat
+
+JSON Response:
+{"EQStat":"On"} or {"EQStat":"Off"}
+
+> Example responses
+
+> 222 Response
+
+```
+null
+```
+
+<h3 id="get__eqgetstat-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|222|Unknown|Default response|Inline|
+
+<h3 id="get__eqgetstat-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__EQGetList
+
+`GET /EQGetList`
+
+*Check all the possible EQ settings*
+
+http://10.10.10.254/httpapi.asp?command=EQGetList
+
+Response:
+["Flat", "Acoustic", "Bass Booster", "Bass Reducer", "Classical", "Dance", "Deep", "Electronic",
+"Hip-Hop", "Jazz", "Latin", "Loudness", "Lounge", "Piano", "Pop", "R&B", "Rock", "Small
+Speakers", "Spoken Word", "Treble Booster", "Treble Reducer", "Vocal Booster"]
+
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
+<h3 id="get__eqgetlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="get__eqgetlist-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__EQLoad:{name}
+
+`GET /EQLoad:{name}`
+
+*Set the specific EQ with name*
+
+http://10.10.10.254/httpapi.asp?command=EQLoad:xxx
+
+JSON Response:
+{"status":"OK"} or {"status":"Failed"}
+
+Note: xxx is the one of the name in the list returned by EQGetList, i.e., EQLoad:Flat
+
+<h3 id="get__eqload:{name}-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|name|path|string|true|The name in the list returned by EQGetList, i.e., EQLoad:Flat|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|name|Flat|
+|name|Acoustic|
+|name|Bass Booster|
+|name|Bass Reducer|
+|name|Classical|
+|name|Dance|
+|name|Deep|
+|name|Electronic|
+|name|Hip-Hop|
+|name|Jazz|
+|name|Latin|
+|name|Loudness|
+|name|Lounge|
+|name|Piano|
+|name|Pop|
+|name|R&B|
+|name|Rock|
+|name|Small Speakers|
+|name|Spoken Word|
+|name|Treble Booster|
+|name|Treble Reducer|
+|name|Vocal Booster|
+
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
+<h3 id="get__eqload:{name}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="get__eqload:{name}-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication

@@ -75,30 +75,40 @@ paths:
       tags:
         - Network
       summary: Get the connection status
-      description: >-
+      description: >+
         Makes a call to
-        https://10.10.10.254/httpapi.asp?command=wlanGetConnectState Note the
-        return result is not in json.
+        https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
+
+
+        Note the return result is not in json.
+
+
+        Return string：
+
+        Return string Description
+
+        PROCESS In progress
+
+        PAIRFAIL Wrong password
+
+        FAIL Connect fail
+
+        OK connected
+
       responses:
         '200':
           description: Successful response
           content:
             text/html:
               schema:
-                oneOf:
-                  - type: string
-                    example: PROCESS
-                    description: In progress
-                  - type: string
-                    example: PAIRFAIL
-                    description: Wrong password
-                  - type: string
-                    example: FAIL
-                    description: Connection failed
-                  - type: string
-                    example: OK
-                    description: Connected
+                - PROCESS
+                - PAIRFAIL
+                - FAIL
+                - OK
       parameters: []
+      externalDocs:
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        description: HTTP API for WiiM PRODUCTS Version 1.2
   /getPlayerStatus:
     get:
       tags:
@@ -124,42 +134,6 @@ paths:
                   ...:
                     type: string
       parameters: []
-  '/setPlayerCmd:play:url':
-    get:
-      summary: Play audio URL
-      description: |-
-        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
-        Play the URL. URL points to an audio stream address.
-        Response is always 'OK' now
-      parameters: []
-      responses:
-        default:
-          description: Default response
-      tags:
-        - Playback control
-  '/setPlayerCmd:playlist:url:{index}':
-    get:
-      summary: Play audio playlist
-      description: >-
-        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
-
-        Play the playlist with the URL (URL points to the m3u or ASX playlist
-        link, index is the start
-
-        index).
-
-        Response is always 'OK' now.
-      parameters:
-        - name: index
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        default:
-          description: Default response
-      tags:
-        - Playback control
   '/setPlayerCmd:hex_playlist:url:{index}':
     get:
       summary: ''
@@ -411,10 +385,211 @@ paths:
           description: Default response
       tags:
         - Track Metadata
+  '/setPlayerCmd:play:{url}':
+    get:
+      summary: Play audio URL
+      description: |-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
+        Play the URL. URL points to an audio stream address.
+        Response is always 'OK' now
+      parameters:
+        - name: url
+          in: path
+          required: true
+          schema:
+            type: string
+            default: >-
+              http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8
+          description: URL points to an audio stream address
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  '/setPlayerCmd:playlist:{url}:{index}':
+    get:
+      summary: Play audio playlist
+      description: >-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
+
+        Play the playlist with the URL (URL points to the m3u or ASX playlist
+        link, index is the start
+
+        index).
+
+        Response is always 'OK' now.
+      parameters:
+        - name: index
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: url
+          in: path
+          required: true
+          schema:
+            type: string
+            default: >-
+              https://gist.githubusercontent.com/bpsib/67089b959e4fa898af69fea59ad74bc3/raw/685789e28187c0a15da978b51d436a140d5ea207/BBC-Radio-HLS.m3u
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Playback control
+  /EQOn:
+    get:
+      summary: Turn on the EQ
+      description: |-
+        https://10.10.10.254/httpapi.asp?command=EQOn
+
+        JSON Response:
+        {"status":"OK"} or {"status":"Failed"}
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: ''
+      responses:
+        '200':
+          description: Default response
+          content:
+            text/html:
+              schema: {}
+      tags:
+        - EQ
+  /EQOff:
+    get:
+      summary: Turn off the EQ setting
+      description: |
+        https://10.10.10.254/httpapi.asp?command=EQOff
+
+        JSON Response:
+        {"status":"OK"} or {"status":"Failed"}
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: ''
+      responses:
+        '200':
+          description: Default response
+          content:
+            text/html:
+              schema: {}
+      tags:
+        - EQ
+  /EQGetStat:
+    get:
+      summary: Check if the EQ is ON or OFF
+      description: |-
+        http://10.10.10.254/httpapi.asp?command=EQGetStat
+
+        JSON Response:
+        {"EQStat":"On"} or {"EQStat":"Off"}
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: ''
+      responses:
+        '222':
+          description: Default response
+          content:
+            text/html:
+              schema: {}
+      tags:
+        - EQ
+  /EQGetList:
+    get:
+      summary: Check all the possible EQ settings
+      description: >
+        http://10.10.10.254/httpapi.asp?command=EQGetList
+
+
+        Response:
+
+        ["Flat", "Acoustic", "Bass Booster", "Bass Reducer", "Classical",
+        "Dance", "Deep", "Electronic",
+
+        "Hip-Hop", "Jazz", "Latin", "Loudness", "Lounge", "Piano", "Pop", "R&B",
+        "Rock", "Small
+
+        Speakers", "Spoken Word", "Treble Booster", "Treble Reducer", "Vocal
+        Booster"]
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: ''
+      responses:
+        '200':
+          description: Default response
+          content:
+            text/html:
+              schema: {}
+      tags:
+        - EQ
+  '/EQLoad:{name}':
+    get:
+      summary: Set the specific EQ with name
+      description: >-
+        http://10.10.10.254/httpapi.asp?command=EQLoad:xxx
+
+
+        JSON Response:
+
+        {"status":"OK"} or {"status":"Failed"}
+
+
+        Note: xxx is the one of the name in the list returned by EQGetList,
+        i.e., EQLoad:Flat
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - Flat
+              - Acoustic
+              - Bass Booster
+              - Bass Reducer
+              - Classical
+              - Dance
+              - Deep
+              - Electronic
+              - Hip-Hop
+              - Jazz
+              - Latin
+              - Loudness
+              - Lounge
+              - Piano
+              - Pop
+              - R&B
+              - Rock
+              - Small Speakers
+              - Spoken Word
+              - Treble Booster
+              - Treble Reducer
+              - Vocal Booster
+          description: 'The name in the list returned by EQGetList, i.e., EQLoad:Flat'
+      operationId: ''
+      responses:
+        '200':
+          description: Default response
+          content:
+            text/html:
+              schema: {}
+      tags:
+        - EQ
 security: []
 components:
   links: {}
   callbacks: {}
   schemas: {}
+  securitySchemes: {}
 externalDocs:
   url: 'https://github.com/cvdlinden/wiim-httpapi'
