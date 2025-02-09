@@ -1,499 +1,497 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "Linkplay/WiiM HTTP API",
-        "description": "HTTP API for Linkplay/WiiM devices.\n\nYou can send 'HTTPs Get' request to the device, most of the response is in the JSON format.\n\nRequest format is https://x.x.x.x/httpapi.asp?command=********\nx.x.x.x is the IP address of the device (Below, we assume the IP of the device is 10.10.10.254) ******* is the actual command.\n\nCommands can contain both integers and strings, denoted as '%d' for integers and '%s' for strings, respectively.\n\nThis Swagger doc uses a reverse proxy to access the device. See the description for the actual command.",
-        "version": "1.2.0",
-        "contact": {}
-    },
-    "servers": [
-        {
-            "url": "http://localhost:3000/proxy",
-            "description": "Reverse proxy to access the device. See the README for more information."
-        }
-    ],
-    "tags": [
-        {
-            "name": "Device information",
-            "description": "Get the device information"
-        },
-        {
-            "name": "Network",
-            "description": "Get the network status"
-        },
-        {
-            "name": "Playback control",
-            "description": "Get and set playback controls"
-        },
-        {
-            "name": "EQ",
-            "description": "Get and set equalizer settings"
-        },
-        {
-            "name": "Device control",
-            "description": "Control the device"
-        },
-        {
-            "name": "Alarm clock",
-            "description": "Get and set alarm clock"
-        },
-        {
-            "name": "Source Input Switch",
-            "description": "Switch between inputs"
-        },
-        {
-            "name": "Presets",
-            "description": "Manage presets"
-        },
-        {
-            "name": "Track Metadata",
-            "description": "Get Current Track Metadata"
-        },
-        {
-            "name": "Audio Output Control",
-            "description": "Get and set audio output mode"
-        }
-    ],
-    "paths": {
-        "/getStatusEx": {
-            "get": {
-                "tags": [
-                    "Device information"
-                ],
-                "summary": "Get device information",
-                "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx",
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "text/html": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "language": {
-                                            "type": "string"
-                                        },
-                                        "ssid": {
-                                            "type": "string",
-                                            "description": "Name of the device"
-                                        },
-                                        "...": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters": []
-            }
-        },
-        "/wlanGetConnectState": {
-            "get": {
-                "tags": [
-                    "Network"
-                ],
-                "summary": "Get the connection status",
-                "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=wlanGetConnectState Note the return result is not in json.",
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "text/html": {
-                                "schema": {
-                                    "oneOf": [
-                                        {
-                                            "type": "string",
-                                            "example": "PROCESS",
-                                            "description": "In progress"
-                                        },
-                                        {
-                                            "type": "string",
-                                            "example": "PAIRFAIL",
-                                            "description": "Wrong password"
-                                        },
-                                        {
-                                            "type": "string",
-                                            "example": "FAIL",
-                                            "description": "Connection failed"
-                                        },
-                                        {
-                                            "type": "string",
-                                            "example": "OK",
-                                            "description": "Connected"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters": []
-            }
-        },
-        "/getPlayerStatus": {
-            "get": {
-                "tags": [
-                    "Playback control"
-                ],
-                "summary": "Get the playback status",
-                "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus",
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "text/html": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "status": {
-                                            "type": "string",
-                                            "description": "Playback status",
-                                            "enum": [
-                                                "PLAYING",
-                                                "PAUSE",
-                                                "STOP",
-                                                "BUFFERING"
-                                            ]
-                                        },
-                                        "...": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters": []
-            }
-        },
-        "/setPlayerCmd:play:url": {
-            "get": {
-                "summary": "Play audio URL",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url\nPlay the URL. URL points to an audio stream address.\nResponse is always 'OK' now",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:playlist:url:{index}": {
-            "get": {
-                "summary": "Play audio playlist",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>\nPlay the playlist with the URL (URL points to the m3u or ASX playlist link, index is the start\nindex).\nResponse is always 'OK' now.",
-                "parameters": [
-                    {
-                        "name": "index",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:hex_playlist:url:{index}": {
-            "get": {
-                "summary": "",
-                "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>\nPlay the URl (URI is the m3u or ASX playlist link, index is the start index), here, url should be\nhexed (please refer to 1.3)\n",
-                "parameters": [
-                    {
-                        "name": "index",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ],
-                "deprecated": true
-            }
-        },
-        "/setPlayerCmd:pause": {
-            "get": {
-                "summary": "Pause",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:resume": {
-            "get": {
-                "summary": "Resume",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:onepause": {
-            "get": {
-                "summary": "Toggle pause/play",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause\nIf the state is paused, resume it; otherwise, pause it.",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:prev": {
-            "get": {
-                "summary": "Previous",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:next": {
-            "get": {
-                "summary": "Next",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:seek:position": {
-            "get": {
-                "summary": "Seek",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:seek:position\nPosition is from 0 to duration in second.",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:stop": {
-            "get": {
-                "summary": "Stop",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:vol:{value}": {
-            "get": {
-                "summary": "Set volume",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:vol:value\nValue can be 0 to 100.",
-                "parameters": [
-                    {
-                        "name": "value",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "description": "Value can be 0 to 100.",
-                        "minLength": "",
-                        "maxLength": ""
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:mute:{n}": {
-            "get": {
-                "summary": "Mute",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:mute:n\nMute: n=1\nUnmute: n=0\nThe slave mute state will be set at the same time when it's in group play.",
-                "parameters": [
-                    {
-                        "name": "n",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "1",
-                                "0"
-                            ],
-                            "default": "1"
-                        },
-                        "description": "Mute: n=1\nUnmute: n=0"
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/setPlayerCmd:loopmode:{n}": {
-            "get": {
-                "summary": "Loop mode set",
-                "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:loopmode:n\n\nn = \n0 - Sequence, no loop\n1 - Single loop\n2 - Shuffle loop\n-1 - Sequence loop\n",
-                "parameters": [
-                    {
-                        "name": "n",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "0",
-                                "1",
-                                "2",
-                                "-1"
-                            ]
-                        },
-                        "description": "0 Sequence, no loop\n1 Single loop\n2 Shuffle loop\n-1 Sequence loop"
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Playback control"
-                ]
-            }
-        },
-        "/getNewAudioOutputHardwareMode": {
-            "get": {
-                "summary": "Get audio output mode",
-                "description": "JSON Response：\n{\"hardware\":\"2\",\"source\":\"0\",\"audiocast\":\"0\"}\nDescription：\nField Description\nhardware Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE\nsource BT source output mode:\n0: disable\n1: active\naudiocast Audio cast output mode:\n0: disable\n1: active",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Audio Output Control"
-                ]
-            }
-        },
-        "/setAudioOutputHardwareMode:{n}": {
-            "get": {
-                "summary": "Set audio output mode",
-                "description": "Field Description\nHardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE\nResponse is 'OK'",
-                "parameters": [
-                    {
-                        "name": "n",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "1",
-                                "2",
-                                "3"
-                            ]
-                        },
-                        "description": "Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE"
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Audio Output Control"
-                ]
-            }
-        },
-        "/getMetaInfo": {
-            "get": {
-                "summary": "Get Current Track Metadata",
-                "description": "JSON Response\n{\n \"metaData\": {\n \"album\": \"Country Heat\",\n \"title\": \"Old Dirt Roads\",\n \"artist\": \"Owen Riegling\",\n \"albumArtURI \": \"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg\",\n \"sampleRate \": \"44100\",\n \"bitDepth\": \"16\"\n }\n}",
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "Default response"
-                    }
-                },
-                "tags": [
-                    "Track Metadata"
-                ]
-            }
-        }
-    },
-    "security": [],
-    "components": {
-        "links": {},
-        "callbacks": {},
-        "schemas": {}
-    },
-    "externalDocs": {
-        "url": "https://github.com/cvdlinden/wiim-httpapi"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Linkplay/WiiM HTTP API",
+    "description": "HTTP API for Linkplay/WiiM devices.\n\nYou can send 'HTTPs Get' request to the device, most of the response is in the JSON format.\n\nRequest format is https://x.x.x.x/httpapi.asp?command=********\nx.x.x.x is the IP address of the device (Below, we assume the IP of the device is 10.10.10.254) ******* is the actual command.\n\nCommands can contain both integers and strings, denoted as '%d' for integers and '%s' for strings, respectively.\n\nThis Swagger doc uses a reverse proxy to access the device. See the description for the actual command.",
+    "version": "1.2.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/proxy",
+      "description": "Reverse proxy to access the device. See the README for more information."
     }
+  ],
+  "tags": [
+    {
+      "name": "Device information",
+      "description": "Get the device information"
+    },
+    {
+      "name": "Network",
+      "description": "Get the network status"
+    },
+    {
+      "name": "Playback control",
+      "description": "Get and set playback controls"
+    },
+    {
+      "name": "EQ",
+      "description": "Get and set equalizer settings"
+    },
+    {
+      "name": "Device control",
+      "description": "Control the device"
+    },
+    {
+      "name": "Alarm clock",
+      "description": "Get and set alarm clock"
+    },
+    {
+      "name": "Source Input Switch",
+      "description": "Switch between inputs"
+    },
+    {
+      "name": "Presets",
+      "description": "Manage presets"
+    },
+    {
+      "name": "Track Metadata",
+      "description": "Get Current Track Metadata"
+    },
+    {
+      "name": "Audio Output Control",
+      "description": "Get and set audio output mode"
+    }
+  ],
+  "paths": {
+    "/getStatusEx": {
+      "get": {
+        "tags": [
+          "Device information"
+        ],
+        "summary": "Get device information",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "language": {
+                      "type": "string"
+                    },
+                    "ssid": {
+                      "type": "string",
+                      "description": "Name of the device"
+                    },
+                    "...": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/wlanGetConnectState": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "Get the connection status",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=wlanGetConnectState Note the return result is not in json.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "example": "PROCESS",
+                      "description": "In progress"
+                    },
+                    {
+                      "type": "string",
+                      "example": "PAIRFAIL",
+                      "description": "Wrong password"
+                    },
+                    {
+                      "type": "string",
+                      "example": "FAIL",
+                      "description": "Connection failed"
+                    },
+                    {
+                      "type": "string",
+                      "example": "OK",
+                      "description": "Connected"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/getPlayerStatus": {
+      "get": {
+        "tags": [
+          "Playback control"
+        ],
+        "summary": "Get the playback status",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Playback status",
+                      "enum": [
+                        "PLAYING",
+                        "PAUSE",
+                        "STOP",
+                        "BUFFERING"
+                      ]
+                    },
+                    "...": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/setPlayerCmd:play:url": {
+      "get": {
+        "summary": "Play audio URL",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url\nPlay the URL. URL points to an audio stream address.\nResponse is always 'OK' now",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:playlist:url:{index}": {
+      "get": {
+        "summary": "Play audio playlist",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>\nPlay the playlist with the URL (URL points to the m3u or ASX playlist link, index is the start\nindex).\nResponse is always 'OK' now.",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:hex_playlist:url:{index}": {
+      "get": {
+        "summary": "",
+        "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>\nPlay the URl (URI is the m3u or ASX playlist link, index is the start index), here, url should be\nhexed (please refer to 1.3)\n",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ],
+        "deprecated": true
+      }
+    },
+    "/setPlayerCmd:pause": {
+      "get": {
+        "summary": "Pause",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:resume": {
+      "get": {
+        "summary": "Resume",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:onepause": {
+      "get": {
+        "summary": "Toggle pause/play",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause\nIf the state is paused, resume it; otherwise, pause it.",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:prev": {
+      "get": {
+        "summary": "Previous",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:next": {
+      "get": {
+        "summary": "Next",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:seek:position": {
+      "get": {
+        "summary": "Seek",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:seek:position\nPosition is from 0 to duration in second.",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:stop": {
+      "get": {
+        "summary": "Stop",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:vol:{value}": {
+      "get": {
+        "summary": "Set volume",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:vol:value\nValue can be 0 to 100.",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Value can be 0 to 100."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:mute:{n}": {
+      "get": {
+        "summary": "Mute",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:mute:n\nMute: n=1\nUnmute: n=0\nThe slave mute state will be set at the same time when it's in group play.",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "0"
+              ],
+              "default": "1"
+            },
+            "description": "Mute: n=1\nUnmute: n=0"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/setPlayerCmd:loopmode:{n}": {
+      "get": {
+        "summary": "Loop mode set",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:loopmode:n\n\nn = \n0 - Sequence, no loop\n1 - Single loop\n2 - Shuffle loop\n-1 - Sequence loop\n",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "0",
+                "1",
+                "2",
+                "-1"
+              ]
+            },
+            "description": "0 Sequence, no loop\n1 Single loop\n2 Shuffle loop\n-1 Sequence loop"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ]
+      }
+    },
+    "/getNewAudioOutputHardwareMode": {
+      "get": {
+        "summary": "Get audio output mode",
+        "description": "JSON Response：\n{\"hardware\":\"2\",\"source\":\"0\",\"audiocast\":\"0\"}\nDescription：\nField Description\nhardware Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE\nsource BT source output mode:\n0: disable\n1: active\naudiocast Audio cast output mode:\n0: disable\n1: active",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Audio Output Control"
+        ]
+      }
+    },
+    "/setAudioOutputHardwareMode:{n}": {
+      "get": {
+        "summary": "Set audio output mode",
+        "description": "Field Description\nHardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE\nResponse is 'OK'",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3"
+              ]
+            },
+            "description": "Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Audio Output Control"
+        ]
+      }
+    },
+    "/getMetaInfo": {
+      "get": {
+        "summary": "Get Current Track Metadata",
+        "description": "JSON Response\n{\n \"metaData\": {\n \"album\": \"Country Heat\",\n \"title\": \"Old Dirt Roads\",\n \"artist\": \"Owen Riegling\",\n \"albumArtURI \": \"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg\",\n \"sampleRate \": \"44100\",\n \"bitDepth\": \"16\"\n }\n}",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        },
+        "tags": [
+          "Track Metadata"
+        ]
+      }
+    }
+  },
+  "security": [],
+  "components": {
+    "links": {},
+    "callbacks": {},
+    "schemas": {}
+  },
+  "externalDocs": {
+    "url": "https://github.com/cvdlinden/wiim-httpapi"
+  }
 }

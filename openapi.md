@@ -351,7 +351,7 @@ Value can be 0 to 100.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|value|path|string|true|Value can be 0 to 100.|
+|value|path|integer|true|Value can be 0 to 100.|
 
 <h3 id="get__setplayercmd:vol:{value}-responses">Responses</h3>
 
