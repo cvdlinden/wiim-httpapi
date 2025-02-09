@@ -733,14 +733,13 @@
             }
         }
     },
+    "externalDocs": {
+        "url": "https://github.com/cvdlinden/wiim-httpapi"
+    },
     "security": [],
     "components": {
         "links": {},
         "callbacks": {},
-        "schemas": {},
-        "securitySchemes": {}
-    },
-    "externalDocs": {
-        "url": "https://github.com/cvdlinden/wiim-httpapi"
+        "schemas": {}
     }
 }

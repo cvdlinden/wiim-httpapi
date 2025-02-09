@@ -19,8 +19,6 @@ Base URLs:
 
 * <a href="http://localhost:3000/proxy">http://localhost:3000/proxy</a>
 
-# Authentication
-
 <h1 id="linkplay-wiim-http-api-device-information">Device information</h1>
 
 Get the device information
