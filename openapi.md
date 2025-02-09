@@ -75,7 +75,7 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
 
 Note the return result is not in json.
 
-Return string：
+Return string:
 Return string Description
 PROCESS In progress
 PAIRFAIL Wrong password
@@ -84,19 +84,29 @@ OK connected
 
 > Example responses
 
-> 200 Response
+> Successful response
 
 ```
-null
+"PROCESS"
+```
+
+```
+"PAIRFAIL"
+```
+
+```
+"FAIL"
+```
+
+```
+"OK"
 ```
 
 <h3 id="get__wlangetconnectstate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
-
-<h3 id="get__wlangetconnectstate-responseschema">Response Schema</h3>
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication

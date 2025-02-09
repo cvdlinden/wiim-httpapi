@@ -54,6 +54,9 @@ paths:
         - Device information
       summary: Get device information
       description: 'Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       responses:
         '200':
           description: Successful response
@@ -83,7 +86,7 @@ paths:
         Note the return result is not in json.
 
 
-        Return string：
+        Return string:
 
         Return string Description
 
@@ -95,26 +98,39 @@ paths:
 
         OK connected
 
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       responses:
         '200':
           description: Successful response
           content:
             text/html:
               schema:
-                - PROCESS
-                - PAIRFAIL
-                - FAIL
-                - OK
+                type: string
+              examples:
+                PROCESS:
+                  summary: In progress
+                  value: PROCESS
+                PAIRFAIL:
+                  summary: Wrong password
+                  value: PAIRFAIL
+                FAIL:
+                  summary: Connect fail
+                  value: FAIL
+                OK:
+                  summary: Connected
+                  value: OK
       parameters: []
-      externalDocs:
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
-        description: HTTP API for WiiM PRODUCTS Version 1.2
   /getPlayerStatus:
     get:
       tags:
         - Playback control
       summary: Get the playback status
       description: 'Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       responses:
         '200':
           description: Successful response
@@ -144,6 +160,9 @@ paths:
         index), here, url should be
 
         hexed (please refer to 1.3)
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters:
         - name: index
           in: path
@@ -160,6 +179,9 @@ paths:
     get:
       summary: Pause
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -170,6 +192,9 @@ paths:
     get:
       summary: Resume
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -182,6 +207,9 @@ paths:
       description: |-
         https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause
         If the state is paused, resume it; otherwise, pause it.
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -192,6 +220,9 @@ paths:
     get:
       summary: Previous
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -202,6 +233,9 @@ paths:
     get:
       summary: Next
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -214,6 +248,9 @@ paths:
       description: |-
         https://10.10.10.254/httpapi.asp?command=setPlayerCmd:seek:position
         Position is from 0 to duration in second.
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -224,6 +261,9 @@ paths:
     get:
       summary: Stop
       description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -236,6 +276,9 @@ paths:
       description: |-
         https://10.10.10.254/httpapi.asp?command=setPlayerCmd:vol:value
         Value can be 0 to 100.
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters:
         - name: value
           in: path
@@ -260,6 +303,9 @@ paths:
 
         The slave mute state will be set at the same time when it's in group
         play.
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters:
         - name: 'n'
           in: path
@@ -289,6 +335,9 @@ paths:
         1 - Single loop
         2 - Shuffle loop
         -1 - Sequence loop
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters:
         - name: 'n'
           in: path
@@ -328,6 +377,9 @@ paths:
         audiocast Audio cast output mode:
         0: disable
         1: active
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -344,6 +396,9 @@ paths:
         2: AUDIO_OUTPUT_AUX_MODE
         3: AUDIO_OUTPUT_COAX_MODE
         Response is 'OK'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters:
         - name: 'n'
           in: path
@@ -379,6 +434,9 @@ paths:
          "bitDepth": "16"
          }
         }
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
       responses:
         default:
@@ -392,6 +450,9 @@ paths:
         https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
         Play the URL. URL points to an audio stream address.
         Response is always 'OK' now
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters:
         - name: url
           in: path
@@ -418,6 +479,9 @@ paths:
         index).
 
         Response is always 'OK' now.
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters:
         - name: index
           in: path
@@ -448,7 +512,6 @@ paths:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
-      operationId: ''
       responses:
         '200':
           description: Default response
@@ -469,7 +532,6 @@ paths:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
-      operationId: ''
       responses:
         '200':
           description: Default response
@@ -490,7 +552,6 @@ paths:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
-      operationId: ''
       responses:
         '222':
           description: Default response
@@ -520,7 +581,6 @@ paths:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
       parameters: []
-      operationId: ''
       responses:
         '200':
           description: Default response
