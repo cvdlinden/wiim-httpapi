@@ -73,3 +73,12 @@ nodemon -e yaml
 ```
 
 Note: You'll find an openapi.json file as well in this source. It isn't used and only here for reference.
+
+## OpenAPI.yaml to Markdown
+
+Use ```npm run openapi2md``` to create an Markdown version of the YAML file. Then see openapi.md
+
+Uses Widdershins:
+
+* <https://github.com/Mermade/widdershins>
+* <https://techdocs.studio/blog/openapi-to-markdown>

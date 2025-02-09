@@ -4,6 +4,7 @@
   "description": "Exploring the HTTP API for WiiM products. Work in progress...",
   "main": "index.js",
   "scripts": {
+    "openapi2md": "widdershins openapi.yaml -o openapi.md --omitHeader -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
