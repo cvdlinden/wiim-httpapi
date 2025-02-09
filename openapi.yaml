@@ -138,7 +138,7 @@ paths:
           description: Default response
       tags:
         - Playback control
-  '/setPlayerCmd:playlist:url:<index>':
+  '/setPlayerCmd:playlist:url:{index}':
     get:
       summary: Play audio playlist
       description: >-
@@ -157,7 +157,7 @@ paths:
           description: Default response
       tags:
         - Playback control
-  '/setPlayerCmd:hex_playlist:url:<index>':
+  '/setPlayerCmd:hex_playlist:url:{index}':
     get:
       summary: ''
       description: >
