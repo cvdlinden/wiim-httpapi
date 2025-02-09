@@ -76,7 +76,7 @@ Note: You'll find an openapi.json file as well in this source. It isn't used and
 
 ## OpenAPI.yaml to Markdown
 
-Use ```npm run openapi2md``` to create an Markdown version of the YAML file. Then see openapi.md
+Use ```npm run openapi2md``` to create an Markdown version of the YAML file. Then see [openapi.md](openapi.md).
 
 Uses Widdershins:
 
