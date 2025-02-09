@@ -31,7 +31,7 @@ Requirements:
 * [Git](https://git-scm.com/): in order to clone this repo. Although you can just download the ZIP file as well.
 * [Nodejs](https://nodejs.org/): in order to run this documentation.
 
-## Linkplay/WiiM HTTP API sources
+## Linkplay/WiiM/Arylic HTTP API sources
 
 In no particular order:
 
