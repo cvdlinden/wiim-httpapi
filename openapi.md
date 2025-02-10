@@ -868,11 +868,21 @@ MM is minute (00~59)，SS is second (00~59)
 
 In UTC
 
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
 <h3 id="settimesync-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="settimesync-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication
@@ -976,11 +986,21 @@ if trigger is 5, day should be 2 bytes (“01”~“31”)
 |op|1|
 |op|2|
 
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
 <h3 id="setalarmclock-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="setalarmclock-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication
@@ -1018,19 +1038,29 @@ n: 0~2，currently support max 3 alarm
 |n|1|
 |n|2|
 
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
 <h3 id="getalarmclock-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="getalarmclock-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## stopAlarm
+## stopAlarmClock
 
-<a id="opIdstopAlarm"></a>
+<a id="opIdstopAlarmClock"></a>
 
 `GET /alarmStop`
 
@@ -1038,11 +1068,78 @@ This operation does not require authentication
 
 http://10.10.10.254/httpapi.asp?command=alarmStop
 
-<h3 id="stopalarm-responses">Responses</h3>
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
+<h3 id="stopalarmclock-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="stopalarmclock-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="linkplay-wiim-arylic-http-api-source-input-switch">Source Input Switch</h1>
+
+Switch between inputs
+
+## setPlayerCmdSwitchMode
+
+<a id="opIdsetPlayerCmdSwitchMode"></a>
+
+`GET /setPlayerCmd:switchmode:{mode}`
+
+*Switch the source input*
+
+http://10.10.10.254/httpapi.asp?command=setPlayerCmd:switchmode:%s
+
+the mode can be the text as below:
+line-in (it refers to aux-in too)
+bluetooth
+optical
+udisk
+wifi
+
+<h3 id="setplayercmdswitchmode-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|mode|path|string|true|none|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|mode|line-in|
+|mode|bluetooth|
+|mode|optical|
+|mode|udisk|
+|mode|wifi|
+
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
+<h3 id="setplayercmdswitchmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="setplayercmdswitchmode-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication

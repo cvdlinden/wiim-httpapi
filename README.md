@@ -2,7 +2,8 @@
 
 Exploring the HTTP API (/httpapi.asp) for WiiM products.
 
-Status: Work in progress...
+Status: Work in progress!  
+First I'll gather all endpoint, then test and elaborate the documentation.
 
 Idea: Use [Swagger UI](https://swagger.io/tools/swagger-ui/) to document the Linkplay HTTP API, that is used by WiiM.
 Swagger/OpenAPI has a nice documentation format, with a 'try it out' option so you can test to see what the responses are.
@@ -22,7 +23,8 @@ Note: The WiiM device has a self-signed certificate, which is deemed unsafe by a
    or download the ZIP file and unpack to a folder
 2. Do an ```npm install``` to install the required packages
 3. Copy the ```config-sample.yaml``` file to ```config.yaml```
-4. Edit ```config.yaml``` in your favorite text editor and replace the ip-address with the address of your WiiM device
+4. Edit ```config.yaml``` in your favorite text editor and replace the IP-address with the address of your WiiM device.  
+   > You can find your IP-address in the WiiM Home app > Devices > Settings > Network Status
 5. Run ```node .\index.js```
 6. You will find the interactive documentation at <http://localhost:3000/>
 
@@ -30,6 +32,10 @@ Requirements:
 
 * [Git](https://git-scm.com/): in order to clone this repo. Although you can just download the ZIP file as well.
 * [Nodejs](https://nodejs.org/): in order to run this documentation.
+
+## "I don't want to install anything"
+
+Sure, please see [openapi.md](openapi.md) for a static version of the documentation.
 
 ## Linkplay/WiiM/Arylic HTTP API sources
 

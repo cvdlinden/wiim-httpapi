@@ -897,7 +897,12 @@
                 "operationId": "setTimeSync",
                 "responses": {
                     "200": {
-                        "description": "Default response"
+                        "description": "Default response",
+                        "content": {
+                            "text/html": {
+                                "schema": {}
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -994,7 +999,12 @@
                 "operationId": "setAlarmClock",
                 "responses": {
                     "200": {
-                        "description": "Default response"
+                        "description": "Default response",
+                        "content": {
+                            "text/html": {
+                                "schema": {}
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -1030,7 +1040,12 @@
                 "operationId": "getAlarmClock",
                 "responses": {
                     "200": {
-                        "description": "Default response"
+                        "description": "Default response",
+                        "content": {
+                            "text/html": {
+                                "schema": {}
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -1047,14 +1062,60 @@
                     "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
                 },
                 "parameters": [],
-                "operationId": "stopAlarm",
+                "operationId": "stopAlarmClock",
                 "responses": {
                     "200": {
-                        "description": "Default response"
+                        "description": "Default response",
+                        "content": {
+                            "text/html": {
+                                "schema": {}
+                            }
+                        }
                     }
                 },
                 "tags": [
                     "Alarm clock"
+                ]
+            }
+        },
+        "/setPlayerCmd:switchmode:{mode}": {
+            "get": {
+                "summary": "Switch the source input",
+                "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:switchmode:%s\n\nthe mode can be the text as below:\nline-in (it refers to aux-in too)\nbluetooth\noptical\nudisk\nwifi\n",
+                "externalDocs": {
+                    "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+                    "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+                },
+                "parameters": [
+                    {
+                        "name": "mode",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "line-in",
+                                "bluetooth",
+                                "optical",
+                                "udisk",
+                                "wifi"
+                            ]
+                        }
+                    }
+                ],
+                "operationId": "setPlayerCmdSwitchMode",
+                "responses": {
+                    "200": {
+                        "description": "Default response",
+                        "content": {
+                            "text/html": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Source Input Switch"
                 ]
             }
         }
