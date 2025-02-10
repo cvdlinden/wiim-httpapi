@@ -847,6 +847,207 @@ Return the seconds
 This operation does not require authentication
 </aside>
 
+<h1 id="linkplay-wiim-arylic-http-api-alarm-clock">Alarm clock</h1>
+
+Get and set alarm clock
+
+## setTimeSync
+
+<a id="opIdsetTimeSync"></a>
+
+`GET /timeSync:{YYYYMMDDHHMMSS}`
+
+*Get network time*
+
+If the device has no internet access, you need to sync its time with:
+
+http://10.10.10.254/httpapi.asp?command=timeSync:YYYYMMDDHHMMSS
+
+YYYY is year（such as 2015)，MM is month (01~12)，DD is day (01~31)，HH is hour (00~23)，
+MM is minute (00~59)，SS is second (00~59)
+
+In UTC
+
+<h3 id="settimesync-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAlarmClock
+
+<a id="opIdsetAlarmClock"></a>
+
+`GET /setAlarmClock:{n}:{trig}:{op}:{time}[:{day}][:{url}]`
+
+*Set Alarm*
+
+http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]
+
+n: 0~2，currently support max 3 alarm
+
+trig: the alarm trigger：
+0 cancel the alarm, for example: setAlarmClock:n:0
+1 once，day should be YYYYMMDD
+2 every day
+3 every week，day should be 2 bytes (00”~“06”), means from Sunday to Saturday.
+4 every week，day should be 2 bytes, the bit 0 to bit 6 means the effect，for example,
+“7F” means every day in week, “01” means only Sunday
+5 every month，day should be 2 bytes (“01”~“31”)
+
+op: the action
+0 shell execute
+1 playback or ring
+2 stop playback
+time: should be HHMMSS, in UTC
+
+day:
+if trigger is 0 or 2, no need to set.
+if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
+if trigger is 3, day should be 2 bytes (“00”~“06”), means from Sunday to Saturday.
+if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect，for example,
+“7F” means every day in week, “01” means only Sunday
+if trigger is 5, day should be 2 bytes (“01”~“31”)
+
+url：the shell path or playback url, should less than 256 bytes
+
+<h3 id="setalarmclock-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|string|true|The alarm clock number|
+|trig|path|string|true|The alarm trigger|
+|op|path|string|true|The action|
+|time|path|string|true|should be HHMMSS, in UTC|
+|day|path|string|true|if trigger is 0 or 2, no need to set.|
+|url|path|string|true|The shell path or playback url, should less than 256 bytes|
+
+#### Detailed descriptions
+
+**n**: The alarm clock number
+
+currently support max 3 alarm
+
+**trig**: The alarm trigger
+
+0 cancel the alarm, for example: setAlarmClock:n:0
+1 once，day should be YYYYMMDD
+2 every day
+3 every week，day should be 2 bytes (00”~“06”), means from Sunday to Saturday.
+4 every week，day should be 2 bytes, the bit 0 to bit 6 means the effect，for example,
+“7F” means every day in week, “01” means only Sunday
+5 every month，day should be 2 bytes (“01”~“31”)
+
+**op**: The action
+
+0 shell execute
+1 playback or ring
+2 stop playback
+
+**day**: if trigger is 0 or 2, no need to set.
+
+if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
+
+if trigger is 3, day should be 2 bytes (“00”~“06”), means from Sunday to Saturday.
+
+if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
+“7F” means every day in week, “01” means only Sunday
+
+if trigger is 5, day should be 2 bytes (“01”~“31”)
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|0|
+|n|1|
+|n|2|
+|trig|0|
+|trig|1|
+|trig|2|
+|trig|3|
+|trig|4|
+|trig|5|
+|op|0|
+|op|1|
+|op|2|
+
+<h3 id="setalarmclock-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAlarmClock
+
+<a id="opIdgetAlarmClock"></a>
+
+`GET /getAlarmClock:{n}`
+
+http://10.10.10.254/httpapi.asp?command=getAlarmClock:n
+
+n: 0~2，currently support max 3 alarm
+{"enable":"1",
+"trigger":"%d",
+"operation":"%d",
+"date"::"%02d:%02d:%02d", //if not a “every day” alarm, no this
+"week_day":"%d", //if not a “every week” alarm, no this
+"day":"%02d", //if not a “every month” alarm, no this
+"time":"%02d:02d:%02d",
+"path":"%s""}
+
+<h3 id="getalarmclock-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|string|true|The alarm clock number|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|0|
+|n|1|
+|n|2|
+
+<h3 id="getalarmclock-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## stopAlarm
+
+<a id="opIdstopAlarm"></a>
+
+`GET /alarmStop`
+
+*Stop the current alarm*
+
+http://10.10.10.254/httpapi.asp?command=alarmStop
+
+<h3 id="stopalarm-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-arylic-http-api-track-metadata">Track Metadata</h1>
 
 Get Current Track Metadata

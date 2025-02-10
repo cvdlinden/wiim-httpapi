@@ -774,6 +774,249 @@ paths:
                   value: 0
       tags:
         - Device control
+  '/timeSync:{YYYYMMDDHHMMSS}':
+    get:
+      summary: Get network time
+      description: >-
+        If the device has no internet access, you need to sync its time with:
+
+
+        http://10.10.10.254/httpapi.asp?command=timeSync:YYYYMMDDHHMMSS
+
+
+        YYYY is year（such as 2015)，MM is month (01~12)，DD is day (01~31)，HH is
+        hour (00~23)，
+
+        MM is minute (00~59)，SS is second (00~59)
+
+
+        In UTC
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: setTimeSync
+      responses:
+        '200':
+          description: Default response
+      tags:
+        - Alarm clock
+  '/setAlarmClock:{n}:{trig}:{op}:{time}[:{day}][:{url}]':
+    get:
+      summary: Set Alarm
+      description: >-
+        http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]
+
+
+        n: 0~2，currently support max 3 alarm
+
+
+        trig: the alarm trigger：
+
+        0 cancel the alarm, for example: setAlarmClock:n:0
+
+        1 once，day should be YYYYMMDD
+
+        2 every day
+
+        3 every week，day should be 2 bytes (00”~“06”), means from Sunday to
+        Saturday.
+
+        4 every week，day should be 2 bytes, the bit 0 to bit 6 means the
+        effect，for example,
+
+        “7F” means every day in week, “01” means only Sunday
+
+        5 every month，day should be 2 bytes (“01”~“31”)
+
+
+        op: the action
+
+        0 shell execute
+
+        1 playback or ring
+
+        2 stop playback
+
+        time: should be HHMMSS, in UTC
+
+
+        day:
+
+        if trigger is 0 or 2, no need to set.
+
+        if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
+
+        if trigger is 3, day should be 2 bytes (“00”~“06”), means from Sunday to
+        Saturday.
+
+        if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the
+        effect，for example,
+
+        “7F” means every day in week, “01” means only Sunday
+
+        if trigger is 5, day should be 2 bytes (“01”~“31”)
+
+
+        url：the shell path or playback url, should less than 256 bytes
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters:
+        - name: 'n'
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - '0'
+              - '1'
+              - '2'
+          description: |
+            The alarm clock number
+
+            currently support max 3 alarm
+        - name: trig
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - '0'
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              - '5'
+          description: >
+            The alarm trigger
+
+
+            0 cancel the alarm, for example: setAlarmClock:n:0
+
+            1 once，day should be YYYYMMDD
+
+            2 every day
+
+            3 every week，day should be 2 bytes (00”~“06”), means from Sunday to
+            Saturday.
+
+            4 every week，day should be 2 bytes, the bit 0 to bit 6 means the
+            effect，for example,
+
+            “7F” means every day in week, “01” means only Sunday
+
+            5 every month，day should be 2 bytes (“01”~“31”)
+        - name: op
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - '0'
+              - '1'
+              - '2'
+          description: |
+            The action
+
+            0 shell execute
+            1 playback or ring
+            2 stop playback
+        - name: time
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 'should be HHMMSS, in UTC'
+          format: date-time
+          pattern: HHMMSS
+        - name: day
+          in: path
+          required: true
+          schema:
+            type: string
+          description: >-
+            if trigger is 0 or 2, no need to set.
+
+
+            if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
+
+
+            if trigger is 3, day should be 2 bytes (“00”~“06”), means from
+            Sunday to Saturday.
+
+
+            if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the
+            effect, for example,
+
+            “7F” means every day in week, “01” means only Sunday
+
+
+            if trigger is 5, day should be 2 bytes (“01”~“31”)
+          format: ''
+          pattern: ''
+        - name: url
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 'The shell path or playback url, should less than 256 bytes'
+      operationId: setAlarmClock
+      responses:
+        '200':
+          description: Default response
+      tags:
+        - Alarm clock
+  '/getAlarmClock:{n}':
+    get:
+      summary: ''
+      description: |
+        http://10.10.10.254/httpapi.asp?command=getAlarmClock:n
+
+        n: 0~2，currently support max 3 alarm
+        {"enable":"1",
+        "trigger":"%d",
+        "operation":"%d",
+        "date"::"%02d:%02d:%02d", //if not a “every day” alarm, no this
+        "week_day":"%d", //if not a “every week” alarm, no this
+        "day":"%02d", //if not a “every month” alarm, no this
+        "time":"%02d:02d:%02d",
+        "path":"%s""}
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters:
+        - name: 'n'
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - '0'
+              - '1'
+              - '2'
+            default: ''
+          description: The alarm clock number
+      operationId: getAlarmClock
+      responses:
+        '200':
+          description: Default response
+      tags:
+        - Alarm clock
+  /alarmStop:
+    get:
+      summary: Stop the current alarm
+      description: 'http://10.10.10.254/httpapi.asp?command=alarmStop'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: stopAlarm
+      responses:
+        '200':
+          description: Default response
+      tags:
+        - Alarm clock
 externalDocs:
   url: 'https://github.com/cvdlinden/wiim-httpapi'
 security: []
