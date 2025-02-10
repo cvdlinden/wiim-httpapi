@@ -1,9 +1,10 @@
 # wiim-httpapi
 
-Exploring the HTTP API (/httpapi.asp) for WiiM products.
+Exploring the HTTP API for WiiM products.  
+The HTTP API can be found on your WiiM device like so: https://{ip-address}/httpapi.asp?command={command}
 
 Status: Work in progress!  
-First I'll gather all endpoint, then test and elaborate the documentation.
+First I'll gather all endpoints, then test and elaborate the documentation.
 
 Idea: Use [Swagger UI](https://swagger.io/tools/swagger-ui/) to document the Linkplay HTTP API, that is used by WiiM.
 Swagger/OpenAPI has a nice documentation format, with a 'try it out' option so you can test to see what the responses are.
@@ -77,7 +78,7 @@ In no particular order:
 
 [What Is OpenAPI?](https://swagger.io/docs/specification/v3_0/about/)
 
-Swagger Editor:
+Swagger Editor, an online editor for OpenAPI:
 
 * <https://editor-next.swagger.io/>
 
@@ -85,20 +86,20 @@ File > Import File > edit to your liking
 Then Save as YAML and JSON  
 Or Generate Server/Client (if you want to use the API in your own project)
 
-OpenAPI GUI (editor):
+OpenAPI GUI, an online editor for OpenAPI:
 
 * <https://github.com/Mermade/openapi-gui>
 * <https://mermade.github.io/openapi-gui/>
 
 ### Reviewing changes to the YAML doc
 
-If you're actively changing the openapi.yaml file locally it is best to use ```nodemon```. If you've changed the documentation you will only need to refresh the browser, instead of restarting nodejs again.
+If you're actively changing the openapi.yaml file locally it is best to use ```nodemon```. If you've changed the documentation you will only need to refresh the browser, instead of restarting nodejs again. Run:
 
 ```shell
 nodemon
 ```
 
-Note: You'll find an openapi.json file as well in this source. It isn't used and only here for reference.
+Note: You'll find an openapi.json file as well in this source. It isn't used and only here for reference purposes.
 
 ### OpenAPI.yaml to OpenAPI.md (Markdown)
 
@@ -112,3 +113,10 @@ npm install -g widdershins
 
 * <https://github.com/Mermade/widdershins>
 * <https://techdocs.studio/blog/openapi-to-markdown>
+
+### Reverse proxy
+
+This solution contains a reverse proxy in order to circumvent the self-signed certificate the WiiM device uses.  
+The proxy can be found at <http://localhost:3000/proxy/{command}>.  
+For the internals, see the index.js file.  
+The reverse proxy will translate the command requested to the proper url that the WiiM device understands and return any output it receives.

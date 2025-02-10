@@ -31,11 +31,12 @@ app.use("/proxy", (req, res) => {
   reqUrl = reqUrl.replace("/", "/httpapi.asp?command=");
   console.log("Call:", "https://" + config.deviceHost + reqUrl);
 
+  // Create a new HTTP client to forward the request to the WiiM/Linkplay device
   const http_client = https.request({
     host: config.deviceHost,
     path: reqUrl,
     method: req.method,
-    rejectUnauthorized: false,
+    rejectUnauthorized: false, // Ignore self-signed certificate
     headers: req.headers,
     body: req.body
   }, (resp) => {
