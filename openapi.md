@@ -136,6 +136,34 @@ This operation does not require authentication
 
 Get the network status
 
+## getStaticIP
+
+<a id="opIdgetStaticIP"></a>
+
+`GET /getStaticIP`
+
+*Query networking status*
+
+Query current networking status
+
+> Example responses
+
+> 200 Response
+
+```
+"string"
+```
+
+<h3 id="getstaticip-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## wlanGetConnectState
 
 <a id="opIdwlanGetConnectState"></a>

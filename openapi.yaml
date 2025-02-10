@@ -256,6 +256,25 @@ paths:
                     type: string
                     description: The group name of the device is belonged to
       parameters: []
+  /getStaticIP:
+    get:
+      tags:
+        - Network
+      deprecated: true
+      summary: Query networking status
+      description: Query current networking status
+      externalDocs:
+        description: Arylic Developers
+        url: 'https://developer.arylic.com/httpapi/#http-api'
+      operationId: getStaticIP
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+      parameters: []
   /wlanGetConnectState:
     get:
       tags:

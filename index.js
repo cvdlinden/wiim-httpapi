@@ -21,8 +21,16 @@ app.get("/", (req, res) => {
   res.redirect("/api-docs");
 });
 
+var options = {
+  swaggerOptions: {
+    // tagsSorter: "alpha",
+    // apisSorter: "alpha",
+    operationsSorter: "alpha"
+  }
+};
+
 // Serve Swagger UI at /api-docs
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 // Proxy requests to WiiM/Linkplay device
 app.use("/proxy", (req, res) => {
