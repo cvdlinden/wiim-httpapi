@@ -81,8 +81,180 @@ paths:
                   ssid:
                     type: string
                     description: Name of the device
-                  ...:
+                  hideSSID:
                     type: string
+                  firmware:
+                    type: string
+                    description: firmware version
+                  build:
+                    type: string
+                  project:
+                    type: string
+                  priv_prj:
+                    type: string
+                  Release:
+                    type: string
+                    description: data the firmware is released
+                  FW_Release_version:
+                    type: string
+                    description: Reserved
+                  group:
+                    type: string
+                    description: >-
+                      0 means it's a master speaker, 1 means a slave speaker in
+                      a group
+                  wmrm_version:
+                    type: string
+                    description: >-
+                      LinkPlay's MRM SDK version, version 4.2 or above won't
+                      work with any version below 4.2
+                  expired:
+                    type: string
+                    description: Reserved
+                  internet:
+                    type: string
+                    description: Is it connected to Internet
+                  uuid:
+                    type: string
+                    description: The unique ID of the device
+                  MAC:
+                    type: string
+                    description: The WiFi MAC address of the device
+                  BT_MAC:
+                    type: string
+                    description: The BT MAC address of the device
+                  AP_MAC:
+                    type: string
+                    description: The MAC address of the AP that the device is connected to
+                  date:
+                    type: string
+                  time:
+                    type: string
+                  netstat:
+                    type: string
+                  essid:
+                    type: string
+                    description: The AP name in the HEX format
+                  apcli0:
+                    type: string
+                    description: The IP v4 address of the device
+                  eth0:
+                    type: string
+                  ETH_MAC:
+                    type: string
+                  hardware:
+                    type: string
+                  VersionUpdate:
+                    type: string
+                    description: '0: No new version; 1: new version.'
+                  NewVer:
+                    type: string
+                    description: 'If there''s new version, the new firmware version number'
+                  mcu_ver:
+                    type: string
+                  mcu_ver_new:
+                    type: string
+                  update_check_count:
+                    type: string
+                  ra0:
+                    type: string
+                  temp_uuid:
+                    type: string
+                  cap1:
+                    type: string
+                    description: Reserved
+                  capability:
+                    type: string
+                    description: Reserved
+                  languages:
+                    type: string
+                  prompt_status:
+                    type: string
+                  alexa_ver:
+                    type: string
+                  alexa_beta_enable:
+                    type: string
+                  alexa_force_beta_cfg:
+                    type: string
+                  dsp_ver:
+                    type: string
+                  streams_all:
+                    type: string
+                    description: Reserved
+                  streams:
+                    type: string
+                    description: Reserved
+                  region:
+                    type: string
+                  volume_control:
+                    type: string
+                  external:
+                    type: string
+                  preset_key:
+                    type: string
+                    description: Number of preset keys
+                  plm_support:
+                    type: string
+                    description: Reserved
+                  lbc_support:
+                    type: string
+                    description: Reserved
+                  WifiChannel:
+                    type: string
+                  RSSI:
+                    type: string
+                    description: WiFi signal strength
+                  BSSID:
+                    type: string
+                    description: The MAC address of connected access point
+                  wlanFreq:
+                    type: string
+                  wlanDataRate:
+                    type: string
+                  battery:
+                    type: string
+                  battery_percent:
+                    type: string
+                  securemode:
+                    type: string
+                  ota_interface_ver:
+                    type: string
+                  upnp_version:
+                    type: string
+                  upnp_uuid:
+                    type: string
+                  uart_pass_port:
+                    type: string
+                  communication_port:
+                    type: string
+                  web_firmware_update_hide:
+                    type: string
+                  tidal_version:
+                    type: string
+                  service_version:
+                    type: string
+                  EQ_support:
+                    type: string
+                  HiFiSRC_version:
+                    type: string
+                  power_mode:
+                    type: string
+                  security:
+                    type: string
+                  security_version:
+                    type: string
+                  security_capabilities:
+                    type: string
+                  public_https_version:
+                    type: string
+                  privacy_mode:
+                    type: string
+                  DeviceName:
+                    type: string
+                    description: The device name
+                  GroupName:
+                    type: string
+                    description: The group name of the device is belonged to
       parameters: []
   /wlanGetConnectState:
     get:
@@ -387,9 +559,10 @@ paths:
     get:
       summary: Get audio output mode
       description: |-
-        JSON Response：
+        JSON Response:
         {"hardware":"2","source":"0","audiocast":"0"}
-        Description：
+
+        Description:
         Field Description
         hardware Hardware Interface output mode:
         1: AUDIO_OUTPUT_SPDIF_MODE
@@ -794,17 +967,22 @@ paths:
         http://10.10.10.254/httpapi.asp?command=timeSync:YYYYMMDDHHMMSS
 
 
-        YYYY is year（such as 2015)，MM is month (01~12)，DD is day (01~31)，HH is
-        hour (00~23)，
+        YYYY is year (such as 2015), MM is month (01~12), DD is day (01~31), HH
+        is hour (00~23),
 
-        MM is minute (00~59)，SS is second (00~59)
+        MM is minute (00~59), SS is second (00~59)
 
 
         In UTC
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
-      parameters: []
+      parameters:
+        - name: YYYYMMDDHHMMSS
+          in: path
+          required: true
+          schema:
+            type: string
       operationId: setTimeSync
       responses:
         '200':
@@ -814,33 +992,33 @@ paths:
               schema: {}
       tags:
         - Alarm clock
-  '/setAlarmClock:{n}:{trig}:{op}:{time}[:{day}][:{url}]':
+  '/setAlarmClock:{n}:{trig}:{op}:{time}:{day}:{url}':
     get:
       summary: Set Alarm
       description: >-
         http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]
 
 
-        n: 0~2，currently support max 3 alarm
+        n: 0~2, currently support max 3 alarm
 
 
-        trig: the alarm trigger：
+        trig: the alarm trigger:
 
         0 cancel the alarm, for example: setAlarmClock:n:0
 
-        1 once，day should be YYYYMMDD
+        1 once, day should be YYYYMMDD
 
         2 every day
 
-        3 every week，day should be 2 bytes (00”~“06”), means from Sunday to
+        3 every week, day should be 2 bytes (00”~“06”), means from Sunday to
         Saturday.
 
-        4 every week，day should be 2 bytes, the bit 0 to bit 6 means the
-        effect，for example,
+        4 every week, day should be 2 bytes, the bit 0 to bit 6 means the
+        effect, for example,
 
         “7F” means every day in week, “01” means only Sunday
 
-        5 every month，day should be 2 bytes (“01”~“31”)
+        5 every month, day should be 2 bytes (“01”~“31”)
 
 
         op: the action
@@ -864,14 +1042,14 @@ paths:
         Saturday.
 
         if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the
-        effect，for example,
+        effect, for example,
 
         “7F” means every day in week, “01” means only Sunday
 
         if trigger is 5, day should be 2 bytes (“01”~“31”)
 
 
-        url：the shell path or playback url, should less than 256 bytes
+        url: the shell path or playback url, should less than 256 bytes
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
@@ -907,19 +1085,19 @@ paths:
 
             0 cancel the alarm, for example: setAlarmClock:n:0
 
-            1 once，day should be YYYYMMDD
+            1 once, day should be YYYYMMDD
 
             2 every day
 
-            3 every week，day should be 2 bytes (00”~“06”), means from Sunday to
+            3 every week, day should be 2 bytes (00”~“06”), means from Sunday to
             Saturday.
 
-            4 every week，day should be 2 bytes, the bit 0 to bit 6 means the
-            effect，for example,
+            4 every week, day should be 2 bytes, the bit 0 to bit 6 means the
+            effect, for example,
 
             “7F” means every day in week, “01” means only Sunday
 
-            5 every month，day should be 2 bytes (“01”~“31”)
+            5 every month, day should be 2 bytes (“01”~“31”)
         - name: op
           in: path
           required: true
@@ -941,8 +1119,6 @@ paths:
           schema:
             type: string
           description: 'should be HHMMSS, in UTC'
-          format: date-time
-          pattern: HHMMSS
         - name: day
           in: path
           required: true
@@ -966,8 +1142,6 @@ paths:
 
 
             if trigger is 5, day should be 2 bytes (“01”~“31”)
-          format: ''
-          pattern: ''
         - name: url
           in: path
           required: true
@@ -989,7 +1163,7 @@ paths:
       description: |
         http://10.10.10.254/httpapi.asp?command=getAlarmClock:n
 
-        n: 0~2，currently support max 3 alarm
+        n: 0~2, currently support max 3 alarm
         {"enable":"1",
         "trigger":"%d",
         "operation":"%d",

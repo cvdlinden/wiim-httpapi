@@ -38,7 +38,7 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx
 > 200 Response
 
 ```
-{"language":"string","ssid":"string","...":"string"}
+{"language":"string","ssid":"string","hideSSID":"string","firmware":"string","build":"string","project":"string","priv_prj":"string","Release":"string","FW_Release_version":"string","group":"string","wmrm_version":"string","expired":"string","internet":"string","uuid":"string","MAC":"string","BT_MAC":"string","AP_MAC":"string","date":"string","time":"string","netstat":"string","essid":"string","apcli0":"string","eth0":"string","ETH_MAC":"string","hardware":"string","VersionUpdate":"string","NewVer":"string","mcu_ver":"string","mcu_ver_new":"string","update_check_count":"string","ra0":"string","temp_uuid":"string","cap1":"string","capability":"string","languages":"string","prompt_status":"string","alexa_ver":"string","alexa_beta_enable":"string","alexa_force_beta_cfg":"string","dsp_ver":"string","streams_all":"string","streams":"string","region":"string","volume_control":"string","external":"string","preset_key":"string","plm_support":"string","lbc_support":"string","WifiChannel":"string","RSSI":"string","BSSID":"string","wlanFreq":"string","wlanDataRate":"string","battery":"string","battery_percent":"string","securemode":"string","ota_interface_ver":"string","upnp_version":"string","upnp_uuid":"string","uart_pass_port":"string","communication_port":"string","web_firmware_update_hide":"string","tidal_version":"string","service_version":"string","EQ_support":"string","HiFiSRC_version":"string","power_mode":"string","security":"string","security_version":"string","security_capabilities":"string","public_https_version":"string","privacy_mode":"string","DeviceName":"string","GroupName":"string"}
 ```
 
 <h3 id="getstatusex-responses">Responses</h3>
@@ -55,7 +55,78 @@ Status Code **200**
 |---|---|---|---|---|
 |» language|string|false|none|none|
 |» ssid|string|false|none|Name of the device|
-|» ...|string|false|none|none|
+|» hideSSID|string|false|none|none|
+|» firmware|string|false|none|firmware version|
+|» build|string|false|none|none|
+|» project|string|false|none|none|
+|» priv_prj|string|false|none|none|
+|» Release|string|false|none|data the firmware is released|
+|» FW_Release_version|string|false|none|Reserved|
+|» group|string|false|none|0 means it's a master speaker, 1 means a slave speaker in a group|
+|» wmrm_version|string|false|none|LinkPlay's MRM SDK version, version 4.2 or above won't work with any version below 4.2|
+|» expired|string|false|none|Reserved|
+|» internet|string|false|none|Is it connected to Internet|
+|» uuid|string|false|none|The unique ID of the device|
+|» MAC|string|false|none|The WiFi MAC address of the device|
+|» BT_MAC|string|false|none|The BT MAC address of the device|
+|» AP_MAC|string|false|none|The MAC address of the AP that the device is connected to|
+|» date|string|false|none|none|
+|» time|string|false|none|none|
+|» netstat|string|false|none|none|
+|» essid|string|false|none|The AP name in the HEX format|
+|» apcli0|string|false|none|The IP v4 address of the device|
+|» eth0|string|false|none|none|
+|» ETH_MAC|string|false|none|none|
+|» hardware|string|false|none|none|
+|» VersionUpdate|string|false|none|0: No new version; 1: new version.|
+|» NewVer|string|false|none|If there's new version, the new firmware version number|
+|» mcu_ver|string|false|none|none|
+|» mcu_ver_new|string|false|none|none|
+|» update_check_count|string|false|none|none|
+|» ra0|string|false|none|none|
+|» temp_uuid|string|false|none|none|
+|» cap1|string|false|none|Reserved|
+|» capability|string|false|none|Reserved|
+|» languages|string|false|none|none|
+|» prompt_status|string|false|none|none|
+|» alexa_ver|string|false|none|none|
+|» alexa_beta_enable|string|false|none|none|
+|» alexa_force_beta_cfg|string|false|none|none|
+|» dsp_ver|string|false|none|none|
+|» streams_all|string|false|none|Reserved|
+|» streams|string|false|none|Reserved|
+|» region|string|false|none|none|
+|» volume_control|string|false|none|none|
+|» external|string|false|none|none|
+|» preset_key|string|false|none|Number of preset keys|
+|» plm_support|string|false|none|Reserved|
+|» lbc_support|string|false|none|Reserved|
+|» WifiChannel|string|false|none|none|
+|» RSSI|string|false|none|WiFi signal strength|
+|» BSSID|string|false|none|The MAC address of connected access point|
+|» wlanFreq|string|false|none|none|
+|» wlanDataRate|string|false|none|none|
+|» battery|string|false|none|none|
+|» battery_percent|string|false|none|none|
+|» securemode|string|false|none|none|
+|» ota_interface_ver|string|false|none|none|
+|» upnp_version|string|false|none|none|
+|» upnp_uuid|string|false|none|none|
+|» uart_pass_port|string|false|none|none|
+|» communication_port|string|false|none|none|
+|» web_firmware_update_hide|string|false|none|none|
+|» tidal_version|string|false|none|none|
+|» service_version|string|false|none|none|
+|» EQ_support|string|false|none|none|
+|» HiFiSRC_version|string|false|none|none|
+|» power_mode|string|false|none|none|
+|» security|string|false|none|none|
+|» security_version|string|false|none|none|
+|» security_capabilities|string|false|none|none|
+|» public_https_version|string|false|none|none|
+|» privacy_mode|string|false|none|none|
+|» DeviceName|string|false|none|The device name|
+|» GroupName|string|false|none|The group name of the device is belonged to|
 
 <aside class="success">
 This operation does not require authentication
@@ -863,10 +934,16 @@ If the device has no internet access, you need to sync its time with:
 
 http://10.10.10.254/httpapi.asp?command=timeSync:YYYYMMDDHHMMSS
 
-YYYY is year（such as 2015)，MM is month (01~12)，DD is day (01~31)，HH is hour (00~23)，
-MM is minute (00~59)，SS is second (00~59)
+YYYY is year (such as 2015), MM is month (01~12), DD is day (01~31), HH is hour (00~23),
+MM is minute (00~59), SS is second (00~59)
 
 In UTC
+
+<h3 id="settimesync-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|YYYYMMDDHHMMSS|path|string|true|none|
 
 > Example responses
 
@@ -892,22 +969,22 @@ This operation does not require authentication
 
 <a id="opIdsetAlarmClock"></a>
 
-`GET /setAlarmClock:{n}:{trig}:{op}:{time}[:{day}][:{url}]`
+`GET /setAlarmClock:{n}:{trig}:{op}:{time}:{day}:{url}`
 
 *Set Alarm*
 
 http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]
 
-n: 0~2，currently support max 3 alarm
+n: 0~2, currently support max 3 alarm
 
-trig: the alarm trigger：
+trig: the alarm trigger:
 0 cancel the alarm, for example: setAlarmClock:n:0
-1 once，day should be YYYYMMDD
+1 once, day should be YYYYMMDD
 2 every day
-3 every week，day should be 2 bytes (00”~“06”), means from Sunday to Saturday.
-4 every week，day should be 2 bytes, the bit 0 to bit 6 means the effect，for example,
+3 every week, day should be 2 bytes (00”~“06”), means from Sunday to Saturday.
+4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
 “7F” means every day in week, “01” means only Sunday
-5 every month，day should be 2 bytes (“01”~“31”)
+5 every month, day should be 2 bytes (“01”~“31”)
 
 op: the action
 0 shell execute
@@ -919,11 +996,11 @@ day:
 if trigger is 0 or 2, no need to set.
 if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
 if trigger is 3, day should be 2 bytes (“00”~“06”), means from Sunday to Saturday.
-if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect，for example,
+if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
 “7F” means every day in week, “01” means only Sunday
 if trigger is 5, day should be 2 bytes (“01”~“31”)
 
-url：the shell path or playback url, should less than 256 bytes
+url: the shell path or playback url, should less than 256 bytes
 
 <h3 id="setalarmclock-parameters">Parameters</h3>
 
@@ -945,12 +1022,12 @@ currently support max 3 alarm
 **trig**: The alarm trigger
 
 0 cancel the alarm, for example: setAlarmClock:n:0
-1 once，day should be YYYYMMDD
+1 once, day should be YYYYMMDD
 2 every day
-3 every week，day should be 2 bytes (00”~“06”), means from Sunday to Saturday.
-4 every week，day should be 2 bytes, the bit 0 to bit 6 means the effect，for example,
+3 every week, day should be 2 bytes (00”~“06”), means from Sunday to Saturday.
+4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
 “7F” means every day in week, “01” means only Sunday
-5 every month，day should be 2 bytes (“01”~“31”)
+5 every month, day should be 2 bytes (“01”~“31”)
 
 **op**: The action
 
@@ -1014,7 +1091,7 @@ This operation does not require authentication
 
 http://10.10.10.254/httpapi.asp?command=getAlarmClock:n
 
-n: 0~2，currently support max 3 alarm
+n: 0~2, currently support max 3 alarm
 {"enable":"1",
 "trigger":"%d",
 "operation":"%d",
@@ -1301,9 +1378,10 @@ Get and set audio output mode
 
 *Get audio output mode*
 
-JSON Response：
+JSON Response:
 {"hardware":"2","source":"0","audiocast":"0"}
-Description：
+
+Description:
 Field Description
 hardware Hardware Interface output mode:
 1: AUDIO_OUTPUT_SPDIF_MODE
