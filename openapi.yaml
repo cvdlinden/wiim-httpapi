@@ -42,7 +42,17 @@ tags:
   - name: Source Input Switch
     description: Switch between inputs
   - name: Presets
-    description: Manage presets
+    description: >
+      Manage presets
+
+
+      The WiiM Home App allows users to configure 12 presets for quick access to
+      preferred radio
+
+      stations, playlists, mixes, albums, or artists. Each preset is accessible
+      through its assigned
+
+      number.
   - name: Track Metadata
     description: Get Current Track Metadata
   - name: Audio Output Control
@@ -1065,6 +1075,132 @@ paths:
               schema: {}
       tags:
         - Source Input Switch
+  '/MCUKeyShortClick:{n}':
+    get:
+      summary: Play preset with preset number
+      description: |
+        http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d
+
+        %d: Range is from 1 to 12
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters:
+        - name: 'n'
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              - '5'
+              - '6'
+              - '7'
+              - '8'
+              - '9'
+              - '10'
+              - '11'
+              - '12'
+          description: Preset number
+      operationId: getMCUKeyShortClick
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Presets
+  /getPresetInfo:
+    get:
+      summary: Get Preset List
+      description: >
+        http://10.10.10.254/httpapi.asp?command=getPresetInfo
+
+
+        JSON Response
+
+        {
+
+        "preset_num": 3,
+
+        "preset_list": [{
+
+        "number": 1,
+
+        "name": "BBC Radio Norfolk",
+
+        "url":
+        "http:\/\/as-hls-wwlive.akamaized.net\/pool_904\/live\/ww\/bbc_radio_norfolk\/bbc_radio_norfolk.isml\/bbc_ra
+
+        dio_norfolk-audio%3d96000.norewind.m3u8",
+
+        "source": "Linkplay Radio",
+
+        "picurl":
+        "http:\/\/cdnprofiles.tunein.com\/s6852\/images\/logoq.jpg?t=638353933090000000"
+
+        }, {
+
+        "number": 6,
+
+        "name": "Radio Paradise",
+
+        "url": "http:\/\/stream.radioparadise.com\/flacm",
+
+        "source": "RadioParadise",
+
+        "picurl":
+        "https:\/\/cdnprofiles.tunein.com\/s13606\/images\/logod.png?t=637541039930000000"
+
+        }, {
+
+        "number": 8,
+
+        "name": "1. Country Heat",
+
+        "url": "unknow",
+
+        "source": "Prime",
+
+        "picurl": "https:\/\/m.media-amazon.com\/images\/I\/51uR6AJUAQL.jpg"
+
+        }]
+
+        }
+
+
+        Description
+
+        Field type Description
+
+        name string Playlist name
+
+        Version 1.2
+
+        Field type Description
+
+        number int Preset index (Start from 1)
+
+        picurl string Cover picture url
+
+        preset_list json array Preset list information
+
+        preset_num int Total number of presets
+
+        source string Music source
+
+        url string Play url
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: getPresetInfo
+      responses:
+        default:
+          description: Default response
+      tags:
+        - Presets
 externalDocs:
   url: 'https://github.com/cvdlinden/wiim-httpapi'
 security: []

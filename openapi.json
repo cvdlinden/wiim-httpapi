@@ -43,7 +43,7 @@
         },
         {
             "name": "Presets",
-            "description": "Manage presets"
+            "description": "Manage presets\n\nThe WiiM Home App allows users to configure 12 presets for quick access to preferred radio\nstations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned\nnumber.\n"
         },
         {
             "name": "Track Metadata",
@@ -1116,6 +1116,70 @@
                 },
                 "tags": [
                     "Source Input Switch"
+                ]
+            }
+        },
+        "/MCUKeyShortClick:{n}": {
+            "get": {
+                "summary": "Play preset with preset number",
+                "description": "http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d\n\n%d: Range is from 1 to 12\n",
+                "externalDocs": {
+                    "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+                    "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+                },
+                "parameters": [
+                    {
+                        "name": "n",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10",
+                                "11",
+                                "12"
+                            ]
+                        },
+                        "description": "Preset number"
+                    }
+                ],
+                "operationId": "getMCUKeyShortClick",
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "tags": [
+                    "Presets"
+                ]
+            }
+        },
+        "/getPresetInfo": {
+            "get": {
+                "summary": "Get Preset List",
+                "description": "http://10.10.10.254/httpapi.asp?command=getPresetInfo\n\nJSON Response\n{\n\"preset_num\": 3,\n\"preset_list\": [{\n\"number\": 1,\n\"name\": \"BBC Radio Norfolk\",\n\"url\": \"http:\\/\\/as-hls-wwlive.akamaized.net\\/pool_904\\/live\\/ww\\/bbc_radio_norfolk\\/bbc_radio_norfolk.isml\\/bbc_ra\ndio_norfolk-audio%3d96000.norewind.m3u8\",\n\"source\": \"Linkplay Radio\",\n\"picurl\": \"http:\\/\\/cdnprofiles.tunein.com\\/s6852\\/images\\/logoq.jpg?t=638353933090000000\"\n}, {\n\"number\": 6,\n\"name\": \"Radio Paradise\",\n\"url\": \"http:\\/\\/stream.radioparadise.com\\/flacm\",\n\"source\": \"RadioParadise\",\n\"picurl\": \"https:\\/\\/cdnprofiles.tunein.com\\/s13606\\/images\\/logod.png?t=637541039930000000\"\n}, {\n\"number\": 8,\n\"name\": \"1. Country Heat\",\n\"url\": \"unknow\",\n\"source\": \"Prime\",\n\"picurl\": \"https:\\/\\/m.media-amazon.com\\/images\\/I\\/51uR6AJUAQL.jpg\"\n}]\n}\n\nDescription\nField type Description\nname string Playlist name\nVersion 1.2\nField type Description\nnumber int Preset index (Start from 1)\npicurl string Cover picture url\npreset_list json array Preset list information\npreset_num int Total number of presets\nsource string Music source\nurl string Play url\n",
+                "externalDocs": {
+                    "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+                    "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+                },
+                "parameters": [],
+                "operationId": "getPresetInfo",
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "tags": [
+                    "Presets"
                 ]
             }
         }

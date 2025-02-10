@@ -1145,6 +1145,116 @@ null
 This operation does not require authentication
 </aside>
 
+<h1 id="linkplay-wiim-arylic-http-api-presets">Presets</h1>
+
+Manage presets
+
+The WiiM Home App allows users to configure 12 presets for quick access to preferred radio
+stations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned
+number.
+
+## getMCUKeyShortClick
+
+<a id="opIdgetMCUKeyShortClick"></a>
+
+`GET /MCUKeyShortClick:{n}`
+
+*Play preset with preset number*
+
+http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d
+
+%d: Range is from 1 to 12
+
+<h3 id="getmcukeyshortclick-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|string|true|Preset number|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|1|
+|n|2|
+|n|3|
+|n|4|
+|n|5|
+|n|6|
+|n|7|
+|n|8|
+|n|9|
+|n|10|
+|n|11|
+|n|12|
+
+<h3 id="getmcukeyshortclick-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getPresetInfo
+
+<a id="opIdgetPresetInfo"></a>
+
+`GET /getPresetInfo`
+
+*Get Preset List*
+
+http://10.10.10.254/httpapi.asp?command=getPresetInfo
+
+JSON Response
+{
+"preset_num": 3,
+"preset_list": [{
+"number": 1,
+"name": "BBC Radio Norfolk",
+"url": "http:\/\/as-hls-wwlive.akamaized.net\/pool_904\/live\/ww\/bbc_radio_norfolk\/bbc_radio_norfolk.isml\/bbc_ra
+dio_norfolk-audio%3d96000.norewind.m3u8",
+"source": "Linkplay Radio",
+"picurl": "http:\/\/cdnprofiles.tunein.com\/s6852\/images\/logoq.jpg?t=638353933090000000"
+}, {
+"number": 6,
+"name": "Radio Paradise",
+"url": "http:\/\/stream.radioparadise.com\/flacm",
+"source": "RadioParadise",
+"picurl": "https:\/\/cdnprofiles.tunein.com\/s13606\/images\/logod.png?t=637541039930000000"
+}, {
+"number": 8,
+"name": "1. Country Heat",
+"url": "unknow",
+"source": "Prime",
+"picurl": "https:\/\/m.media-amazon.com\/images\/I\/51uR6AJUAQL.jpg"
+}]
+}
+
+Description
+Field type Description
+name string Playlist name
+Version 1.2
+Field type Description
+number int Preset index (Start from 1)
+picurl string Cover picture url
+preset_list json array Preset list information
+preset_num int Total number of presets
+source string Music source
+url string Play url
+
+<h3 id="getpresetinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|default|Default|Default response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-arylic-http-api-track-metadata">Track Metadata</h1>
 
 Get Current Track Metadata
