@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="linkplay-wiim-http-api">Linkplay/WiiM HTTP API v1.2.0</h1>
+<h1 id="linkplay-wiim-arylic-http-api">Linkplay/WiiM/Arylic HTTP API v1.2.0</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -19,11 +19,13 @@ Base URLs:
 
 * <a href="http://localhost:3000/proxy">http://localhost:3000/proxy</a>
 
-<h1 id="linkplay-wiim-http-api-device-information">Device information</h1>
+<h1 id="linkplay-wiim-arylic-http-api-device-information">Device information</h1>
 
 Get the device information
 
-## get__getStatusEx
+## getStatusEx
+
+<a id="opIdgetStatusEx"></a>
 
 `GET /getStatusEx`
 
@@ -39,13 +41,13 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx
 {"language":"string","ssid":"string","...":"string"}
 ```
 
-<h3 id="get__getstatusex-responses">Responses</h3>
+<h3 id="getstatusex-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
 
-<h3 id="get__getstatusex-responseschema">Response Schema</h3>
+<h3 id="getstatusex-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -59,11 +61,13 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-network">Network</h1>
+<h1 id="linkplay-wiim-arylic-http-api-network">Network</h1>
 
 Get the network status
 
-## get__wlanGetConnectState
+## wlanGetConnectState
+
+<a id="opIdwlanGetConnectState"></a>
 
 `GET /wlanGetConnectState`
 
@@ -100,7 +104,7 @@ OK connected
 "OK"
 ```
 
-<h3 id="get__wlangetconnectstate-responses">Responses</h3>
+<h3 id="wlangetconnectstate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -110,11 +114,13 @@ OK connected
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-playback-control">Playback control</h1>
+<h1 id="linkplay-wiim-arylic-http-api-playback-control">Playback control</h1>
 
 Get and set playback controls
 
-## get__getPlayerStatus
+## getPlayerStatus
+
+<a id="opIdgetPlayerStatus"></a>
 
 `GET /getPlayerStatus`
 
@@ -130,13 +136,13 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus
 {"status":"PLAYING","...":"string"}
 ```
 
-<h3 id="get__getplayerstatus-responses">Responses</h3>
+<h3 id="getplayerstatus-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
 
-<h3 id="get__getplayerstatus-responseschema">Response Schema</h3>
+<h3 id="getplayerstatus-responseschema">Response Schema</h3>
 
 Status Code **200**
 
@@ -158,7 +164,9 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:hex_playlist:url:{index}
+## setPlayerCmdHexPlaylistUrl
+
+<a id="opIdsetPlayerCmdHexPlaylistUrl"></a>
 
 `GET /setPlayerCmd:hex_playlist:url:{index}`
 
@@ -166,13 +174,13 @@ http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>
 Play the URl (URI is the m3u or ASX playlist link, index is the start index), here, url should be
 hexed (please refer to 1.3)
 
-<h3 id="get__setplayercmd:hex_playlist:url:{index}-parameters">Parameters</h3>
+<h3 id="setplayercmdhexplaylisturl-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |index|path|string|true|none|
 
-<h3 id="get__setplayercmd:hex_playlist:url:{index}-responses">Responses</h3>
+<h3 id="setplayercmdhexplaylisturl-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -182,7 +190,9 @@ hexed (please refer to 1.3)
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:pause
+## setPlayerCmdPause
+
+<a id="opIdsetPlayerCmdPause"></a>
 
 `GET /setPlayerCmd:pause`
 
@@ -190,7 +200,7 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause
 
-<h3 id="get__setplayercmd:pause-responses">Responses</h3>
+<h3 id="setplayercmdpause-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -200,7 +210,9 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:resume
+## setPlayerCmdResume
+
+<a id="opIdsetPlayerCmdResume"></a>
 
 `GET /setPlayerCmd:resume`
 
@@ -208,7 +220,7 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume
 
-<h3 id="get__setplayercmd:resume-responses">Responses</h3>
+<h3 id="setplayercmdresume-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -218,7 +230,9 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:onepause
+## setPlayerCmdOnePause
+
+<a id="opIdsetPlayerCmdOnePause"></a>
 
 `GET /setPlayerCmd:onepause`
 
@@ -227,7 +241,7 @@ This operation does not require authentication
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause
 If the state is paused, resume it; otherwise, pause it.
 
-<h3 id="get__setplayercmd:onepause-responses">Responses</h3>
+<h3 id="setplayercmdonepause-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -237,7 +251,9 @@ If the state is paused, resume it; otherwise, pause it.
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:prev
+## setPlayerCmdPrev
+
+<a id="opIdsetPlayerCmdPrev"></a>
 
 `GET /setPlayerCmd:prev`
 
@@ -245,7 +261,7 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev
 
-<h3 id="get__setplayercmd:prev-responses">Responses</h3>
+<h3 id="setplayercmdprev-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -255,7 +271,9 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:next
+## setPlayerCmdNext
+
+<a id="opIdsetPlayerCmdNext"></a>
 
 `GET /setPlayerCmd:next`
 
@@ -263,7 +281,7 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next
 
-<h3 id="get__setplayercmd:next-responses">Responses</h3>
+<h3 id="setplayercmdnext-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -273,7 +291,9 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:seek:position
+## setPlayerCmdSeekPosition
+
+<a id="opIdsetPlayerCmdSeekPosition"></a>
 
 `GET /setPlayerCmd:seek:position`
 
@@ -282,7 +302,7 @@ This operation does not require authentication
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:seek:position
 Position is from 0 to duration in second.
 
-<h3 id="get__setplayercmd:seek:position-responses">Responses</h3>
+<h3 id="setplayercmdseekposition-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -292,7 +312,9 @@ Position is from 0 to duration in second.
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:stop
+## setPlayerCmdStop
+
+<a id="opIdsetPlayerCmdStop"></a>
 
 `GET /setPlayerCmd:stop`
 
@@ -300,7 +322,7 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop
 
-<h3 id="get__setplayercmd:stop-responses">Responses</h3>
+<h3 id="setplayercmdstop-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -310,7 +332,9 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:vol:{value}
+## setPlayerCmdVol
+
+<a id="opIdsetPlayerCmdVol"></a>
 
 `GET /setPlayerCmd:vol:{value}`
 
@@ -319,13 +343,13 @@ This operation does not require authentication
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:vol:value
 Value can be 0 to 100.
 
-<h3 id="get__setplayercmd:vol:{value}-parameters">Parameters</h3>
+<h3 id="setplayercmdvol-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |value|path|integer|true|Value can be 0 to 100.|
 
-<h3 id="get__setplayercmd:vol:{value}-responses">Responses</h3>
+<h3 id="setplayercmdvol-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -335,7 +359,9 @@ Value can be 0 to 100.
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:mute:{n}
+## setPlayerCmdMute
+
+<a id="opIdsetPlayerCmdMute"></a>
 
 `GET /setPlayerCmd:mute:{n}`
 
@@ -346,7 +372,7 @@ Mute: n=1
 Unmute: n=0
 The slave mute state will be set at the same time when it's in group play.
 
-<h3 id="get__setplayercmd:mute:{n}-parameters">Parameters</h3>
+<h3 id="setplayercmdmute-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -364,7 +390,7 @@ Unmute: n=0
 |n|1|
 |n|0|
 
-<h3 id="get__setplayercmd:mute:{n}-responses">Responses</h3>
+<h3 id="setplayercmdmute-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -374,7 +400,9 @@ Unmute: n=0
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:loopmode:{n}
+## setPlayerCmdLoopmode
+
+<a id="opIdsetPlayerCmdLoopmode"></a>
 
 `GET /setPlayerCmd:loopmode:{n}`
 
@@ -388,7 +416,7 @@ n =
 2 - Shuffle loop
 -1 - Sequence loop
 
-<h3 id="get__setplayercmd:loopmode:{n}-parameters">Parameters</h3>
+<h3 id="setplayercmdloopmode-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -410,7 +438,7 @@ n =
 |n|2|
 |n|-1|
 
-<h3 id="get__setplayercmd:loopmode:{n}-responses">Responses</h3>
+<h3 id="setplayercmdloopmode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -420,7 +448,9 @@ n =
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:play:{url}
+## setPlayerCmdPlayUrl
+
+<a id="opIdsetPlayerCmdPlayUrl"></a>
 
 `GET /setPlayerCmd:play:{url}`
 
@@ -430,13 +460,13 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
 Play the URL. URL points to an audio stream address.
 Response is always 'OK' now
 
-<h3 id="get__setplayercmd:play:{url}-parameters">Parameters</h3>
+<h3 id="setplayercmdplayurl-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |url|path|string|true|URL points to an audio stream address|
 
-<h3 id="get__setplayercmd:play:{url}-responses">Responses</h3>
+<h3 id="setplayercmdplayurl-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -446,7 +476,9 @@ Response is always 'OK' now
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:playlist:{url}:{index}
+## setPlayerCmdPlaylistUrl
+
+<a id="opIdsetPlayerCmdPlaylistUrl"></a>
 
 `GET /setPlayerCmd:playlist:{url}:{index}`
 
@@ -457,14 +489,14 @@ Play the playlist with the URL (URL points to the m3u or ASX playlist link, inde
 index).
 Response is always 'OK' now.
 
-<h3 id="get__setplayercmd:playlist:{url}:{index}-parameters">Parameters</h3>
+<h3 id="setplayercmdplaylisturl-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |index|path|string|true|none|
 |url|path|string|true|none|
 
-<h3 id="get__setplayercmd:playlist:{url}:{index}-responses">Responses</h3>
+<h3 id="setplayercmdplaylisturl-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -474,11 +506,13 @@ Response is always 'OK' now.
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-eq">EQ</h1>
+<h1 id="linkplay-wiim-arylic-http-api-eq">EQ</h1>
 
 Get and set equalizer settings
 
-## get__EQOn
+## setEQOn
+
+<a id="opIdsetEQOn"></a>
 
 `GET /EQOn`
 
@@ -497,19 +531,21 @@ JSON Response:
 null
 ```
 
-<h3 id="get__eqon-responses">Responses</h3>
+<h3 id="seteqon-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
-<h3 id="get__eqon-responseschema">Response Schema</h3>
+<h3 id="seteqon-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## get__EQOff
+## setEQOff
+
+<a id="opIdsetEQOff"></a>
 
 `GET /EQOff`
 
@@ -528,19 +564,21 @@ JSON Response:
 null
 ```
 
-<h3 id="get__eqoff-responses">Responses</h3>
+<h3 id="seteqoff-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
-<h3 id="get__eqoff-responseschema">Response Schema</h3>
+<h3 id="seteqoff-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## get__EQGetStat
+## getEQStat
+
+<a id="opIdgetEQStat"></a>
 
 `GET /EQGetStat`
 
@@ -559,19 +597,21 @@ JSON Response:
 null
 ```
 
-<h3 id="get__eqgetstat-responses">Responses</h3>
+<h3 id="geteqstat-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |222|Unknown|Default response|Inline|
 
-<h3 id="get__eqgetstat-responseschema">Response Schema</h3>
+<h3 id="geteqstat-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## get__EQGetList
+## getEQList
+
+<a id="opIdgetEQList"></a>
 
 `GET /EQGetList`
 
@@ -592,19 +632,21 @@ Speakers", "Spoken Word", "Treble Booster", "Treble Reducer", "Vocal Booster"]
 null
 ```
 
-<h3 id="get__eqgetlist-responses">Responses</h3>
+<h3 id="geteqlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
-<h3 id="get__eqgetlist-responseschema">Response Schema</h3>
+<h3 id="geteqlist-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## get__EQLoad:{name}
+## loadEQByName
+
+<a id="opIdloadEQByName"></a>
 
 `GET /EQLoad:{name}`
 
@@ -617,7 +659,7 @@ JSON Response:
 
 Note: xxx is the one of the name in the list returned by EQGetList, i.e., EQLoad:Flat
 
-<h3 id="get__eqload:{name}-parameters">Parameters</h3>
+<h3 id="loadeqbyname-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -658,23 +700,160 @@ Note: xxx is the one of the name in the list returned by EQGetList, i.e., EQLoad
 null
 ```
 
-<h3 id="get__eqload:{name}-responses">Responses</h3>
+<h3 id="loadeqbyname-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
-<h3 id="get__eqload:{name}-responseschema">Response Schema</h3>
+<h3 id="loadeqbyname-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-track-metadata">Track Metadata</h1>
+<h1 id="linkplay-wiim-arylic-http-api-device-control">Device control</h1>
+
+Control the device
+
+## rebootDevice
+
+<a id="opIdrebootDevice"></a>
+
+`GET /reboot`
+
+*Reboot*
+
+http://10.10.10.254/httpapi.asp?command=reboot
+
+JSON Response:
+{"status":"OK"}
+
+> Example responses
+
+> Default response
+
+```
+{"status":"OK"}
+```
+
+<h3 id="rebootdevice-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="rebootdevice-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setShutdownTimer
+
+<a id="opIdsetShutdownTimer"></a>
+
+`GET /setShutdown:{sec}`
+
+*Shutdown*
+
+http://10.10.10.254/httpapi.asp?command=setShutdown:sec
+
+Shutdown device in sec
+
+sec:
+0: shutdown immediately
+-1: cancel the previous shutdown timer
+
+JSON Response:
+{"status":"OK"} or {"status":"Failed"}
+
+<h3 id="setshutdowntimer-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|sec|path|string|true|Shutdown device in sec|
+
+#### Detailed descriptions
+
+**sec**: Shutdown device in sec
+
+0: shutdown immediately
+-1: cancel the previous shutdown timer
+
+> Example responses
+
+> Default response
+
+```
+{"status":"OK"}
+```
+
+```
+{"status":"Failed"}
+```
+
+<h3 id="setshutdowntimer-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="setshutdowntimer-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getShutdownTimer
+
+<a id="opIdgetShutdownTimer"></a>
+
+`GET /getShutdown`
+
+*Get the shutdown timer*
+
+http://10.10.10.254/httpapi.asp?command=getShutdown
+
+Return the seconds
+
+> Example responses
+
+> Default response
+
+```
+0
+```
+
+<h3 id="getshutdowntimer-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|integer|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="linkplay-wiim-arylic-http-api-track-metadata">Track Metadata</h1>
 
 Get Current Track Metadata
 
-## get__getMetaInfo
+## getMetaInfo
+
+<a id="opIdgetMetaInfo"></a>
 
 `GET /getMetaInfo`
 
@@ -692,7 +871,7 @@ JSON Response
  }
 }
 
-<h3 id="get__getmetainfo-responses">Responses</h3>
+<h3 id="getmetainfo-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -702,11 +881,13 @@ JSON Response
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-audio-output-control">Audio Output Control</h1>
+<h1 id="linkplay-wiim-arylic-http-api-audio-output-control">Audio Output Control</h1>
 
 Get and set audio output mode
 
-## get__getNewAudioOutputHardwareMode
+## getNewAudioOutputHardwareMode
+
+<a id="opIdgetNewAudioOutputHardwareMode"></a>
 
 `GET /getNewAudioOutputHardwareMode`
 
@@ -727,7 +908,7 @@ audiocast Audio cast output mode:
 0: disable
 1: active
 
-<h3 id="get__getnewaudiooutputhardwaremode-responses">Responses</h3>
+<h3 id="getnewaudiooutputhardwaremode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -737,7 +918,9 @@ audiocast Audio cast output mode:
 This operation does not require authentication
 </aside>
 
-## get__setAudioOutputHardwareMode:{n}
+## setAudioOutputHardwareMode
+
+<a id="opIdsetAudioOutputHardwareMode"></a>
 
 `GET /setAudioOutputHardwareMode:{n}`
 
@@ -750,7 +933,7 @@ Hardware Interface output mode:
 3: AUDIO_OUTPUT_COAX_MODE
 Response is 'OK'
 
-<h3 id="get__setaudiooutputhardwaremode:{n}-parameters">Parameters</h3>
+<h3 id="setaudiooutputhardwaremode-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -771,7 +954,7 @@ Response is 'OK'
 |n|2|
 |n|3|
 
-<h3 id="get__setaudiooutputhardwaremode:{n}-responses">Responses</h3>
+<h3 id="setaudiooutputhardwaremode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|

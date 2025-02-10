@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Linkplay/WiiM HTTP API
+  title: Linkplay/WiiM/Arylic HTTP API
   description: >-
     HTTP API for Linkplay/WiiM devices.
 
@@ -57,6 +57,7 @@ paths:
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      operationId: getStatusEx
       responses:
         '200':
           description: Successful response
@@ -101,6 +102,7 @@ paths:
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      operationId: wlanGetConnectState
       responses:
         '200':
           description: Successful response
@@ -150,6 +152,7 @@ paths:
                   ...:
                     type: string
       parameters: []
+      operationId: getPlayerStatus
   '/setPlayerCmd:hex_playlist:url:{index}':
     get:
       summary: ''
@@ -175,6 +178,7 @@ paths:
       tags:
         - Playback control
       deprecated: true
+      operationId: setPlayerCmdHexPlaylistUrl
   '/setPlayerCmd:pause':
     get:
       summary: Pause
@@ -188,6 +192,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdPause
   '/setPlayerCmd:resume':
     get:
       summary: Resume
@@ -201,6 +206,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdResume
   '/setPlayerCmd:onepause':
     get:
       summary: Toggle pause/play
@@ -216,6 +222,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdOnePause
   '/setPlayerCmd:prev':
     get:
       summary: Previous
@@ -229,6 +236,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdPrev
   '/setPlayerCmd:next':
     get:
       summary: Next
@@ -242,6 +250,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdNext
   '/setPlayerCmd:seek:position':
     get:
       summary: Seek
@@ -257,6 +266,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdSeekPosition
   '/setPlayerCmd:stop':
     get:
       summary: Stop
@@ -270,6 +280,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdStop
   '/setPlayerCmd:vol:{value}':
     get:
       summary: Set volume
@@ -291,6 +302,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdVol
   '/setPlayerCmd:mute:{n}':
     get:
       summary: Mute
@@ -324,6 +336,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdMute
   '/setPlayerCmd:loopmode:{n}':
     get:
       summary: Loop mode set
@@ -359,6 +372,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdLoopmode
   /getNewAudioOutputHardwareMode:
     get:
       summary: Get audio output mode
@@ -386,6 +400,7 @@ paths:
           description: Default response
       tags:
         - Audio Output Control
+      operationId: getNewAudioOutputHardwareMode
   '/setAudioOutputHardwareMode:{n}':
     get:
       summary: Set audio output mode
@@ -419,6 +434,7 @@ paths:
           description: Default response
       tags:
         - Audio Output Control
+      operationId: setAudioOutputHardwareMode
   /getMetaInfo:
     get:
       summary: Get Current Track Metadata
@@ -443,6 +459,7 @@ paths:
           description: Default response
       tags:
         - Track Metadata
+      operationId: getMetaInfo
   '/setPlayerCmd:play:{url}':
     get:
       summary: Play audio URL
@@ -467,6 +484,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdPlayUrl
   '/setPlayerCmd:playlist:{url}:{index}':
     get:
       summary: Play audio playlist
@@ -500,6 +518,7 @@ paths:
           description: Default response
       tags:
         - Playback control
+      operationId: setPlayerCmdPlaylistUrl
   /EQOn:
     get:
       summary: Turn on the EQ
@@ -520,6 +539,7 @@ paths:
               schema: {}
       tags:
         - EQ
+      operationId: setEQOn
   /EQOff:
     get:
       summary: Turn off the EQ setting
@@ -540,6 +560,7 @@ paths:
               schema: {}
       tags:
         - EQ
+      operationId: setEQOff
   /EQGetStat:
     get:
       summary: Check if the EQ is ON or OFF
@@ -560,6 +581,7 @@ paths:
               schema: {}
       tags:
         - EQ
+      operationId: getEQStat
   /EQGetList:
     get:
       summary: Check all the possible EQ settings
@@ -589,6 +611,7 @@ paths:
               schema: {}
       tags:
         - EQ
+      operationId: getEQList
   '/EQLoad:{name}':
     get:
       summary: Set the specific EQ with name
@@ -636,7 +659,7 @@ paths:
               - Treble Reducer
               - Vocal Booster
           description: 'The name in the list returned by EQGetList, i.e., EQLoad:Flat'
-      operationId: ''
+      operationId: loadEQByName
       responses:
         '200':
           description: Default response
@@ -645,6 +668,112 @@ paths:
               schema: {}
       tags:
         - EQ
+  /reboot:
+    get:
+      summary: Reboot
+      description: |-
+        http://10.10.10.254/httpapi.asp?command=reboot
+
+        JSON Response:
+        {"status":"OK"}
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: rebootDevice
+      responses:
+        '200':
+          description: Default response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                OK:
+                  summary: Response
+                  value:
+                    status: OK
+      tags:
+        - Device control
+  '/setShutdown:{sec}':
+    get:
+      summary: Shutdown
+      description: |
+        http://10.10.10.254/httpapi.asp?command=setShutdown:sec
+
+        Shutdown device in sec
+
+        sec:
+        0: shutdown immediately
+        -1: cancel the previous shutdown timer
+
+        JSON Response:
+        {"status":"OK"} or {"status":"Failed"}
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters:
+        - name: sec
+          in: path
+          required: true
+          schema:
+            type: string
+            default: '0'
+          description: |-
+            Shutdown device in sec
+
+            0: shutdown immediately
+            -1: cancel the previous shutdown timer
+      operationId: setShutdownTimer
+      responses:
+        '200':
+          description: Default response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    status: OK
+                FAILED:
+                  summary: Failed
+                  value:
+                    status: Failed
+      tags:
+        - Device control
+  /getShutdown:
+    get:
+      summary: Get the shutdown timer
+      description: |
+        http://10.10.10.254/httpapi.asp?command=getShutdown
+
+        Return the seconds
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+      parameters: []
+      operationId: getShutdownTimer
+      responses:
+        '200':
+          description: Default response
+          content:
+            text/html:
+              schema:
+                type: integer
+              examples:
+                OK:
+                  summary: Number of seconds
+                  value: 0
+      tags:
+        - Device control
 externalDocs:
   url: 'https://github.com/cvdlinden/wiim-httpapi'
 security: []

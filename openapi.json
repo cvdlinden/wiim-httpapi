@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Linkplay/WiiM HTTP API",
+        "title": "Linkplay/WiiM/Arylic HTTP API",
         "description": "HTTP API for Linkplay/WiiM devices.\n\nYou can send 'HTTPs Get' request to the device, most of the response is in the JSON format.\n\nRequest format is https://x.x.x.x/httpapi.asp?command=********\nx.x.x.x is the IP address of the device (Below, we assume the IP of the device is 10.10.10.254) ******* is the actual command.\n\nCommands can contain both integers and strings, denoted as '%d' for integers and '%s' for strings, respectively.\n\nThis Swagger doc uses a reverse proxy to access the device. See the description for the actual command.",
         "version": "1.2.0",
         "contact": {}
@@ -66,6 +66,7 @@
                     "description": "HTTP API for WiiM PRODUCTS Version 1.2",
                     "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
                 },
+                "operationId": "getStatusEx",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -104,6 +105,7 @@
                     "description": "HTTP API for WiiM PRODUCTS Version 1.2",
                     "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
                 },
+                "operationId": "wlanGetConnectState",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -175,7 +177,8 @@
                         }
                     }
                 },
-                "parameters": []
+                "parameters": [],
+                "operationId": "getPlayerStatus"
             }
         },
         "/setPlayerCmd:hex_playlist:url:{index}": {
@@ -204,7 +207,8 @@
                 "tags": [
                     "Playback control"
                 ],
-                "deprecated": true
+                "deprecated": true,
+                "operationId": "setPlayerCmdHexPlaylistUrl"
             }
         },
         "/setPlayerCmd:pause": {
@@ -223,7 +227,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdPause"
             }
         },
         "/setPlayerCmd:resume": {
@@ -242,7 +247,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdResume"
             }
         },
         "/setPlayerCmd:onepause": {
@@ -261,7 +267,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdOnePause"
             }
         },
         "/setPlayerCmd:prev": {
@@ -280,7 +287,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdPrev"
             }
         },
         "/setPlayerCmd:next": {
@@ -299,7 +307,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdNext"
             }
         },
         "/setPlayerCmd:seek:position": {
@@ -318,7 +327,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdSeekPosition"
             }
         },
         "/setPlayerCmd:stop": {
@@ -337,7 +347,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdStop"
             }
         },
         "/setPlayerCmd:vol:{value}": {
@@ -366,7 +377,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdVol"
             }
         },
         "/setPlayerCmd:mute:{n}": {
@@ -400,7 +412,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdMute"
             }
         },
         "/setPlayerCmd:loopmode:{n}": {
@@ -435,7 +448,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdLoopmode"
             }
         },
         "/getNewAudioOutputHardwareMode": {
@@ -454,7 +468,8 @@
                 },
                 "tags": [
                     "Audio Output Control"
-                ]
+                ],
+                "operationId": "getNewAudioOutputHardwareMode"
             }
         },
         "/setAudioOutputHardwareMode:{n}": {
@@ -488,7 +503,8 @@
                 },
                 "tags": [
                     "Audio Output Control"
-                ]
+                ],
+                "operationId": "setAudioOutputHardwareMode"
             }
         },
         "/getMetaInfo": {
@@ -507,7 +523,8 @@
                 },
                 "tags": [
                     "Track Metadata"
-                ]
+                ],
+                "operationId": "getMetaInfo"
             }
         },
         "/setPlayerCmd:play:{url}": {
@@ -537,7 +554,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdPlayUrl"
             }
         },
         "/setPlayerCmd:playlist:{url}:{index}": {
@@ -574,7 +592,8 @@
                 },
                 "tags": [
                     "Playback control"
-                ]
+                ],
+                "operationId": "setPlayerCmdPlaylistUrl"
             }
         },
         "/EQOn": {
@@ -598,7 +617,8 @@
                 },
                 "tags": [
                     "EQ"
-                ]
+                ],
+                "operationId": "setEQOn"
             }
         },
         "/EQOff": {
@@ -622,7 +642,8 @@
                 },
                 "tags": [
                     "EQ"
-                ]
+                ],
+                "operationId": "setEQOff"
             }
         },
         "/EQGetStat": {
@@ -646,7 +667,8 @@
                 },
                 "tags": [
                     "EQ"
-                ]
+                ],
+                "operationId": "getEQStat"
             }
         },
         "/EQGetList": {
@@ -670,7 +692,8 @@
                 },
                 "tags": [
                     "EQ"
-                ]
+                ],
+                "operationId": "getEQList"
             }
         },
         "/EQLoad:{name}": {
@@ -716,7 +739,7 @@
                         "description": "The name in the list returned by EQGetList, i.e., EQLoad:Flat"
                     }
                 ],
-                "operationId": "",
+                "operationId": "loadEQByName",
                 "responses": {
                     "200": {
                         "description": "Default response",
@@ -729,6 +752,136 @@
                 },
                 "tags": [
                     "EQ"
+                ]
+            }
+        },
+        "/reboot": {
+            "get": {
+                "summary": "Reboot",
+                "description": "http://10.10.10.254/httpapi.asp?command=reboot\n\nJSON Response:\n{\"status\":\"OK\"}",
+                "externalDocs": {
+                    "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+                    "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+                },
+                "parameters": [],
+                "operationId": "rebootDevice",
+                "responses": {
+                    "200": {
+                        "description": "Default response",
+                        "content": {
+                            "text/html": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "OK": {
+                                        "summary": "Response",
+                                        "value": {
+                                            "status": "OK"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Device control"
+                ]
+            }
+        },
+        "/setShutdown:{sec}": {
+            "get": {
+                "summary": "Shutdown",
+                "description": "http://10.10.10.254/httpapi.asp?command=setShutdown:sec\n\nShutdown device in sec\n\nsec:\n0: shutdown immediately\n-1: cancel the previous shutdown timer\n\nJSON Response:\n{\"status\":\"OK\"} or {\"status\":\"Failed\"}\n",
+                "externalDocs": {
+                    "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+                    "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+                },
+                "parameters": [
+                    {
+                        "name": "sec",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "0"
+                        },
+                        "description": "Shutdown device in sec\n\n0: shutdown immediately\n-1: cancel the previous shutdown timer"
+                    }
+                ],
+                "operationId": "setShutdownTimer",
+                "responses": {
+                    "200": {
+                        "description": "Default response",
+                        "content": {
+                            "text/html": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "OK": {
+                                        "summary": "OK",
+                                        "value": {
+                                            "status": "OK"
+                                        }
+                                    },
+                                    "FAILED": {
+                                        "summary": "Failed",
+                                        "value": {
+                                            "status": "Failed"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Device control"
+                ]
+            }
+        },
+        "/getShutdown": {
+            "get": {
+                "summary": "Get the shutdown timer",
+                "description": "http://10.10.10.254/httpapi.asp?command=getShutdown\n\nReturn the seconds\n",
+                "externalDocs": {
+                    "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+                    "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+                },
+                "parameters": [],
+                "operationId": "getShutdownTimer",
+                "responses": {
+                    "200": {
+                        "description": "Default response",
+                        "content": {
+                            "text/html": {
+                                "schema": {
+                                    "type": "integer"
+                                },
+                                "examples": {
+                                    "OK": {
+                                        "summary": "Number of seconds",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Device control"
                 ]
             }
         }
