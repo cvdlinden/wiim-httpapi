@@ -201,6 +201,50 @@ This operation does not require authentication
 
 Get the network status
 
+## getStaticIpInfo
+
+<a id="opIdgetStaticIpInfo"></a>
+
+`GET /getStaticIpInfo`
+
+*Get the static IP information*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo
+If the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).
+
+> Example responses
+
+> 200 Response
+
+```
+{"wlanStaticIp":"string","wlanGateWay":"string","wlanDnsServer":"string","wlanStaticIpEnable":0,"ethStaticIp":"string","ethGateWay":"string","ethDnsServer":"string","ethStaticIpEnable":0}
+```
+
+<h3 id="getstaticipinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getstaticipinfo-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» wlanStaticIp|string|false|none|Wifi IP address of the device|
+|» wlanGateWay|string|false|none|Wifi IP address of the gateway|
+|» wlanDnsServer|string|false|none|Wifi IP address of the DNS server|
+|» wlanStaticIpEnable|integer|false|none|Status of the WiFi static IP configuration 0: Disabled 1: Enabled|
+|» ethStaticIp|string|false|none|Wired IP address of the device|
+|» ethGateWay|string|false|none|Wired IP address of the gateway|
+|» ethDnsServer|string|false|none|Wired IP address of the DNS server|
+|» ethStaticIpEnable|integer|false|none|Status of the wired static IP configuration 0: Disabled 1: Enabled|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## getStaticIP
 
 <a id="opIdgetStaticIP"></a>

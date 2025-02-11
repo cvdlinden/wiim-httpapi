@@ -516,6 +516,57 @@ paths:
                     type: string
                     description: The group name of the device that it belongs to
       parameters: []
+  /getStaticIpInfo:
+    get:
+      tags:
+        - Network
+      summary: Get the static IP information
+      description: >-
+        Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo
+
+        If the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: 'https://github.com/DanBrezeanu/wiim-extended-http-api'
+      operationId: getStaticIpInfo
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  wlanStaticIp: 
+                    type: string
+                    description: Wifi IP address of the device
+                  wlanGateWay: 
+                    type: string
+                    description: Wifi IP address of the gateway
+                  wlanDnsServer: 
+                    type: string
+                    description: Wifi IP address of the DNS server
+                  wlanStaticIpEnable:
+                    type: integer
+                    description: >-
+                      Status of the WiFi static IP configuration
+                      0: Disabled
+                      1: Enabled
+                  ethStaticIp: 
+                    type: string
+                    description: Wired IP address of the device
+                  ethGateWay: 
+                    type: string
+                    description: Wired IP address of the gateway
+                  ethDnsServer: 
+                    type: string
+                    description: Wired IP address of the DNS server
+                  ethStaticIpEnable:
+                    type: integer
+                    description: >-
+                      Status of the wired static IP configuration
+                      0: Disabled
+                      1: Enabled
   /getStaticIP:
     get:
       tags:
