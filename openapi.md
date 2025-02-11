@@ -33,12 +33,15 @@ Get the device information
 
 Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx
 
+Retrieves detailed informations about a connected device.
+The documented output may or may not be complete or differ from what the device actually reports.
+
 > Example responses
 
 > 200 Response
 
 ```
-{"language":"string","ssid":"string","hideSSID":"string","firmware":"string","build":"string","project":"string","priv_prj":"string","Release":"string","FW_Release_version":"string","group":"string","wmrm_version":"string","expired":"string","internet":"string","uuid":"string","MAC":"string","BT_MAC":"string","AP_MAC":"string","date":"string","time":"string","netstat":"string","essid":"string","apcli0":"string","eth0":"string","ETH_MAC":"string","hardware":"string","VersionUpdate":"string","NewVer":"string","mcu_ver":"string","mcu_ver_new":"string","update_check_count":"string","ra0":"string","temp_uuid":"string","cap1":"string","capability":"string","languages":"string","prompt_status":"string","alexa_ver":"string","alexa_beta_enable":"string","alexa_force_beta_cfg":"string","dsp_ver":"string","streams_all":"string","streams":"string","region":"string","volume_control":"string","external":"string","preset_key":"string","plm_support":"string","lbc_support":"string","WifiChannel":"string","RSSI":"string","BSSID":"string","wlanFreq":"string","wlanDataRate":"string","battery":"string","battery_percent":"string","securemode":"string","ota_interface_ver":"string","upnp_version":"string","upnp_uuid":"string","uart_pass_port":"string","communication_port":"string","web_firmware_update_hide":"string","tidal_version":"string","service_version":"string","EQ_support":"string","HiFiSRC_version":"string","power_mode":"string","security":"string","security_version":"string","security_capabilities":"string","public_https_version":"string","privacy_mode":"string","DeviceName":"string","GroupName":"string"}
+{"language":"string","ssid":"string","hideSSID":"string","SSIDStrategy":"string","branch":"string","firmware":"string","build":"string","project":"string","priv_prj":"string","project_build_name":"string","Release":"string","FW_Release_version":"string","PCB_version":"string","cast_enable":0,"cast_usage_report":0,"group":"string","master_uuid":"string","slave_mask":"string","wmrm_version":"string","wmrm_sub_ver":"string","expired":"string","internet":"string","uuid":"string","MAC":"string","STA_MAC":"string","BT_MAC":"string","AP_MAC":"string","ETH_MAC":"string","InitialConfiguration":"string","temperature_power_control":"string","temperature_cpu":"string","temperature_tmp102":"string","CountryCode":"string","CountryRegion":"string","date":"string","time":"string","tz":"string","dst_enable":"string","netstat":"string","essid":"string","apcli0":"string","eth0":"string","eth2":"string","eth_dhcp":"string","eth_static_ip":"string","eth_static_mask":"string","eth_static_gateway":"string","eth_static_dns1":"string","eth_static_dns2":"string","hardware":"string","VersionUpdate":"string","NewVer":"string","mcu_ver":"string","mcu_ver_new":"string","hdmi_ver":"string","hdmi_ver_new":"string","update_check_count":"string","BleRemote_update_checked_counter":"string","ra0":"string","temp_uuid":"string","cap1":"string","capability":"string","languages":"string","prompt_status":"string","iot_ver":"string","alexa_ver":"string","alexa_beta_enable":"string","alexa_force_beta_cfg":"string","dsp_ver":"string","dsp_ver_new":"string","ModuleColorNumber":"string","ModuleColorString":"string","uboot_verinfo":"string","streams_all":"string","streams":"string","region":"string","volume_control":"string","external":"string","preset_key":"string","spotify_active":"string","plm_support":"string","mqtt_support":"string","lbc_support":"string","WifiChannel":"string","RSSI":"string","BSSID":"string","wlanSnr":"string","wlanNoise":"string","wlanFreq":"string","wlanDataRate":"string","battery":"string","battery_percent":"string","securemode":"string","auth":"string","encry":"string","ota_interface_ver":"string","ota_api_ver":"string","upnp_version":"string","upnp_uuid":"string","uart_pass_port":"string","communication_port":"string","web_firmware_update_hide":"string","ignore_talkstart":"string","silence_ota_flag":"string","silenceOTATime":"string","ignore_silenceOTATime":"string","new_tunein_preset_and_alarm":"string","iheartradio_new":"string","new_iheart_podcast":"string","tidal_version":"string","service_version":"string","EQ_support":"string","EQVersion":"string","HiFiSRC_version":"string","audio_channel_config":"string","app_timezone_id":"string","avs_timezone_id":"string","tz_info_ver":"string","max_volume":"string","power_mode":"string","security":"string","security_version":"string","security_capabilities":{},"public_https_version":"string","BleRemoteControl":"string","BleRemoteConnected":"string","BleRemoteException":"string","udisk":"string","umount":"string","autoSenseVersion":"string","set_play_mode_enable":"string","set_play_mode_gain":"string","audioOutputModeVer":"string","privacy_mode":"string","DeviceName":"string","GroupName":"string"}
 ```
 
 <h3 id="getstatusex-responses">Responses</h3>
@@ -53,80 +56,142 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» language|string|false|none|none|
-|» ssid|string|false|none|Name of the device|
-|» hideSSID|string|false|none|none|
-|» firmware|string|false|none|firmware version|
-|» build|string|false|none|none|
-|» project|string|false|none|none|
-|» priv_prj|string|false|none|none|
-|» Release|string|false|none|data the firmware is released|
+|» language|string|false|none|The device language|
+|» ssid|string|false|none|Name of the device. Device's own SSID when in WiFi pairing mode or when device's WiFi hotspot is active|
+|» hideSSID|string|false|none|When the device is operating as a WiFi hotspot, this flag determines whether its SSID should be hidden or visible 0: ssid is visible 1: ssid is hidden|
+|» SSIDStrategy|string|false|none|none|
+|» branch|string|false|none|Code branch|
+|» firmware|string|false|none|Current firmware version|
+|» build|string|false|none|Possible values: release, debug, backup release: this is a release version debug: this is a debug version backup: this is a backup version|
+|» project|string|false|none|The project name|
+|» priv_prj|string|false|none|Project name which would stand for a specific board|
+|» project_build_name|string|false|none|Code identifier for customized release|
+|» Release|string|false|none|Firmware build date Format: YYYYMMDD|
 |» FW_Release_version|string|false|none|Reserved|
-|» group|string|false|none|0 means it's a master speaker, 1 means a slave speaker in a group|
-|» wmrm_version|string|false|none|LinkPlay's MRM SDK version, version 4.2 or above won't work with any version below 4.2|
+|» PCB_version|string|false|none|PCB version/revision|
+|» cast_enable|integer|false|none|Flag for casting feature 0: casting is disabled 1: casting is enabled|
+|» cast_usage_report|integer|false|none|Reserved|
+|» group|string|false|none|0 means it's a master speaker or standalone,  1 means a slave speaker in group|
+|» master_uuid|string|false|none|Exist when working in slave mode, showing the UUID of master device.|
+|» slave_mask|string|false|none|Exist when working in slave mode, showing if the device support mask feature. 0 means not supported.|
+|» wmrm_version|string|false|none|LinkPlay's MRM SDK version, Multiroom library version, version 4.2 or above won't work with any version below 4.2|
+|» wmrm_sub_ver|string|false|none|Multiroom library sub version|
 |» expired|string|false|none|Reserved|
-|» internet|string|false|none|Is it connected to Internet|
-|» uuid|string|false|none|The unique ID of the device|
-|» MAC|string|false|none|The WiFi MAC address of the device|
+|» internet|string|false|none|Current status of internet access: 0: not ready 1: ready|
+|» uuid|string|false|none|The unique ID of the device (will remain after device reboot)|
+|» MAC|string|false|none|MAC address of the device when working in hotspot mode, will show on APP and also the sticker on module/device.|
+|» STA_MAC|string|false|none|MAC address of the device when working in station mode|
 |» BT_MAC|string|false|none|The BT MAC address of the device|
 |» AP_MAC|string|false|none|The MAC address of the AP that the device is connected to|
-|» date|string|false|none|none|
-|» time|string|false|none|none|
-|» netstat|string|false|none|none|
-|» essid|string|false|none|The AP name in the HEX format|
-|» apcli0|string|false|none|The IP v4 address of the device|
-|» eth0|string|false|none|none|
-|» ETH_MAC|string|false|none|none|
-|» hardware|string|false|none|none|
-|» VersionUpdate|string|false|none|0: No new version; 1: new version.|
-|» NewVer|string|false|none|If there's new version, the new firmware version number|
-|» mcu_ver|string|false|none|none|
-|» mcu_ver_new|string|false|none|none|
+|» ETH_MAC|string|false|none|The MAC address of the device when it's connected to ethernet|
+|» InitialConfiguration|string|false|none|Flag for initial configuration 0: not configured 1: configured|
+|» temperature_power_control|string|false|none|Reserved|
+|» temperature_cpu|string|false|none|Reserved|
+|» temperature_tmp102|string|false|none|Reserved|
+|» CountryCode|string|false|none|The country code|
+|» CountryRegion|string|false|none|The country region|
+|» date|string|false|none|Current Date|
+|» time|string|false|none|Current local time|
+|» tz|string|false|none|Timezone offset|
+|» dst_enable|string|false|none|Daylight saving time enable|
+|» netstat|string|false|none|Current WiFi status: 0: no network 1: connected to the internet 2: connected to the local network|
+|» essid|string|false|none|SSID of the WiFi the device is connected to in HEX format|
+|» apcli0|string|false|none|The IP v4 address of the device over WiFi|
+|» eth0|string|false|none|Device's IP address when it's connected to ethernet|
+|» eth2|string|false|none|Device's IP address when it's connected to ethernet|
+|» eth_dhcp|string|false|none|Flag for DHCP or Static IP Address 0: Static IP 1: IP Address provided by LAN/WLAN DHCP Server|
+|» eth_static_ip|string|false|none|Device's Static IP address (If eth_dhcp=0)|
+|» eth_static_mask|string|false|none|Device's Network Mask (If eth_dhcp=0)|
+|» eth_static_gateway|string|false|none|Device's IP Gateway (If eth_dhcp=0)|
+|» eth_static_dns1|string|false|none|Device's Primary DNS Server (If eth_dhcp=0)|
+|» eth_static_dns2|string|false|none|Device's Secondary DNS Server (If eth_dhcp=0)|
+|» hardware|string|false|none|Hardware model|
+|» VersionUpdate|string|false|none|Flag that determines, if there is a new firmware version available or not. 0: no new firmware 1: new firmware available|
+|» NewVer|string|false|none|If there is a new firmware available (in case of VersionUpdate is set to 1), this is the new version number|
+|» mcu_ver|string|false|none|Version of MCU on base board|
+|» mcu_ver_new|string|false|none|New version of MCU on base board, indicates if there is a newer version of MCU available 0 - No new version others - New version|
+|» hdmi_ver|string|false|none|HDMI version|
+|» hdmi_ver_new|string|false|none|New HDMI version|
 |» update_check_count|string|false|none|none|
-|» ra0|string|false|none|none|
-|» temp_uuid|string|false|none|none|
-|» cap1|string|false|none|Reserved|
-|» capability|string|false|none|Reserved|
-|» languages|string|false|none|none|
-|» prompt_status|string|false|none|none|
+|» BleRemote_update_checked_counter|string|false|none|none|
+|» ra0|string|false|none|WiFi AP IP address, normally it is 10.10.10.254|
+|» temp_uuid|string|false|none|Temporary UUID (will change after device reboot)|
+|» cap1|string|false|none|Bit mask for the module feature, used internally|
+|» capability|string|false|none|Bit mask for the module feature, used internally|
+|» languages|string|false|none|Supported languages, bit mask|
+|» prompt_status|string|false|none|Indicates if the prompting voice would be played or not, you can set with command PromptEnable and PromptDisable. 0 - No prompting voice 1 - Have prompting voice|
+|» iot_ver|string|false|none|IOT library version, not used|
 |» alexa_ver|string|false|none|none|
 |» alexa_beta_enable|string|false|none|none|
 |» alexa_force_beta_cfg|string|false|none|none|
-|» dsp_ver|string|false|none|none|
+|» dsp_ver|string|false|none|Version for voice processing, not used|
+|» dsp_ver_new|string|false|none|New version for voice processing, not used|
+|» ModuleColorNumber|string|false|none|Reserved|
+|» ModuleColorString|string|false|none|Reserved|
+|» uboot_verinfo|string|false|none|Uboot version|
 |» streams_all|string|false|none|Reserved|
-|» streams|string|false|none|Reserved|
-|» region|string|false|none|none|
+|» streams|string|false|none|This is a bit mask: 0: If Airplay is enabled 1: If DLNA is enabled 2: Has TTPod support 3: Has TuneIn support 4: Has Pandora support 5: Has DoubanFM support|
+|» region|string|false|none|Reserved|
 |» volume_control|string|false|none|none|
-|» external|string|false|none|none|
-|» preset_key|string|false|none|Number of preset keys|
-|» plm_support|string|false|none|Reserved|
+|» external|string|false|none|Reserved (hex value)|
+|» preset_key|string|false|none|Amount of preset keys available|
+|» spotify_active|string|false|none|Spotify status 0: Spotify is not playing 1: Spotify is playing|
+|» plm_support|string|false|none|This is a bit mask, each bit stands for an external input source: bit1: LineIn (Aux support) bit2: Bluetooth support bit3: USB support bit4: Optical support bit6: Coaxial support bit8: LineIn 2 support bit15: USBDAC support Others are reserved or not used.|
+|» mqtt_support|string|false|none|Reserved|
 |» lbc_support|string|false|none|Reserved|
-|» WifiChannel|string|false|none|none|
-|» RSSI|string|false|none|WiFi signal strength|
-|» BSSID|string|false|none|The MAC address of connected access point|
+|» WifiChannel|string|false|none|The current connected WiFi channel|
+|» RSSI|string|false|none|RSSI Level of used WiFi Value ranges from 0 - 100. 100 means best signal strength.|
+|» BSSID|string|false|none|The Basic Service Set Identifiers:  In most cases this will be the MAC Address of the Wireless Acces Point Used (e.g. Router)|
+|» wlanSnr|string|false|none|Signal to Noise Ratio of the WiFi connection|
+|» wlanNoise|string|false|none|Noise level of the WiFi connection|
 |» wlanFreq|string|false|none|none|
 |» wlanDataRate|string|false|none|none|
-|» battery|string|false|none|none|
-|» battery_percent|string|false|none|none|
-|» securemode|string|false|none|none|
+|» battery|string|false|none|Battery status 0: battery is not charging 1: battery is charging|
+|» battery_percent|string|false|none|Battery charge level Value ranges from 0 - 100|
+|» securemode|string|false|none|Reserved|
+|» auth|string|false|none|Type of WiFi Protected Access used (Authentication Key).|
+|» encry|string|false|none|Type of encryption used for the WiFi connection.|
 |» ota_interface_ver|string|false|none|none|
-|» upnp_version|string|false|none|none|
-|» upnp_uuid|string|false|none|none|
-|» uart_pass_port|string|false|none|none|
-|» communication_port|string|false|none|none|
+|» ota_api_ver|string|false|none|none|
+|» upnp_version|string|false|none|UPnP Device Architecture Version|
+|» upnp_uuid|string|false|none|UPnP UUID|
+|» uart_pass_port|string|false|none|Port used for TCP/IP Communcations/Socket Connections|
+|» communication_port|string|false|none|TCP port for internal messages|
 |» web_firmware_update_hide|string|false|none|none|
-|» tidal_version|string|false|none|none|
+|» ignore_talkstart|string|false|none|none|
+|» silence_ota_flag|string|false|none|none|
+|» silenceOTATime|string|false|none|none|
+|» ignore_silenceOTATime|string|false|none|none|
+|» new_tunein_preset_and_alarm|string|false|none|none|
+|» iheartradio_new|string|false|none|none|
+|» new_iheart_podcast|string|false|none|none|
+|» tidal_version|string|false|none|TIDAL API version|
 |» service_version|string|false|none|none|
 |» EQ_support|string|false|none|none|
+|» EQVersion|string|false|none|none|
 |» HiFiSRC_version|string|false|none|none|
+|» audio_channel_config|string|false|none|none|
+|» app_timezone_id|string|false|none|Timezone ID|
+|» avs_timezone_id|string|false|none|Timezone ID for Alexa|
+|» tz_info_ver|string|false|none|none|
+|» max_volume|string|false|none|Maximum volume level (normally 100)|
 |» power_mode|string|false|none|none|
-|» security|string|false|none|none|
-|» security_version|string|false|none|none|
-|» security_capabilities|string|false|none|none|
-|» public_https_version|string|false|none|none|
+|» security|string|false|none|HTTPS API version|
+|» security_version|string|false|none|HTTPS API security version|
+|» security_capabilities|object|false|none|HTTPS API security capabilities|
+|» public_https_version|string|false|none|HTTPS API public version|
+|» BleRemoteControl|string|false|none|none|
+|» BleRemoteConnected|string|false|none|none|
+|» BleRemoteException|string|false|none|none|
+|» udisk|string|false|none|USB disk status 0: no USB disk 1: USB disk is connected|
+|» umount|string|false|none|Reserved|
+|» autoSenseVersion|string|false|none|none|
+|» set_play_mode_enable|string|false|none|none|
+|» set_play_mode_gain|string|false|none|none|
+|» audioOutputModeVer|string|false|none|none|
 |» privacy_mode|string|false|none|none|
-|» DeviceName|string|false|none|The device name|
-|» GroupName|string|false|none|The group name of the device is belonged to|
+|» DeviceName|string|false|none|The device UPnP and Airplay friendly name|
+|» GroupName|string|false|none|The group name of the device that it belongs to|
 
 <aside class="success">
 This operation does not require authentication

@@ -63,7 +63,14 @@ paths:
       tags:
         - Device information
       summary: Get device information
-      description: 'Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx'
+      description: >-
+        Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx
+
+
+        Retrieves detailed informations about a connected device.
+
+        The documented output may or may not be complete or differ from what the
+        device actually reports.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
@@ -78,98 +85,237 @@ paths:
                 properties:
                   language:
                     type: string
+                    description: The device language
                   ssid:
                     type: string
-                    description: Name of the device
+                    description: >-
+                      Name of the device. Device's own SSID when in WiFi pairing
+                      mode or when device's WiFi hotspot is active
                   hideSSID:
                     type: string
+                    description: >-
+                      When the device is operating as a WiFi hotspot, this flag
+                      determines whether its SSID should be hidden or visible 0:
+                      ssid is visible 1: ssid is hidden
+                  SSIDStrategy:
+                    type: string
+                  branch:
+                    type: string
+                    description: Code branch
                   firmware:
                     type: string
-                    description: firmware version
+                    description: Current firmware version
                   build:
                     type: string
+                    description: >-
+                      Possible values: release, debug, backup release: this is a
+                      release version debug: this is a debug version backup:
+                      this is a backup version
                   project:
                     type: string
+                    description: The project name
                   priv_prj:
                     type: string
+                    description: Project name which would stand for a specific board
+                  project_build_name:
+                    type: string
+                    description: Code identifier for customized release
                   Release:
                     type: string
-                    description: data the firmware is released
+                    description: 'Firmware build date Format: YYYYMMDD'
                   FW_Release_version:
                     type: string
+                    description: Reserved
+                  PCB_version:
+                    type: string
+                    description: PCB version/revision
+                  cast_enable:
+                    type: integer
+                    description: >-
+                      Flag for casting feature 0: casting is disabled 1: casting
+                      is enabled
+                  cast_usage_report:
+                    type: integer
                     description: Reserved
                   group:
                     type: string
                     description: >-
-                      0 means it's a master speaker, 1 means a slave speaker in
-                      a group
+                      0 means it's a master speaker or standalone,  1 means a
+                      slave speaker in group
+                  master_uuid:
+                    type: string
+                    description: >-
+                      Exist when working in slave mode, showing the UUID of
+                      master device.
+                  slave_mask:
+                    type: string
+                    description: >-
+                      Exist when working in slave mode, showing if the device
+                      support mask feature. 0 means not supported.
                   wmrm_version:
                     type: string
                     description: >-
-                      LinkPlay's MRM SDK version, version 4.2 or above won't
-                      work with any version below 4.2
+                      LinkPlay's MRM SDK version, Multiroom library version,
+                      version 4.2 or above won't work with any version below 4.2
+                  wmrm_sub_ver:
+                    type: string
+                    description: Multiroom library sub version
                   expired:
                     type: string
                     description: Reserved
                   internet:
                     type: string
-                    description: Is it connected to Internet
+                    description: 'Current status of internet access: 0: not ready 1: ready'
                   uuid:
                     type: string
-                    description: The unique ID of the device
+                    description: >-
+                      The unique ID of the device (will remain after device
+                      reboot)
                   MAC:
                     type: string
-                    description: The WiFi MAC address of the device
+                    description: >-
+                      MAC address of the device when working in hotspot mode,
+                      will show on APP and also the sticker on module/device.
+                  STA_MAC:
+                    type: string
+                    description: MAC address of the device when working in station mode
                   BT_MAC:
                     type: string
                     description: The BT MAC address of the device
                   AP_MAC:
                     type: string
                     description: The MAC address of the AP that the device is connected to
-                  date:
-                    type: string
-                  time:
-                    type: string
-                  netstat:
-                    type: string
-                  essid:
-                    type: string
-                    description: The AP name in the HEX format
-                  apcli0:
-                    type: string
-                    description: The IP v4 address of the device
-                  eth0:
-                    type: string
                   ETH_MAC:
                     type: string
+                    description: >-
+                      The MAC address of the device when it's connected to
+                      ethernet
+                  InitialConfiguration:
+                    type: string
+                    description: >-
+                      Flag for initial configuration 0: not configured 1:
+                      configured
+                  temperature_power_control:
+                    type: string
+                    description: Reserved
+                  temperature_cpu:
+                    type: string
+                    description: Reserved
+                  temperature_tmp102:
+                    type: string
+                    description: Reserved
+                  CountryCode:
+                    type: string
+                    description: The country code
+                  CountryRegion:
+                    type: string
+                    description: The country region
+                  date:
+                    type: string
+                    description: Current Date
+                  time:
+                    type: string
+                    description: Current local time
+                  tz:
+                    type: string
+                    description: Timezone offset
+                  dst_enable:
+                    type: string
+                    description: Daylight saving time enable
+                  netstat:
+                    type: string
+                    description: >-
+                      Current WiFi status: 0: no network 1: connected to the
+                      internet 2: connected to the local network
+                  essid:
+                    type: string
+                    description: SSID of the WiFi the device is connected to in HEX format
+                  apcli0:
+                    type: string
+                    description: The IP v4 address of the device over WiFi
+                  eth0:
+                    type: string
+                    description: Device's IP address when it's connected to ethernet
+                  eth2:
+                    type: string
+                    description: Device's IP address when it's connected to ethernet
+                  eth_dhcp:
+                    type: string
+                    description: >-
+                      Flag for DHCP or Static IP Address 0: Static IP 1: IP
+                      Address provided by LAN/WLAN DHCP Server
+                  eth_static_ip:
+                    type: string
+                    description: Device's Static IP address (If eth_dhcp=0)
+                  eth_static_mask:
+                    type: string
+                    description: Device's Network Mask (If eth_dhcp=0)
+                  eth_static_gateway:
+                    type: string
+                    description: Device's IP Gateway (If eth_dhcp=0)
+                  eth_static_dns1:
+                    type: string
+                    description: Device's Primary DNS Server (If eth_dhcp=0)
+                  eth_static_dns2:
+                    type: string
+                    description: Device's Secondary DNS Server (If eth_dhcp=0)
                   hardware:
                     type: string
+                    description: Hardware model
                   VersionUpdate:
                     type: string
-                    description: '0: No new version; 1: new version.'
+                    description: >-
+                      Flag that determines, if there is a new firmware version
+                      available or not. 0: no new firmware 1: new firmware
+                      available
                   NewVer:
                     type: string
-                    description: 'If there''s new version, the new firmware version number'
+                    description: >-
+                      If there is a new firmware available (in case of
+                      VersionUpdate is set to 1), this is the new version number
                   mcu_ver:
                     type: string
+                    description: Version of MCU on base board
                   mcu_ver_new:
                     type: string
+                    description: >-
+                      New version of MCU on base board, indicates if there is a
+                      newer version of MCU available 0 - No new version others -
+                      New version
+                  hdmi_ver:
+                    type: string
+                    description: HDMI version
+                  hdmi_ver_new:
+                    type: string
+                    description: New HDMI version
                   update_check_count:
+                    type: string
+                  BleRemote_update_checked_counter:
                     type: string
                   ra0:
                     type: string
+                    description: 'WiFi AP IP address, normally it is 10.10.10.254'
                   temp_uuid:
                     type: string
+                    description: Temporary UUID (will change after device reboot)
                   cap1:
                     type: string
-                    description: Reserved
+                    description: 'Bit mask for the module feature, used internally'
                   capability:
                     type: string
-                    description: Reserved
+                    description: 'Bit mask for the module feature, used internally'
                   languages:
                     type: string
+                    description: 'Supported languages, bit mask'
                   prompt_status:
                     type: string
+                    description: >-
+                      Indicates if the prompting voice would be played or not,
+                      you can set with command PromptEnable and PromptDisable. 0
+                      - No prompting voice 1 - Have prompting voice
+                  iot_ver:
+                    type: string
+                    description: 'IOT library version, not used'
                   alexa_ver:
                     type: string
                   alexa_beta_enable:
@@ -178,22 +324,53 @@ paths:
                     type: string
                   dsp_ver:
                     type: string
+                    description: 'Version for voice processing, not used'
+                  dsp_ver_new:
+                    type: string
+                    description: 'New version for voice processing, not used'
+                  ModuleColorNumber:
+                    type: string
+                    description: Reserved
+                  ModuleColorString:
+                    type: string
+                    description: Reserved
+                  uboot_verinfo:
+                    type: string
+                    description: Uboot version
                   streams_all:
                     type: string
                     description: Reserved
                   streams:
                     type: string
-                    description: Reserved
+                    description: >-
+                      This is a bit mask: 0: If Airplay is enabled 1: If DLNA is
+                      enabled 2: Has TTPod support 3: Has TuneIn support 4: Has
+                      Pandora support 5: Has DoubanFM support
                   region:
                     type: string
+                    description: Reserved
                   volume_control:
                     type: string
                   external:
                     type: string
+                    description: Reserved (hex value)
                   preset_key:
                     type: string
-                    description: Number of preset keys
+                    description: Amount of preset keys available
+                  spotify_active:
+                    type: string
+                    description: >-
+                      Spotify status 0: Spotify is not playing 1: Spotify is
+                      playing
                   plm_support:
+                    type: string
+                    description: >-
+                      This is a bit mask, each bit stands for an external input
+                      source: bit1: LineIn (Aux support) bit2: Bluetooth support
+                      bit3: USB support bit4: Optical support bit6: Coaxial
+                      support bit8: LineIn 2 support bit15: USBDAC support
+                      Others are reserved or not used.
+                  mqtt_support:
                     type: string
                     description: Reserved
                   lbc_support:
@@ -201,60 +378,143 @@ paths:
                     description: Reserved
                   WifiChannel:
                     type: string
+                    description: The current connected WiFi channel
                   RSSI:
                     type: string
-                    description: WiFi signal strength
+                    description: >-
+                      RSSI Level of used WiFi Value ranges from 0 - 100. 100
+                      means best signal strength.
                   BSSID:
                     type: string
-                    description: The MAC address of connected access point
+                    description: >-
+                      The Basic Service Set Identifiers:  In most cases this
+                      will be the MAC Address of the Wireless Acces Point Used
+                      (e.g. Router)
+                  wlanSnr:
+                    type: string
+                    description: Signal to Noise Ratio of the WiFi connection
+                  wlanNoise:
+                    type: string
+                    description: Noise level of the WiFi connection
                   wlanFreq:
                     type: string
                   wlanDataRate:
                     type: string
                   battery:
                     type: string
+                    description: >-
+                      Battery status 0: battery is not charging 1: battery is
+                      charging
                   battery_percent:
                     type: string
+                    description: Battery charge level Value ranges from 0 - 100
                   securemode:
                     type: string
+                    description: Reserved
+                  auth:
+                    type: string
+                    description: Type of WiFi Protected Access used (Authentication Key).
+                  encry:
+                    type: string
+                    description: Type of encryption used for the WiFi connection.
                   ota_interface_ver:
+                    type: string
+                  ota_api_ver:
                     type: string
                   upnp_version:
                     type: string
+                    description: UPnP Device Architecture Version
                   upnp_uuid:
                     type: string
+                    description: UPnP UUID
                   uart_pass_port:
                     type: string
+                    description: Port used for TCP/IP Communcations/Socket Connections
                   communication_port:
                     type: string
+                    description: TCP port for internal messages
                   web_firmware_update_hide:
+                    type: string
+                  ignore_talkstart:
+                    type: string
+                  silence_ota_flag:
+                    type: string
+                  silenceOTATime:
+                    type: string
+                  ignore_silenceOTATime:
+                    type: string
+                  new_tunein_preset_and_alarm:
+                    type: string
+                  iheartradio_new:
+                    type: string
+                  new_iheart_podcast:
                     type: string
                   tidal_version:
                     type: string
+                    description: TIDAL API version
                   service_version:
                     type: string
                   EQ_support:
                     type: string
+                  EQVersion:
+                    type: string
                   HiFiSRC_version:
                     type: string
+                  audio_channel_config:
+                    type: string
+                  app_timezone_id:
+                    type: string
+                    description: Timezone ID
+                  avs_timezone_id:
+                    type: string
+                    description: Timezone ID for Alexa
+                  tz_info_ver:
+                    type: string
+                  max_volume:
+                    type: string
+                    description: Maximum volume level (normally 100)
                   power_mode:
                     type: string
                   security:
                     type: string
+                    description: HTTPS API version
                   security_version:
                     type: string
+                    description: HTTPS API security version
                   security_capabilities:
-                    type: string
+                    type: object
+                    description: HTTPS API security capabilities
                   public_https_version:
+                    type: string
+                    description: HTTPS API public version
+                  BleRemoteControl:
+                    type: string
+                  BleRemoteConnected:
+                    type: string
+                  BleRemoteException:
+                    type: string
+                  udisk:
+                    type: string
+                    description: 'USB disk status 0: no USB disk 1: USB disk is connected'
+                  umount:
+                    type: string
+                    description: Reserved
+                  autoSenseVersion:
+                    type: string
+                  set_play_mode_enable:
+                    type: string
+                  set_play_mode_gain:
+                    type: string
+                  audioOutputModeVer:
                     type: string
                   privacy_mode:
                     type: string
                   DeviceName:
                     type: string
-                    description: The device name
+                    description: The device UPnP and Airplay friendly name
                   GroupName:
                     type: string
-                    description: The group name of the device is belonged to
+                    description: The group name of the device that it belongs to
       parameters: []
   /getStaticIP:
     get:
