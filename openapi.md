@@ -297,7 +297,7 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus
 > 200 Response
 
 ```
-{"status":"PLAYING","...":"string"}
+{"type":"string","ch":"string","mode":"string","loop":"string","eq":"string","vendor":"string","status":"PLAYING","curpos":"string","offset_pts":"string","totlen":"string","Title":"string","Artist":"string","Album":"string","alarmflag":"string","plicount":"string","plicurr":"string","vol":"string","mute":"string"}
 ```
 
 <h3 id="getplayerstatus-responses">Responses</h3>
@@ -312,8 +312,24 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» status|string|false|none|Playback status|
-|» ...|string|false|none|none|
+|» type|string|false|none|0: Main or standalone device 1: Device is a Multiroom Guest|
+|» ch|string|false|none|Active channel(s) 0: Stereo 1: Left 2: Right|
+|» mode|string|false|none|0: None 1: AirPlay or AirPlay 2 2: DLNA streaming 10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc 11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI 31: Spotify Connect 32: TIDAL Connect 40: AUX-In/Line-In input mode 41: Bluetooth input mode 42: External storage 43: Optical-In input mode 47: Line-In #2 input mode 50: Mirror 51: USBDAC input mode 60: Voice mail 99: The Device is a Guest in a Multiroom Zone|
+|» loop|string|false|none|Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE: disabled REPEAT: enabled - loop 1: SHUFFLE: disabled REPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT: enabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4: SHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled REPEAT: enabled - loop once|
+|» eq|string|false|none|The preset number of the Equalizer|
+|» vendor|string|false|none|Name of the stream source|
+|» status|string|false|none|Playback status stop: no audio selected play: playing audio load/loading: loading/buffering audio pause: audio paused|
+|» curpos|string|false|none|Current position, in ms|
+|» offset_pts|string|false|none|Offset position, in ms|
+|» totlen|string|false|none|Track duration in ms. Zero when playing a live stream.|
+|» Title|string|false|none|hexed string of the track title|
+|» Artist|string|false|none|hexed string of the artist|
+|» Album|string|false|none|hexed string of the album|
+|» alarmflag|string|false|none|none|
+|» plicount|string|false|none|The total number of tracks in the playlist|
+|» plicurr|string|false|none|Current track index|
+|» vol|string|false|none|Current volume Value range is from 0 - 100. So can be considered a linear percentage (0% to 100%) of the volume.|
+|» mute|string|false|none|Current mute state 0: Not muted 1: Muted|
 
 #### Enumerated Values
 
