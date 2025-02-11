@@ -1134,10 +1134,10 @@ trig: the alarm trigger:
 0 cancel the alarm, for example: setAlarmClock:n:0
 1 once, day should be YYYYMMDD
 2 every day
-3 every week, day should be 2 bytes (00”~“06”), means from Sunday to Saturday.
+3 every week, day should be 2 bytes ("00"~"06"), means from Sunday to Saturday.
 4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
-“7F” means every day in week, “01” means only Sunday
-5 every month, day should be 2 bytes (“01”~“31”)
+"7F" means every day in week, "01" means only Sunday
+5 every month, day should be 2 bytes ("01"~"31")
 
 op: the action
 0 shell execute
@@ -1148,10 +1148,10 @@ time: should be HHMMSS, in UTC
 day:
 if trigger is 0 or 2, no need to set.
 if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
-if trigger is 3, day should be 2 bytes (“00”~“06”), means from Sunday to Saturday.
+if trigger is 3, day should be 2 bytes ("00"~"06"), means from Sunday to Saturday.
 if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
-“7F” means every day in week, “01” means only Sunday
-if trigger is 5, day should be 2 bytes (“01”~“31”)
+"7F" means every day in week, "01" means only Sunday
+if trigger is 5, day should be 2 bytes ("01"~"31")
 
 url: the shell path or playback url, should less than 256 bytes
 
@@ -1177,10 +1177,10 @@ currently support max 3 alarm
 0 cancel the alarm, for example: setAlarmClock:n:0
 1 once, day should be YYYYMMDD
 2 every day
-3 every week, day should be 2 bytes (00”~“06”), means from Sunday to Saturday.
+3 every week, day should be 2 bytes (00"~"06"), means from Sunday to Saturday.
 4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
-“7F” means every day in week, “01” means only Sunday
-5 every month, day should be 2 bytes (“01”~“31”)
+"7F" means every day in week, "01" means only Sunday
+5 every month, day should be 2 bytes ("01"~"31")
 
 **op**: The action
 
@@ -1192,12 +1192,12 @@ currently support max 3 alarm
 
 if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
 
-if trigger is 3, day should be 2 bytes (“00”~“06”), means from Sunday to Saturday.
+if trigger is 3, day should be 2 bytes ("00"~"06"), means from Sunday to Saturday.
 
 if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
-“7F” means every day in week, “01” means only Sunday
+"7F" means every day in week, "01" means only Sunday
 
-if trigger is 5, day should be 2 bytes (“01”~“31”)
+if trigger is 5, day should be 2 bytes ("01"~"31")
 
 #### Enumerated Values
 
@@ -1248,9 +1248,9 @@ n: 0~2, currently support max 3 alarm
 {"enable":"1",
 "trigger":"%d",
 "operation":"%d",
-"date"::"%02d:%02d:%02d", //if not a “every day” alarm, no this
-"week_day":"%d", //if not a “every week” alarm, no this
-"day":"%02d", //if not a “every month” alarm, no this
+"date"::"%02d:%02d:%02d", //if not a "every day" alarm, no this
+"week_day":"%d", //if not a "every week" alarm, no this
+"day":"%02d", //if not a "every month" alarm, no this
 "time":"%02d:02d:%02d",
 "path":"%s""}
 

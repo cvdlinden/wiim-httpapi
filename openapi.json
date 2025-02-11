@@ -1574,7 +1574,7 @@
     "/setAlarmClock:{n}:{trig}:{op}:{time}:{day}:{url}": {
       "get": {
         "summary": "Set Alarm",
-        "description": "http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]\n\nn: 0~2, currently support max 3 alarm\n\ntrig: the alarm trigger:\n0 cancel the alarm, for example: setAlarmClock:n:0\n1 once, day should be YYYYMMDD\n2 every day\n3 every week, day should be 2 bytes (00”~“06”), means from Sunday to Saturday.\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n“7F” means every day in week, “01” means only Sunday\n5 every month, day should be 2 bytes (“01”~“31”)\n\nop: the action\n0 shell execute\n1 playback or ring\n2 stop playback\ntime: should be HHMMSS, in UTC\n\nday:\nif trigger is 0 or 2, no need to set.\nif trigger is 1, should be YYYYMMDD ( %04d%02d%02d)\nif trigger is 3, day should be 2 bytes (“00”~“06”), means from Sunday to Saturday.\nif trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n“7F” means every day in week, “01” means only Sunday\nif trigger is 5, day should be 2 bytes (“01”~“31”)\n\nurl: the shell path or playback url, should less than 256 bytes",
+        "description": "http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]\n\nn: 0~2, currently support max 3 alarm\n\ntrig: the alarm trigger:\n0 cancel the alarm, for example: setAlarmClock:n:0\n1 once, day should be YYYYMMDD\n2 every day\n3 every week, day should be 2 bytes (\"00\"~\"06\"), means from Sunday to Saturday.\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n\"7F\" means every day in week, \"01\" means only Sunday\n5 every month, day should be 2 bytes (\"01\"~\"31\")\n\nop: the action\n0 shell execute\n1 playback or ring\n2 stop playback\ntime: should be HHMMSS, in UTC\n\nday:\nif trigger is 0 or 2, no need to set.\nif trigger is 1, should be YYYYMMDD ( %04d%02d%02d)\nif trigger is 3, day should be 2 bytes (\"00\"~\"06\"), means from Sunday to Saturday.\nif trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n\"7F\" means every day in week, \"01\" means only Sunday\nif trigger is 5, day should be 2 bytes (\"01\"~\"31\")\n\nurl: the shell path or playback url, should less than 256 bytes",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1609,7 +1609,7 @@
                 "5"
               ]
             },
-            "description": "The alarm trigger\n\n0 cancel the alarm, for example: setAlarmClock:n:0\n1 once, day should be YYYYMMDD\n2 every day\n3 every week, day should be 2 bytes (00”~“06”), means from Sunday to Saturday.\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n“7F” means every day in week, “01” means only Sunday\n5 every month, day should be 2 bytes (“01”~“31”)\n"
+            "description": "The alarm trigger\n\n0 cancel the alarm, for example: setAlarmClock:n:0\n1 once, day should be YYYYMMDD\n2 every day\n3 every week, day should be 2 bytes (00\"~\"06\"), means from Sunday to Saturday.\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n\"7F\" means every day in week, \"01\" means only Sunday\n5 every month, day should be 2 bytes (\"01\"~\"31\")\n"
           },
           {
             "name": "op",
@@ -1641,7 +1641,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "if trigger is 0 or 2, no need to set.\n\nif trigger is 1, should be YYYYMMDD ( %04d%02d%02d)\n\nif trigger is 3, day should be 2 bytes (“00”~“06”), means from Sunday to Saturday.\n\nif trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n“7F” means every day in week, “01” means only Sunday\n\nif trigger is 5, day should be 2 bytes (“01”~“31”)"
+            "description": "if trigger is 0 or 2, no need to set.\n\nif trigger is 1, should be YYYYMMDD ( %04d%02d%02d)\n\nif trigger is 3, day should be 2 bytes (\"00\"~\"06\"), means from Sunday to Saturday.\n\nif trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n\"7F\" means every day in week, \"01\" means only Sunday\n\nif trigger is 5, day should be 2 bytes (\"01\"~\"31\")"
           },
           {
             "name": "url",
@@ -1672,7 +1672,7 @@
     "/getAlarmClock:{n}": {
       "get": {
         "summary": "",
-        "description": "http://10.10.10.254/httpapi.asp?command=getAlarmClock:n\n\nn: 0~2, currently support max 3 alarm\n{\"enable\":\"1\",\n\"trigger\":\"%d\",\n\"operation\":\"%d\",\n\"date\"::\"%02d:%02d:%02d\", //if not a “every day” alarm, no this\n\"week_day\":\"%d\", //if not a “every week” alarm, no this\n\"day\":\"%02d\", //if not a “every month” alarm, no this\n\"time\":\"%02d:02d:%02d\",\n\"path\":\"%s\"\"}\n",
+        "description": "http://10.10.10.254/httpapi.asp?command=getAlarmClock:n\n\nn: 0~2, currently support max 3 alarm\n{\"enable\":\"1\",\n\"trigger\":\"%d\",\n\"operation\":\"%d\",\n\"date\"::\"%02d:%02d:%02d\", //if not a \"every day\" alarm, no this\n\"week_day\":\"%d\", //if not a \"every week\" alarm, no this\n\"day\":\"%02d\", //if not a \"every month\" alarm, no this\n\"time\":\"%02d:02d:%02d\",\n\"path\":\"%s\"\"}\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"

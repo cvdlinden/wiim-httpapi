@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "openapi2md": "widdershins openapi.yaml -o openapi.md --omitHeader -c",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "openapi2json": "yaml2json -p openapi.yaml > openapi.json",
+    "generate": "npm run openapi2md && npm run openapi2json"
   },
   "repository": {
     "type": "git",
