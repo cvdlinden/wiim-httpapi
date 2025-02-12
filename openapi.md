@@ -1603,5 +1603,285 @@ Response is 'OK'
 This operation does not require authentication
 </aside>
 
+<h1 id="linkplay-wiim-arylic-http-api-bluetooth">Bluetooth</h1>
+
+Get and set Bluetooth settings
+
+## startBtDiscovery
+
+<a id="opIdstartBtDiscovery"></a>
+
+`GET /startbtdiscovery:3`
+
+*Start Bluetooth device scan*
+
+Args: 3 (Not sure what this argument means, I've only seen the app use the value 3 for it. Works with other integers and successfully starts a BT scan. Maybe a max list size?)
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="startbtdiscovery-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getBtDiscoveryResult
+
+<a id="opIdgetBtDiscoveryResult"></a>
+
+`GET /getbtdiscoveryresult`
+
+*Get Bluetooth device scan result*
+
+First do a startbtdiscovery:3: to start the scan, then use this to get the result.
+Output (JSON): num: Number of found devices scan_status: BT scan step
+  0: Not started
+  1: Initializing
+  2: ??? (never seen it)
+  3: Scanning
+  4: Finished scanning
+list: List of found devices
+Already paired devices may be listed as well.
+
+> Example responses
+
+> 200 Response
+
+```
+{"num":1,"scan_status":4,"list":[{"name":"My Device","ad":"00:11:22:33:44:55","ct":0,"role":"Audio Source"}]}
+```
+
+<h3 id="getbtdiscoveryresult-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[BluetoothDeviceList](#schemabluetoothdevicelist)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## clearBtDiscoveryResult
+
+<a id="opIdclearBtDiscoveryResult"></a>
+
+`GET /clearbtdiscoveryresult`
+
+*Clear Bluetooth device scan result*
+
+Clears the Bluetooth device scan results
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="clearbtdiscoveryresult-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getBtHistory
+
+<a id="opIdgetBtHistory"></a>
+
+`GET /getbthistory`
+
+*Get paired Bluetooth devices*
+
+Output (JSON):
+num: Number of found devices scan_status: BT scan step 1: Initializing 2: ??? (never seen it) 3: Scanning 4: Finished scanning list: List of found devices
+
+> Example responses
+
+> 200 Response
+
+```
+{"num":1,"scan_status":4,"list":[{"name":"My Device","ad":"00:11:22:33:44:55","ct":0,"role":"Audio Source"}]}
+```
+
+<h3 id="getbthistory-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[BluetoothDeviceList](#schemabluetoothdevicelist)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## connectBtA2dpsynk
+
+<a id="opIdconnectBtA2dpsynk"></a>
+
+`GET /connectbta2dpsynk:{BT_MAC_ADDRESS}`
+
+*Connect to a Bluetooth device*
+
+Example: https://192.168.1.100/httpapi.asp?command=connectbta2dpsynk:9c:2a:be:2e:ce:f1
+Output: Success: OK Error: Failed
+Observations: The device should be an Audio Sink (e.g. speaker, A/V reciever). The audio output will be changed to the device.
+
+<h3 id="connectbta2dpsynk-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|BT_MAC_ADDRESS|path|string|true|The Bluetooth MAC address of the device you want to connect to or disconnect from|
+
+> Example responses
+
+> Successful response
+
+```
+"OK"
+```
+
+```
+"Failed"
+```
+
+<h3 id="connectbta2dpsynk-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## disconnectBtA2dpsynk
+
+<a id="opIddisconnectBtA2dpsynk"></a>
+
+`GET /disconnectbta2dpsynk:{BT_MAC_ADDRESS}`
+
+*Disconnect from a Bluetooth device*
+
+Example: https://192.168.1.100/httpapi.asp?command=disconnectbta2dpsynk:9c:2a:be:2e:ce:f1
+
+<h3 id="disconnectbta2dpsynk-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|BT_MAC_ADDRESS|path|string|true|The Bluetooth MAC address of the device you want to connect to or disconnect from|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="disconnectbta2dpsynk-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getBtPairStatus
+
+<a id="opIdgetBtPairStatus"></a>
+
+`GET /getbtpairstatus`
+
+*Get Bluetooth pairing status*
+
+Example: https://192.168.1.100/httpapi.asp?command=getbtpairstatus
+Output (JSON): result: Pair status 0: Not paired 1: Disconnected 2: Connecting (assumption, never seen it) 3: Connected
+
+> Example responses
+
+> 200 Response
+
+```
+{"result":1}
+```
+
+<h3 id="getbtpairstatus-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getbtpairstatus-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» result|integer|false|none|Pair status 0: Not paired 1: Disconnected 2: Connecting 3: Connected|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|result|0|
+|result|1|
+|result|2|
+|result|3|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 # Schemas
+
+<h2 id="tocS_BluetoothDeviceList">BluetoothDeviceList</h2>
+<!-- backwards compatibility -->
+<a id="schemabluetoothdevicelist"></a>
+<a id="schema_BluetoothDeviceList"></a>
+<a id="tocSbluetoothdevicelist"></a>
+<a id="tocsbluetoothdevicelist"></a>
+
+```json
+{
+  "num": 1,
+  "scan_status": 4,
+  "list": [
+    {
+      "name": "My Device",
+      "ad": "00:11:22:33:44:55",
+      "ct": 0,
+      "role": "Audio Source"
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|num|integer|false|none|Number of devices found|
+|scan_status|integer|false|none|BT scan step 0: Not started 1: Initializing 2: ??? (never seen it) 3: Scanning 4: Finished scanning|
+|list|[object]|false|none|List of devices found|
+|» name|string|false|none|Device name|
+|» ad|string|false|none|MAC address|
+|» ct|integer|false|none|Connection type|
+|» role|string|false|none|Role|
 

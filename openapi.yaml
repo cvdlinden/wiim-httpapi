@@ -24,7 +24,7 @@ info:
   version: 1.2.0
   contact: {}
 servers:
-  - url: 'http://localhost:3000/proxy'
+  - url: "http://localhost:3000/proxy"
     description: Reverse proxy to access the device. See the README for more information.
 tags:
   - name: Device information
@@ -57,6 +57,8 @@ tags:
     description: Get Current Track Metadata
   - name: Audio Output Control
     description: Get and set audio output mode
+  - name: Bluetooth
+    description: Get and set Bluetooth settings
 paths:
   /getStatusEx:
     get:
@@ -73,10 +75,10 @@ paths:
         device actually reports.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       operationId: getStatusEx
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             text/html:
@@ -122,7 +124,7 @@ paths:
                     description: Code identifier for customized release
                   Release:
                     type: string
-                    description: 'Firmware build date Format: YYYYMMDD'
+                    description: "Firmware build date Format: YYYYMMDD"
                   FW_Release_version:
                     type: string
                     description: Reserved
@@ -165,7 +167,7 @@ paths:
                     description: Reserved
                   internet:
                     type: string
-                    description: 'Current status of internet access: 0: not ready 1: ready'
+                    description: "Current status of internet access: 0: not ready 1: ready"
                   uuid:
                     type: string
                     description: >-
@@ -294,19 +296,19 @@ paths:
                     type: string
                   ra0:
                     type: string
-                    description: 'WiFi AP IP address, normally it is 10.10.10.254'
+                    description: "WiFi AP IP address, normally it is 10.10.10.254"
                   temp_uuid:
                     type: string
                     description: Temporary UUID (will change after device reboot)
                   cap1:
                     type: string
-                    description: 'Bit mask for the module feature, used internally'
+                    description: "Bit mask for the module feature, used internally"
                   capability:
                     type: string
-                    description: 'Bit mask for the module feature, used internally'
+                    description: "Bit mask for the module feature, used internally"
                   languages:
                     type: string
-                    description: 'Supported languages, bit mask'
+                    description: "Supported languages, bit mask"
                   prompt_status:
                     type: string
                     description: >-
@@ -315,7 +317,7 @@ paths:
                       - No prompting voice 1 - Have prompting voice
                   iot_ver:
                     type: string
-                    description: 'IOT library version, not used'
+                    description: "IOT library version, not used"
                   alexa_ver:
                     type: string
                   alexa_beta_enable:
@@ -324,10 +326,10 @@ paths:
                     type: string
                   dsp_ver:
                     type: string
-                    description: 'Version for voice processing, not used'
+                    description: "Version for voice processing, not used"
                   dsp_ver_new:
                     type: string
-                    description: 'New version for voice processing, not used'
+                    description: "New version for voice processing, not used"
                   ModuleColorNumber:
                     type: string
                     description: Reserved
@@ -495,7 +497,7 @@ paths:
                     type: string
                   udisk:
                     type: string
-                    description: 'USB disk status 0: no USB disk 1: USB disk is connected'
+                    description: "USB disk status 0: no USB disk 1: USB disk is connected"
                   umount:
                     type: string
                     description: Reserved
@@ -527,23 +529,23 @@ paths:
         If the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
-        url: 'https://github.com/DanBrezeanu/wiim-extended-http-api'
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
       operationId: getStaticIpInfo
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             text/html:
               schema:
                 type: object
                 properties:
-                  wlanStaticIp: 
+                  wlanStaticIp:
                     type: string
                     description: Wifi IP address of the device
-                  wlanGateWay: 
+                  wlanGateWay:
                     type: string
                     description: Wifi IP address of the gateway
-                  wlanDnsServer: 
+                  wlanDnsServer:
                     type: string
                     description: Wifi IP address of the DNS server
                   wlanStaticIpEnable:
@@ -552,13 +554,13 @@ paths:
                       Status of the WiFi static IP configuration
                       0: Disabled
                       1: Enabled
-                  ethStaticIp: 
+                  ethStaticIp:
                     type: string
                     description: Wired IP address of the device
-                  ethGateWay: 
+                  ethGateWay:
                     type: string
                     description: Wired IP address of the gateway
-                  ethDnsServer: 
+                  ethDnsServer:
                     type: string
                     description: Wired IP address of the DNS server
                   ethStaticIpEnable:
@@ -576,10 +578,10 @@ paths:
       description: Query current networking status
       externalDocs:
         description: Arylic Developers
-        url: 'https://developer.arylic.com/httpapi/#http-api'
+        url: "https://developer.arylic.com/httpapi/#http-api"
       operationId: getStaticIP
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             text/html:
@@ -613,10 +615,10 @@ paths:
 
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       operationId: wlanGetConnectState
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             text/html:
@@ -641,12 +643,12 @@ paths:
       tags:
         - Playback control
       summary: Get the playback status
-      description: 'Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus'
+      description: "Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus"
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             text/html:
@@ -660,7 +662,7 @@ paths:
                       Guest
                   ch:
                     type: string
-                    description: 'Active channel(s) 0: Stereo 1: Left 2: Right'
+                    description: "Active channel(s) 0: Stereo 1: Left 2: Right"
                   mode:
                     type: string
                     description: >-
@@ -701,10 +703,10 @@ paths:
                       - BUFFERING
                   curpos:
                     type: string
-                    description: 'Current position, in ms'
+                    description: "Current position, in ms"
                   offset_pts:
                     type: string
-                    description: 'Offset position, in ms'
+                    description: "Offset position, in ms"
                   totlen:
                     type: string
                     description: Track duration in ms. Zero when playing a live stream.
@@ -732,12 +734,12 @@ paths:
                       considered a linear percentage (0% to 100%) of the volume.
                   mute:
                     type: string
-                    description: 'Current mute state 0: Not muted 1: Muted'
+                    description: "Current mute state 0: Not muted 1: Muted"
       parameters: []
       operationId: getPlayerStatus
-  '/setPlayerCmd:hex_playlist:url:{index}':
+  "/setPlayerCmd:hex_playlist:url:{index}":
     get:
-      summary: ''
+      summary: ""
       description: >
         http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>
 
@@ -747,7 +749,7 @@ paths:
         hexed (please refer to 1.3)
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
         - name: index
           in: path
@@ -761,13 +763,13 @@ paths:
         - Playback control
       deprecated: true
       operationId: setPlayerCmdHexPlaylistUrl
-  '/setPlayerCmd:pause':
+  "/setPlayerCmd:pause":
     get:
       summary: Pause
-      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause'
+      description: "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause"
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -775,13 +777,13 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdPause
-  '/setPlayerCmd:resume':
+  "/setPlayerCmd:resume":
     get:
       summary: Resume
-      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume'
+      description: "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume"
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -789,7 +791,7 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdResume
-  '/setPlayerCmd:onepause':
+  "/setPlayerCmd:onepause":
     get:
       summary: Toggle pause/play
       description: |-
@@ -797,7 +799,7 @@ paths:
         If the state is paused, resume it; otherwise, pause it.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -805,13 +807,13 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdOnePause
-  '/setPlayerCmd:prev':
+  "/setPlayerCmd:prev":
     get:
       summary: Previous
-      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev'
+      description: "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev"
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -819,13 +821,13 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdPrev
-  '/setPlayerCmd:next':
+  "/setPlayerCmd:next":
     get:
       summary: Next
-      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next'
+      description: "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next"
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -833,7 +835,7 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdNext
-  '/setPlayerCmd:seek:position':
+  "/setPlayerCmd:seek:position":
     get:
       summary: Seek
       description: |-
@@ -841,7 +843,7 @@ paths:
         Position is from 0 to duration in second.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -849,13 +851,13 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdSeekPosition
-  '/setPlayerCmd:stop':
+  "/setPlayerCmd:stop":
     get:
       summary: Stop
-      description: 'https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop'
+      description: "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop"
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -863,7 +865,7 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdStop
-  '/setPlayerCmd:vol:{value}':
+  "/setPlayerCmd:vol:{value}":
     get:
       summary: Set volume
       description: |-
@@ -871,7 +873,7 @@ paths:
         Value can be 0 to 100.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
         - name: value
           in: path
@@ -885,7 +887,7 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdVol
-  '/setPlayerCmd:mute:{n}':
+  "/setPlayerCmd:mute:{n}":
     get:
       summary: Mute
       description: >-
@@ -899,17 +901,17 @@ paths:
         play.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
-        - name: 'n'
+        - name: "n"
           in: path
           required: true
           schema:
             type: string
             enum:
-              - '1'
-              - '0'
-            default: '1'
+              - "1"
+              - "0"
+            default: "1"
           description: |-
             Mute: n=1
             Unmute: n=0
@@ -919,7 +921,7 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdMute
-  '/setPlayerCmd:loopmode:{n}':
+  "/setPlayerCmd:loopmode:{n}":
     get:
       summary: Loop mode set
       description: |
@@ -932,18 +934,18 @@ paths:
         -1 - Sequence loop
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
-        - name: 'n'
+        - name: "n"
           in: path
           required: true
           schema:
             type: string
             enum:
-              - '0'
-              - '1'
-              - '2'
-              - '-1'
+              - "0"
+              - "1"
+              - "2"
+              - "-1"
           description: |-
             0 Sequence, no loop
             1 Single loop
@@ -976,7 +978,7 @@ paths:
         1: active
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -984,7 +986,7 @@ paths:
       tags:
         - Audio Output Control
       operationId: getNewAudioOutputHardwareMode
-  '/setAudioOutputHardwareMode:{n}':
+  "/setAudioOutputHardwareMode:{n}":
     get:
       summary: Set audio output mode
       description: |-
@@ -996,17 +998,17 @@ paths:
         Response is 'OK'
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
-        - name: 'n'
+        - name: "n"
           in: path
           required: true
           schema:
             type: string
             enum:
-              - '1'
-              - '2'
-              - '3'
+              - "1"
+              - "2"
+              - "3"
           description: |-
             Hardware Interface output mode:
             1: AUDIO_OUTPUT_SPDIF_MODE
@@ -1035,7 +1037,7 @@ paths:
         }
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
         default:
@@ -1043,7 +1045,7 @@ paths:
       tags:
         - Track Metadata
       operationId: getMetaInfo
-  '/setPlayerCmd:play:{url}':
+  "/setPlayerCmd:play:{url}":
     get:
       summary: Play audio URL
       description: |-
@@ -1052,7 +1054,7 @@ paths:
         Response is always 'OK' now
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
         - name: url
           in: path
@@ -1068,7 +1070,7 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdPlayUrl
-  '/setPlayerCmd:playlist:{url}:{index}':
+  "/setPlayerCmd:playlist:{url}:{index}":
     get:
       summary: Play audio playlist
       description: >-
@@ -1082,7 +1084,7 @@ paths:
         Response is always 'OK' now.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
         - name: index
           in: path
@@ -1112,10 +1114,10 @@ paths:
         {"status":"OK"} or {"status":"Failed"}
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
@@ -1133,10 +1135,10 @@ paths:
         {"status":"OK"} or {"status":"Failed"}
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
@@ -1154,10 +1156,10 @@ paths:
         {"EQStat":"On"} or {"EQStat":"Off"}
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
-        '222':
+        "222":
           description: Default response
           content:
             text/html:
@@ -1184,10 +1186,10 @@ paths:
         Booster"]
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
@@ -1195,7 +1197,7 @@ paths:
       tags:
         - EQ
       operationId: getEQList
-  '/EQLoad:{name}':
+  "/EQLoad:{name}":
     get:
       summary: Set the specific EQ with name
       description: >-
@@ -1211,7 +1213,7 @@ paths:
         i.e., EQLoad:Flat
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
         - name: name
           in: path
@@ -1241,10 +1243,10 @@ paths:
               - Treble Booster
               - Treble Reducer
               - Vocal Booster
-          description: 'The name in the list returned by EQGetList, i.e., EQLoad:Flat'
+          description: "The name in the list returned by EQGetList, i.e., EQLoad:Flat"
       operationId: loadEQByName
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
@@ -1261,11 +1263,11 @@ paths:
         {"status":"OK"}
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       operationId: rebootDevice
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
@@ -1281,7 +1283,7 @@ paths:
                     status: OK
       tags:
         - Device control
-  '/setShutdown:{sec}':
+  "/setShutdown:{sec}":
     get:
       summary: Shutdown
       description: |
@@ -1297,14 +1299,14 @@ paths:
         {"status":"OK"} or {"status":"Failed"}
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
         - name: sec
           in: path
           required: true
           schema:
             type: string
-            default: '0'
+            default: "0"
           description: |-
             Shutdown device in sec
 
@@ -1312,7 +1314,7 @@ paths:
             -1: cancel the previous shutdown timer
       operationId: setShutdownTimer
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
@@ -1341,11 +1343,11 @@ paths:
         Return the seconds
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       operationId: getShutdownTimer
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
@@ -1357,7 +1359,7 @@ paths:
                   value: 0
       tags:
         - Device control
-  '/timeSync:{YYYYMMDDHHMMSS}':
+  "/timeSync:{YYYYMMDDHHMMSS}":
     get:
       summary: Get network time
       description: >-
@@ -1376,7 +1378,7 @@ paths:
         In UTC
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
         - name: YYYYMMDDHHMMSS
           in: path
@@ -1385,14 +1387,14 @@ paths:
             type: string
       operationId: setTimeSync
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
               schema: {}
       tags:
         - Alarm clock
-  '/setAlarmClock:{n}:{trig}:{op}:{time}:{day}:{url}':
+  "/setAlarmClock:{n}:{trig}:{op}:{time}:{day}:{url}":
     get:
       summary: Set Alarm
       description: >-
@@ -1452,17 +1454,17 @@ paths:
         url: the shell path or playback url, should less than 256 bytes
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
-        - name: 'n'
+        - name: "n"
           in: path
           required: true
           schema:
             type: string
             enum:
-              - '0'
-              - '1'
-              - '2'
+              - "0"
+              - "1"
+              - "2"
           description: |
             The alarm clock number
 
@@ -1473,12 +1475,12 @@ paths:
           schema:
             type: string
             enum:
-              - '0'
-              - '1'
-              - '2'
-              - '3'
-              - '4'
-              - '5'
+              - "0"
+              - "1"
+              - "2"
+              - "3"
+              - "4"
+              - "5"
           description: >
             The alarm trigger
 
@@ -1504,9 +1506,9 @@ paths:
           schema:
             type: string
             enum:
-              - '0'
-              - '1'
-              - '2'
+              - "0"
+              - "1"
+              - "2"
           description: |
             The action
 
@@ -1518,7 +1520,7 @@ paths:
           required: true
           schema:
             type: string
-          description: 'should be HHMMSS, in UTC'
+          description: "should be HHMMSS, in UTC"
         - name: day
           in: path
           required: true
@@ -1547,19 +1549,19 @@ paths:
           required: true
           schema:
             type: string
-          description: 'The shell path or playback url, should less than 256 bytes'
+          description: "The shell path or playback url, should less than 256 bytes"
       operationId: setAlarmClock
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
               schema: {}
       tags:
         - Alarm clock
-  '/getAlarmClock:{n}':
+  "/getAlarmClock:{n}":
     get:
-      summary: ''
+      summary: ""
       description: |
         http://10.10.10.254/httpapi.asp?command=getAlarmClock:n
 
@@ -1574,22 +1576,22 @@ paths:
         "path":"%s""}
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
-        - name: 'n'
+        - name: "n"
           in: path
           required: true
           schema:
             type: string
             enum:
-              - '0'
-              - '1'
-              - '2'
-            default: ''
+              - "0"
+              - "1"
+              - "2"
+            default: ""
           description: The alarm clock number
       operationId: getAlarmClock
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
@@ -1599,21 +1601,21 @@ paths:
   /alarmStop:
     get:
       summary: Stop the current alarm
-      description: 'http://10.10.10.254/httpapi.asp?command=alarmStop'
+      description: "http://10.10.10.254/httpapi.asp?command=alarmStop"
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       operationId: stopAlarmClock
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
               schema: {}
       tags:
         - Alarm clock
-  '/setPlayerCmd:switchmode:{mode}':
+  "/setPlayerCmd:switchmode:{mode}":
     get:
       summary: Switch the source input
       description: |
@@ -1627,7 +1629,7 @@ paths:
         wifi
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
         - name: mode
           in: path
@@ -1642,14 +1644,14 @@ paths:
               - wifi
       operationId: setPlayerCmdSwitchMode
       responses:
-        '200':
+        "200":
           description: Default response
           content:
             text/html:
               schema: {}
       tags:
         - Source Input Switch
-  '/MCUKeyShortClick:{n}':
+  "/MCUKeyShortClick:{n}":
     get:
       summary: Play preset with preset number
       description: |
@@ -1658,26 +1660,26 @@ paths:
         %d: Range is from 1 to 12
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters:
-        - name: 'n'
+        - name: "n"
           in: path
           required: true
           schema:
             type: string
             enum:
-              - '1'
-              - '2'
-              - '3'
-              - '4'
-              - '5'
-              - '6'
-              - '7'
-              - '8'
-              - '9'
-              - '10'
-              - '11'
-              - '12'
+              - "1"
+              - "2"
+              - "3"
+              - "4"
+              - "5"
+              - "6"
+              - "7"
+              - "8"
+              - "9"
+              - "10"
+              - "11"
+              - "12"
           description: Preset number
       operationId: getMCUKeyShortClick
       responses:
@@ -1767,7 +1769,7 @@ paths:
         url string Play url
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: 'https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf'
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
       parameters: []
       operationId: getPresetInfo
       responses:
@@ -1775,10 +1777,258 @@ paths:
           description: Default response
       tags:
         - Presets
+  /startbtdiscovery:3:
+    get:
+      tags:
+        - Bluetooth
+      summary: Start Bluetooth device scan
+      description: >-
+        Args: 3 (Not sure what this argument means, I've only seen the app use the value 3 for it. Works with other integers and successfully starts a BT scan. Maybe a max list size?)
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: startBtDiscovery
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+                example: OK
+  /getbtdiscoveryresult:
+    get:
+      tags:
+        - Bluetooth
+      summary: Get Bluetooth device scan result
+      description: >-
+        First do a startbtdiscovery:3: to start the scan, then use this to get the result.
+
+        Output (JSON):
+        num: Number of found devices
+        scan_status: BT scan step
+          0: Not started
+          1: Initializing
+          2: ??? (never seen it)
+          3: Scanning
+          4: Finished scanning
+        list: List of found devices
+
+        Already paired devices may be listed as well.
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getBtDiscoveryResult
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/BluetoothDeviceList"
+  /clearbtdiscoveryresult:
+    get:
+      tags:
+        - Bluetooth
+      summary: Clear Bluetooth device scan result
+      description: Clears the Bluetooth device scan results
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: clearBtDiscoveryResult
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+                example: OK
+  /getbthistory:
+    get:
+      tags:
+        - Bluetooth
+      summary: Get paired Bluetooth devices
+      description: >-
+        Output (JSON):
+
+        num: Number of found devices
+        scan_status: BT scan step
+        1: Initializing
+        2: ??? (never seen it)
+        3: Scanning
+        4: Finished scanning
+        list: List of found devices
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getBtHistory
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/BluetoothDeviceList"
+  /connectbta2dpsynk:{BT_MAC_ADDRESS}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Connect to a Bluetooth device
+      description: >-
+        Example: https://192.168.1.100/httpapi.asp?command=connectbta2dpsynk:9c:2a:be:2e:ce:f1
+
+        Output:
+        Success: OK
+        Error: Failed
+
+        Observations: The device should be an Audio Sink (e.g. speaker, A/V reciever). The audio output will be changed to the device.
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: connectBtA2dpsynk
+      parameters:
+        - $ref: "#/components/parameters/BT_MAC_ADDRESS"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                OK:
+                  summary: Response OK
+                  value: OK
+                Failed:
+                  summary: Response Failed
+                  value: Failed
+  /disconnectbta2dpsynk:{BT_MAC_ADDRESS}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Disconnect from a Bluetooth device
+      description: >-
+        Example: https://192.168.1.100/httpapi.asp?command=disconnectbta2dpsynk:9c:2a:be:2e:ce:f1
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: disconnectBtA2dpsynk
+      parameters:
+        - $ref: "#/components/parameters/BT_MAC_ADDRESS"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+                example: OK
+  /getbtpairstatus:
+    get:
+      tags:
+        - Bluetooth
+      summary: Get Bluetooth pairing status
+      description: >-
+        Example: https://192.168.1.100/httpapi.asp?command=getbtpairstatus
+
+        Output (JSON):
+        result: Pair status
+        0: Not paired
+        1: Disconnected
+        2: Connecting (assumption, never seen it)
+        3: Connected
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getBtPairStatus
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: integer
+                    description: >-
+                      Pair status
+                      0: Not paired
+                      1: Disconnected
+                      2: Connecting
+                      3: Connected
+                    example: 1
+                    enum:
+                      - 0
+                      - 1
+                      - 2
+                      - 3
 externalDocs:
-  url: 'https://github.com/cvdlinden/wiim-httpapi'
+  url: "https://github.com/cvdlinden/wiim-httpapi"
 security: []
 components:
   links: {}
   callbacks: {}
-  schemas: {}
+
+  #-------------------------------
+  # Reusable schemas (data models)
+  #-------------------------------
+  schemas:
+    BluetoothDeviceList: # Can be referenced as "#/components/schemas/BluetoothDeviceList"
+      type: object
+      properties:
+        num:
+          type: integer
+          description: Number of devices found
+          example: 1
+        scan_status:
+          type: integer
+          description: >-
+            BT scan step
+            0: Not started
+            1: Initializing
+            2: ??? (never seen it)
+            3: Scanning
+            4: Finished scanning
+          example: 4
+        list:
+          type: array
+          description: List of devices found
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Device name
+                example: "My Device"
+              ad:
+                type: string
+                description: MAC address
+                example: "00:11:22:33:44:55"
+              ct:
+                type: integer
+                description: Connection type
+                example: 0
+              role:
+                type: string
+                description: Role
+                example: "Audio Source"
+
+  #-------------------------------
+  # Reusable operation parameters
+  #-------------------------------
+  parameters:
+    BT_MAC_ADDRESS: # Can be referenced as "#/components/parameters/BT_MAC_ADDRESS"
+      name: BT_MAC_ADDRESS
+      description: The Bluetooth MAC address of the device you want to connect to or disconnect from
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "9c:2a:be:2e:ce:f1"
+
+  #-------------------------------
+  # Reusable responses
+  #-------------------------------
+  responses: {}

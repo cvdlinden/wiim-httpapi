@@ -52,6 +52,10 @@
     {
       "name": "Audio Output Control",
       "description": "Get and set audio output mode"
+    },
+    {
+      "name": "Bluetooth",
+      "description": "Get and set Bluetooth settings"
     }
   ],
   "paths": {
@@ -1839,6 +1843,224 @@
           "Presets"
         ]
       }
+    },
+    "/startbtdiscovery:3": {
+      "get": {
+        "tags": [
+          "Bluetooth"
+        ],
+        "summary": "Start Bluetooth device scan",
+        "description": "Args: 3 (Not sure what this argument means, I've only seen the app use the value 3 for it. Works with other integers and successfully starts a BT scan. Maybe a max list size?)",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "startBtDiscovery",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "OK"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getbtdiscoveryresult": {
+      "get": {
+        "tags": [
+          "Bluetooth"
+        ],
+        "summary": "Get Bluetooth device scan result",
+        "description": "First do a startbtdiscovery:3: to start the scan, then use this to get the result.\nOutput (JSON): num: Number of found devices scan_status: BT scan step  0: Not started\n  1: Initializing\n  2: ??? (never seen it)\n  3: Scanning\n  4: Finished scanning\nlist: List of found devices\nAlready paired devices may be listed as well.",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getBtDiscoveryResult",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/BluetoothDeviceList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clearbtdiscoveryresult": {
+      "get": {
+        "tags": [
+          "Bluetooth"
+        ],
+        "summary": "Clear Bluetooth device scan result",
+        "description": "Clears the Bluetooth device scan results",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "clearBtDiscoveryResult",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "OK"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getbthistory": {
+      "get": {
+        "tags": [
+          "Bluetooth"
+        ],
+        "summary": "Get paired Bluetooth devices",
+        "description": "Output (JSON):\nnum: Number of found devices scan_status: BT scan step 1: Initializing 2: ??? (never seen it) 3: Scanning 4: Finished scanning list: List of found devices",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getBtHistory",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/BluetoothDeviceList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connectbta2dpsynk:{BT_MAC_ADDRESS}": {
+      "get": {
+        "tags": [
+          "Bluetooth"
+        ],
+        "summary": "Connect to a Bluetooth device",
+        "description": "Example: https://192.168.1.100/httpapi.asp?command=connectbta2dpsynk:9c:2a:be:2e:ce:f1\nOutput: Success: OK Error: Failed\nObservations: The device should be an Audio Sink (e.g. speaker, A/V reciever). The audio output will be changed to the device.",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "connectBtA2dpsynk",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/BT_MAC_ADDRESS"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "OK": {
+                    "summary": "Response OK",
+                    "value": "OK"
+                  },
+                  "Failed": {
+                    "summary": "Response Failed",
+                    "value": "Failed"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/disconnectbta2dpsynk:{BT_MAC_ADDRESS}": {
+      "get": {
+        "tags": [
+          "Bluetooth"
+        ],
+        "summary": "Disconnect from a Bluetooth device",
+        "description": "Example: https://192.168.1.100/httpapi.asp?command=disconnectbta2dpsynk:9c:2a:be:2e:ce:f1",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "disconnectBtA2dpsynk",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/BT_MAC_ADDRESS"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "OK"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getbtpairstatus": {
+      "get": {
+        "tags": [
+          "Bluetooth"
+        ],
+        "summary": "Get Bluetooth pairing status",
+        "description": "Example: https://192.168.1.100/httpapi.asp?command=getbtpairstatus\nOutput (JSON): result: Pair status 0: Not paired 1: Disconnected 2: Connecting (assumption, never seen it) 3: Connected",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getBtPairStatus",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "integer",
+                      "description": "Pair status 0: Not paired 1: Disconnected 2: Connecting 3: Connected",
+                      "example": 1,
+                      "enum": [
+                        0,
+                        1,
+                        2,
+                        3
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "externalDocs": {
@@ -1848,6 +2070,64 @@
   "components": {
     "links": {},
     "callbacks": {},
-    "schemas": {}
+    "schemas": {
+      "BluetoothDeviceList": {
+        "type": "object",
+        "properties": {
+          "num": {
+            "type": "integer",
+            "description": "Number of devices found",
+            "example": 1
+          },
+          "scan_status": {
+            "type": "integer",
+            "description": "BT scan step 0: Not started 1: Initializing 2: ??? (never seen it) 3: Scanning 4: Finished scanning",
+            "example": 4
+          },
+          "list": {
+            "type": "array",
+            "description": "List of devices found",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Device name",
+                  "example": "My Device"
+                },
+                "ad": {
+                  "type": "string",
+                  "description": "MAC address",
+                  "example": "00:11:22:33:44:55"
+                },
+                "ct": {
+                  "type": "integer",
+                  "description": "Connection type",
+                  "example": 0
+                },
+                "role": {
+                  "type": "string",
+                  "description": "Role",
+                  "example": "Audio Source"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "BT_MAC_ADDRESS": {
+        "name": "BT_MAC_ADDRESS",
+        "description": "The Bluetooth MAC address of the device you want to connect to or disconnect from",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "9c:2a:be:2e:ce:f1"
+        }
+      }
+    },
+    "responses": {}
   }
 }
