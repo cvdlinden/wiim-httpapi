@@ -6,14 +6,19 @@
 
 HTTP API for Linkplay/WiiM devices.
 
-You can send 'HTTPs Get' request to the device, most of the response is in the JSON format.
+You can send 'HTTPs Get' request to the device, most of the response is in
+the JSON format.
 
 Request format is https://x.x.x.x/httpapi.asp?command=********
-x.x.x.x is the IP address of the device (Below, we assume the IP of the device is 10.10.10.254) ******* is the actual command.
 
-Commands can contain both integers and strings, denoted as '%d' for integers and '%s' for strings, respectively.
+x.x.x.x is the IP address of the device (Below, we assume the IP of the
+device is 10.10.10.254) ******* is the actual command.
 
-This Swagger doc uses a reverse proxy to access the device. See the description for the actual command.
+Commands can contain both integers and strings, denoted as '%d' for integers
+and '%s' for strings, respectively.
+
+This Swagger doc uses a reverse proxy to access the device. See the
+description for the actual command.
 
 Base URLs:
 
@@ -34,7 +39,9 @@ Get the device information
 Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx
 
 Retrieves detailed informations about a connected device.
-The documented output may or may not be complete or differ from what the device actually reports.
+
+The documented output may or may not be complete or differ from what the
+device actually reports.
 
 > Example responses
 
@@ -67,6 +74,7 @@ Get the network status
 *Get the static IP information*
 
 Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo
+
 If the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).
 
 > Example responses
@@ -92,11 +100,11 @@ Status Code **200**
 |» wlanStaticIp|string|false|none|Wifi IP address of the device|
 |» wlanGateWay|string|false|none|Wifi IP address of the gateway|
 |» wlanDnsServer|string|false|none|Wifi IP address of the DNS server|
-|» wlanStaticIpEnable|integer|false|none|Status of the WiFi static IP configuration 0: Disabled 1: Enabled|
+|» wlanStaticIpEnable|integer|false|none|Status of the WiFi static IP configuration<br>0: Disabled<br>1: Enabled|
 |» ethStaticIp|string|false|none|Wired IP address of the device|
 |» ethGateWay|string|false|none|Wired IP address of the gateway|
 |» ethDnsServer|string|false|none|Wired IP address of the DNS server|
-|» ethStaticIpEnable|integer|false|none|Status of the wired static IP configuration 0: Disabled 1: Enabled|
+|» ethStaticIpEnable|integer|false|none|Status of the wired static IP configuration<br>0: Disabled<br>1: Enabled|
 
 <aside class="success">
 This operation does not require authentication
@@ -138,15 +146,21 @@ This operation does not require authentication
 
 *Get the connection status*
 
-Makes a call to https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
+Makes a call to
+https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
 
 Note the return result is not in json.
 
 Return string:
+
 Return string Description
+
 PROCESS In progress
+
 PAIRFAIL Wrong password
+
 FAIL Connect fail
+
 OK connected
 
 > Example responses
@@ -213,13 +227,13 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» type|string|false|none|0: Main or standalone device 1: Device is a Multiroom Guest|
+|» type|string|false|none|0: Main or standalone device <br>1: Device is a Multiroom Guest|
 |» ch|string|false|none|Active channel(s) 0: Stereo 1: Left 2: Right|
-|» mode|string|false|none|0: None 1: AirPlay or AirPlay 2 2: DLNA streaming 10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc 11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI 31: Spotify Connect 32: TIDAL Connect 40: AUX-In/Line-In input mode 41: Bluetooth input mode 42: External storage 43: Optical-In input mode 47: Line-In #2 input mode 50: Mirror 51: USBDAC input mode 60: Voice mail 99: The Device is a Guest in a Multiroom Zone|
-|» loop|string|false|none|Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE: disabled REPEAT: enabled - loop 1: SHUFFLE: disabled REPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT: enabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4: SHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled REPEAT: enabled - loop once|
+|» mode|string|false|none|0: None <br>1: AirPlay or AirPlay 2 <br>2: DLNA streaming <br>10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc <br>11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI <br>31: Spotify Connect <br>32: TIDAL Connect <br>40: AUX-In/Line-In input mode <br>41: Bluetooth input mode <br>42: External storage <br>43: Optical-In input mode <br>47: Line-In #2 input mode <br>50: Mirror <br>51: USBDAC input mode <br>60: Voice mail<br>99: The Device is a Guest in a Multiroom Zone|
+|» loop|string|false|none|Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE:<br>disabled REPEAT: enabled - loop 1: SHUFFLE: disabled<br>REPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT:<br>enabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4:<br>SHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled<br>REPEAT: enabled - loop once|
 |» eq|string|false|none|The preset number of the Equalizer|
 |» vendor|string|false|none|Name of the stream source|
-|» status|string|false|none|Playback status stop: no audio selected play: playing audio load/loading: loading/buffering audio pause: audio paused|
+|» status|string|false|none|Playback status stop: no audio selected play: playing<br>audio load/loading: loading/buffering audio pause: audio<br>paused|
 |» curpos|string|false|none|Current position, in ms|
 |» offset_pts|string|false|none|Offset position, in ms|
 |» totlen|string|false|none|Track duration in ms. Zero when playing a live stream.|
@@ -229,7 +243,7 @@ Status Code **200**
 |» alarmflag|string|false|none|none|
 |» plicount|string|false|none|The total number of tracks in the playlist|
 |» plicurr|string|false|none|Current track index|
-|» vol|string|false|none|Current volume Value range is from 0 - 100. So can be considered a linear percentage (0% to 100%) of the volume.|
+|» vol|string|false|none|Current volume Value range is from 0 - 100. So can be<br>considered a linear percentage (0% to 100%) of the volume.|
 |» mute|string|false|none|Current mute state 0: Not muted 1: Muted|
 
 #### Enumerated Values
@@ -251,9 +265,12 @@ This operation does not require authentication
 
 `GET /setPlayerCmd:hex_playlist:url:{index}`
 
+*Play a specific track from a playlist by URL and index*
+
 http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>
-Play the URl (URI is the m3u or ASX playlist link, index is the start index), here, url should be
-hexed (please refer to 1.3)
+
+Play the URl (URI is the m3u or ASX playlist link, index is the start
+index), here, url should be hexed (please refer to 1.3)
 
 <h3 id="setplayercmdhexplaylisturl-parameters">Parameters</h3>
 
@@ -265,7 +282,7 @@ hexed (please refer to 1.3)
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -285,7 +302,7 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -305,7 +322,7 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -320,13 +337,14 @@ This operation does not require authentication
 *Toggle pause/play*
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause
+
 If the state is paused, resume it; otherwise, pause it.
 
 <h3 id="setplayercmdonepause-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -346,7 +364,7 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -366,7 +384,7 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -387,7 +405,7 @@ Position is from 0 to duration in second.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -407,7 +425,7 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -434,7 +452,7 @@ Value can be 0 to 100.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -449,9 +467,13 @@ This operation does not require authentication
 *Mute*
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:mute:n
+
 Mute: n=1
+
 Unmute: n=0
-The slave mute state will be set at the same time when it's in group play.
+
+The slave mute state will be set at the same time when it's in group
+play.
 
 <h3 id="setplayercmdmute-parameters">Parameters</h3>
 
@@ -468,14 +490,14 @@ Unmute: n=0
 
 |Parameter|Value|
 |---|---|
-|n|1|
 |n|0|
+|n|1|
 
 <h3 id="setplayercmdmute-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -523,7 +545,7 @@ n =
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -551,7 +573,7 @@ Response is always 'OK' now
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -566,8 +588,12 @@ This operation does not require authentication
 *Play audio playlist*
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
-Play the playlist with the URL (URL points to the m3u or ASX playlist link, index is the start
+
+Play the playlist with the URL (URL points to the m3u or ASX playlist
+link, index is the start
+
 index).
+
 Response is always 'OK' now.
 
 <h3 id="setplayercmdplaylisturl-parameters">Parameters</h3>
@@ -581,7 +607,7 @@ Response is always 'OK' now.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -701,9 +727,15 @@ This operation does not require authentication
 http://10.10.10.254/httpapi.asp?command=EQGetList
 
 Response:
-["Flat", "Acoustic", "Bass Booster", "Bass Reducer", "Classical", "Dance", "Deep", "Electronic",
-"Hip-Hop", "Jazz", "Latin", "Loudness", "Lounge", "Piano", "Pop", "R&B", "Rock", "Small
-Speakers", "Spoken Word", "Treble Booster", "Treble Reducer", "Vocal Booster"]
+
+["Flat", "Acoustic", "Bass Booster", "Bass Reducer", "Classical",
+"Dance", "Deep", "Electronic",
+
+"Hip-Hop", "Jazz", "Latin", "Loudness", "Lounge", "Piano", "Pop", "R&B",
+"Rock", "Small
+
+Speakers", "Spoken Word", "Treble Booster", "Treble Reducer", "Vocal
+Booster"]
 
 > Example responses
 
@@ -736,9 +768,11 @@ This operation does not require authentication
 http://10.10.10.254/httpapi.asp?command=EQLoad:xxx
 
 JSON Response:
+
 {"status":"OK"} or {"status":"Failed"}
 
-Note: xxx is the one of the name in the list returned by EQGetList, i.e., EQLoad:Flat
+Note: xxx is the one of the name in the list returned by EQGetList,
+i.e., EQLoad:Flat
 
 <h3 id="loadeqbyname-parameters">Parameters</h3>
 
@@ -944,7 +978,9 @@ If the device has no internet access, you need to sync its time with:
 
 http://10.10.10.254/httpapi.asp?command=timeSync:YYYYMMDDHHMMSS
 
-YYYY is year (such as 2015), MM is month (01~12), DD is day (01~31), HH is hour (00~23),
+YYYY is year (such as 2015), MM is month (01~12), DD is day (01~31), HH
+is hour (00~23),
+
 MM is minute (00~59), SS is second (00~59)
 
 In UTC
@@ -988,26 +1024,47 @@ http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]
 n: 0~2, currently support max 3 alarm
 
 trig: the alarm trigger:
+
 0 cancel the alarm, for example: setAlarmClock:n:0
+
 1 once, day should be YYYYMMDD
+
 2 every day
-3 every week, day should be 2 bytes ("00"~"06"), means from Sunday to Saturday.
-4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
+
+3 every week, day should be 2 bytes ("00"~"06"), means from Sunday to
+Saturday.
+
+4 every week, day should be 2 bytes, the bit 0 to bit 6 means the
+effect, for example,
+
 "7F" means every day in week, "01" means only Sunday
+
 5 every month, day should be 2 bytes ("01"~"31")
 
 op: the action
+
 0 shell execute
+
 1 playback or ring
+
 2 stop playback
+
 time: should be HHMMSS, in UTC
 
 day:
+
 if trigger is 0 or 2, no need to set.
+
 if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
-if trigger is 3, day should be 2 bytes ("00"~"06"), means from Sunday to Saturday.
-if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
+
+if trigger is 3, day should be 2 bytes ("00"~"06"), means from Sunday to
+Saturday.
+
+if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the
+effect, for example,
+
 "7F" means every day in week, "01" means only Sunday
+
 if trigger is 5, day should be 2 bytes ("01"~"31")
 
 url: the shell path or playback url, should less than 256 bytes
@@ -1032,11 +1089,19 @@ currently support max 3 alarm
 **trig**: The alarm trigger
 
 0 cancel the alarm, for example: setAlarmClock:n:0
+
 1 once, day should be YYYYMMDD
+
 2 every day
-3 every week, day should be 2 bytes (00"~"06"), means from Sunday to Saturday.
-4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
+
+3 every week, day should be 2 bytes (00"~"06"), means from Sunday to
+Saturday.
+
+4 every week, day should be 2 bytes, the bit 0 to bit 6 means the
+effect, for example,
+
 "7F" means every day in week, "01" means only Sunday
+
 5 every month, day should be 2 bytes ("01"~"31")
 
 **op**: The action
@@ -1049,9 +1114,12 @@ currently support max 3 alarm
 
 if trigger is 1, should be YYYYMMDD ( %04d%02d%02d)
 
-if trigger is 3, day should be 2 bytes ("00"~"06"), means from Sunday to Saturday.
+if trigger is 3, day should be 2 bytes ("00"~"06"), means from
+Sunday to Saturday.
 
-if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,
+if trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the
+effect, for example,
+
 "7F" means every day in week, "01" means only Sunday
 
 if trigger is 5, day should be 2 bytes ("01"~"31")
@@ -1236,9 +1304,8 @@ This operation does not require authentication
 
 Manage presets
 
-The WiiM Home App allows users to configure 12 presets for quick access to preferred radio
-stations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned
-number.
+The WiiM Home App allows users to configure 12 presets for quick access to
+preferred radio stations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned number.
 
 ## getMCUKeyShortClick
 
@@ -1279,7 +1346,7 @@ http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -1296,47 +1363,83 @@ This operation does not require authentication
 http://10.10.10.254/httpapi.asp?command=getPresetInfo
 
 JSON Response
+
 {
+
 "preset_num": 3,
+
 "preset_list": [{
+
 "number": 1,
+
 "name": "BBC Radio Norfolk",
-"url": "http:\/\/as-hls-wwlive.akamaized.net\/pool_904\/live\/ww\/bbc_radio_norfolk\/bbc_radio_norfolk.isml\/bbc_ra
+
+"url":
+"http:\/\/as-hls-wwlive.akamaized.net\/pool_904\/live\/ww\/bbc_radio_norfolk\/bbc_radio_norfolk.isml\/bbc_ra
+
 dio_norfolk-audio%3d96000.norewind.m3u8",
+
 "source": "Linkplay Radio",
-"picurl": "http:\/\/cdnprofiles.tunein.com\/s6852\/images\/logoq.jpg?t=638353933090000000"
+
+"picurl":
+"http:\/\/cdnprofiles.tunein.com\/s6852\/images\/logoq.jpg?t=638353933090000000"
+
 }, {
+
 "number": 6,
+
 "name": "Radio Paradise",
+
 "url": "http:\/\/stream.radioparadise.com\/flacm",
+
 "source": "RadioParadise",
-"picurl": "https:\/\/cdnprofiles.tunein.com\/s13606\/images\/logod.png?t=637541039930000000"
+
+"picurl":
+"https:\/\/cdnprofiles.tunein.com\/s13606\/images\/logod.png?t=637541039930000000"
+
 }, {
+
 "number": 8,
+
 "name": "1. Country Heat",
+
 "url": "unknow",
+
 "source": "Prime",
+
 "picurl": "https:\/\/m.media-amazon.com\/images\/I\/51uR6AJUAQL.jpg"
+
 }]
+
 }
 
 Description
+
 Field type Description
+
 name string Playlist name
+
 Version 1.2
+
 Field type Description
+
 number int Preset index (Start from 1)
+
 picurl string Cover picture url
+
 preset_list json array Preset list information
+
 preset_num int Total number of presets
+
 source string Music source
+
 url string Play url
 
 <h3 id="getpresetinfo-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -1370,7 +1473,7 @@ JSON Response
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -1408,7 +1511,7 @@ audiocast Audio cast output mode:
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -1454,7 +1557,7 @@ Response is 'OK'
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|default|Default|Default response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -1501,13 +1604,17 @@ This operation does not require authentication
 *Get Bluetooth device scan result*
 
 First do a startbtdiscovery:3: to start the scan, then use this to get the result.
-Output (JSON): num: Number of found devices scan_status: BT scan step
+
+Output (JSON):
+num: Number of found devices
+scan_status: BT scan step
   0: Not started
   1: Initializing
   2: ??? (never seen it)
   3: Scanning
   4: Finished scanning
 list: List of found devices
+
 Already paired devices may be listed as well.
 
 > Example responses
@@ -1565,7 +1672,14 @@ This operation does not require authentication
 *Get paired Bluetooth devices*
 
 Output (JSON):
-num: Number of found devices scan_status: BT scan step 1: Initializing 2: ??? (never seen it) 3: Scanning 4: Finished scanning list: List of found devices
+
+num: Number of found devices
+scan_status: BT scan step
+1: Initializing
+2: ??? (never seen it)
+3: Scanning
+4: Finished scanning
+list: List of found devices
 
 > Example responses
 
@@ -1594,7 +1708,11 @@ This operation does not require authentication
 *Connect to a Bluetooth device*
 
 Example: https://192.168.1.100/httpapi.asp?command=connectbta2dpsynk:9c:2a:be:2e:ce:f1
-Output: Success: OK Error: Failed
+
+Output:
+Success: OK
+Error: Failed
+
 Observations: The device should be an Audio Sink (e.g. speaker, A/V reciever). The audio output will be changed to the device.
 
 <h3 id="connectbta2dpsynk-parameters">Parameters</h3>
@@ -1668,7 +1786,13 @@ This operation does not require authentication
 *Get Bluetooth pairing status*
 
 Example: https://192.168.1.100/httpapi.asp?command=getbtpairstatus
-Output (JSON): result: Pair status 0: Not paired 1: Disconnected 2: Connecting (assumption, never seen it) 3: Connected
+
+Output (JSON):
+result: Pair status
+0: Not paired
+1: Disconnected
+2: Connecting (assumption, never seen it)
+3: Connected
 
 > Example responses
 
@@ -1690,7 +1814,7 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» result|integer|false|none|Pair status 0: Not paired 1: Disconnected 2: Connecting 3: Connected|
+|» result|integer|false|none|Pair status<br>0: Not paired<br>1: Disconnected<br>2: Connecting<br>3: Connected|
 
 #### Enumerated Values
 
@@ -1864,34 +1988,34 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |language|string|false|none|The device language|
-|ssid|string|false|none|Name of the device. Device's own SSID when in WiFi pairing mode or when device's WiFi hotspot is active|
-|hideSSID|string|false|none|When the device is operating as a WiFi hotspot, this flag determines whether its SSID should be hidden or visible 0: ssid is visible 1: ssid is hidden|
+|ssid|string|false|none|Name of the device. Device's own SSID when in WiFi pairing<br>mode or when device's WiFi hotspot is active|
+|hideSSID|string|false|none|When the device is operating as a WiFi hotspot, this flag<br>determines whether its SSID should be hidden or visible 0:<br>ssid is visible 1: ssid is hidden|
 |SSIDStrategy|string|false|none|none|
 |branch|string|false|none|Code branch|
 |firmware|string|false|none|Current firmware version|
-|build|string|false|none|Possible values: release, debug, backup release: this is a release version debug: this is a debug version backup: this is a backup version|
+|build|string|false|none|Possible values: release, debug, backup release: this is a<br>release version debug: this is a debug version backup:<br>this is a backup version|
 |project|string|false|none|The project name|
 |priv_prj|string|false|none|Project name which would stand for a specific board|
 |project_build_name|string|false|none|Code identifier for customized release|
 |Release|string|false|none|Firmware build date Format: YYYYMMDD|
 |FW_Release_version|string|false|none|Reserved|
 |PCB_version|string|false|none|PCB version/revision|
-|cast_enable|integer|false|none|Flag for casting feature 0: casting is disabled 1: casting is enabled|
+|cast_enable|integer|false|none|Flag for casting feature 0: casting is disabled 1: casting<br>is enabled|
 |cast_usage_report|integer|false|none|Reserved|
-|group|string|false|none|0 means it's a master speaker or standalone,  1 means a slave speaker in group|
-|master_uuid|string|false|none|Exist when working in slave mode, showing the UUID of master device.|
-|slave_mask|string|false|none|Exist when working in slave mode, showing if the device support mask feature. 0 means not supported.|
-|wmrm_version|string|false|none|LinkPlay's MRM SDK version, Multiroom library version, version 4.2 or above won't work with any version below 4.2|
+|group|string|false|none|0 means it's a master speaker or standalone,  1 means a<br>slave speaker in group|
+|master_uuid|string|false|none|Exist when working in slave mode, showing the UUID of<br>master device.|
+|slave_mask|string|false|none|Exist when working in slave mode, showing if the device<br>support mask feature. 0 means not supported.|
+|wmrm_version|string|false|none|LinkPlay's MRM SDK version, Multiroom library version,<br>version 4.2 or above won't work with any version below 4.2|
 |wmrm_sub_ver|string|false|none|Multiroom library sub version|
 |expired|string|false|none|Reserved|
 |internet|string|false|none|Current status of internet access: 0: not ready 1: ready|
-|uuid|string|false|none|The unique ID of the device (will remain after device reboot)|
-|MAC|string|false|none|MAC address of the device when working in hotspot mode, will show on APP and also the sticker on module/device.|
+|uuid|string|false|none|The unique ID of the device (will remain after device<br>reboot)|
+|MAC|string|false|none|MAC address of the device when working in hotspot mode,<br>will show on APP and also the sticker on module/device.|
 |STA_MAC|string|false|none|MAC address of the device when working in station mode|
 |BT_MAC|string|false|none|The BT MAC address of the device|
 |AP_MAC|string|false|none|The MAC address of the AP that the device is connected to|
-|ETH_MAC|string|false|none|The MAC address of the device when it's connected to ethernet|
-|InitialConfiguration|string|false|none|Flag for initial configuration 0: not configured 1: configured|
+|ETH_MAC|string|false|none|The MAC address of the device when it's connected to<br>ethernet|
+|InitialConfiguration|string|false|none|Flag for initial configuration 0: not configured 1:<br>configured|
 |temperature_power_control|string|false|none|Reserved|
 |temperature_cpu|string|false|none|Reserved|
 |temperature_tmp102|string|false|none|Reserved|
@@ -1901,22 +2025,22 @@ This operation does not require authentication
 |time|string|false|none|Current local time|
 |tz|string|false|none|Timezone offset|
 |dst_enable|string|false|none|Daylight saving time enable|
-|netstat|string|false|none|Current WiFi status: 0: no network 1: connected to the internet 2: connected to the local network|
+|netstat|string|false|none|Current WiFi status: 0: no network 1: connected to the<br>internet 2: connected to the local network|
 |essid|string|false|none|SSID of the WiFi the device is connected to in HEX format|
 |apcli0|string|false|none|The IP v4 address of the device over WiFi|
 |eth0|string|false|none|Device's IP address when it's connected to ethernet|
 |eth2|string|false|none|Device's IP address when it's connected to ethernet|
-|eth_dhcp|string|false|none|Flag for DHCP or Static IP Address 0: Static IP 1: IP Address provided by LAN/WLAN DHCP Server|
+|eth_dhcp|string|false|none|Flag for DHCP or Static IP Address 0: Static IP 1: IP<br>Address provided by LAN/WLAN DHCP Server|
 |eth_static_ip|string|false|none|Device's Static IP address (If eth_dhcp=0)|
 |eth_static_mask|string|false|none|Device's Network Mask (If eth_dhcp=0)|
 |eth_static_gateway|string|false|none|Device's IP Gateway (If eth_dhcp=0)|
 |eth_static_dns1|string|false|none|Device's Primary DNS Server (If eth_dhcp=0)|
 |eth_static_dns2|string|false|none|Device's Secondary DNS Server (If eth_dhcp=0)|
 |hardware|string|false|none|Hardware model|
-|VersionUpdate|string|false|none|Flag that determines, if there is a new firmware version available or not. 0: no new firmware 1: new firmware available|
-|NewVer|string|false|none|If there is a new firmware available (in case of VersionUpdate is set to 1), this is the new version number|
+|VersionUpdate|string|false|none|Flag that determines, if there is a new firmware version<br>available or not. 0: no new firmware 1: new firmware<br>available|
+|NewVer|string|false|none|If there is a new firmware available (in case of<br>VersionUpdate is set to 1), this is the new version number|
 |mcu_ver|string|false|none|Version of MCU on base board|
-|mcu_ver_new|string|false|none|New version of MCU on base board, indicates if there is a newer version of MCU available 0 - No new version others - New version|
+|mcu_ver_new|string|false|none|New version of MCU on base board, indicates if there is a<br>newer version of MCU available 0 - No new version others -<br>New version|
 |hdmi_ver|string|false|none|HDMI version|
 |hdmi_ver_new|string|false|none|New HDMI version|
 |update_check_count|string|false|none|none|
@@ -1926,7 +2050,7 @@ This operation does not require authentication
 |cap1|string|false|none|Bit mask for the module feature, used internally|
 |capability|string|false|none|Bit mask for the module feature, used internally|
 |languages|string|false|none|Supported languages, bit mask|
-|prompt_status|string|false|none|Indicates if the prompting voice would be played or not, you can set with command PromptEnable and PromptDisable. 0 - No prompting voice 1 - Have prompting voice|
+|prompt_status|string|false|none|Indicates if the prompting voice would be played or not,<br>you can set with command PromptEnable and PromptDisable. 0<br>- No prompting voice 1 - Have prompting voice|
 |iot_ver|string|false|none|IOT library version, not used|
 |alexa_ver|string|false|none|none|
 |alexa_beta_enable|string|false|none|none|
@@ -1937,23 +2061,23 @@ This operation does not require authentication
 |ModuleColorString|string|false|none|Reserved|
 |uboot_verinfo|string|false|none|Uboot version|
 |streams_all|string|false|none|Reserved|
-|streams|string|false|none|This is a bit mask: 0: If Airplay is enabled 1: If DLNA is enabled 2: Has TTPod support 3: Has TuneIn support 4: Has Pandora support 5: Has DoubanFM support|
+|streams|string|false|none|This is a bit mask: 0: If Airplay is enabled 1: If DLNA is<br>enabled 2: Has TTPod support 3: Has TuneIn support 4: Has<br>Pandora support 5: Has DoubanFM support|
 |region|string|false|none|Reserved|
 |volume_control|string|false|none|none|
 |external|string|false|none|Reserved (hex value)|
 |preset_key|string|false|none|Amount of preset keys available|
-|spotify_active|string|false|none|Spotify status 0: Spotify is not playing 1: Spotify is playing|
-|plm_support|string|false|none|This is a bit mask, each bit stands for an external input source: bit1: LineIn (Aux support) bit2: Bluetooth support bit3: USB support bit4: Optical support bit6: Coaxial support bit8: LineIn 2 support bit15: USBDAC support Others are reserved or not used.|
+|spotify_active|string|false|none|Spotify status 0: Spotify is not playing 1: Spotify is<br>playing|
+|plm_support|string|false|none|This is a bit mask, each bit stands for an external input<br>source: bit1: LineIn (Aux support) bit2: Bluetooth support<br>bit3: USB support bit4: Optical support bit6: Coaxial<br>support bit8: LineIn 2 support bit15: USBDAC support<br>Others are reserved or not used.|
 |mqtt_support|string|false|none|Reserved|
 |lbc_support|string|false|none|Reserved|
 |WifiChannel|string|false|none|The current connected WiFi channel|
-|RSSI|string|false|none|RSSI Level of used WiFi Value ranges from 0 - 100. 100 means best signal strength.|
-|BSSID|string|false|none|The Basic Service Set Identifiers:  In most cases this will be the MAC Address of the Wireless Acces Point Used (e.g. Router)|
+|RSSI|string|false|none|RSSI Level of used WiFi Value ranges from 0 - 100. 100<br>means best signal strength.|
+|BSSID|string|false|none|The Basic Service Set Identifiers:  In most cases this<br>will be the MAC Address of the Wireless Acces Point Used<br>(e.g. Router)|
 |wlanSnr|string|false|none|Signal to Noise Ratio of the WiFi connection|
 |wlanNoise|string|false|none|Noise level of the WiFi connection|
 |wlanFreq|string|false|none|none|
 |wlanDataRate|string|false|none|none|
-|battery|string|false|none|Battery status 0: battery is not charging 1: battery is charging|
+|battery|string|false|none|Battery status 0: battery is not charging 1: battery is<br>charging|
 |battery_percent|string|false|none|Battery charge level Value ranges from 0 - 100|
 |securemode|string|false|none|Reserved|
 |auth|string|false|none|Type of WiFi Protected Access used (Authentication Key).|
@@ -2028,7 +2152,7 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |num|integer|false|none|Number of devices found|
-|scan_status|integer|false|none|BT scan step 0: Not started 1: Initializing 2: ??? (never seen it) 3: Scanning 4: Finished scanning|
+|scan_status|integer|false|none|BT scan step<br>0: Not started<br>1: Initializing<br>2: ??? (never seen it)<br>3: Scanning<br>4: Finished scanning|
 |list|[object]|false|none|List of devices found|
 |» name|string|false|none|Device name|
 |» ad|string|false|none|MAC address|

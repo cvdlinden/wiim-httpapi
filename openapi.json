@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Linkplay/WiiM/Arylic HTTP API",
-    "description": "HTTP API for Linkplay/WiiM devices.\n\nYou can send 'HTTPs Get' request to the device, most of the response is in the JSON format.\n\nRequest format is https://x.x.x.x/httpapi.asp?command=********\nx.x.x.x is the IP address of the device (Below, we assume the IP of the device is 10.10.10.254) ******* is the actual command.\n\nCommands can contain both integers and strings, denoted as '%d' for integers and '%s' for strings, respectively.\n\nThis Swagger doc uses a reverse proxy to access the device. See the description for the actual command.",
+    "description": "HTTP API for Linkplay/WiiM devices.\n\n\nYou can send 'HTTPs Get' request to the device, most of the response is in\nthe JSON format.\n\n\nRequest format is https://x.x.x.x/httpapi.asp?command=********\n\nx.x.x.x is the IP address of the device (Below, we assume the IP of the\ndevice is 10.10.10.254) ******* is the actual command.\n\n\nCommands can contain both integers and strings, denoted as '%d' for integers\nand '%s' for strings, respectively.\n\n\nThis Swagger doc uses a reverse proxy to access the device. See the\ndescription for the actual command.",
     "version": "1.2.0",
     "contact": {}
   },
@@ -43,7 +43,7 @@
     },
     {
       "name": "Presets",
-      "description": "Manage presets\n\nThe WiiM Home App allows users to configure 12 presets for quick access to preferred radio\nstations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned\nnumber.\n"
+      "description": "Manage presets\n\nThe WiiM Home App allows users to configure 12 presets for quick access to\npreferred radio stations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned number."
     },
     {
       "name": "Track Metadata",
@@ -65,7 +65,7 @@
           "Device information"
         ],
         "summary": "Get device information",
-        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx\n\nRetrieves detailed informations about a connected device.\nThe documented output may or may not be complete or differ from what the device actually reports.",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx\n\n\nRetrieves detailed informations about a connected device.\n\nThe documented output may or may not be complete or differ from what the\ndevice actually reports.",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -92,7 +92,7 @@
           "Network"
         ],
         "summary": "Get the static IP information",
-        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo\nIf the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo\n\nIf the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).",
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",
           "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -120,7 +120,7 @@
                     },
                     "wlanStaticIpEnable": {
                       "type": "integer",
-                      "description": "Status of the WiFi static IP configuration 0: Disabled 1: Enabled"
+                      "description": "Status of the WiFi static IP configuration\n0: Disabled\n1: Enabled"
                     },
                     "ethStaticIp": {
                       "type": "string",
@@ -136,7 +136,7 @@
                     },
                     "ethStaticIpEnable": {
                       "type": "integer",
-                      "description": "Status of the wired static IP configuration 0: Disabled 1: Enabled"
+                      "description": "Status of the wired static IP configuration\n0: Disabled\n1: Enabled"
                     }
                   }
                 }
@@ -180,7 +180,7 @@
           "Network"
         ],
         "summary": "Get the connection status",
-        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=wlanGetConnectState\n\nNote the return result is not in json.\n\nReturn string:\nReturn string Description\nPROCESS In progress\nPAIRFAIL Wrong password\nFAIL Connect fail\nOK connected\n\n",
+        "description": "Makes a call to\nhttps://10.10.10.254/httpapi.asp?command=wlanGetConnectState\n\n\nNote the return result is not in json.\n\n\nReturn string:\n\nReturn string Description\n\nPROCESS In progress\n\nPAIRFAIL Wrong password\n\nFAIL Connect fail\n\nOK connected",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -240,7 +240,7 @@
                   "properties": {
                     "type": {
                       "type": "string",
-                      "description": "0: Main or standalone device 1: Device is a Multiroom Guest"
+                      "description": "0: Main or standalone device \n1: Device is a Multiroom Guest"
                     },
                     "ch": {
                       "type": "string",
@@ -248,11 +248,11 @@
                     },
                     "mode": {
                       "type": "string",
-                      "description": "0: None 1: AirPlay or AirPlay 2 2: DLNA streaming 10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc 11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI 31: Spotify Connect 32: TIDAL Connect 40: AUX-In/Line-In input mode 41: Bluetooth input mode 42: External storage 43: Optical-In input mode 47: Line-In #2 input mode 50: Mirror 51: USBDAC input mode 60: Voice mail 99: The Device is a Guest in a Multiroom Zone"
+                      "description": "0: None \n1: AirPlay or AirPlay 2 \n2: DLNA streaming \n10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc \n11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI \n31: Spotify Connect \n32: TIDAL Connect \n40: AUX-In/Line-In input mode \n41: Bluetooth input mode \n42: External storage \n43: Optical-In input mode \n47: Line-In #2 input mode \n50: Mirror \n51: USBDAC input mode \n60: Voice mail\n99: The Device is a Guest in a Multiroom Zone"
                     },
                     "loop": {
                       "type": "string",
-                      "description": "Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE: disabled REPEAT: enabled - loop 1: SHUFFLE: disabled REPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT: enabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4: SHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled REPEAT: enabled - loop once"
+                      "description": "Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE:\ndisabled REPEAT: enabled - loop 1: SHUFFLE: disabled\nREPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT:\nenabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4:\nSHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled\nREPEAT: enabled - loop once"
                     },
                     "eq": {
                       "type": "string",
@@ -264,7 +264,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Playback status stop: no audio selected play: playing audio load/loading: loading/buffering audio pause: audio paused",
+                      "description": "Playback status stop: no audio selected play: playing\naudio load/loading: loading/buffering audio pause: audio\npaused",
                       "enum": [
                         "PLAYING",
                         "PAUSE",
@@ -309,7 +309,7 @@
                     },
                     "vol": {
                       "type": "string",
-                      "description": "Current volume Value range is from 0 - 100. So can be considered a linear percentage (0% to 100%) of the volume."
+                      "description": "Current volume Value range is from 0 - 100. So can be\nconsidered a linear percentage (0% to 100%) of the volume."
                     },
                     "mute": {
                       "type": "string",
@@ -327,8 +327,8 @@
     },
     "/setPlayerCmd:hex_playlist:url:{index}": {
       "get": {
-        "summary": "",
-        "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>\nPlay the URl (URI is the m3u or ASX playlist link, index is the start index), here, url should be\nhexed (please refer to 1.3)\n",
+        "summary": "Play a specific track from a playlist by URL and index",
+        "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:hex_playlist:url:<index>\n\nPlay the URl (URI is the m3u or ASX playlist link, index is the start\nindex), here, url should be hexed (please refer to 1.3)\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -344,8 +344,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -365,8 +365,8 @@
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -385,8 +385,8 @@
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -398,15 +398,15 @@
     "/setPlayerCmd:onepause": {
       "get": {
         "summary": "Toggle pause/play",
-        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause\nIf the state is paused, resume it; otherwise, pause it.",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause\n\nIf the state is paused, resume it; otherwise, pause it.",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -425,8 +425,8 @@
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -445,8 +445,8 @@
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -465,8 +465,8 @@
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -485,8 +485,8 @@
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -515,8 +515,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -528,7 +528,7 @@
     "/setPlayerCmd:mute:{n}": {
       "get": {
         "summary": "Mute",
-        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:mute:n\nMute: n=1\nUnmute: n=0\nThe slave mute state will be set at the same time when it's in group play.",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:mute:n\n\nMute: n=1\n\nUnmute: n=0\n\nThe slave mute state will be set at the same time when it's in group\nplay.",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -541,8 +541,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "1",
-                "0"
+                "0",
+                "1"
               ],
               "default": "1"
             },
@@ -550,8 +550,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -586,8 +586,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -606,8 +606,8 @@
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -641,8 +641,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -661,8 +661,8 @@
         },
         "parameters": [],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -692,8 +692,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -705,7 +705,7 @@
     "/setPlayerCmd:playlist:{url}:{index}": {
       "get": {
         "summary": "Play audio playlist",
-        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>\nPlay the playlist with the URL (URL points to the m3u or ASX playlist link, index is the start\nindex).\nResponse is always 'OK' now.",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>\n\nPlay the playlist with the URL (URL points to the m3u or ASX playlist\nlink, index is the start\n\nindex).\n\nResponse is always 'OK' now.",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -730,8 +730,8 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -818,7 +818,7 @@
     "/EQGetList": {
       "get": {
         "summary": "Check all the possible EQ settings",
-        "description": "http://10.10.10.254/httpapi.asp?command=EQGetList\n\nResponse:\n[\"Flat\", \"Acoustic\", \"Bass Booster\", \"Bass Reducer\", \"Classical\", \"Dance\", \"Deep\", \"Electronic\",\n\"Hip-Hop\", \"Jazz\", \"Latin\", \"Loudness\", \"Lounge\", \"Piano\", \"Pop\", \"R&B\", \"Rock\", \"Small\nSpeakers\", \"Spoken Word\", \"Treble Booster\", \"Treble Reducer\", \"Vocal Booster\"]\n",
+        "description": "http://10.10.10.254/httpapi.asp?command=EQGetList\n\n\nResponse:\n\n[\"Flat\", \"Acoustic\", \"Bass Booster\", \"Bass Reducer\", \"Classical\",\n\"Dance\", \"Deep\", \"Electronic\",\n\n\"Hip-Hop\", \"Jazz\", \"Latin\", \"Loudness\", \"Lounge\", \"Piano\", \"Pop\", \"R&B\",\n\"Rock\", \"Small\n\nSpeakers\", \"Spoken Word\", \"Treble Booster\", \"Treble Reducer\", \"Vocal\nBooster\"]\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -843,7 +843,7 @@
     "/EQLoad:{name}": {
       "get": {
         "summary": "Set the specific EQ with name",
-        "description": "http://10.10.10.254/httpapi.asp?command=EQLoad:xxx\n\nJSON Response:\n{\"status\":\"OK\"} or {\"status\":\"Failed\"}\n\nNote: xxx is the one of the name in the list returned by EQGetList, i.e., EQLoad:Flat",
+        "description": "http://10.10.10.254/httpapi.asp?command=EQLoad:xxx\n\n\nJSON Response:\n\n{\"status\":\"OK\"} or {\"status\":\"Failed\"}\n\n\nNote: xxx is the one of the name in the list returned by EQGetList,\ni.e., EQLoad:Flat",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1032,7 +1032,7 @@
     "/timeSync:{YYYYMMDDHHMMSS}": {
       "get": {
         "summary": "Get network time",
-        "description": "If the device has no internet access, you need to sync its time with:\n\nhttp://10.10.10.254/httpapi.asp?command=timeSync:YYYYMMDDHHMMSS\n\nYYYY is year (such as 2015), MM is month (01~12), DD is day (01~31), HH is hour (00~23),\nMM is minute (00~59), SS is second (00~59)\n\nIn UTC",
+        "description": "If the device has no internet access, you need to sync its time with:\n\n\nhttp://10.10.10.254/httpapi.asp?command=timeSync:YYYYMMDDHHMMSS\n\n\nYYYY is year (such as 2015), MM is month (01~12), DD is day (01~31), HH\nis hour (00~23),\n\nMM is minute (00~59), SS is second (00~59)\n\n\nIn UTC",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1066,7 +1066,7 @@
     "/setAlarmClock:{n}:{trig}:{op}:{time}:{day}:{url}": {
       "get": {
         "summary": "Set Alarm",
-        "description": "http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]\n\nn: 0~2, currently support max 3 alarm\n\ntrig: the alarm trigger:\n0 cancel the alarm, for example: setAlarmClock:n:0\n1 once, day should be YYYYMMDD\n2 every day\n3 every week, day should be 2 bytes (\"00\"~\"06\"), means from Sunday to Saturday.\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n\"7F\" means every day in week, \"01\" means only Sunday\n5 every month, day should be 2 bytes (\"01\"~\"31\")\n\nop: the action\n0 shell execute\n1 playback or ring\n2 stop playback\ntime: should be HHMMSS, in UTC\n\nday:\nif trigger is 0 or 2, no need to set.\nif trigger is 1, should be YYYYMMDD ( %04d%02d%02d)\nif trigger is 3, day should be 2 bytes (\"00\"~\"06\"), means from Sunday to Saturday.\nif trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n\"7F\" means every day in week, \"01\" means only Sunday\nif trigger is 5, day should be 2 bytes (\"01\"~\"31\")\n\nurl: the shell path or playback url, should less than 256 bytes",
+        "description": "http://10.10.10.254/httpapi.asp?command=setAlarmClock:n:trig:op:time[:day][:url]\n\n\nn: 0~2, currently support max 3 alarm\n\n\ntrig: the alarm trigger:\n\n0 cancel the alarm, for example: setAlarmClock:n:0\n\n1 once, day should be YYYYMMDD\n\n2 every day\n\n3 every week, day should be 2 bytes (\"00\"~\"06\"), means from Sunday to\nSaturday.\n\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the\neffect, for example,\n\n\"7F\" means every day in week, \"01\" means only Sunday\n\n5 every month, day should be 2 bytes (\"01\"~\"31\")\n\n\nop: the action\n\n0 shell execute\n\n1 playback or ring\n\n2 stop playback\n\ntime: should be HHMMSS, in UTC\n\n\nday:\n\nif trigger is 0 or 2, no need to set.\n\nif trigger is 1, should be YYYYMMDD ( %04d%02d%02d)\n\nif trigger is 3, day should be 2 bytes (\"00\"~\"06\"), means from Sunday to\nSaturday.\n\nif trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the\neffect, for example,\n\n\"7F\" means every day in week, \"01\" means only Sunday\n\nif trigger is 5, day should be 2 bytes (\"01\"~\"31\")\n\n\nurl: the shell path or playback url, should less than 256 bytes",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1101,7 +1101,7 @@
                 "5"
               ]
             },
-            "description": "The alarm trigger\n\n0 cancel the alarm, for example: setAlarmClock:n:0\n1 once, day should be YYYYMMDD\n2 every day\n3 every week, day should be 2 bytes (00\"~\"06\"), means from Sunday to Saturday.\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n\"7F\" means every day in week, \"01\" means only Sunday\n5 every month, day should be 2 bytes (\"01\"~\"31\")\n"
+            "description": "The alarm trigger\n\n\n0 cancel the alarm, for example: setAlarmClock:n:0\n\n1 once, day should be YYYYMMDD\n\n2 every day\n\n3 every week, day should be 2 bytes (00\"~\"06\"), means from Sunday to\nSaturday.\n\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the\neffect, for example,\n\n\"7F\" means every day in week, \"01\" means only Sunday\n\n5 every month, day should be 2 bytes (\"01\"~\"31\")\n"
           },
           {
             "name": "op",
@@ -1133,7 +1133,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "if trigger is 0 or 2, no need to set.\n\nif trigger is 1, should be YYYYMMDD ( %04d%02d%02d)\n\nif trigger is 3, day should be 2 bytes (\"00\"~\"06\"), means from Sunday to Saturday.\n\nif trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the effect, for example,\n\"7F\" means every day in week, \"01\" means only Sunday\n\nif trigger is 5, day should be 2 bytes (\"01\"~\"31\")"
+            "description": "if trigger is 0 or 2, no need to set.\n\n\nif trigger is 1, should be YYYYMMDD ( %04d%02d%02d)\n\n\nif trigger is 3, day should be 2 bytes (\"00\"~\"06\"), means from\nSunday to Saturday.\n\n\nif trigger is 4, day should be 2 bytes, the bit 0 to bit 6 means the\neffect, for example,\n\n\"7F\" means every day in week, \"01\" means only Sunday\n\n\nif trigger is 5, day should be 2 bytes (\"01\"~\"31\")"
           },
           {
             "name": "url",
@@ -1303,8 +1303,8 @@
         ],
         "operationId": "getMCUKeyShortClick",
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -1315,7 +1315,7 @@
     "/getPresetInfo": {
       "get": {
         "summary": "Get Preset List",
-        "description": "http://10.10.10.254/httpapi.asp?command=getPresetInfo\n\nJSON Response\n{\n\"preset_num\": 3,\n\"preset_list\": [{\n\"number\": 1,\n\"name\": \"BBC Radio Norfolk\",\n\"url\": \"http:\\/\\/as-hls-wwlive.akamaized.net\\/pool_904\\/live\\/ww\\/bbc_radio_norfolk\\/bbc_radio_norfolk.isml\\/bbc_ra\ndio_norfolk-audio%3d96000.norewind.m3u8\",\n\"source\": \"Linkplay Radio\",\n\"picurl\": \"http:\\/\\/cdnprofiles.tunein.com\\/s6852\\/images\\/logoq.jpg?t=638353933090000000\"\n}, {\n\"number\": 6,\n\"name\": \"Radio Paradise\",\n\"url\": \"http:\\/\\/stream.radioparadise.com\\/flacm\",\n\"source\": \"RadioParadise\",\n\"picurl\": \"https:\\/\\/cdnprofiles.tunein.com\\/s13606\\/images\\/logod.png?t=637541039930000000\"\n}, {\n\"number\": 8,\n\"name\": \"1. Country Heat\",\n\"url\": \"unknow\",\n\"source\": \"Prime\",\n\"picurl\": \"https:\\/\\/m.media-amazon.com\\/images\\/I\\/51uR6AJUAQL.jpg\"\n}]\n}\n\nDescription\nField type Description\nname string Playlist name\nVersion 1.2\nField type Description\nnumber int Preset index (Start from 1)\npicurl string Cover picture url\npreset_list json array Preset list information\npreset_num int Total number of presets\nsource string Music source\nurl string Play url\n",
+        "description": "http://10.10.10.254/httpapi.asp?command=getPresetInfo\n\n\nJSON Response\n\n{\n\n\"preset_num\": 3,\n\n\"preset_list\": [{\n\n\"number\": 1,\n\n\"name\": \"BBC Radio Norfolk\",\n\n\"url\":\n\"http:\\/\\/as-hls-wwlive.akamaized.net\\/pool_904\\/live\\/ww\\/bbc_radio_norfolk\\/bbc_radio_norfolk.isml\\/bbc_ra\n\ndio_norfolk-audio%3d96000.norewind.m3u8\",\n\n\"source\": \"Linkplay Radio\",\n\n\"picurl\":\n\"http:\\/\\/cdnprofiles.tunein.com\\/s6852\\/images\\/logoq.jpg?t=638353933090000000\"\n\n}, {\n\n\"number\": 6,\n\n\"name\": \"Radio Paradise\",\n\n\"url\": \"http:\\/\\/stream.radioparadise.com\\/flacm\",\n\n\"source\": \"RadioParadise\",\n\n\"picurl\":\n\"https:\\/\\/cdnprofiles.tunein.com\\/s13606\\/images\\/logod.png?t=637541039930000000\"\n\n}, {\n\n\"number\": 8,\n\n\"name\": \"1. Country Heat\",\n\n\"url\": \"unknow\",\n\n\"source\": \"Prime\",\n\n\"picurl\": \"https:\\/\\/m.media-amazon.com\\/images\\/I\\/51uR6AJUAQL.jpg\"\n\n}]\n\n}\n\n\nDescription\n\nField type Description\n\nname string Playlist name\n\nVersion 1.2\n\nField type Description\n\nnumber int Preset index (Start from 1)\n\npicurl string Cover picture url\n\npreset_list json array Preset list information\n\npreset_num int Total number of presets\n\nsource string Music source\n\nurl string Play url\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1323,8 +1323,8 @@
         "parameters": [],
         "operationId": "getPresetInfo",
         "responses": {
-          "default": {
-            "description": "Default response"
+          "200": {
+            "description": "Successful response"
           }
         },
         "tags": [
@@ -1365,7 +1365,7 @@
           "Bluetooth"
         ],
         "summary": "Get Bluetooth device scan result",
-        "description": "First do a startbtdiscovery:3: to start the scan, then use this to get the result.\nOutput (JSON): num: Number of found devices scan_status: BT scan step  0: Not started\n  1: Initializing\n  2: ??? (never seen it)\n  3: Scanning\n  4: Finished scanning\nlist: List of found devices\nAlready paired devices may be listed as well.",
+        "description": "First do a startbtdiscovery:3: to start the scan, then use this to get the result.\n\nOutput (JSON):\nnum: Number of found devices\nscan_status: BT scan step\n  0: Not started\n  1: Initializing\n  2: ??? (never seen it)\n  3: Scanning\n  4: Finished scanning\nlist: List of found devices\n\nAlready paired devices may be listed as well.",
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",
           "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -1418,7 +1418,7 @@
           "Bluetooth"
         ],
         "summary": "Get paired Bluetooth devices",
-        "description": "Output (JSON):\nnum: Number of found devices scan_status: BT scan step 1: Initializing 2: ??? (never seen it) 3: Scanning 4: Finished scanning list: List of found devices",
+        "description": "Output (JSON):\n\nnum: Number of found devices\nscan_status: BT scan step\n1: Initializing\n2: ??? (never seen it)\n3: Scanning\n4: Finished scanning\nlist: List of found devices",
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",
           "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -1444,7 +1444,7 @@
           "Bluetooth"
         ],
         "summary": "Connect to a Bluetooth device",
-        "description": "Example: https://192.168.1.100/httpapi.asp?command=connectbta2dpsynk:9c:2a:be:2e:ce:f1\nOutput: Success: OK Error: Failed\nObservations: The device should be an Audio Sink (e.g. speaker, A/V reciever). The audio output will be changed to the device.",
+        "description": "Example: https://192.168.1.100/httpapi.asp?command=connectbta2dpsynk:9c:2a:be:2e:ce:f1\n\nOutput:\nSuccess: OK\nError: Failed\n\nObservations: The device should be an Audio Sink (e.g. speaker, A/V reciever). The audio output will be changed to the device.",
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",
           "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -1517,7 +1517,7 @@
           "Bluetooth"
         ],
         "summary": "Get Bluetooth pairing status",
-        "description": "Example: https://192.168.1.100/httpapi.asp?command=getbtpairstatus\nOutput (JSON): result: Pair status 0: Not paired 1: Disconnected 2: Connecting (assumption, never seen it) 3: Connected",
+        "description": "Example: https://192.168.1.100/httpapi.asp?command=getbtpairstatus\n\nOutput (JSON):\nresult: Pair status\n0: Not paired\n1: Disconnected\n2: Connecting (assumption, never seen it)\n3: Connected",
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",
           "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -1533,7 +1533,7 @@
                   "properties": {
                     "result": {
                       "type": "integer",
-                      "description": "Pair status 0: Not paired 1: Disconnected 2: Connecting 3: Connected",
+                      "description": "Pair status\n0: Not paired\n1: Disconnected\n2: Connecting\n3: Connected",
                       "example": 1,
                       "enum": [
                         0,
@@ -1569,12 +1569,12 @@
           },
           "ssid": {
             "type": "string",
-            "description": "Name of the device. Device's own SSID when in WiFi pairing mode or when device's WiFi hotspot is active",
+            "description": "Name of the device. Device's own SSID when in WiFi pairing\nmode or when device's WiFi hotspot is active",
             "example": "WiiM-1234"
           },
           "hideSSID": {
             "type": "string",
-            "description": "When the device is operating as a WiFi hotspot, this flag determines whether its SSID should be hidden or visible 0: ssid is visible 1: ssid is hidden",
+            "description": "When the device is operating as a WiFi hotspot, this flag\ndetermines whether its SSID should be hidden or visible 0:\nssid is visible 1: ssid is hidden",
             "example": "0"
           },
           "SSIDStrategy": {
@@ -1593,7 +1593,7 @@
           },
           "build": {
             "type": "string",
-            "description": "Possible values: release, debug, backup release: this is a release version debug: this is a debug version backup: this is a backup version",
+            "description": "Possible values: release, debug, backup release: this is a\nrelease version debug: this is a debug version backup:\nthis is a backup version",
             "example": "release"
           },
           "project": {
@@ -1628,7 +1628,7 @@
           },
           "cast_enable": {
             "type": "integer",
-            "description": "Flag for casting feature 0: casting is disabled 1: casting is enabled",
+            "description": "Flag for casting feature 0: casting is disabled 1: casting\nis enabled",
             "example": 1
           },
           "cast_usage_report": {
@@ -1638,22 +1638,22 @@
           },
           "group": {
             "type": "string",
-            "description": "0 means it's a master speaker or standalone,  1 means a slave speaker in group",
+            "description": "0 means it's a master speaker or standalone,  1 means a\nslave speaker in group",
             "example": "0"
           },
           "master_uuid": {
             "type": "string",
-            "description": "Exist when working in slave mode, showing the UUID of master device.",
+            "description": "Exist when working in slave mode, showing the UUID of\nmaster device.",
             "example": "A7A50887ACBC9B36"
           },
           "slave_mask": {
             "type": "string",
-            "description": "Exist when working in slave mode, showing if the device support mask feature. 0 means not supported.",
+            "description": "Exist when working in slave mode, showing if the device\nsupport mask feature. 0 means not supported.",
             "example": "0"
           },
           "wmrm_version": {
             "type": "string",
-            "description": "LinkPlay's MRM SDK version, Multiroom library version, version 4.2 or above won't work with any version below 4.2",
+            "description": "LinkPlay's MRM SDK version, Multiroom library version,\nversion 4.2 or above won't work with any version below 4.2",
             "example": "4.3"
           },
           "wmrm_sub_ver": {
@@ -1673,12 +1673,12 @@
           },
           "uuid": {
             "type": "string",
-            "description": "The unique ID of the device (will remain after device reboot)",
+            "description": "The unique ID of the device (will remain after device\nreboot)",
             "example": "FF31F09E1A5020113B0A3918"
           },
           "MAC": {
             "type": "string",
-            "description": "MAC address of the device when working in hotspot mode, will show on APP and also the sticker on module/device.",
+            "description": "MAC address of the device when working in hotspot mode,\nwill show on APP and also the sticker on module/device.",
             "example": "08:E9:F6:8F:8F:A2"
           },
           "STA_MAC": {
@@ -1698,12 +1698,12 @@
           },
           "ETH_MAC": {
             "type": "string",
-            "description": "The MAC address of the device when it's connected to ethernet",
+            "description": "The MAC address of the device when it's connected to\nethernet",
             "example": "08:E9:F6:8F:8F:A9"
           },
           "InitialConfiguration": {
             "type": "string",
-            "description": "Flag for initial configuration 0: not configured 1: configured",
+            "description": "Flag for initial configuration 0: not configured 1:\nconfigured",
             "example": "1"
           },
           "temperature_power_control": {
@@ -1753,7 +1753,7 @@
           },
           "netstat": {
             "type": "string",
-            "description": "Current WiFi status: 0: no network 1: connected to the internet 2: connected to the local network",
+            "description": "Current WiFi status: 0: no network 1: connected to the\ninternet 2: connected to the local network",
             "example": "1"
           },
           "essid": {
@@ -1778,7 +1778,7 @@
           },
           "eth_dhcp": {
             "type": "string",
-            "description": "Flag for DHCP or Static IP Address 0: Static IP 1: IP Address provided by LAN/WLAN DHCP Server",
+            "description": "Flag for DHCP or Static IP Address 0: Static IP 1: IP\nAddress provided by LAN/WLAN DHCP Server",
             "example": "1"
           },
           "eth_static_ip": {
@@ -1813,12 +1813,12 @@
           },
           "VersionUpdate": {
             "type": "string",
-            "description": "Flag that determines, if there is a new firmware version available or not. 0: no new firmware 1: new firmware available",
+            "description": "Flag that determines, if there is a new firmware version\navailable or not. 0: no new firmware 1: new firmware\navailable",
             "example": "0"
           },
           "NewVer": {
             "type": "string",
-            "description": "If there is a new firmware available (in case of VersionUpdate is set to 1), this is the new version number",
+            "description": "If there is a new firmware available (in case of\nVersionUpdate is set to 1), this is the new version number",
             "example": "0"
           },
           "mcu_ver": {
@@ -1828,7 +1828,7 @@
           },
           "mcu_ver_new": {
             "type": "string",
-            "description": "New version of MCU on base board, indicates if there is a newer version of MCU available 0 - No new version others - New version",
+            "description": "New version of MCU on base board, indicates if there is a\nnewer version of MCU available 0 - No new version others -\nNew version",
             "example": "0"
           },
           "hdmi_ver": {
@@ -1876,7 +1876,7 @@
           },
           "prompt_status": {
             "type": "string",
-            "description": "Indicates if the prompting voice would be played or not, you can set with command PromptEnable and PromptDisable. 0 - No prompting voice 1 - Have prompting voice",
+            "description": "Indicates if the prompting voice would be played or not,\nyou can set with command PromptEnable and PromptDisable. 0\n- No prompting voice 1 - Have prompting voice",
             "example": "1"
           },
           "iot_ver": {
@@ -1928,7 +1928,7 @@
           },
           "streams": {
             "type": "string",
-            "description": "This is a bit mask: 0: If Airplay is enabled 1: If DLNA is enabled 2: Has TTPod support 3: Has TuneIn support 4: Has Pandora support 5: Has DoubanFM support",
+            "description": "This is a bit mask: 0: If Airplay is enabled 1: If DLNA is\nenabled 2: Has TTPod support 3: Has TuneIn support 4: Has\nPandora support 5: Has DoubanFM support",
             "example": "0x7b9831fe"
           },
           "region": {
@@ -1952,12 +1952,12 @@
           },
           "spotify_active": {
             "type": "string",
-            "description": "Spotify status 0: Spotify is not playing 1: Spotify is playing",
+            "description": "Spotify status 0: Spotify is not playing 1: Spotify is\nplaying",
             "example": "0"
           },
           "plm_support": {
             "type": "string",
-            "description": "This is a bit mask, each bit stands for an external input source: bit1: LineIn (Aux support) bit2: Bluetooth support bit3: USB support bit4: Optical support bit6: Coaxial support bit8: LineIn 2 support bit15: USBDAC support Others are reserved or not used.",
+            "description": "This is a bit mask, each bit stands for an external input\nsource: bit1: LineIn (Aux support) bit2: Bluetooth support\nbit3: USB support bit4: Optical support bit6: Coaxial\nsupport bit8: LineIn 2 support bit15: USBDAC support\nOthers are reserved or not used.",
             "example": "0x6"
           },
           "mqtt_support": {
@@ -1977,12 +1977,12 @@
           },
           "RSSI": {
             "type": "string",
-            "description": "RSSI Level of used WiFi Value ranges from 0 - 100. 100 means best signal strength.",
+            "description": "RSSI Level of used WiFi Value ranges from 0 - 100. 100\nmeans best signal strength.",
             "example": "0"
           },
           "BSSID": {
             "type": "string",
-            "description": "The Basic Service Set Identifiers:  In most cases this will be the MAC Address of the Wireless Acces Point Used (e.g. Router)",
+            "description": "The Basic Service Set Identifiers:  In most cases this\nwill be the MAC Address of the Wireless Acces Point Used\n(e.g. Router)",
             "example": ""
           },
           "wlanSnr": {
@@ -2005,7 +2005,7 @@
           },
           "battery": {
             "type": "string",
-            "description": "Battery status 0: battery is not charging 1: battery is charging",
+            "description": "Battery status 0: battery is not charging 1: battery is\ncharging",
             "example": "0"
           },
           "battery_percent": {
@@ -2223,7 +2223,7 @@
           },
           "scan_status": {
             "type": "integer",
-            "description": "BT scan step 0: Not started 1: Initializing 2: ??? (never seen it) 3: Scanning 4: Finished scanning",
+            "description": "BT scan step\n0: Not started\n1: Initializing\n2: ??? (never seen it)\n3: Scanning\n4: Finished scanning",
             "example": 4
           },
           "list": {
