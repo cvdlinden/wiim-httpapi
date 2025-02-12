@@ -366,7 +366,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -386,7 +386,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -406,7 +406,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -426,7 +426,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -446,7 +446,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -466,7 +466,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -486,7 +486,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -516,7 +516,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -551,7 +551,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -587,7 +587,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -607,7 +607,31 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hardware": {
+                      "type": "string",
+                      "description": "Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE",
+                      "example": "2"
+                    },
+                    "source": {
+                      "type": "string",
+                      "description": "BT source output mode:\n0: disable\n1: active",
+                      "example": "0"
+                    },
+                    "audiocast": {
+                      "type": "string",
+                      "description": "Audio cast output mode:\n0: disable\n1: active",
+                      "example": "0"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -642,7 +666,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -654,7 +678,7 @@
     "/getMetaInfo": {
       "get": {
         "summary": "Get Current Track Metadata",
-        "description": "JSON Response\n{\n \"metaData\": {\n \"album\": \"Country Heat\",\n \"title\": \"Old Dirt Roads\",\n \"artist\": \"Owen Riegling\",\n \"albumArtURI \": \"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg\",\n \"sampleRate \": \"44100\",\n \"bitDepth\": \"16\"\n }\n}",
+        "description": "JSON Response\n{\n \"metaData\": {\n  \"album\": \"Country Heat\",\n  \"title\": \"Old Dirt Roads\",\n  \"subtitle\": \"\",\n  \"artist\": \"Owen Riegling\",\n  \"albumArtURI \": \"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg\",\n  \"sampleRate \": \"44100\",\n  \"bitDepth\": \"16\",\n  \"bitRate\": \"63\",\n  \"trackId\": \"s6707\",\n }\n}",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -662,7 +686,66 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "properties": {
+                        "album": {
+                          "type": "string",
+                          "description": "Album name",
+                          "example": "Country Heat"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "Track title",
+                          "example": "Old Dirt Roads"
+                        },
+                        "subtitle": {
+                          "type": "string",
+                          "description": "Subtitle",
+                          "example": ""
+                        },
+                        "artist": {
+                          "type": "string",
+                          "description": "Artist name",
+                          "example": "Owen Riegling"
+                        },
+                        "albumArtURI": {
+                          "type": "string",
+                          "description": "URL to the album art",
+                          "example": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg"
+                        },
+                        "sampleRate": {
+                          "type": "string",
+                          "description": "Sample rate",
+                          "example": "44100"
+                        },
+                        "bitDepth": {
+                          "type": "string",
+                          "description": "Bit depth",
+                          "example": "16"
+                        },
+                        "bitRate": {
+                          "type": "string",
+                          "description": "Bit rate",
+                          "example": "63"
+                        },
+                        "trackId": {
+                          "type": "string",
+                          "description": "Track ID",
+                          "example": "s6707"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -693,7 +776,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -705,7 +788,7 @@
     "/setPlayerCmd:playlist:{url}:{index}": {
       "get": {
         "summary": "Play audio playlist",
-        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>\n\nPlay the playlist with the URL (URL points to the m3u or ASX playlist\nlink, index is the start\n\nindex).\n\nResponse is always 'OK' now.",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>\n\nPlay the playlist with the URL (URL points to the m3u or ASX playlist\nlink, index is the start index).\n\nResponse is always 'OK' now.",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -731,7 +814,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -1304,7 +1387,7 @@
         "operationId": "getMCUKeyShortClick",
         "responses": {
           "200": {
-            "description": "Successful response"
+            "$ref": "#/components/responses/StringOK"
           }
         },
         "tags": [
@@ -1315,7 +1398,7 @@
     "/getPresetInfo": {
       "get": {
         "summary": "Get Preset List",
-        "description": "http://10.10.10.254/httpapi.asp?command=getPresetInfo\n\n\nJSON Response\n\n{\n\n\"preset_num\": 3,\n\n\"preset_list\": [{\n\n\"number\": 1,\n\n\"name\": \"BBC Radio Norfolk\",\n\n\"url\":\n\"http:\\/\\/as-hls-wwlive.akamaized.net\\/pool_904\\/live\\/ww\\/bbc_radio_norfolk\\/bbc_radio_norfolk.isml\\/bbc_ra\n\ndio_norfolk-audio%3d96000.norewind.m3u8\",\n\n\"source\": \"Linkplay Radio\",\n\n\"picurl\":\n\"http:\\/\\/cdnprofiles.tunein.com\\/s6852\\/images\\/logoq.jpg?t=638353933090000000\"\n\n}, {\n\n\"number\": 6,\n\n\"name\": \"Radio Paradise\",\n\n\"url\": \"http:\\/\\/stream.radioparadise.com\\/flacm\",\n\n\"source\": \"RadioParadise\",\n\n\"picurl\":\n\"https:\\/\\/cdnprofiles.tunein.com\\/s13606\\/images\\/logod.png?t=637541039930000000\"\n\n}, {\n\n\"number\": 8,\n\n\"name\": \"1. Country Heat\",\n\n\"url\": \"unknow\",\n\n\"source\": \"Prime\",\n\n\"picurl\": \"https:\\/\\/m.media-amazon.com\\/images\\/I\\/51uR6AJUAQL.jpg\"\n\n}]\n\n}\n\n\nDescription\n\nField type Description\n\nname string Playlist name\n\nVersion 1.2\n\nField type Description\n\nnumber int Preset index (Start from 1)\n\npicurl string Cover picture url\n\npreset_list json array Preset list information\n\npreset_num int Total number of presets\n\nsource string Music source\n\nurl string Play url\n",
+        "description": "http://10.10.10.254/httpapi.asp?command=getPresetInfo\n\n\nJSON Response\n\n{\n  \"preset_num\": 3,\n  \"preset_list\": [\n  {\n    \"number\": 1,\n    \"name\": \"BBC Radio Norfolk\",\n    \"url\": \"http:\\/\\/as-hls-wwlive.akamaized.net\\/pool_904\\/live\\/ww\\/bbc_radio_norfolk\\/bbc_radio_norfolk.isml\\/bbc_radio_norfolk-audio%3d96000.norewind.m3u8\",\n    \"source\": \"Linkplay Radio\",\n    \"picurl\": \"http:\\/\\/cdnprofiles.tunein.com\\/s6852\\/images\\/logoq.jpg?t=638353933090000000\"\n  }, \n  {\n    \"number\": 6,\n    \"name\": \"Radio Paradise\",\n    \"url\": \"http:\\/\\/stream.radioparadise.com\\/flacm\",\n    \"source\": \"RadioParadise\",\n    \"picurl\": \"https:\\/\\/cdnprofiles.tunein.com\\/s13606\\/images\\/logod.png?t=637541039930000000\"\n  }, \n  {\n    \"number\": 8,\n    \"name\": \"1. Country Heat\",\n    \"url\": \"unknow\",\n    \"source\": \"Prime\",\n    \"picurl\": \"https:\\/\\/m.media-amazon.com\\/images\\/I\\/51uR6AJUAQL.jpg\"\n  }\n  ]\n}\n\n\nDescription\n\nField type Description\n\npreset_num int Total number of presets\n\npreset_list json array Preset list information\n\nnumber int Preset index (Start from 1)\n\nname string Playlist name\n\nurl string Play url\n\nsource string Music source\n\npicurl string Cover picture url\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1324,7 +1407,54 @@
         "operationId": "getPresetInfo",
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "preset_num": {
+                      "type": "integer",
+                      "description": "Total number of presets",
+                      "example": 3
+                    },
+                    "preset_list": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "number": {
+                            "type": "integer",
+                            "description": "Preset index (Start from 1)",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Playlist name",
+                            "example": "BBC Radio Norfolk"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "Play url",
+                            "example": "http://as-hls-wwlive.akamaized.net/pool_904/live/ww/bbc_radio_norfolk/bbc_radio_norfolk.isml/bbc_radio_norfolk-audio%3d96000.norewind.m3u8"
+                          },
+                          "source": {
+                            "type": "string",
+                            "description": "Music source",
+                            "example": "Linkplay Radio"
+                          },
+                          "picurl": {
+                            "type": "string",
+                            "description": "Cover picture url",
+                            "example": "http://cdnprofiles.tunein.com/s6852/images/logoq.jpg?t=638353933090000000"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1346,15 +1476,7 @@
         "operationId": "startBtDiscovery",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "example": "OK"
-                }
-              }
-            }
+            "$ref": "#/components/responses/StringOK"
           }
         }
       }
@@ -1399,15 +1521,7 @@
         "operationId": "clearBtDiscoveryResult",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "example": "OK"
-                }
-              }
-            }
+            "$ref": "#/components/responses/StringOK"
           }
         }
       }
@@ -1498,15 +1612,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "example": "OK"
-                }
-              }
-            }
+            "$ref": "#/components/responses/StringOK"
           }
         }
       }
@@ -2270,6 +2376,18 @@
         }
       }
     },
-    "responses": {}
+    "responses": {
+      "StringOK": {
+        "description": "Successful response",
+        "content": {
+          "text/html": {
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
+          }
+        }
+      }
+    }
   }
 }

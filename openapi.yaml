@@ -342,7 +342,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdPause
@@ -356,7 +356,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdResume
@@ -373,7 +373,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdOnePause
@@ -387,7 +387,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdPrev
@@ -401,7 +401,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdNext
@@ -417,7 +417,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdSeekPosition
@@ -431,7 +431,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdStop
@@ -453,7 +453,7 @@ paths:
           description: Value can be 0 to 100.
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdVol
@@ -487,7 +487,7 @@ paths:
             Unmute: n=0
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdMute
@@ -523,7 +523,7 @@ paths:
             -1 Sequence loop
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdLoopmode
@@ -553,6 +553,33 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  hardware:
+                    type: string
+                    description: |-
+                      Hardware Interface output mode:
+                      1: AUDIO_OUTPUT_SPDIF_MODE
+                      2: AUDIO_OUTPUT_AUX_MODE
+                      3: AUDIO_OUTPUT_COAX_MODE
+                    example: "2"
+                  source:
+                    type: string
+                    description: |-
+                      BT source output mode:
+                      0: disable
+                      1: active
+                    example: "0"
+                  audiocast:
+                    type: string
+                    description: |-
+                      Audio cast output mode:
+                      0: disable
+                      1: active
+                    example: "0"
       tags:
         - Audio Output Control
       operationId: getNewAudioOutputHardwareMode
@@ -586,7 +613,7 @@ paths:
             3: AUDIO_OUTPUT_COAX_MODE
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Audio Output Control
       operationId: setAudioOutputHardwareMode
@@ -597,12 +624,15 @@ paths:
         JSON Response
         {
          "metaData": {
-         "album": "Country Heat",
-         "title": "Old Dirt Roads",
-         "artist": "Owen Riegling",
-         "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
-         "sampleRate ": "44100",
-         "bitDepth": "16"
+          "album": "Country Heat",
+          "title": "Old Dirt Roads",
+          "subtitle": "",
+          "artist": "Owen Riegling",
+          "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
+          "sampleRate ": "44100",
+          "bitDepth": "16",
+          "bitRate": "63",
+          "trackId": "s6707",
          }
         }
       externalDocs:
@@ -612,6 +642,50 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  metaData:
+                    type: object
+                    properties:
+                      album:
+                        type: string
+                        description: Album name
+                        example: Country Heat
+                      title:
+                        type: string
+                        description: Track title
+                        example: Old Dirt Roads
+                      subtitle:
+                        type: string
+                        description: Subtitle
+                        example: ""
+                      artist:
+                        type: string
+                        description: Artist name
+                        example: Owen Riegling
+                      albumArtURI:
+                        type: string
+                        description: URL to the album art
+                        example: "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg"
+                      sampleRate:
+                        type: string
+                        description: Sample rate
+                        example: "44100"
+                      bitDepth:
+                        type: string
+                        description: Bit depth
+                        example: "16"
+                      bitRate:
+                        type: string
+                        description: Bit rate
+                        example: "63"
+                      trackId:
+                        type: string
+                        description: Track ID
+                        example: s6707
       tags:
         - Track Metadata
       operationId: getMetaInfo
@@ -636,7 +710,7 @@ paths:
           description: URL points to an audio stream address
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdPlayUrl
@@ -647,9 +721,7 @@ paths:
         https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
 
         Play the playlist with the URL (URL points to the m3u or ASX playlist
-        link, index is the start
-
-        index).
+        link, index is the start index).
 
         Response is always 'OK' now.
       externalDocs:
@@ -670,7 +742,7 @@ paths:
               https://gist.githubusercontent.com/bpsib/67089b959e4fa898af69fea59ad74bc3/raw/685789e28187c0a15da978b51d436a140d5ea207/BBC-Radio-HLS.m3u
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Playback control
       operationId: setPlayerCmdPlaylistUrl
@@ -1254,7 +1326,7 @@ paths:
       operationId: getMCUKeyShortClick
       responses:
         "200":
-          description: Successful response
+          $ref: "#/components/responses/StringOK"
       tags:
         - Presets
   /getPresetInfo:
@@ -1267,52 +1339,30 @@ paths:
         JSON Response
 
         {
-
-        "preset_num": 3,
-
-        "preset_list": [{
-
-        "number": 1,
-
-        "name": "BBC Radio Norfolk",
-
-        "url":
-        "http:\/\/as-hls-wwlive.akamaized.net\/pool_904\/live\/ww\/bbc_radio_norfolk\/bbc_radio_norfolk.isml\/bbc_ra
-
-        dio_norfolk-audio%3d96000.norewind.m3u8",
-
-        "source": "Linkplay Radio",
-
-        "picurl":
-        "http:\/\/cdnprofiles.tunein.com\/s6852\/images\/logoq.jpg?t=638353933090000000"
-
-        }, {
-
-        "number": 6,
-
-        "name": "Radio Paradise",
-
-        "url": "http:\/\/stream.radioparadise.com\/flacm",
-
-        "source": "RadioParadise",
-
-        "picurl":
-        "https:\/\/cdnprofiles.tunein.com\/s13606\/images\/logod.png?t=637541039930000000"
-
-        }, {
-
-        "number": 8,
-
-        "name": "1. Country Heat",
-
-        "url": "unknow",
-
-        "source": "Prime",
-
-        "picurl": "https:\/\/m.media-amazon.com\/images\/I\/51uR6AJUAQL.jpg"
-
-        }]
-
+          "preset_num": 3,
+          "preset_list": [
+          {
+            "number": 1,
+            "name": "BBC Radio Norfolk",
+            "url": "http:\/\/as-hls-wwlive.akamaized.net\/pool_904\/live\/ww\/bbc_radio_norfolk\/bbc_radio_norfolk.isml\/bbc_radio_norfolk-audio%3d96000.norewind.m3u8",
+            "source": "Linkplay Radio",
+            "picurl": "http:\/\/cdnprofiles.tunein.com\/s6852\/images\/logoq.jpg?t=638353933090000000"
+          }, 
+          {
+            "number": 6,
+            "name": "Radio Paradise",
+            "url": "http:\/\/stream.radioparadise.com\/flacm",
+            "source": "RadioParadise",
+            "picurl": "https:\/\/cdnprofiles.tunein.com\/s13606\/images\/logod.png?t=637541039930000000"
+          }, 
+          {
+            "number": 8,
+            "name": "1. Country Heat",
+            "url": "unknow",
+            "source": "Prime",
+            "picurl": "https:\/\/m.media-amazon.com\/images\/I\/51uR6AJUAQL.jpg"
+          }
+          ]
         }
 
 
@@ -1320,23 +1370,20 @@ paths:
 
         Field type Description
 
-        name string Playlist name
-
-        Version 1.2
-
-        Field type Description
-
-        number int Preset index (Start from 1)
-
-        picurl string Cover picture url
+        preset_num int Total number of presets
 
         preset_list json array Preset list information
 
-        preset_num int Total number of presets
+        number int Preset index (Start from 1)
+
+        name string Playlist name
+
+        url string Play url
 
         source string Music source
 
-        url string Play url
+        picurl string Cover picture url
+
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1345,6 +1392,42 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  preset_num:
+                    type: integer
+                    description: Total number of presets
+                    example: 3
+                  preset_list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        number:
+                          type: integer
+                          description: Preset index (Start from 1)
+                          example: 1
+                        name:
+                          type: string
+                          description: Playlist name
+                          example: BBC Radio Norfolk
+                        url:
+                          type: string
+                          description: Play url
+                          example: >-
+                            http://as-hls-wwlive.akamaized.net/pool_904/live/ww/bbc_radio_norfolk/bbc_radio_norfolk.isml/bbc_radio_norfolk-audio%3d96000.norewind.m3u8
+                        source:
+                          type: string
+                          description: Music source
+                          example: Linkplay Radio
+                        picurl:
+                          type: string
+                          description: Cover picture url
+                          example: >-
+                            http://cdnprofiles.tunein.com/s6852/images/logoq.jpg?t=638353933090000000
       tags:
         - Presets
   /startbtdiscovery:3:
@@ -1360,12 +1443,7 @@ paths:
       operationId: startBtDiscovery
       responses:
         "200":
-          description: Successful response
-          content:
-            text/html:
-              schema:
-                type: string
-                example: OK
+          $ref: "#/components/responses/StringOK"
   /getbtdiscoveryresult:
     get:
       tags:
@@ -1408,12 +1486,7 @@ paths:
       operationId: clearBtDiscoveryResult
       responses:
         "200":
-          description: Successful response
-          content:
-            text/html:
-              schema:
-                type: string
-                example: OK
+          $ref: "#/components/responses/StringOK"
   /getbthistory:
     get:
       tags:
@@ -1488,12 +1561,7 @@ paths:
         - $ref: "#/components/parameters/BT_MAC_ADDRESS"
       responses:
         "200":
-          description: Successful response
-          content:
-            text/html:
-              schema:
-                type: string
-                example: OK
+          $ref: "#/components/responses/StringOK"
   /getbtpairstatus:
     get:
       tags:
@@ -2175,4 +2243,12 @@ components:
   #-------------------------------
   # Reusable responses
   #-------------------------------
-  responses: {}
+  responses:
+    StringOK: # Can be referenced as "#/components/responses/StringOK"
+      description: Successful response
+      content:
+        text/html:
+          schema:
+            type: string
+            example: OK
+

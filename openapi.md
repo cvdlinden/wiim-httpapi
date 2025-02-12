@@ -298,11 +298,19 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:pause
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdpause-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -318,11 +326,19 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:resume
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdresume-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -340,11 +356,19 @@ https://10.10.10.254/httpapi.asp?command=setPlayerCmd:onepause
 
 If the state is paused, resume it; otherwise, pause it.
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdonepause-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -360,11 +384,19 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:prev
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdprev-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -380,11 +412,19 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:next
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdnext-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -401,11 +441,19 @@ This operation does not require authentication
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:seek:position
 Position is from 0 to duration in second.
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdseekposition-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -421,11 +469,19 @@ This operation does not require authentication
 
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:stop
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdstop-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -448,11 +504,19 @@ Value can be 0 to 100.
 |---|---|---|---|---|
 |value|path|integer|true|Value can be 0 to 100.|
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdvol-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -493,11 +557,19 @@ Unmute: n=0
 |n|0|
 |n|1|
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdmute-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -541,11 +613,19 @@ n =
 |n|2|
 |n|-1|
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdloopmode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -569,11 +649,19 @@ Response is always 'OK' now
 |---|---|---|---|---|
 |url|path|string|true|URL points to an audio stream address|
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdplayurl-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -590,9 +678,7 @@ This operation does not require authentication
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
 
 Play the playlist with the URL (URL points to the m3u or ASX playlist
-link, index is the start
-
-index).
+link, index is the start index).
 
 Response is always 'OK' now.
 
@@ -603,11 +689,19 @@ Response is always 'OK' now.
 |index|path|string|true|none|
 |url|path|string|true|none|
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setplayercmdplaylisturl-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -1342,11 +1436,19 @@ http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d
 |n|11|
 |n|12|
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="getmcukeyshortclick-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -1365,81 +1467,77 @@ http://10.10.10.254/httpapi.asp?command=getPresetInfo
 JSON Response
 
 {
-
-"preset_num": 3,
-
-"preset_list": [{
-
-"number": 1,
-
-"name": "BBC Radio Norfolk",
-
-"url":
-"http:\/\/as-hls-wwlive.akamaized.net\/pool_904\/live\/ww\/bbc_radio_norfolk\/bbc_radio_norfolk.isml\/bbc_ra
-
-dio_norfolk-audio%3d96000.norewind.m3u8",
-
-"source": "Linkplay Radio",
-
-"picurl":
-"http:\/\/cdnprofiles.tunein.com\/s6852\/images\/logoq.jpg?t=638353933090000000"
-
-}, {
-
-"number": 6,
-
-"name": "Radio Paradise",
-
-"url": "http:\/\/stream.radioparadise.com\/flacm",
-
-"source": "RadioParadise",
-
-"picurl":
-"https:\/\/cdnprofiles.tunein.com\/s13606\/images\/logod.png?t=637541039930000000"
-
-}, {
-
-"number": 8,
-
-"name": "1. Country Heat",
-
-"url": "unknow",
-
-"source": "Prime",
-
-"picurl": "https:\/\/m.media-amazon.com\/images\/I\/51uR6AJUAQL.jpg"
-
-}]
-
+  "preset_num": 3,
+  "preset_list": [
+  {
+    "number": 1,
+    "name": "BBC Radio Norfolk",
+    "url": "http:\/\/as-hls-wwlive.akamaized.net\/pool_904\/live\/ww\/bbc_radio_norfolk\/bbc_radio_norfolk.isml\/bbc_radio_norfolk-audio%3d96000.norewind.m3u8",
+    "source": "Linkplay Radio",
+    "picurl": "http:\/\/cdnprofiles.tunein.com\/s6852\/images\/logoq.jpg?t=638353933090000000"
+  }, 
+  {
+    "number": 6,
+    "name": "Radio Paradise",
+    "url": "http:\/\/stream.radioparadise.com\/flacm",
+    "source": "RadioParadise",
+    "picurl": "https:\/\/cdnprofiles.tunein.com\/s13606\/images\/logod.png?t=637541039930000000"
+  }, 
+  {
+    "number": 8,
+    "name": "1. Country Heat",
+    "url": "unknow",
+    "source": "Prime",
+    "picurl": "https:\/\/m.media-amazon.com\/images\/I\/51uR6AJUAQL.jpg"
+  }
+  ]
 }
 
 Description
 
 Field type Description
 
-name string Playlist name
-
-Version 1.2
-
-Field type Description
-
-number int Preset index (Start from 1)
-
-picurl string Cover picture url
+preset_num int Total number of presets
 
 preset_list json array Preset list information
 
-preset_num int Total number of presets
+number int Preset index (Start from 1)
+
+name string Playlist name
+
+url string Play url
 
 source string Music source
 
-url string Play url
+picurl string Cover picture url
+
+> Example responses
+
+> 200 Response
+
+```
+{"preset_num":3,"preset_list":[{"number":1,"name":"BBC Radio Norfolk","url":"http://as-hls-wwlive.akamaized.net/pool_904/live/ww/bbc_radio_norfolk/bbc_radio_norfolk.isml/bbc_radio_norfolk-audio%3d96000.norewind.m3u8","source":"Linkplay Radio","picurl":"http://cdnprofiles.tunein.com/s6852/images/logoq.jpg?t=638353933090000000"}]}
+```
 
 <h3 id="getpresetinfo-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getpresetinfo-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» preset_num|integer|false|none|Total number of presets|
+|» preset_list|[object]|false|none|none|
+|»» number|integer|false|none|Preset index (Start from 1)|
+|»» name|string|false|none|Playlist name|
+|»» url|string|false|none|Play url|
+|»» source|string|false|none|Music source|
+|»» picurl|string|false|none|Cover picture url|
 
 <aside class="success">
 This operation does not require authentication
@@ -1460,20 +1558,48 @@ Get Current Track Metadata
 JSON Response
 {
  "metaData": {
- "album": "Country Heat",
- "title": "Old Dirt Roads",
- "artist": "Owen Riegling",
- "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
- "sampleRate ": "44100",
- "bitDepth": "16"
+  "album": "Country Heat",
+  "title": "Old Dirt Roads",
+  "subtitle": "",
+  "artist": "Owen Riegling",
+  "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
+  "sampleRate ": "44100",
+  "bitDepth": "16",
+  "bitRate": "63",
+  "trackId": "s6707",
  }
 }
+
+> Example responses
+
+> 200 Response
+
+```
+{"metaData":{"album":"Country Heat","title":"Old Dirt Roads","subtitle":"","artist":"Owen Riegling","albumArtURI":"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg","sampleRate":"44100","bitDepth":"16","bitRate":"63","trackId":"s6707"}}
+```
 
 <h3 id="getmetainfo-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getmetainfo-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» metaData|object|false|none|none|
+|»» album|string|false|none|Album name|
+|»» title|string|false|none|Track title|
+|»» subtitle|string|false|none|Subtitle|
+|»» artist|string|false|none|Artist name|
+|»» albumArtURI|string|false|none|URL to the album art|
+|»» sampleRate|string|false|none|Sample rate|
+|»» bitDepth|string|false|none|Bit depth|
+|»» bitRate|string|false|none|Bit rate|
+|»» trackId|string|false|none|Track ID|
 
 <aside class="success">
 This operation does not require authentication
@@ -1507,11 +1633,29 @@ audiocast Audio cast output mode:
 0: disable
 1: active
 
+> Example responses
+
+> 200 Response
+
+```
+{"hardware":"2","source":"0","audiocast":"0"}
+```
+
 <h3 id="getnewaudiooutputhardwaremode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getnewaudiooutputhardwaremode-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» hardware|string|false|none|Hardware Interface output mode:<br>1: AUDIO_OUTPUT_SPDIF_MODE<br>2: AUDIO_OUTPUT_AUX_MODE<br>3: AUDIO_OUTPUT_COAX_MODE|
+|» source|string|false|none|BT source output mode:<br>0: disable<br>1: active|
+|» audiocast|string|false|none|Audio cast output mode:<br>0: disable<br>1: active|
 
 <aside class="success">
 This operation does not require authentication
@@ -1553,11 +1697,19 @@ Response is 'OK'
 |n|2|
 |n|3|
 
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="setaudiooutputhardwaremode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
