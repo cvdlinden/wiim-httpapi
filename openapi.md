@@ -89,22 +89,7 @@ If the WiiM device is configured to use DHCP, the above string values will be em
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
-
-<h3 id="getstaticipinfo-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» wlanStaticIp|string|false|none|Wifi IP address of the device|
-|» wlanGateWay|string|false|none|Wifi IP address of the gateway|
-|» wlanDnsServer|string|false|none|Wifi IP address of the DNS server|
-|» wlanStaticIpEnable|integer|false|none|Status of the WiFi static IP configuration<br>0: Disabled<br>1: Enabled|
-|» ethStaticIp|string|false|none|Wired IP address of the device|
-|» ethGateWay|string|false|none|Wired IP address of the gateway|
-|» ethDnsServer|string|false|none|Wired IP address of the DNS server|
-|» ethStaticIpEnable|integer|false|none|Status of the wired static IP configuration<br>0: Disabled<br>1: Enabled|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[StaticIpInfo](#schemastaticipinfo)|
 
 <aside class="success">
 This operation does not require authentication
@@ -212,48 +197,14 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus
 > 200 Response
 
 ```
-{"type":"string","ch":"string","mode":"string","loop":"string","eq":"string","vendor":"string","status":"PLAYING","curpos":"string","offset_pts":"string","totlen":"string","Title":"string","Artist":"string","Album":"string","alarmflag":"string","plicount":"string","plicurr":"string","vol":"string","mute":"string"}
+{"type":"0","ch":"0","mode":"10","loop":"-1","eq":"0","vendor":"vTuner","status":"play","curpos":"63634","offset_pts":"63634","totlen":"0","Title":"4D6F726E696E67204C69676874","Artist":"4F77656E20526965676C696E67","Album":"4D6F726E696E67204C69676874","alarmflag":"0","plicount":"5","plicurr":"2","vol":"25","mute":"0"}
 ```
 
 <h3 id="getplayerstatus-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
-
-<h3 id="getplayerstatus-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» type|string|false|none|0: Main or standalone device <br>1: Device is a Multiroom Guest|
-|» ch|string|false|none|Active channel(s) 0: Stereo 1: Left 2: Right|
-|» mode|string|false|none|0: None <br>1: AirPlay or AirPlay 2 <br>2: DLNA streaming <br>10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc <br>11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI <br>31: Spotify Connect <br>32: TIDAL Connect <br>40: AUX-In/Line-In input mode <br>41: Bluetooth input mode <br>42: External storage <br>43: Optical-In input mode <br>47: Line-In #2 input mode <br>50: Mirror <br>51: USBDAC input mode <br>60: Voice mail<br>99: The Device is a Guest in a Multiroom Zone|
-|» loop|string|false|none|Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE:<br>disabled REPEAT: enabled - loop 1: SHUFFLE: disabled<br>REPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT:<br>enabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4:<br>SHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled<br>REPEAT: enabled - loop once|
-|» eq|string|false|none|The preset number of the Equalizer|
-|» vendor|string|false|none|Name of the stream source|
-|» status|string|false|none|Playback status stop: no audio selected play: playing<br>audio load/loading: loading/buffering audio pause: audio<br>paused|
-|» curpos|string|false|none|Current position, in ms|
-|» offset_pts|string|false|none|Offset position, in ms|
-|» totlen|string|false|none|Track duration in ms. Zero when playing a live stream.|
-|» Title|string|false|none|hexed string of the track title|
-|» Artist|string|false|none|hexed string of the artist|
-|» Album|string|false|none|hexed string of the album|
-|» alarmflag|string|false|none|none|
-|» plicount|string|false|none|The total number of tracks in the playlist|
-|» plicurr|string|false|none|Current track index|
-|» vol|string|false|none|Current volume Value range is from 0 - 100. So can be<br>considered a linear percentage (0% to 100%) of the volume.|
-|» mute|string|false|none|Current mute state 0: Not muted 1: Muted|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|status|PLAYING|
-|status|PAUSE|
-|status|STOP|
-|status|BUFFERING|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[PlayerStatus](#schemaplayerstatus)|
 
 <aside class="success">
 This operation does not require authentication
@@ -1523,21 +1474,7 @@ picurl string Cover picture url
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
-
-<h3 id="getpresetinfo-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» preset_num|integer|false|none|Total number of presets|
-|» preset_list|[object]|false|none|none|
-|»» number|integer|false|none|Preset index (Start from 1)|
-|»» name|string|false|none|Playlist name|
-|»» url|string|false|none|Play url|
-|»» source|string|false|none|Music source|
-|»» picurl|string|false|none|Cover picture url|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[PresetList](#schemapresetlist)|
 
 <aside class="success">
 This operation does not require authentication
@@ -1582,24 +1519,7 @@ JSON Response
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
-
-<h3 id="getmetainfo-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» metaData|object|false|none|none|
-|»» album|string|false|none|Album name|
-|»» title|string|false|none|Track title|
-|»» subtitle|string|false|none|Subtitle|
-|»» artist|string|false|none|Artist name|
-|»» albumArtURI|string|false|none|URL to the album art|
-|»» sampleRate|string|false|none|Sample rate|
-|»» bitDepth|string|false|none|Bit depth|
-|»» bitRate|string|false|none|Bit rate|
-|»» trackId|string|false|none|Track ID|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[TrackMetadata](#schematrackmetadata)|
 
 <aside class="success">
 This operation does not require authentication
@@ -2275,6 +2195,177 @@ This operation does not require authentication
 |privacy_mode|string|false|none|none|
 |DeviceName|string|false|none|The device UPnP and Airplay friendly name|
 |GroupName|string|false|none|The group name of the device that it belongs to|
+
+<h2 id="tocS_PlayerStatus">PlayerStatus</h2>
+<!-- backwards compatibility -->
+<a id="schemaplayerstatus"></a>
+<a id="schema_PlayerStatus"></a>
+<a id="tocSplayerstatus"></a>
+<a id="tocsplayerstatus"></a>
+
+```json
+{
+  "type": "0",
+  "ch": "0",
+  "mode": "10",
+  "loop": "-1",
+  "eq": "0",
+  "vendor": "vTuner",
+  "status": "play",
+  "curpos": "63634",
+  "offset_pts": "63634",
+  "totlen": "0",
+  "Title": "4D6F726E696E67204C69676874",
+  "Artist": "4F77656E20526965676C696E67",
+  "Album": "4D6F726E696E67204C69676874",
+  "alarmflag": "0",
+  "plicount": "5",
+  "plicurr": "2",
+  "vol": "25",
+  "mute": "0"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|false|none|0: Main or standalone device <br>1: Device is a Multiroom Guest|
+|ch|string|false|none|Active channel(s) 0: Stereo 1: Left 2: Right|
+|mode|string|false|none|0: None <br>1: AirPlay or AirPlay 2 <br>2: DLNA streaming <br>10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc <br>11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI <br>31: Spotify Connect <br>32: TIDAL Connect <br>40: AUX-In/Line-In input mode <br>41: Bluetooth input mode <br>42: External storage <br>43: Optical-In input mode <br>47: Line-In #2 input mode <br>50: Mirror <br>51: USBDAC input mode <br>60: Voice mail<br>99: The Device is a Guest in a Multiroom Zone|
+|loop|string|false|none|Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE:<br>disabled REPEAT: enabled - loop 1: SHUFFLE: disabled<br>REPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT:<br>enabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4:<br>SHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled<br>REPEAT: enabled - loop once|
+|eq|string|false|none|The preset number of the Equalizer|
+|vendor|string|false|none|Name of the stream source|
+|status|string|false|none|Playback status stop: no audio selected play: playing<br>audio load/loading: loading/buffering audio pause: audio<br>paused|
+|curpos|string|false|none|Current position, in ms|
+|offset_pts|string|false|none|Offset position, in ms|
+|totlen|string|false|none|Track duration in ms. Zero when playing a live stream.|
+|Title|string|false|none|hexed string of the track title|
+|Artist|string|false|none|hexed string of the artist|
+|Album|string|false|none|hexed string of the album|
+|alarmflag|string|false|none|none|
+|plicount|string|false|none|The total number of tracks in the playlist|
+|plicurr|string|false|none|Current track index|
+|vol|string|false|none|Current volume Value range is from 0 - 100. So can be<br>considered a linear percentage (0% to 100%) of the volume.|
+|mute|string|false|none|Current mute state 0: Not muted 1: Muted|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|status|play|
+|status|pause|
+|status|stop|
+|status|buffering|
+
+<h2 id="tocS_TrackMetadata">TrackMetadata</h2>
+<!-- backwards compatibility -->
+<a id="schematrackmetadata"></a>
+<a id="schema_TrackMetadata"></a>
+<a id="tocStrackmetadata"></a>
+<a id="tocstrackmetadata"></a>
+
+```json
+{
+  "metaData": {
+    "album": "Country Heat",
+    "title": "Old Dirt Roads",
+    "subtitle": "",
+    "artist": "Owen Riegling",
+    "albumArtURI": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
+    "sampleRate": "44100",
+    "bitDepth": "16",
+    "bitRate": "63",
+    "trackId": "s6707"
+  }
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|metaData|object|false|none|none|
+|» album|string|false|none|Album name|
+|» title|string|false|none|Track title|
+|» subtitle|string|false|none|Subtitle|
+|» artist|string|false|none|Artist name|
+|» albumArtURI|string|false|none|URL to the album art|
+|» sampleRate|string|false|none|Sample rate in Hz|
+|» bitDepth|string|false|none|Bit depth in bits|
+|» bitRate|string|false|none|Bit rate in kbps|
+|» trackId|string|false|none|Track ID|
+
+<h2 id="tocS_PresetList">PresetList</h2>
+<!-- backwards compatibility -->
+<a id="schemapresetlist"></a>
+<a id="schema_PresetList"></a>
+<a id="tocSpresetlist"></a>
+<a id="tocspresetlist"></a>
+
+```json
+{
+  "preset_num": 3,
+  "preset_list": [
+    {
+      "number": 1,
+      "name": "BBC Radio Norfolk",
+      "url": "http://as-hls-wwlive.akamaized.net/pool_904/live/ww/bbc_radio_norfolk/bbc_radio_norfolk.isml/bbc_radio_norfolk-audio%3d96000.norewind.m3u8",
+      "source": "Linkplay Radio",
+      "picurl": "http://cdnprofiles.tunein.com/s6852/images/logoq.jpg?t=638353933090000000"
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|preset_num|integer|false|none|Total number of presets|
+|preset_list|[object]|false|none|none|
+|» number|integer|false|none|Preset index (Start from 1)|
+|» name|string|false|none|Playlist name|
+|» url|string|false|none|Play url|
+|» source|string|false|none|Music source|
+|» picurl|string|false|none|Cover picture url|
+
+<h2 id="tocS_StaticIpInfo">StaticIpInfo</h2>
+<!-- backwards compatibility -->
+<a id="schemastaticipinfo"></a>
+<a id="schema_StaticIpInfo"></a>
+<a id="tocSstaticipinfo"></a>
+<a id="tocsstaticipinfo"></a>
+
+```json
+{
+  "wlanStaticIp": "string",
+  "wlanGateWay": "string",
+  "wlanDnsServer": "string",
+  "wlanStaticIpEnable": 0,
+  "ethStaticIp": "string",
+  "ethGateWay": "string",
+  "ethDnsServer": "string",
+  "ethStaticIpEnable": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|wlanStaticIp|string|false|none|Wifi IP address of the device|
+|wlanGateWay|string|false|none|Wifi IP address of the gateway|
+|wlanDnsServer|string|false|none|Wifi IP address of the DNS server|
+|wlanStaticIpEnable|integer|false|none|Status of the WiFi static IP configuration<br>0: Disabled<br>1: Enabled|
+|ethStaticIp|string|false|none|Wired IP address of the device|
+|ethGateWay|string|false|none|Wired IP address of the gateway|
+|ethDnsServer|string|false|none|Wired IP address of the DNS server|
+|ethStaticIpEnable|integer|false|none|Status of the wired static IP configuration<br>0: Disabled<br>1: Enabled|
 
 <h2 id="tocS_BluetoothDeviceList">BluetoothDeviceList</h2>
 <!-- backwards compatibility -->

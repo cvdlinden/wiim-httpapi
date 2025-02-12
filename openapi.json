@@ -104,41 +104,7 @@
             "content": {
               "text/html": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "wlanStaticIp": {
-                      "type": "string",
-                      "description": "Wifi IP address of the device"
-                    },
-                    "wlanGateWay": {
-                      "type": "string",
-                      "description": "Wifi IP address of the gateway"
-                    },
-                    "wlanDnsServer": {
-                      "type": "string",
-                      "description": "Wifi IP address of the DNS server"
-                    },
-                    "wlanStaticIpEnable": {
-                      "type": "integer",
-                      "description": "Status of the WiFi static IP configuration\n0: Disabled\n1: Enabled"
-                    },
-                    "ethStaticIp": {
-                      "type": "string",
-                      "description": "Wired IP address of the device"
-                    },
-                    "ethGateWay": {
-                      "type": "string",
-                      "description": "Wired IP address of the gateway"
-                    },
-                    "ethDnsServer": {
-                      "type": "string",
-                      "description": "Wired IP address of the DNS server"
-                    },
-                    "ethStaticIpEnable": {
-                      "type": "integer",
-                      "description": "Status of the wired static IP configuration\n0: Disabled\n1: Enabled"
-                    }
-                  }
+                  "$ref": "#/components/schemas/StaticIpInfo"
                 }
               }
             }
@@ -236,86 +202,7 @@
             "content": {
               "text/html": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "description": "0: Main or standalone device \n1: Device is a Multiroom Guest"
-                    },
-                    "ch": {
-                      "type": "string",
-                      "description": "Active channel(s) 0: Stereo 1: Left 2: Right"
-                    },
-                    "mode": {
-                      "type": "string",
-                      "description": "0: None \n1: AirPlay or AirPlay 2 \n2: DLNA streaming \n10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc \n11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI \n31: Spotify Connect \n32: TIDAL Connect \n40: AUX-In/Line-In input mode \n41: Bluetooth input mode \n42: External storage \n43: Optical-In input mode \n47: Line-In #2 input mode \n50: Mirror \n51: USBDAC input mode \n60: Voice mail\n99: The Device is a Guest in a Multiroom Zone"
-                    },
-                    "loop": {
-                      "type": "string",
-                      "description": "Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE:\ndisabled REPEAT: enabled - loop 1: SHUFFLE: disabled\nREPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT:\nenabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4:\nSHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled\nREPEAT: enabled - loop once"
-                    },
-                    "eq": {
-                      "type": "string",
-                      "description": "The preset number of the Equalizer"
-                    },
-                    "vendor": {
-                      "type": "string",
-                      "description": "Name of the stream source"
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Playback status stop: no audio selected play: playing\naudio load/loading: loading/buffering audio pause: audio\npaused",
-                      "enum": [
-                        "PLAYING",
-                        "PAUSE",
-                        "STOP",
-                        "BUFFERING"
-                      ]
-                    },
-                    "curpos": {
-                      "type": "string",
-                      "description": "Current position, in ms"
-                    },
-                    "offset_pts": {
-                      "type": "string",
-                      "description": "Offset position, in ms"
-                    },
-                    "totlen": {
-                      "type": "string",
-                      "description": "Track duration in ms. Zero when playing a live stream."
-                    },
-                    "Title": {
-                      "type": "string",
-                      "description": "hexed string of the track title"
-                    },
-                    "Artist": {
-                      "type": "string",
-                      "description": "hexed string of the artist"
-                    },
-                    "Album": {
-                      "type": "string",
-                      "description": "hexed string of the album"
-                    },
-                    "alarmflag": {
-                      "type": "string"
-                    },
-                    "plicount": {
-                      "type": "string",
-                      "description": "The total number of tracks in the playlist"
-                    },
-                    "plicurr": {
-                      "type": "string",
-                      "description": "Current track index"
-                    },
-                    "vol": {
-                      "type": "string",
-                      "description": "Current volume Value range is from 0 - 100. So can be\nconsidered a linear percentage (0% to 100%) of the volume."
-                    },
-                    "mute": {
-                      "type": "string",
-                      "description": "Current mute state 0: Not muted 1: Muted"
-                    }
-                  }
+                  "$ref": "#/components/schemas/PlayerStatus"
                 }
               }
             }
@@ -690,59 +577,7 @@
             "content": {
               "text/html": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "metaData": {
-                      "type": "object",
-                      "properties": {
-                        "album": {
-                          "type": "string",
-                          "description": "Album name",
-                          "example": "Country Heat"
-                        },
-                        "title": {
-                          "type": "string",
-                          "description": "Track title",
-                          "example": "Old Dirt Roads"
-                        },
-                        "subtitle": {
-                          "type": "string",
-                          "description": "Subtitle",
-                          "example": ""
-                        },
-                        "artist": {
-                          "type": "string",
-                          "description": "Artist name",
-                          "example": "Owen Riegling"
-                        },
-                        "albumArtURI": {
-                          "type": "string",
-                          "description": "URL to the album art",
-                          "example": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg"
-                        },
-                        "sampleRate": {
-                          "type": "string",
-                          "description": "Sample rate",
-                          "example": "44100"
-                        },
-                        "bitDepth": {
-                          "type": "string",
-                          "description": "Bit depth",
-                          "example": "16"
-                        },
-                        "bitRate": {
-                          "type": "string",
-                          "description": "Bit rate",
-                          "example": "63"
-                        },
-                        "trackId": {
-                          "type": "string",
-                          "description": "Track ID",
-                          "example": "s6707"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/TrackMetadata"
                 }
               }
             }
@@ -1411,47 +1246,7 @@
             "content": {
               "text/html": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "preset_num": {
-                      "type": "integer",
-                      "description": "Total number of presets",
-                      "example": 3
-                    },
-                    "preset_list": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "number": {
-                            "type": "integer",
-                            "description": "Preset index (Start from 1)",
-                            "example": 1
-                          },
-                          "name": {
-                            "type": "string",
-                            "description": "Playlist name",
-                            "example": "BBC Radio Norfolk"
-                          },
-                          "url": {
-                            "type": "string",
-                            "description": "Play url",
-                            "example": "http://as-hls-wwlive.akamaized.net/pool_904/live/ww/bbc_radio_norfolk/bbc_radio_norfolk.isml/bbc_radio_norfolk-audio%3d96000.norewind.m3u8"
-                          },
-                          "source": {
-                            "type": "string",
-                            "description": "Music source",
-                            "example": "Linkplay Radio"
-                          },
-                          "picurl": {
-                            "type": "string",
-                            "description": "Cover picture url",
-                            "example": "http://cdnprofiles.tunein.com/s6852/images/logoq.jpg?t=638353933090000000"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/PresetList"
                 }
               }
             }
@@ -2316,6 +2111,241 @@
             "type": "string",
             "description": "The group name of the device that it belongs to",
             "example": "WiiM Mini-8FA2"
+          }
+        }
+      },
+      "PlayerStatus": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "0: Main or standalone device \n1: Device is a Multiroom Guest",
+            "example": "0"
+          },
+          "ch": {
+            "type": "string",
+            "description": "Active channel(s) 0: Stereo 1: Left 2: Right",
+            "example": "0"
+          },
+          "mode": {
+            "type": "string",
+            "description": "0: None \n1: AirPlay or AirPlay 2 \n2: DLNA streaming \n10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc \n11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI \n31: Spotify Connect \n32: TIDAL Connect \n40: AUX-In/Line-In input mode \n41: Bluetooth input mode \n42: External storage \n43: Optical-In input mode \n47: Line-In #2 input mode \n50: Mirror \n51: USBDAC input mode \n60: Voice mail\n99: The Device is a Guest in a Multiroom Zone",
+            "example": "10"
+          },
+          "loop": {
+            "type": "string",
+            "description": "Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE:\ndisabled REPEAT: enabled - loop 1: SHUFFLE: disabled\nREPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT:\nenabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4:\nSHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled\nREPEAT: enabled - loop once",
+            "example": "-1"
+          },
+          "eq": {
+            "type": "string",
+            "description": "The preset number of the Equalizer",
+            "example": "0"
+          },
+          "vendor": {
+            "type": "string",
+            "description": "Name of the stream source",
+            "example": "vTuner"
+          },
+          "status": {
+            "type": "string",
+            "description": "Playback status stop: no audio selected play: playing\naudio load/loading: loading/buffering audio pause: audio\npaused",
+            "enum": [
+              "play",
+              "pause",
+              "stop",
+              "buffering"
+            ],
+            "example": "play"
+          },
+          "curpos": {
+            "type": "string",
+            "description": "Current position, in ms",
+            "example": "63634"
+          },
+          "offset_pts": {
+            "type": "string",
+            "description": "Offset position, in ms",
+            "example": "63634"
+          },
+          "totlen": {
+            "type": "string",
+            "description": "Track duration in ms. Zero when playing a live stream.",
+            "example": "0"
+          },
+          "Title": {
+            "type": "string",
+            "description": "hexed string of the track title",
+            "example": "4D6F726E696E67204C69676874"
+          },
+          "Artist": {
+            "type": "string",
+            "description": "hexed string of the artist",
+            "example": "4F77656E20526965676C696E67"
+          },
+          "Album": {
+            "type": "string",
+            "description": "hexed string of the album",
+            "example": "4D6F726E696E67204C69676874"
+          },
+          "alarmflag": {
+            "type": "string",
+            "example": "0"
+          },
+          "plicount": {
+            "type": "string",
+            "description": "The total number of tracks in the playlist",
+            "example": "5"
+          },
+          "plicurr": {
+            "type": "string",
+            "description": "Current track index",
+            "example": "2"
+          },
+          "vol": {
+            "type": "string",
+            "description": "Current volume Value range is from 0 - 100. So can be\nconsidered a linear percentage (0% to 100%) of the volume.",
+            "example": "25"
+          },
+          "mute": {
+            "type": "string",
+            "description": "Current mute state 0: Not muted 1: Muted",
+            "example": "0"
+          }
+        }
+      },
+      "TrackMetadata": {
+        "type": "object",
+        "properties": {
+          "metaData": {
+            "type": "object",
+            "properties": {
+              "album": {
+                "type": "string",
+                "description": "Album name",
+                "example": "Country Heat"
+              },
+              "title": {
+                "type": "string",
+                "description": "Track title",
+                "example": "Old Dirt Roads"
+              },
+              "subtitle": {
+                "type": "string",
+                "description": "Subtitle",
+                "example": ""
+              },
+              "artist": {
+                "type": "string",
+                "description": "Artist name",
+                "example": "Owen Riegling"
+              },
+              "albumArtURI": {
+                "type": "string",
+                "description": "URL to the album art",
+                "example": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg"
+              },
+              "sampleRate": {
+                "type": "string",
+                "description": "Sample rate in Hz",
+                "example": "44100"
+              },
+              "bitDepth": {
+                "type": "string",
+                "description": "Bit depth in bits",
+                "example": "16"
+              },
+              "bitRate": {
+                "type": "string",
+                "description": "Bit rate in kbps",
+                "example": "63"
+              },
+              "trackId": {
+                "type": "string",
+                "description": "Track ID",
+                "example": "s6707"
+              }
+            }
+          }
+        }
+      },
+      "PresetList": {
+        "type": "object",
+        "properties": {
+          "preset_num": {
+            "type": "integer",
+            "description": "Total number of presets",
+            "example": 3
+          },
+          "preset_list": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "number": {
+                  "type": "integer",
+                  "description": "Preset index (Start from 1)",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Playlist name",
+                  "example": "BBC Radio Norfolk"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Play url",
+                  "example": "http://as-hls-wwlive.akamaized.net/pool_904/live/ww/bbc_radio_norfolk/bbc_radio_norfolk.isml/bbc_radio_norfolk-audio%3d96000.norewind.m3u8"
+                },
+                "source": {
+                  "type": "string",
+                  "description": "Music source",
+                  "example": "Linkplay Radio"
+                },
+                "picurl": {
+                  "type": "string",
+                  "description": "Cover picture url",
+                  "example": "http://cdnprofiles.tunein.com/s6852/images/logoq.jpg?t=638353933090000000"
+                }
+              }
+            }
+          }
+        }
+      },
+      "StaticIpInfo": {
+        "type": "object",
+        "properties": {
+          "wlanStaticIp": {
+            "type": "string",
+            "description": "Wifi IP address of the device"
+          },
+          "wlanGateWay": {
+            "type": "string",
+            "description": "Wifi IP address of the gateway"
+          },
+          "wlanDnsServer": {
+            "type": "string",
+            "description": "Wifi IP address of the DNS server"
+          },
+          "wlanStaticIpEnable": {
+            "type": "integer",
+            "description": "Status of the WiFi static IP configuration\n0: Disabled\n1: Enabled"
+          },
+          "ethStaticIp": {
+            "type": "string",
+            "description": "Wired IP address of the device"
+          },
+          "ethGateWay": {
+            "type": "string",
+            "description": "Wired IP address of the gateway"
+          },
+          "ethDnsServer": {
+            "type": "string",
+            "description": "Wired IP address of the DNS server"
+          },
+          "ethStaticIpEnable": {
+            "type": "integer",
+            "description": "Status of the wired static IP configuration\n0: Disabled\n1: Enabled"
           }
         }
       },
