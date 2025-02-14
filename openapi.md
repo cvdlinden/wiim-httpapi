@@ -24,6 +24,61 @@ Base URLs:
 
 * <a href="http://localhost:3000/proxy">http://localhost:3000/proxy</a>
 
+<h1 id="linkplay-wiim-arylic-http-api-generic">Generic</h1>
+
+Generic command for testing
+
+## genericCommand
+
+<a id="opIdgenericCommand"></a>
+
+`GET /{command}`
+
+*Generic command*
+
+Generic command to the device. All calls will follow the format /httpapi.asp?command={command}.
+
+The actual command is passed as a path parameter. With this, you can test out any command that is not explicitly defined in this API.
+
+The response could be a simple 'OK' or an object with data. The actual response will depend on the command sent. If you get an 'unknown command' response, the command is not supported by the device.
+
+Examples:
+-  'getStatusEx' will do an /httpapi.asp?command=getStatusEx
+-  'setPlayerCmd:pause' will do an /httpapi.asp?command=setPlayerCmd:pause
+-  'setPlayerCmd:resume' will do an /httpapi.asp?command=setPlayerCmd:resume
+
+<h3 id="genericcommand-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|command|path|string|true|The actual command to send to the device. Note that the command is case-sensitive.|
+
+> Example responses
+
+> Successful response
+
+```
+"OK"
+```
+
+```
+{"foo":"bar"}
+```
+
+```
+"unknown command"
+```
+
+<h3 id="genericcommand-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-arylic-http-api-device-information">Device information</h1>
 
 Get the device information
