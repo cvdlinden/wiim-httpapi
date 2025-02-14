@@ -732,10 +732,14 @@ JSON Response:
 
 > Example responses
 
-> 200 Response
+> Default response
 
 ```
-null
+{"status":"OK"}
+```
+
+```
+{"status":"Failed"}
 ```
 
 <h3 id="seteqon-responses">Responses</h3>
@@ -745,6 +749,12 @@ null
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
 <h3 id="seteqon-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
@@ -765,10 +775,14 @@ JSON Response:
 
 > Example responses
 
-> 200 Response
+> Default response
 
 ```
-null
+{"status":"OK"}
+```
+
+```
+{"status":"Failed"}
 ```
 
 <h3 id="seteqoff-responses">Responses</h3>
@@ -778,6 +792,12 @@ null
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
 <h3 id="seteqoff-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
@@ -909,10 +929,14 @@ i.e., EQLoad:Flat
 
 > Example responses
 
-> 200 Response
+> Default response
 
 ```
-null
+{"status":"OK"}
+```
+
+```
+{"status":"Failed"}
 ```
 
 <h3 id="loadeqbyname-responses">Responses</h3>
@@ -922,6 +946,12 @@ null
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
 <h3 id="loadeqbyname-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication

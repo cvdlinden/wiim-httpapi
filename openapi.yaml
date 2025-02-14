@@ -654,7 +654,20 @@ paths:
           description: Default response
           content:
             text/html:
-              schema: {}
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    status: OK
+                FAILED:
+                  summary: Failed
+                  value:
+                    status: Failed
       tags:
         - EQ
       operationId: setEQOn
@@ -675,7 +688,20 @@ paths:
           description: Default response
           content:
             text/html:
-              schema: {}
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    status: OK
+                FAILED:
+                  summary: Failed
+                  value:
+                    status: Failed
       tags:
         - EQ
       operationId: setEQOff
@@ -783,7 +809,20 @@ paths:
           description: Default response
           content:
             text/html:
-              schema: {}
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                OK:
+                  summary: OK
+                  value:
+                    status: OK
+                FAILED:
+                  summary: Failed
+                  value:
+                    status: Failed
       tags:
         - EQ
   /reboot:
