@@ -1,30 +1,34 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="linkplay-wiim-arylic-http-api">Linkplay/WiiM/Arylic HTTP API v1.2.0</h1>
+<h1 id="linkplay-wiim-http-api">Linkplay/WiiM HTTP API v1.2.0</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-HTTP API for Linkplay/WiiM devices.
+HTTP API for Linkplay/WiiM devices. This API is based on the HTTP API for WiiM PRODUCTS Version 1.2, with additions from others.
 
-You can send 'HTTPs Get' request to the device, most of the response is in
-the JSON format.
+You can send 'HTTPS: Get' requests to the device, most of the responses are a simple 'OK' or in the JSON format.
 
-Request format is https://x.x.x.x/httpapi.asp?command=********
+The request format is 'https://x.x.x.x/httpapi.asp?command=********'
 
-x.x.x.x is the IP address of the device (Below, we assume the IP of the
-device is 10.10.10.254) ******* is the actual command.
+- Where x.x.x.x is the IP address of your WiiM device (In the descriptions, we assume the IP of the device is 10.10.10.254)
+- ******* is the actual command.
 
-Commands can contain both integers and strings, denoted as '%d' for integers
-and '%s' for strings, respectively.
+Commands can contain both integers and strings, denoted as '%d' for integers and '%s' for strings, respectively.
 
-This Swagger doc uses a reverse proxy to access the device. See the
-description for the actual command.
+This Swagger doc uses a reverse proxy to access the device. See the description for the actual command.
+
+Note that Linkplay is a provider of the hardware and software for these devices. WiiM is a brand that uses Linkplay hardware and software.
+However other brands may also use Linkplay hardware and software, so this API may or may not work with other brands as well, such as Arylic.
+
+If a command doesn't work with your device, it may be that the command is not supported by the device or that the device is not a WiiM device. The command may also be specific to a certain version of the firmware. 
+
+If you have a different brand, you may want to check the documentation for that brand. You'll find commands here that are deprecated: these are commands that are no longer supported by the device or may be brand specific. You can still use them, but they may not work as expected.
 
 Base URLs:
 
 * <a href="http://localhost:3000/proxy">http://localhost:3000/proxy</a>
 
-<h1 id="linkplay-wiim-arylic-http-api-generic">Generic</h1>
+<h1 id="linkplay-wiim-http-api-generic">Generic</h1>
 
 Generic command for testing
 
@@ -79,7 +83,7 @@ Examples:
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-device-information">Device information</h1>
+<h1 id="linkplay-wiim-http-api-device-information">Device information</h1>
 
 Get the device information
 
@@ -116,7 +120,7 @@ device actually reports.
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-network">Network</h1>
+<h1 id="linkplay-wiim-http-api-network">Network</h1>
 
 Get the network status
 
@@ -233,7 +237,7 @@ OK connected
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-playback-control">Playback control</h1>
+<h1 id="linkplay-wiim-http-api-playback-control">Playback control</h1>
 
 Get and set playback controls
 
@@ -713,7 +717,7 @@ Response is always 'OK' now.
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-eq">EQ</h1>
+<h1 id="linkplay-wiim-http-api-eq">EQ</h1>
 
 Get and set equalizer settings
 
@@ -947,7 +951,7 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-device-control">Device control</h1>
+<h1 id="linkplay-wiim-http-api-device-control">Device control</h1>
 
 Control the device
 
@@ -1079,7 +1083,7 @@ Return the seconds
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-alarm-clock">Alarm clock</h1>
+<h1 id="linkplay-wiim-http-api-alarm-clock">Alarm clock</h1>
 
 Get and set alarm clock
 
@@ -1360,7 +1364,7 @@ null
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-source-input-switch">Source Input Switch</h1>
+<h1 id="linkplay-wiim-http-api-source-input-switch">Source Input Switch</h1>
 
 Switch between inputs
 
@@ -1417,7 +1421,7 @@ null
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-presets">Presets</h1>
+<h1 id="linkplay-wiim-http-api-presets">Presets</h1>
 
 Manage presets
 
@@ -1552,7 +1556,7 @@ picurl string Cover picture url
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-track-metadata">Track Metadata</h1>
+<h1 id="linkplay-wiim-http-api-track-metadata">Track Metadata</h1>
 
 Get Current Track Metadata
 
@@ -1597,7 +1601,7 @@ JSON Response
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-audio-output-control">Audio Output Control</h1>
+<h1 id="linkplay-wiim-http-api-audio-output-control">Audio Output Control</h1>
 
 Get and set audio output mode
 
@@ -1707,7 +1711,7 @@ Response is 'OK'
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-arylic-http-api-bluetooth">Bluetooth</h1>
+<h1 id="linkplay-wiim-http-api-bluetooth">Bluetooth</h1>
 
 Get and set Bluetooth settings
 
