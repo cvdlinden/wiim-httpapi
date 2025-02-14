@@ -717,7 +717,7 @@
     "/EQOn": {
       "get": {
         "summary": "Turn on the EQ",
-        "description": "https://10.10.10.254/httpapi.asp?command=EQOn\n\nJSON Response:\n{\"status\":\"OK\"} or {\"status\":\"Failed\"}",
+        "description": "https://10.10.10.254/httpapi.asp?command=EQOn",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -763,7 +763,7 @@
     "/EQOff": {
       "get": {
         "summary": "Turn off the EQ setting",
-        "description": "https://10.10.10.254/httpapi.asp?command=EQOff\n\nJSON Response:\n{\"status\":\"OK\"} or {\"status\":\"Failed\"}\n",
+        "description": "https://10.10.10.254/httpapi.asp?command=EQOff\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -859,7 +859,7 @@
     "/EQLoad:{name}": {
       "get": {
         "summary": "Set the specific EQ with name",
-        "description": "http://10.10.10.254/httpapi.asp?command=EQLoad:xxx\n\n\nJSON Response:\n\n{\"status\":\"OK\"} or {\"status\":\"Failed\"}\n\n\nNote: xxx is the one of the name in the list returned by EQGetList,\ni.e., EQLoad:Flat",
+        "description": "http://10.10.10.254/httpapi.asp?command=EQLoad:xxx\n\n\nNote: xxx is the one of the name in the list returned by EQGetList,\ni.e., EQLoad:Flat",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -979,7 +979,7 @@
     "/setShutdown:{sec}": {
       "get": {
         "summary": "Shutdown",
-        "description": "http://10.10.10.254/httpapi.asp?command=setShutdown:sec\n\nShutdown device in sec\n\nsec:\n0: shutdown immediately\n-1: cancel the previous shutdown timer\n\nJSON Response:\n{\"status\":\"OK\"} or {\"status\":\"Failed\"}\n",
+        "description": "http://10.10.10.254/httpapi.asp?command=setShutdown:sec\n\nShutdown device in sec\n\nsec:\n0: shutdown immediately\n-1: cancel the previous shutdown timer\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"

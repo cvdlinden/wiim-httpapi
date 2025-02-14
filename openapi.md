@@ -727,9 +727,6 @@ Get and set equalizer settings
 
 https://10.10.10.254/httpapi.asp?command=EQOn
 
-JSON Response:
-{"status":"OK"} or {"status":"Failed"}
-
 > Example responses
 
 > Default response
@@ -769,9 +766,6 @@ This operation does not require authentication
 *Turn off the EQ setting*
 
 https://10.10.10.254/httpapi.asp?command=EQOff
-
-JSON Response:
-{"status":"OK"} or {"status":"Failed"}
 
 > Example responses
 
@@ -886,10 +880,6 @@ This operation does not require authentication
 *Set the specific EQ with name*
 
 http://10.10.10.254/httpapi.asp?command=EQLoad:xxx
-
-JSON Response:
-
-{"status":"OK"} or {"status":"Failed"}
 
 Note: xxx is the one of the name in the list returned by EQGetList,
 i.e., EQLoad:Flat
@@ -1015,9 +1005,6 @@ Shutdown device in sec
 sec:
 0: shutdown immediately
 -1: cancel the previous shutdown timer
-
-JSON Response:
-{"status":"OK"} or {"status":"Failed"}
 
 <h3 id="setshutdowntimer-parameters">Parameters</h3>
 
