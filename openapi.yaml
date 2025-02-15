@@ -36,11 +36,13 @@ tags:
     description: Generic command for testing
   - name: Device information
     description: Get the device information
-  - name: Network
-    description: Get the network status
+  - name: Track Metadata
+    description: Get Current Track Metadata
   - name: Playback control
     description: Get and set playback controls
-  - name: EQ
+  - name: Network
+    description: Get the network status
+  - name: Equalizer
     description: Get and set equalizer settings
   - name: Device control
     description: Control the device
@@ -54,14 +56,13 @@ tags:
 
       The WiiM Home App allows users to configure 12 presets for quick access to
       preferred radio stations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned number.
-  - name: Track Metadata
-    description: Get Current Track Metadata
   - name: Audio Output Control
     description: Get and set audio output mode
   - name: Bluetooth
     description: Get and set Bluetooth settings
 
 paths:
+  # Generic
   /{command}:
     get:
       summary: Generic command
@@ -110,6 +111,8 @@ paths:
       tags:
         - Generic
       operationId: genericCommand
+
+  # Device information
   /getStatusEx:
     get:
       tags:
@@ -135,95 +138,42 @@ paths:
               schema:
                 $ref: "#/components/schemas/DeviceStatus"
       parameters: []
-  /getStaticIpInfo:
+
+  # Track Metadata
+  /getMetaInfo:
     get:
-      tags:
-        - Network
-      summary: Get the static IP information
+      summary: Get Current Track Metadata
       description: |-
-        Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo
-
-        If the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).
-      externalDocs:
-        description: WiiM Extended HTTP API by DanBrezeanu
-        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
-      operationId: getStaticIpInfo
-      responses:
-        "200":
-          description: Successful response
-          content:
-            text/html:
-              schema:
-                $ref: "#/components/schemas/StaticIpInfo"
-  /getStaticIP:
-    get:
-      tags:
-        - Network
-      deprecated: true
-      summary: Query networking status
-      description: Query current networking status
-      externalDocs:
-        description: Arylic Developers
-        url: "https://developer.arylic.com/httpapi/#http-api"
-      operationId: getStaticIP
-      responses:
-        "200":
-          description: Successful response
-          content:
-            text/html:
-              schema:
-                type: string
-      parameters: []
-  /wlanGetConnectState:
-    get:
-      tags:
-        - Network
-      summary: Get the connection status
-      description: |-
-        Makes a call to
-        https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
-
-
-        Note the return result is not in json.
-
-
-        Return string:
-
-        Return string Description
-
-        PROCESS In progress
-
-        PAIRFAIL Wrong password
-
-        FAIL Connect fail
-
-        OK connected
-
+        JSON Response
+        {
+         "metaData": {
+          "album": "Country Heat",
+          "title": "Old Dirt Roads",
+          "subtitle": "",
+          "artist": "Owen Riegling",
+          "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
+          "sampleRate ": "44100",
+          "bitDepth": "16",
+          "bitRate": "63",
+          "trackId": "s6707",
+         }
+        }
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-      operationId: wlanGetConnectState
+      parameters: []
       responses:
         "200":
           description: Successful response
           content:
             text/html:
               schema:
-                type: string
-              examples:
-                PROCESS:
-                  summary: In progress
-                  value: PROCESS
-                PAIRFAIL:
-                  summary: Wrong password
-                  value: PAIRFAIL
-                FAIL:
-                  summary: Connect fail
-                  value: FAIL
-                OK:
-                  summary: Connected
-                  value: OK
-      parameters: []
+                $ref: "#/components/schemas/TrackMetadata"
+      tags:
+        - Track Metadata
+      operationId: getMetaInfo
+
+  # Playback control
   /getPlayerStatus:
     get:
       tags:
@@ -311,6 +261,63 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdOnePause
+  "/setPlayerCmd:play:{url}":
+    get:
+      summary: Play audio URL
+      description: |-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
+        Play the URL. URL points to an audio stream address.
+        Response is always 'OK' now
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+      parameters:
+        - name: url
+          in: path
+          required: true
+          schema:
+            type: string
+            default: >-
+              http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8
+          description: URL points to an audio stream address
+      responses:
+        "200":
+          $ref: "#/components/responses/StringOK"
+      tags:
+        - Playback control
+      operationId: setPlayerCmdPlayUrl
+  "/setPlayerCmd:playlist:{url}:{index}":
+    get:
+      summary: Play audio playlist
+      description: |-
+        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
+
+        Play the playlist with the URL (URL points to the m3u or ASX playlist
+        link, index is the start index).
+
+        Response is always 'OK' now.
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+      parameters:
+        - name: index
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: url
+          in: path
+          required: true
+          schema:
+            type: string
+            default: >-
+              https://gist.githubusercontent.com/bpsib/67089b959e4fa898af69fea59ad74bc3/raw/685789e28187c0a15da978b51d436a140d5ea207/BBC-Radio-HLS.m3u
+      responses:
+        "200":
+          $ref: "#/components/responses/StringOK"
+      tags:
+        - Playback control
+      operationId: setPlayerCmdPlaylistUrl
   "/setPlayerCmd:prev":
     get:
       summary: Previous
@@ -461,185 +468,99 @@ paths:
       tags:
         - Playback control
       operationId: setPlayerCmdLoopmode
-  /getNewAudioOutputHardwareMode:
-    get:
-      summary: Get audio output mode
-      description: |-
-        JSON Response:
-        {"hardware":"2","source":"0","audiocast":"0"}
 
-        Description:
-        Field Description
-        hardware Hardware Interface output mode:
-        1: AUDIO_OUTPUT_SPDIF_MODE
-        2: AUDIO_OUTPUT_AUX_MODE
-        3: AUDIO_OUTPUT_COAX_MODE
-        source BT source output mode:
-        0: disable
-        1: active
-        audiocast Audio cast output mode:
-        0: disable
-        1: active
+  # Network
+  /getStaticIpInfo:
+    get:
+      tags:
+        - Network
+      summary: Get the static IP information
+      description: |-
+        Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo
+
+        If the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).
       externalDocs:
-        description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-      parameters: []
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getStaticIpInfo
       responses:
         "200":
           description: Successful response
           content:
             text/html:
               schema:
-                type: object
-                properties:
-                  hardware:
-                    type: string
-                    description: |-
-                      Hardware Interface output mode:
-                      1: AUDIO_OUTPUT_SPDIF_MODE
-                      2: AUDIO_OUTPUT_AUX_MODE
-                      3: AUDIO_OUTPUT_COAX_MODE
-                    example: "2"
-                  source:
-                    type: string
-                    description: |-
-                      BT source output mode:
-                      0: disable
-                      1: active
-                    example: "0"
-                  audiocast:
-                    type: string
-                    description: |-
-                      Audio cast output mode:
-                      0: disable
-                      1: active
-                    example: "0"
-      tags:
-        - Audio Output Control
-      operationId: getNewAudioOutputHardwareMode
-  "/setAudioOutputHardwareMode:{n}":
+                $ref: "#/components/schemas/StaticIpInfo"
+  /getStaticIP:
     get:
-      summary: Set audio output mode
-      description: |-
-        Field Description
-        Hardware Interface output mode:
-        1: AUDIO_OUTPUT_SPDIF_MODE
-        2: AUDIO_OUTPUT_AUX_MODE
-        3: AUDIO_OUTPUT_COAX_MODE
-        Response is 'OK'
-      externalDocs:
-        description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-      parameters:
-        - name: "n"
-          in: path
-          required: true
-          schema:
-            type: string
-            enum:
-              - "1"
-              - "2"
-              - "3"
-          description: |-
-            Hardware Interface output mode:
-            1: AUDIO_OUTPUT_SPDIF_MODE
-            2: AUDIO_OUTPUT_AUX_MODE
-            3: AUDIO_OUTPUT_COAX_MODE
-      responses:
-        "200":
-          $ref: "#/components/responses/StringOK"
       tags:
-        - Audio Output Control
-      operationId: setAudioOutputHardwareMode
-  /getMetaInfo:
-    get:
-      summary: Get Current Track Metadata
-      description: |-
-        JSON Response
-        {
-         "metaData": {
-          "album": "Country Heat",
-          "title": "Old Dirt Roads",
-          "subtitle": "",
-          "artist": "Owen Riegling",
-          "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
-          "sampleRate ": "44100",
-          "bitDepth": "16",
-          "bitRate": "63",
-          "trackId": "s6707",
-         }
-        }
+        - Network
+      deprecated: true
+      summary: Query networking status
+      description: Query current networking status
       externalDocs:
-        description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-      parameters: []
+        description: Arylic Developers
+        url: "https://developer.arylic.com/httpapi/#http-api"
+      operationId: getStaticIP
       responses:
         "200":
           description: Successful response
           content:
             text/html:
               schema:
-                $ref: "#/components/schemas/TrackMetadata"
-      tags:
-        - Track Metadata
-      operationId: getMetaInfo
-  "/setPlayerCmd:play:{url}":
+                type: string
+      parameters: []
+  /wlanGetConnectState:
     get:
-      summary: Play audio URL
+      tags:
+        - Network
+      summary: Get the connection status
       description: |-
-        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
-        Play the URL. URL points to an audio stream address.
-        Response is always 'OK' now
+        Makes a call to
+        https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
+
+
+        Note the return result is not in json.
+
+
+        Return string:
+
+        Return string Description
+
+        PROCESS In progress
+
+        PAIRFAIL Wrong password
+
+        FAIL Connect fail
+
+        OK connected
+
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-      parameters:
-        - name: url
-          in: path
-          required: true
-          schema:
-            type: string
-            default: >-
-              http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8
-          description: URL points to an audio stream address
+      operationId: wlanGetConnectState
       responses:
         "200":
-          $ref: "#/components/responses/StringOK"
-      tags:
-        - Playback control
-      operationId: setPlayerCmdPlayUrl
-  "/setPlayerCmd:playlist:{url}:{index}":
-    get:
-      summary: Play audio playlist
-      description: |-
-        https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                PROCESS:
+                  summary: In progress
+                  value: PROCESS
+                PAIRFAIL:
+                  summary: Wrong password
+                  value: PAIRFAIL
+                FAIL:
+                  summary: Connect fail
+                  value: FAIL
+                OK:
+                  summary: Connected
+                  value: OK
+      parameters: []
 
-        Play the playlist with the URL (URL points to the m3u or ASX playlist
-        link, index is the start index).
-
-        Response is always 'OK' now.
-      externalDocs:
-        description: HTTP API for WiiM PRODUCTS Version 1.2
-        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-      parameters:
-        - name: index
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: url
-          in: path
-          required: true
-          schema:
-            type: string
-            default: >-
-              https://gist.githubusercontent.com/bpsib/67089b959e4fa898af69fea59ad74bc3/raw/685789e28187c0a15da978b51d436a140d5ea207/BBC-Radio-HLS.m3u
-      responses:
-        "200":
-          $ref: "#/components/responses/StringOK"
-      tags:
-        - Playback control
-      operationId: setPlayerCmdPlaylistUrl
+  # Equalizer
   /EQOn:
     get:
       summary: Turn on the EQ
@@ -670,7 +591,7 @@ paths:
                   value:
                     status: Failed
       tags:
-        - EQ
+        - Equalizer
       operationId: setEQOn
   /EQOff:
     get:
@@ -702,7 +623,7 @@ paths:
                   value:
                     status: Failed
       tags:
-        - EQ
+        - Equalizer
       operationId: setEQOff
   /EQGetStat:
     get:
@@ -723,7 +644,7 @@ paths:
             text/html:
               schema: {}
       tags:
-        - EQ
+        - Equalizer
       operationId: getEQStat
   /EQGetList:
     get:
@@ -753,7 +674,7 @@ paths:
             text/html:
               schema: {}
       tags:
-        - EQ
+        - Equalizer
       operationId: getEQList
   "/EQLoad:{name}":
     get:
@@ -818,7 +739,9 @@ paths:
                   value:
                     status: Failed
       tags:
-        - EQ
+        - Equalizer
+
+  # Device control
   /reboot:
     get:
       summary: Reboot
@@ -923,6 +846,8 @@ paths:
                   value: 0
       tags:
         - Device control
+
+  # Alarm clock
   "/timeSync:{YYYYMMDDHHMMSS}":
     get:
       summary: Get network time
@@ -1179,6 +1104,8 @@ paths:
               schema: {}
       tags:
         - Alarm clock
+
+  # Source input switch
   "/setPlayerCmd:switchmode:{mode}":
     get:
       summary: Switch the source input
@@ -1215,6 +1142,8 @@ paths:
               schema: {}
       tags:
         - Source Input Switch
+
+  # Presets
   "/MCUKeyShortClick:{n}":
     get:
       summary: Play preset with preset number
@@ -1320,6 +1249,100 @@ paths:
                 $ref: "#/components/schemas/PresetList"
       tags:
         - Presets
+
+  # Audio output control
+  /getNewAudioOutputHardwareMode:
+    get:
+      summary: Get audio output mode
+      description: |-
+        JSON Response:
+        {"hardware":"2","source":"0","audiocast":"0"}
+
+        Description:
+        Field Description
+        hardware Hardware Interface output mode:
+        1: AUDIO_OUTPUT_SPDIF_MODE
+        2: AUDIO_OUTPUT_AUX_MODE
+        3: AUDIO_OUTPUT_COAX_MODE
+        source BT source output mode:
+        0: disable
+        1: active
+        audiocast Audio cast output mode:
+        0: disable
+        1: active
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+      parameters: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  hardware:
+                    type: string
+                    description: |-
+                      Hardware Interface output mode:
+                      1: AUDIO_OUTPUT_SPDIF_MODE
+                      2: AUDIO_OUTPUT_AUX_MODE
+                      3: AUDIO_OUTPUT_COAX_MODE
+                    example: "2"
+                  source:
+                    type: string
+                    description: |-
+                      BT source output mode:
+                      0: disable
+                      1: active
+                    example: "0"
+                  audiocast:
+                    type: string
+                    description: |-
+                      Audio cast output mode:
+                      0: disable
+                      1: active
+                    example: "0"
+      tags:
+        - Audio Output Control
+      operationId: getNewAudioOutputHardwareMode
+  "/setAudioOutputHardwareMode:{n}":
+    get:
+      summary: Set audio output mode
+      description: |-
+        Field Description
+        Hardware Interface output mode:
+        1: AUDIO_OUTPUT_SPDIF_MODE
+        2: AUDIO_OUTPUT_AUX_MODE
+        3: AUDIO_OUTPUT_COAX_MODE
+        Response is 'OK'
+      externalDocs:
+        description: HTTP API for WiiM PRODUCTS Version 1.2
+        url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - "1"
+              - "2"
+              - "3"
+          description: |-
+            Hardware Interface output mode:
+            1: AUDIO_OUTPUT_SPDIF_MODE
+            2: AUDIO_OUTPUT_AUX_MODE
+            3: AUDIO_OUTPUT_COAX_MODE
+      responses:
+        "200":
+          $ref: "#/components/responses/StringOK"
+      tags:
+        - Audio Output Control
+      operationId: setAudioOutputHardwareMode
+
+  # Bluetooth
   /startbtdiscovery:3:
     get:
       tags:

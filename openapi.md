@@ -120,118 +120,46 @@ device actually reports.
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-network">Network</h1>
+<h1 id="linkplay-wiim-http-api-track-metadata">Track Metadata</h1>
 
-Get the network status
+Get Current Track Metadata
 
-## getStaticIpInfo
+## getMetaInfo
 
-<a id="opIdgetStaticIpInfo"></a>
+<a id="opIdgetMetaInfo"></a>
 
-`GET /getStaticIpInfo`
+`GET /getMetaInfo`
 
-*Get the static IP information*
+*Get Current Track Metadata*
 
-Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo
-
-If the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).
-
-> Example responses
-
-> 200 Response
-
-```
-{"wlanStaticIp":"string","wlanGateWay":"string","wlanDnsServer":"string","wlanStaticIpEnable":0,"ethStaticIp":"string","ethGateWay":"string","ethDnsServer":"string","ethStaticIpEnable":0}
-```
-
-<h3 id="getstaticipinfo-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[StaticIpInfo](#schemastaticipinfo)|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getStaticIP
-
-<a id="opIdgetStaticIP"></a>
-
-`GET /getStaticIP`
-
-*Query networking status*
-
-Query current networking status
+JSON Response
+{
+ "metaData": {
+  "album": "Country Heat",
+  "title": "Old Dirt Roads",
+  "subtitle": "",
+  "artist": "Owen Riegling",
+  "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
+  "sampleRate ": "44100",
+  "bitDepth": "16",
+  "bitRate": "63",
+  "trackId": "s6707",
+ }
+}
 
 > Example responses
 
 > 200 Response
 
 ```
-"string"
+{"metaData":{"album":"Country Heat","title":"Old Dirt Roads","subtitle":"","artist":"Owen Riegling","albumArtURI":"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg","sampleRate":"44100","bitDepth":"16","bitRate":"63","trackId":"s6707"}}
 ```
 
-<h3 id="getstaticip-responses">Responses</h3>
+<h3 id="getmetainfo-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## wlanGetConnectState
-
-<a id="opIdwlanGetConnectState"></a>
-
-`GET /wlanGetConnectState`
-
-*Get the connection status*
-
-Makes a call to
-https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
-
-Note the return result is not in json.
-
-Return string:
-
-Return string Description
-
-PROCESS In progress
-
-PAIRFAIL Wrong password
-
-FAIL Connect fail
-
-OK connected
-
-> Example responses
-
-> Successful response
-
-```
-"PROCESS"
-```
-
-```
-"PAIRFAIL"
-```
-
-```
-"FAIL"
-```
-
-```
-"OK"
-```
-
-<h3 id="wlangetconnectstate-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[TrackMetadata](#schematrackmetadata)|
 
 <aside class="success">
 This operation does not require authentication
@@ -375,6 +303,82 @@ If the state is paused, resume it; otherwise, pause it.
 ```
 
 <h3 id="setplayercmdonepause-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayerCmdPlayUrl
+
+<a id="opIdsetPlayerCmdPlayUrl"></a>
+
+`GET /setPlayerCmd:play:{url}`
+
+*Play audio URL*
+
+https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
+Play the URL. URL points to an audio stream address.
+Response is always 'OK' now
+
+<h3 id="setplayercmdplayurl-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|url|path|string|true|URL points to an audio stream address|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="setplayercmdplayurl-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayerCmdPlaylistUrl
+
+<a id="opIdsetPlayerCmdPlaylistUrl"></a>
+
+`GET /setPlayerCmd:playlist:{url}:{index}`
+
+*Play audio playlist*
+
+https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
+
+Play the playlist with the URL (URL points to the m3u or ASX playlist
+link, index is the start index).
+
+Response is always 'OK' now.
+
+<h3 id="setplayercmdplaylisturl-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|index|path|string|true|none|
+|url|path|string|true|none|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="setplayercmdplaylisturl-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -641,33 +645,59 @@ n =
 This operation does not require authentication
 </aside>
 
-## setPlayerCmdPlayUrl
+<h1 id="linkplay-wiim-http-api-network">Network</h1>
 
-<a id="opIdsetPlayerCmdPlayUrl"></a>
+Get the network status
 
-`GET /setPlayerCmd:play:{url}`
+## getStaticIpInfo
 
-*Play audio URL*
+<a id="opIdgetStaticIpInfo"></a>
 
-https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url
-Play the URL. URL points to an audio stream address.
-Response is always 'OK' now
+`GET /getStaticIpInfo`
 
-<h3 id="setplayercmdplayurl-parameters">Parameters</h3>
+*Get the static IP information*
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|url|path|string|true|URL points to an audio stream address|
+Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo
+
+If the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).
 
 > Example responses
 
 > 200 Response
 
 ```
-"OK"
+{"wlanStaticIp":"string","wlanGateWay":"string","wlanDnsServer":"string","wlanStaticIpEnable":0,"ethStaticIp":"string","ethGateWay":"string","ethDnsServer":"string","ethStaticIpEnable":0}
 ```
 
-<h3 id="setplayercmdplayurl-responses">Responses</h3>
+<h3 id="getstaticipinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[StaticIpInfo](#schemastaticipinfo)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getStaticIP
+
+<a id="opIdgetStaticIP"></a>
+
+`GET /getStaticIP`
+
+*Query networking status*
+
+Query current networking status
+
+> Example responses
+
+> 200 Response
+
+```
+"string"
+```
+
+<h3 id="getstaticip-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -677,37 +707,52 @@ Response is always 'OK' now
 This operation does not require authentication
 </aside>
 
-## setPlayerCmdPlaylistUrl
+## wlanGetConnectState
 
-<a id="opIdsetPlayerCmdPlaylistUrl"></a>
+<a id="opIdwlanGetConnectState"></a>
 
-`GET /setPlayerCmd:playlist:{url}:{index}`
+`GET /wlanGetConnectState`
 
-*Play audio playlist*
+*Get the connection status*
 
-https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>
+Makes a call to
+https://10.10.10.254/httpapi.asp?command=wlanGetConnectState
 
-Play the playlist with the URL (URL points to the m3u or ASX playlist
-link, index is the start index).
+Note the return result is not in json.
 
-Response is always 'OK' now.
+Return string:
 
-<h3 id="setplayercmdplaylisturl-parameters">Parameters</h3>
+Return string Description
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|index|path|string|true|none|
-|url|path|string|true|none|
+PROCESS In progress
+
+PAIRFAIL Wrong password
+
+FAIL Connect fail
+
+OK connected
 
 > Example responses
 
-> 200 Response
+> Successful response
+
+```
+"PROCESS"
+```
+
+```
+"PAIRFAIL"
+```
+
+```
+"FAIL"
+```
 
 ```
 "OK"
 ```
 
-<h3 id="setplayercmdplaylisturl-responses">Responses</h3>
+<h3 id="wlangetconnectstate-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -717,7 +762,7 @@ Response is always 'OK' now.
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-eq">EQ</h1>
+<h1 id="linkplay-wiim-http-api-equalizer">Equalizer</h1>
 
 Get and set equalizer settings
 
@@ -1551,51 +1596,6 @@ picurl string Cover picture url
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[PresetList](#schemapresetlist)|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="linkplay-wiim-http-api-track-metadata">Track Metadata</h1>
-
-Get Current Track Metadata
-
-## getMetaInfo
-
-<a id="opIdgetMetaInfo"></a>
-
-`GET /getMetaInfo`
-
-*Get Current Track Metadata*
-
-JSON Response
-{
- "metaData": {
-  "album": "Country Heat",
-  "title": "Old Dirt Roads",
-  "subtitle": "",
-  "artist": "Owen Riegling",
-  "albumArtURI ": "https://m.media-amazon.com/images/I/51iU0odzJwL.jpg",
-  "sampleRate ": "44100",
-  "bitDepth": "16",
-  "bitRate": "63",
-  "trackId": "s6707",
- }
-}
-
-> Example responses
-
-> 200 Response
-
-```
-{"metaData":{"album":"Country Heat","title":"Old Dirt Roads","subtitle":"","artist":"Owen Riegling","albumArtURI":"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg","sampleRate":"44100","bitDepth":"16","bitRate":"63","trackId":"s6707"}}
-```
-
-<h3 id="getmetainfo-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[TrackMetadata](#schematrackmetadata)|
 
 <aside class="success">
 This operation does not require authentication

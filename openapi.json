@@ -22,15 +22,19 @@
       "description": "Get the device information"
     },
     {
-      "name": "Network",
-      "description": "Get the network status"
+      "name": "Track Metadata",
+      "description": "Get Current Track Metadata"
     },
     {
       "name": "Playback control",
       "description": "Get and set playback controls"
     },
     {
-      "name": "EQ",
+      "name": "Network",
+      "description": "Get the network status"
+    },
+    {
+      "name": "Equalizer",
       "description": "Get and set equalizer settings"
     },
     {
@@ -48,10 +52,6 @@
     {
       "name": "Presets",
       "description": "Manage presets\n\nThe WiiM Home App allows users to configure 12 presets for quick access to\npreferred radio stations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned number."
-    },
-    {
-      "name": "Track Metadata",
-      "description": "Get Current Track Metadata"
     },
     {
       "name": "Audio Output Control",
@@ -142,103 +142,31 @@
         "parameters": []
       }
     },
-    "/getStaticIpInfo": {
+    "/getMetaInfo": {
       "get": {
-        "tags": [
-          "Network"
-        ],
-        "summary": "Get the static IP information",
-        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo\n\nIf the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getStaticIpInfo",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "$ref": "#/components/schemas/StaticIpInfo"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/getStaticIP": {
-      "get": {
-        "tags": [
-          "Network"
-        ],
-        "deprecated": true,
-        "summary": "Query networking status",
-        "description": "Query current networking status",
-        "externalDocs": {
-          "description": "Arylic Developers",
-          "url": "https://developer.arylic.com/httpapi/#http-api"
-        },
-        "operationId": "getStaticIP",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "parameters": []
-      }
-    },
-    "/wlanGetConnectState": {
-      "get": {
-        "tags": [
-          "Network"
-        ],
-        "summary": "Get the connection status",
-        "description": "Makes a call to\nhttps://10.10.10.254/httpapi.asp?command=wlanGetConnectState\n\n\nNote the return result is not in json.\n\n\nReturn string:\n\nReturn string Description\n\nPROCESS In progress\n\nPAIRFAIL Wrong password\n\nFAIL Connect fail\n\nOK connected",
+        "summary": "Get Current Track Metadata",
+        "description": "JSON Response\n{\n \"metaData\": {\n  \"album\": \"Country Heat\",\n  \"title\": \"Old Dirt Roads\",\n  \"subtitle\": \"\",\n  \"artist\": \"Owen Riegling\",\n  \"albumArtURI \": \"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg\",\n  \"sampleRate \": \"44100\",\n  \"bitDepth\": \"16\",\n  \"bitRate\": \"63\",\n  \"trackId\": \"s6707\",\n }\n}",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
         },
-        "operationId": "wlanGetConnectState",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
               "text/html": {
                 "schema": {
-                  "type": "string"
-                },
-                "examples": {
-                  "PROCESS": {
-                    "summary": "In progress",
-                    "value": "PROCESS"
-                  },
-                  "PAIRFAIL": {
-                    "summary": "Wrong password",
-                    "value": "PAIRFAIL"
-                  },
-                  "FAIL": {
-                    "summary": "Connect fail",
-                    "value": "FAIL"
-                  },
-                  "OK": {
-                    "summary": "Connected",
-                    "value": "OK"
-                  }
+                  "$ref": "#/components/schemas/TrackMetadata"
                 }
               }
             }
           }
         },
-        "parameters": []
+        "tags": [
+          "Track Metadata"
+        ],
+        "operationId": "getMetaInfo"
       }
     },
     "/getPlayerStatus": {
@@ -356,6 +284,75 @@
           "Playback control"
         ],
         "operationId": "setPlayerCmdOnePause"
+      }
+    },
+    "/setPlayerCmd:play:{url}": {
+      "get": {
+        "summary": "Play audio URL",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url\nPlay the URL. URL points to an audio stream address.\nResponse is always 'OK' now",
+        "externalDocs": {
+          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8"
+            },
+            "description": "URL points to an audio stream address"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/StringOK"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ],
+        "operationId": "setPlayerCmdPlayUrl"
+      }
+    },
+    "/setPlayerCmd:playlist:{url}:{index}": {
+      "get": {
+        "summary": "Play audio playlist",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>\n\nPlay the playlist with the URL (URL points to the m3u or ASX playlist\nlink, index is the start index).\n\nResponse is always 'OK' now.",
+        "externalDocs": {
+          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+        },
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "https://gist.githubusercontent.com/bpsib/67089b959e4fa898af69fea59ad74bc3/raw/685789e28187c0a15da978b51d436a140d5ea207/BBC-Radio-HLS.m3u"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/StringOK"
+          }
+        },
+        "tags": [
+          "Playback control"
+        ],
+        "operationId": "setPlayerCmdPlaylistUrl"
       }
     },
     "/setPlayerCmd:prev": {
@@ -539,179 +536,103 @@
         "operationId": "setPlayerCmdLoopmode"
       }
     },
-    "/getNewAudioOutputHardwareMode": {
+    "/getStaticIpInfo": {
       "get": {
-        "summary": "Get audio output mode",
-        "description": "JSON Response:\n{\"hardware\":\"2\",\"source\":\"0\",\"audiocast\":\"0\"}\n\nDescription:\nField Description\nhardware Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE\nsource BT source output mode:\n0: disable\n1: active\naudiocast Audio cast output mode:\n0: disable\n1: active",
+        "tags": [
+          "Network"
+        ],
+        "summary": "Get the static IP information",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStaticIpInfo\n\nIf the WiiM device is configured to use DHCP, the above string values will be empty (see the ethernet related keys).",
         "externalDocs": {
-          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
-          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
         },
-        "parameters": [],
+        "operationId": "getStaticIpInfo",
         "responses": {
           "200": {
             "description": "Successful response",
             "content": {
               "text/html": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "hardware": {
-                      "type": "string",
-                      "description": "Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE",
-                      "example": "2"
-                    },
-                    "source": {
-                      "type": "string",
-                      "description": "BT source output mode:\n0: disable\n1: active",
-                      "example": "0"
-                    },
-                    "audiocast": {
-                      "type": "string",
-                      "description": "Audio cast output mode:\n0: disable\n1: active",
-                      "example": "0"
-                    }
+                  "$ref": "#/components/schemas/StaticIpInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getStaticIP": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "deprecated": true,
+        "summary": "Query networking status",
+        "description": "Query current networking status",
+        "externalDocs": {
+          "description": "Arylic Developers",
+          "url": "https://developer.arylic.com/httpapi/#http-api"
+        },
+        "operationId": "getStaticIP",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/wlanGetConnectState": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "Get the connection status",
+        "description": "Makes a call to\nhttps://10.10.10.254/httpapi.asp?command=wlanGetConnectState\n\n\nNote the return result is not in json.\n\n\nReturn string:\n\nReturn string Description\n\nPROCESS In progress\n\nPAIRFAIL Wrong password\n\nFAIL Connect fail\n\nOK connected",
+        "externalDocs": {
+          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+        },
+        "operationId": "wlanGetConnectState",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "PROCESS": {
+                    "summary": "In progress",
+                    "value": "PROCESS"
+                  },
+                  "PAIRFAIL": {
+                    "summary": "Wrong password",
+                    "value": "PAIRFAIL"
+                  },
+                  "FAIL": {
+                    "summary": "Connect fail",
+                    "value": "FAIL"
+                  },
+                  "OK": {
+                    "summary": "Connected",
+                    "value": "OK"
                   }
                 }
               }
             }
           }
         },
-        "tags": [
-          "Audio Output Control"
-        ],
-        "operationId": "getNewAudioOutputHardwareMode"
-      }
-    },
-    "/setAudioOutputHardwareMode:{n}": {
-      "get": {
-        "summary": "Set audio output mode",
-        "description": "Field Description\nHardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE\nResponse is 'OK'",
-        "externalDocs": {
-          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
-          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-        },
-        "parameters": [
-          {
-            "name": "n",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "1",
-                "2",
-                "3"
-              ]
-            },
-            "description": "Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/StringOK"
-          }
-        },
-        "tags": [
-          "Audio Output Control"
-        ],
-        "operationId": "setAudioOutputHardwareMode"
-      }
-    },
-    "/getMetaInfo": {
-      "get": {
-        "summary": "Get Current Track Metadata",
-        "description": "JSON Response\n{\n \"metaData\": {\n  \"album\": \"Country Heat\",\n  \"title\": \"Old Dirt Roads\",\n  \"subtitle\": \"\",\n  \"artist\": \"Owen Riegling\",\n  \"albumArtURI \": \"https://m.media-amazon.com/images/I/51iU0odzJwL.jpg\",\n  \"sampleRate \": \"44100\",\n  \"bitDepth\": \"16\",\n  \"bitRate\": \"63\",\n  \"trackId\": \"s6707\",\n }\n}",
-        "externalDocs": {
-          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
-          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "$ref": "#/components/schemas/TrackMetadata"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Track Metadata"
-        ],
-        "operationId": "getMetaInfo"
-      }
-    },
-    "/setPlayerCmd:play:{url}": {
-      "get": {
-        "summary": "Play audio URL",
-        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:play:url\nPlay the URL. URL points to an audio stream address.\nResponse is always 'OK' now",
-        "externalDocs": {
-          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
-          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-        },
-        "parameters": [
-          {
-            "name": "url",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8"
-            },
-            "description": "URL points to an audio stream address"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/StringOK"
-          }
-        },
-        "tags": [
-          "Playback control"
-        ],
-        "operationId": "setPlayerCmdPlayUrl"
-      }
-    },
-    "/setPlayerCmd:playlist:{url}:{index}": {
-      "get": {
-        "summary": "Play audio playlist",
-        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:playlist:url:<index>\n\nPlay the playlist with the URL (URL points to the m3u or ASX playlist\nlink, index is the start index).\n\nResponse is always 'OK' now.",
-        "externalDocs": {
-          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
-          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
-        },
-        "parameters": [
-          {
-            "name": "index",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "url",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "https://gist.githubusercontent.com/bpsib/67089b959e4fa898af69fea59ad74bc3/raw/685789e28187c0a15da978b51d436a140d5ea207/BBC-Radio-HLS.m3u"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/StringOK"
-          }
-        },
-        "tags": [
-          "Playback control"
-        ],
-        "operationId": "setPlayerCmdPlaylistUrl"
+        "parameters": []
       }
     },
     "/EQOn": {
@@ -755,7 +676,7 @@
           }
         },
         "tags": [
-          "EQ"
+          "Equalizer"
         ],
         "operationId": "setEQOn"
       }
@@ -801,7 +722,7 @@
           }
         },
         "tags": [
-          "EQ"
+          "Equalizer"
         ],
         "operationId": "setEQOff"
       }
@@ -826,7 +747,7 @@
           }
         },
         "tags": [
-          "EQ"
+          "Equalizer"
         ],
         "operationId": "getEQStat"
       }
@@ -851,7 +772,7 @@
           }
         },
         "tags": [
-          "EQ"
+          "Equalizer"
         ],
         "operationId": "getEQList"
       }
@@ -932,7 +853,7 @@
           }
         },
         "tags": [
-          "EQ"
+          "Equalizer"
         ]
       }
     },
@@ -1374,6 +1295,85 @@
         "tags": [
           "Presets"
         ]
+      }
+    },
+    "/getNewAudioOutputHardwareMode": {
+      "get": {
+        "summary": "Get audio output mode",
+        "description": "JSON Response:\n{\"hardware\":\"2\",\"source\":\"0\",\"audiocast\":\"0\"}\n\nDescription:\nField Description\nhardware Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE\nsource BT source output mode:\n0: disable\n1: active\naudiocast Audio cast output mode:\n0: disable\n1: active",
+        "externalDocs": {
+          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hardware": {
+                      "type": "string",
+                      "description": "Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE",
+                      "example": "2"
+                    },
+                    "source": {
+                      "type": "string",
+                      "description": "BT source output mode:\n0: disable\n1: active",
+                      "example": "0"
+                    },
+                    "audiocast": {
+                      "type": "string",
+                      "description": "Audio cast output mode:\n0: disable\n1: active",
+                      "example": "0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audio Output Control"
+        ],
+        "operationId": "getNewAudioOutputHardwareMode"
+      }
+    },
+    "/setAudioOutputHardwareMode:{n}": {
+      "get": {
+        "summary": "Set audio output mode",
+        "description": "Field Description\nHardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE\nResponse is 'OK'",
+        "externalDocs": {
+          "description": "HTTP API for WiiM PRODUCTS Version 1.2",
+          "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+        },
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3"
+              ]
+            },
+            "description": "Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/StringOK"
+          }
+        },
+        "tags": [
+          "Audio Output Control"
+        ],
+        "operationId": "setAudioOutputHardwareMode"
       }
     },
     "/startbtdiscovery:3": {
