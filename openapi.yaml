@@ -1894,7 +1894,7 @@ paths:
       responses:
         "200":
           description: Successful response
-  "/setLightOperationBrightConfig:%7B%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7D":
+  "/setLightOperationBrightConfig:%7B%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7D":
     get:
       tags:
         - Other
@@ -1907,7 +1907,21 @@ paths:
         description: WiiM Forums - API for Wiim Amp?
         url: "https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/#post-108841"
       parameters:
-        - name: "n"
+        - name: "s"
+          in: path
+          required: true
+          schema:
+            type: integer
+            default: 0
+          description: "autosense?"
+        - name: "b"
+          in: path
+          required: true
+          schema:
+            type: integer
+            default: 1
+          description: "brightness?"
+        - name: "d"
           in: path
           required: true
           schema:
@@ -1916,7 +1930,7 @@ paths:
               - 0
               - 1
             default: 1
-          description: 1 (on) or 0 (off)
+          description: "disable: 1 (off) or 0 (on)"
       responses:
         "200":
           description: Successful response

@@ -2478,9 +2478,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__setLightOperationBrightConfig:%7B%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7D
+## get__setLightOperationBrightConfig:%7B%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7D
 
-`GET /setLightOperationBrightConfig:%7B%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7D`
+`GET /setLightOperationBrightConfig:%7B%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7D`
 
 *WiiM Ultra enable/disable LCD*
 
@@ -2488,20 +2488,22 @@ Example: https://10.10.10.254/httpapi.asp?command=setLightOperationBrightConfig:
 
 Turns the screen of the WiiM Ultra on or off
 
-<h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7d-parameters">Parameters</h3>
+<h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7d-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|n|path|integer|true|1 (on) or 0 (off)|
+|s|path|integer|true|autosense?|
+|b|path|integer|true|brightness?|
+|d|path|integer|true|disable: 1 (off) or 0 (on)|
 
 #### Enumerated Values
 
 |Parameter|Value|
 |---|---|
-|n|0|
-|n|1|
+|d|0|
+|d|1|
 
-<h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7d-responses">Responses</h3>
+<h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7d-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
