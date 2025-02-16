@@ -1319,7 +1319,7 @@
     "/setPlayerCmd:switchmode:{mode}": {
       "get": {
         "summary": "Switch the source input",
-        "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:switchmode:%s\n\nthe mode can be the text as below:\nline-in (it refers to aux-in too)\nbluetooth\noptical\nudisk\nwifi\n",
+        "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:switchmode:%s\n\nthe mode can be the text as below:\n- line-in (it refers to aux-in too)\n- bluetooth\n- optical\n- udisk\n- wifi\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -2080,6 +2080,402 @@
             "description": "1 (on) or 0 (off)"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:getSlaveList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get a list of LinkPlay available",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:getSlaveList\n\nAllows to obtain the list of the devices using the same communication protocol.\n\nJSON output:\n{\n  \"Slaves\": \"1\",\n  \"Slave_list\": [\n    {\n      \"Name\": \"FA5100_a3f4\",\n      \"Mask\": \"0\",\n      \"Volume\": \"90\",\n      \"Mute\": \"0\",\n      \"Channel\": \"0\",\n      \"Ip\": \"10.10.10.100\",\n      \"Version\": \"WIFIAudio.1.2.2321\"\n    }\n  ]\n}\n\nField\tDescription\nSlaves\tNumber of LinkPlay available\nSlave_list\tInformation about each Sonoé iEast case available\nname\tName\nmask\tCase already in Multi-Room mode, Yes = 1, No = 0\nVolume\tVolume level\nMute\tEnable Mute mode, Yes = 1, Off = 0\nChannel\tWifi channel\nip\tIP address of the LinkPlay Boot\nversion\tfirmware version",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveKickout:{ip}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Removing a LinkPlay from the multi-room",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveKickout:ip\n\nAllows to remove from the multiroom mode a device Based on its IP address.",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveMask:{ip}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Hide the IP address of a LinkPlay",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMask:ip\n\nAllows to integrate a multi-room mode a device Based on its IP address. It is thus rendered invisible from the IP network.",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveUnMask:{ip}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Releasing a Multi-Room Mode",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveUnMask:ip\n\nAllows to release from the multi-room mode based on its IP address. It is thus visible on the IP network.",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveVolume:{ip}:{volume}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Individual volume adjustment",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveVolume:ip:volume\n\nAllows you to adjust the individual volume of the each of the devicees via the IP address of the device and the definition of a value going from from 1 to 100. Note: these settings will be lost when deactivating multi-room mode (kickout)",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setPlayerCmd:slave_vol:{volume}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "General Volume Adjustment",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_vol:volume\n\nAdjusts the overal volume of the multi-room with the definition of a value ranging from 1 to 100. Note: thesis settings will be lost When disabling multi-room mode",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveMute:{ip}:{mute}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Individual muting",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMute:ip:mute\n\nEnables the Mute on each device via the IP address of the device and by enabling (1) and disabling (0)",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setPlayerCmd:slave_mute:mute": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "General activation Mute",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:mute\n\nEnables the Mute on all devices",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setPlayerCmd:slave_mute:unmute": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "General Mute Disabling",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:unmute\n\nTo disable the mute mode overall the",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveChannel:{ip}:{channel}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Individual management of the audio signal Right / left",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveChannel:ip:channel\n\nEnables the Mute on Each of the devices via the IP address of the device and by this parameter to signal right only Channe0 = left and only 1 = Channel signal",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setPlayerCmd:{slave_channel}:{channel}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Overal management of the audio signal Right / left",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_channel:channel\n\nEnables the Mute on Each of devices via the IP address of the device and by this parameter to signal right only Channel= 0 and left signal only 1 = Channel",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveSetDeviceName:{ip}:{s}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Individual definition of the device Name",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveSetDeviceName:%ip:%s\n\nIndividual settings of the name of the square in mode UPnP / Airplay",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:Ungroup": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Disabling Multi-Room",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:Ungroup\n\nDisables the multi-room mode",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getMvRemoteUpdateStartCheck": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Update search",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStartCheck\n\nSearch for the firmware updates available",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getMvRemoteUpdateStart": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Notification updates",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStart\n\nAfter calling the interface, if a new version is available, the device starts to download updates. At the end of the download, the update process starts.\nWARNING: DO NOT POWER OFF DURING THIS PROCESS!!",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getMvRemoteUpdateStatus": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Status of the update process",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStatus\n\nGet the download progress.\n\nValue\tMeaning\n- 10\tUnder review\n- 20  ...\n- 21\tThe verification of the downloaded update file failed\n- 22\tDownloading the update file failed\n- 23\tThe verification of the downloaded update file failed\n- 25\tStart downloading\n- 27\tDownload complete\n- 30\tDownloading and verification completed",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getMvRomBurnPrecent": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Status of the update process",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=getMvRomBurnPrecent\n\nStatus of updating\n\n{\n  \" status \":\" 0 \",\" progress \":\" 50 \"\n}\n\nFields\tMeaning\nstatus\tState\nprogress\tProgress between 0 to 100%",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setSSID:{value}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Change the SSID name of the device",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=setSSID:value\n\nSets a new network name (SSID) of the device in hexadecimal format",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setNetwork:{n}:{password}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Setting the password WIFI",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=setNetwork:1:password\n\nSetting a new password using letters and / or numbers and crossing of setnetwork setting: 1 (Securing WIFI network (WPAPSK) in contrast, setnetwork: 0 (OPEN) makes the network open WIFI.\n\nNo response The system restarts after the validation of the new password.",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/restoreToDefault": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Restoring the factory setting",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=restoreToDefault\n\nTo restore factory settings, erasing defined configurations. The device restarts.",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setPowerWifiDown": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Stop WIFI signal",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=setPowerWifiDown\n\nTurns off the wifi",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setDeviceName:{name}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Setting the name of device",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=setDeviceName:%s\n\nSets the name UPnP, DLNA and Airplay of the device (Hex)",
+        "externalDocs": {
+          "description": "LinkPlayAPI by n4archive",
+          "url": "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+        },
         "responses": {
           "200": {
             "description": "Successful response"

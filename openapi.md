@@ -1562,11 +1562,11 @@ Switch between inputs
 http://10.10.10.254/httpapi.asp?command=setPlayerCmd:switchmode:%s
 
 the mode can be the text as below:
-line-in (it refers to aux-in too)
-bluetooth
-optical
-udisk
-wifi
+- line-in (it refers to aux-in too)
+- bluetooth
+- optical
+- udisk
+- wifi
 
 <h3 id="setplayercmdswitchmode-parameters">Parameters</h3>
 
@@ -2502,6 +2502,494 @@ Turns the screen of the WiiM Ultra on or off
 |n|1|
 
 <h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7d-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:getSlaveList
+
+`GET /multiroom:getSlaveList`
+
+*Get a list of LinkPlay available*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:getSlaveList
+
+Allows to obtain the list of the devices using the same communication protocol.
+
+JSON output:
+{
+  "Slaves": "1",
+  "Slave_list": [
+    {
+      "Name": "FA5100_a3f4",
+      "Mask": "0",
+      "Volume": "90",
+      "Mute": "0",
+      "Channel": "0",
+      "Ip": "10.10.10.100",
+      "Version": "WIFIAudio.1.2.2321"
+    }
+  ]
+}
+
+Field	Description
+Slaves	Number of LinkPlay available
+Slave_list	Information about each Sonoé iEast case available
+name	Name
+mask	Case already in Multi-Room mode, Yes = 1, No = 0
+Volume	Volume level
+Mute	Enable Mute mode, Yes = 1, Off = 0
+Channel	Wifi channel
+ip	IP address of the LinkPlay Boot
+version	firmware version
+
+<h3 id="get__multiroom:getslavelist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:SlaveKickout:{ip}
+
+`GET /multiroom:SlaveKickout:{ip}`
+
+*Removing a LinkPlay from the multi-room*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveKickout:ip
+
+Allows to remove from the multiroom mode a device Based on its IP address.
+
+<h3 id="get__multiroom:slavekickout:{ip}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:SlaveMask:{ip}
+
+`GET /multiroom:SlaveMask:{ip}`
+
+*Hide the IP address of a LinkPlay*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMask:ip
+
+Allows to integrate a multi-room mode a device Based on its IP address. It is thus rendered invisible from the IP network.
+
+<h3 id="get__multiroom:slavemask:{ip}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:SlaveUnMask:{ip}
+
+`GET /multiroom:SlaveUnMask:{ip}`
+
+*Releasing a Multi-Room Mode*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveUnMask:ip
+
+Allows to release from the multi-room mode based on its IP address. It is thus visible on the IP network.
+
+<h3 id="get__multiroom:slaveunmask:{ip}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:SlaveVolume:{ip}:{volume}
+
+`GET /multiroom:SlaveVolume:{ip}:{volume}`
+
+*Individual volume adjustment*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveVolume:ip:volume
+
+Allows you to adjust the individual volume of the each of the devicees via the IP address of the device and the definition of a value going from from 1 to 100. Note: these settings will be lost when deactivating multi-room mode (kickout)
+
+<h3 id="get__multiroom:slavevolume:{ip}:{volume}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setPlayerCmd:slave_vol:{volume}
+
+`GET /setPlayerCmd:slave_vol:{volume}`
+
+*General Volume Adjustment*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_vol:volume
+
+Adjusts the overal volume of the multi-room with the definition of a value ranging from 1 to 100. Note: thesis settings will be lost When disabling multi-room mode
+
+<h3 id="get__setplayercmd:slave_vol:{volume}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:SlaveMute:{ip}:{mute}
+
+`GET /multiroom:SlaveMute:{ip}:{mute}`
+
+*Individual muting*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMute:ip:mute
+
+Enables the Mute on each device via the IP address of the device and by enabling (1) and disabling (0)
+
+<h3 id="get__multiroom:slavemute:{ip}:{mute}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setPlayerCmd:slave_mute:mute
+
+`GET /setPlayerCmd:slave_mute:mute`
+
+*General activation Mute*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:mute
+
+Enables the Mute on all devices
+
+<h3 id="get__setplayercmd:slave_mute:mute-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setPlayerCmd:slave_mute:unmute
+
+`GET /setPlayerCmd:slave_mute:unmute`
+
+*General Mute Disabling*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:unmute
+
+To disable the mute mode overall the
+
+<h3 id="get__setplayercmd:slave_mute:unmute-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:SlaveChannel:{ip}:{channel}
+
+`GET /multiroom:SlaveChannel:{ip}:{channel}`
+
+*Individual management of the audio signal Right / left*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveChannel:ip:channel
+
+Enables the Mute on Each of the devices via the IP address of the device and by this parameter to signal right only Channe0 = left and only 1 = Channel signal
+
+<h3 id="get__multiroom:slavechannel:{ip}:{channel}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setPlayerCmd:{slave_channel}:{channel}
+
+`GET /setPlayerCmd:{slave_channel}:{channel}`
+
+*Overal management of the audio signal Right / left*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_channel:channel
+
+Enables the Mute on Each of devices via the IP address of the device and by this parameter to signal right only Channel= 0 and left signal only 1 = Channel
+
+<h3 id="get__setplayercmd:{slave_channel}:{channel}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:SlaveSetDeviceName:{ip}:{s}
+
+`GET /multiroom:SlaveSetDeviceName:{ip}:{s}`
+
+*Individual definition of the device Name*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveSetDeviceName:%ip:%s
+
+Individual settings of the name of the square in mode UPnP / Airplay
+
+<h3 id="get__multiroom:slavesetdevicename:{ip}:{s}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__multiroom:Ungroup
+
+`GET /multiroom:Ungroup`
+
+*Disabling Multi-Room*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:Ungroup
+
+Disables the multi-room mode
+
+<h3 id="get__multiroom:ungroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getMvRemoteUpdateStartCheck
+
+`GET /getMvRemoteUpdateStartCheck`
+
+*Update search*
+
+Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStartCheck
+
+Search for the firmware updates available
+
+<h3 id="get__getmvremoteupdatestartcheck-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getMvRemoteUpdateStart
+
+`GET /getMvRemoteUpdateStart`
+
+*Notification updates*
+
+Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStart
+
+After calling the interface, if a new version is available, the device starts to download updates. At the end of the download, the update process starts.
+WARNING: DO NOT POWER OFF DURING THIS PROCESS!!
+
+<h3 id="get__getmvremoteupdatestart-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getMvRemoteUpdateStatus
+
+`GET /getMvRemoteUpdateStatus`
+
+*Status of the update process*
+
+Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStatus
+
+Get the download progress.
+
+Value	Meaning
+- 10	Under review
+- 20  ...
+- 21	The verification of the downloaded update file failed
+- 22	Downloading the update file failed
+- 23	The verification of the downloaded update file failed
+- 25	Start downloading
+- 27	Download complete
+- 30	Downloading and verification completed
+
+<h3 id="get__getmvremoteupdatestatus-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getMvRomBurnPrecent
+
+`GET /getMvRomBurnPrecent`
+
+*Status of the update process*
+
+Example: http://10.10.10.254/httpapi.asp?command=getMvRomBurnPrecent
+
+Status of updating
+
+{
+  " status ":" 0 "," progress ":" 50 "
+}
+
+Fields	Meaning
+status	State
+progress	Progress between 0 to 100%
+
+<h3 id="get__getmvromburnprecent-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setSSID:{value}
+
+`GET /setSSID:{value}`
+
+*Change the SSID name of the device*
+
+Example: http://10.10.10.254/httpapi.asp?command=setSSID:value
+
+Sets a new network name (SSID) of the device in hexadecimal format
+
+<h3 id="get__setssid:{value}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setNetwork:{n}:{password}
+
+`GET /setNetwork:{n}:{password}`
+
+*Setting the password WIFI*
+
+Example: http://10.10.10.254/httpapi.asp?command=setNetwork:1:password
+
+Setting a new password using letters and / or numbers and crossing of setnetwork setting: 1 (Securing WIFI network (WPAPSK) in contrast, setnetwork: 0 (OPEN) makes the network open WIFI.
+
+No response The system restarts after the validation of the new password.
+
+<h3 id="get__setnetwork:{n}:{password}-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__restoreToDefault
+
+`GET /restoreToDefault`
+
+*Restoring the factory setting*
+
+Example: http://10.10.10.254/httpapi.asp?command=restoreToDefault
+
+To restore factory settings, erasing defined configurations. The device restarts.
+
+<h3 id="get__restoretodefault-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setPowerWifiDown
+
+`GET /setPowerWifiDown`
+
+*Stop WIFI signal*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPowerWifiDown
+
+Turns off the wifi
+
+<h3 id="get__setpowerwifidown-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__setDeviceName:{name}
+
+`GET /setDeviceName:{name}`
+
+*Setting the name of device*
+
+Example: http://10.10.10.254/httpapi.asp?command=setDeviceName:%s
+
+Sets the name UPnP, DLNA and Airplay of the device (Hex)
+
+<h3 id="get__setdevicename:{name}-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
