@@ -69,7 +69,7 @@ Please tell us what the command does AND where you found it.
 In no particular order:
 
 * [x] <https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf>
-* [ ] <https://github.com/DanBrezeanu/wiim-extended-http-api>
+* [x] <https://github.com/DanBrezeanu/wiim-extended-http-api>
 * [ ] <https://github.com/n4archive/LinkPlayAPI/blob/master/api.md>
 * [ ] <https://developer.arylic.com/httpapi/#http-api>
 * [ ] <https://forum.arylic.com/t/api-files-for-developers/1379>
