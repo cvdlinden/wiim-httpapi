@@ -9,7 +9,9 @@ First I'll gather all endpoints, then test and elaborate the documentation.
 Idea: Use [Swagger UI](https://swagger.io/tools/swagger-ui/) to document the Linkplay HTTP API, that is used by WiiM.
 Swagger/OpenAPI has a nice documentation format, with a 'try it out' option so you can test to see what the responses are.
 
-![Swagger UI](./assets/Screenshot%202025-02-08%20030405.jpg)
+![Swagger UI](./assets/Screenshot%202025-02-16%20022820.png)
+
+![getStatusEx example](./assets/Screenshot%202025-02-16%20023118.png)
 
 Note: The WiiM device has a self-signed certificate, which is deemed unsafe by any modern browser. Therefore this solution uses a reverse proxy that ignores the certificate.
 
