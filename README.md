@@ -103,7 +103,17 @@ nodemon
 
 Note: You'll find an openapi.json file as well in this source. It isn't used and only here for reference purposes.
 
-### OpenAPI.yaml to OpenAPI.json
+### Generate OpenAPI JSON and MD
+
+Run the following command to generate the JSON and MD file in one go:
+
+```shell
+npm run generate
+```
+
+Note: You will need the following npm modules in order to run the ```generate``` script.
+
+#### OpenAPI.yaml to OpenAPI.json
 
 Use ```npm run openapi2json``` to create the JSON version of the OpenAPI documentation. It will create/overwrite the [openapi.json](openapi.json) file!
 
@@ -113,9 +123,9 @@ Uses a global [yamljs](https://www.npmjs.com/package/yamljs) install:
 npm install -g yamljs
 ```
 
-### OpenAPI.yaml to OpenAPI.md (Markdown)
+#### OpenAPI.yaml to OpenAPI.md (Markdown)
 
-Use ```npm run openapi2md``` to create an Markdown version of the YAML file. Then see [openapi.md](openapi.md).
+Use ```npm run openapi2md``` to create an Markdown version of the YAML file. It will create/overwrite the [openapi.md](openapi.md) file!
 
 Uses a global [Widdershins](https://www.npmjs.com/package/widdershins) install:
 
