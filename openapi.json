@@ -2052,6 +2052,40 @@
           }
         }
       }
+    },
+    "/setLightOperationBrightConfig:%7B%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7D": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "WiiM Ultra enable/disable LCD",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=setLightOperationBrightConfig:{%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:1}\n\nTurns the screen of the WiiM Ultra on or off",
+        "externalDocs": {
+          "description": "WiiM Forums - API for Wiim Amp?",
+          "url": "https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/#post-108841"
+        },
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "default": 1
+            },
+            "description": "1 (on) or 0 (off)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
     }
   },
   "externalDocs": {

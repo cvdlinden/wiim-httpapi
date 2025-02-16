@@ -2478,6 +2478,39 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
+## get__setLightOperationBrightConfig:%7B%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7D
+
+`GET /setLightOperationBrightConfig:%7B%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7D`
+
+*WiiM Ultra enable/disable LCD*
+
+Example: https://10.10.10.254/httpapi.asp?command=setLightOperationBrightConfig:{%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:1}
+
+Turns the screen of the WiiM Ultra on or off
+
+<h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7d-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|1 (on) or 0 (off)|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|0|
+|n|1|
+
+<h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:{n}%7d-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 # Schemas
 
 <h2 id="tocS_DeviceStatus">DeviceStatus</h2>
