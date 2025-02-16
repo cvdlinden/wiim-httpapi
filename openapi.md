@@ -2478,7 +2478,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__setLightOperationBrightConfig:%7B%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7D
+## setLightOperationBrightConfig
+
+<a id="opIdsetLightOperationBrightConfig"></a>
 
 `GET /setLightOperationBrightConfig:%7B%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7D`
 
@@ -2488,7 +2490,7 @@ Example: https://10.10.10.254/httpapi.asp?command=setLightOperationBrightConfig:
 
 Turns the screen of the WiiM Ultra on or off
 
-<h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7d-parameters">Parameters</h3>
+<h3 id="setlightoperationbrightconfig-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2503,7 +2505,7 @@ Turns the screen of the WiiM Ultra on or off
 |d|0|
 |d|1|
 
-<h3 id="get__setlightoperationbrightconfig:%7b%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7d-responses">Responses</h3>
+<h3 id="setlightoperationbrightconfig-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|

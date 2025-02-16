@@ -2064,6 +2064,7 @@
           "description": "WiiM Forums - API for Wiim Amp?",
           "url": "https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/#post-108841"
         },
+        "operationId": "setLightOperationBrightConfig",
         "parameters": [
           {
             "name": "s",
