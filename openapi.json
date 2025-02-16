@@ -60,6 +60,10 @@
     {
       "name": "Bluetooth",
       "description": "Get and set Bluetooth settings"
+    },
+    {
+      "name": "Other",
+      "description": "Existing commands, purpose unkown. To research further..."
     }
   ],
   "paths": {
@@ -479,12 +483,12 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "enum": [
-                "0",
-                "1"
+                0,
+                1
               ],
-              "default": "1"
+              "default": 1
             },
             "description": "Mute: n=1\nUnmute: n=0"
           }
@@ -503,7 +507,7 @@
     "/setPlayerCmd:loopmode:{n}": {
       "get": {
         "summary": "Loop mode set",
-        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:loopmode:n\n\nn = \n0 - Sequence, no loop\n1 - Single loop\n2 - Shuffle loop\n-1 - Sequence loop\n",
+        "description": "https://10.10.10.254/httpapi.asp?command=setPlayerCmd:loopmode:n\n\nn = \n- -1: ...\n- 0: Shuffle disabled, Repeat enabled - loop\n- 1: Shuffle disabled, Repeat enabled - loop once\n- 2: Shuffle enabled, Repeat enabled - loop\n- 3: Shuffle enabled, Repeat disabled\n- 4: Shuffle disabled, Repeat disabled\n- 5: Shuffle enabled, Repeat enabled - loop once\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -514,15 +518,19 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "enum": [
-                "0",
-                "1",
-                "2",
-                "-1"
-              ]
+                -1,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "default": 4
             },
-            "description": "0 Sequence, no loop\n1 Single loop\n2 Shuffle loop\n-1 Sequence loop"
+            "description": "- -1: ...\n- 0: Shuffle disabled, Repeat enabled - loop\n- 1: Shuffle disabled, Repeat enabled - loop once\n- 2: Shuffle enabled, Repeat enabled - loop\n- 3: Shuffle enabled, Repeat disabled\n- 4: Shuffle disabled, Repeat disabled\n- 5: Shuffle enabled, Repeat enabled - loop once"
           }
         ],
         "responses": {
@@ -635,6 +643,57 @@
         "parameters": []
       }
     },
+    "/setWlanStaticIp:{IpAddress}:{GatewayIp}:{DnsServerIp}": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "Set static WLAN network config",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=setWlanStaticIp:ipAddr=192.168.1.100/24:gateWay=192.168.1.1:dnsServer=8.8.8.8\n\nKeyword args:\n- ipAddr: Static IP address to set + netmask\n- gateWay: Gateway\n- dnsServer: The DNS Server (default: 8.8.8.8)",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "setWlanStaticIp",
+        "parameters": [
+          {
+            "name": "IpAddress",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Static IP address to set + netmask",
+            "example": "192.168.0.123/24"
+          },
+          {
+            "name": "GatewayIp",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "192.168.0.1",
+            "description": "Gateway IP address"
+          },
+          {
+            "name": "DnsServerIp",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The DNS Server (default: 8.8.8.8)",
+            "example": "8.8.8.8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/StringOK"
+          }
+        }
+      }
+    },
     "/EQOn": {
       "get": {
         "summary": "Turn on the EQ",
@@ -737,7 +796,7 @@
         },
         "parameters": [],
         "responses": {
-          "222": {
+          "200": {
             "description": "Default response",
             "content": {
               "text/html": {
@@ -987,6 +1046,76 @@
         ]
       }
     },
+    "/LED_SWITCH_SET:{n}": {
+      "get": {
+        "summary": "Turn on/off status LED (\"Status Light\" option from app)",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=LED_SWITCH_SET:0\n\nObservations:\n- Value is either 1 (on) or 0 (off)",
+        "tags": [
+          "Device control"
+        ],
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "setLedSwitch",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "default": 1
+            },
+            "description": "1 (on) or 0 (off)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/StringOK"
+          }
+        }
+      }
+    },
+    "/Button_Enable_SET:{n}": {
+      "get": {
+        "summary": "Turn on/off touch controls",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=Button_Enable_SET:0\n\nObservations:\n- Value is either 1 (on) or 0 (off)",
+        "tags": [
+          "Device control"
+        ],
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "setTouchControls",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "default": 1
+            },
+            "description": "1 (on) or 0 (off)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/StringOK"
+          }
+        }
+      }
+    },
     "/timeSync:{YYYYMMDDHHMMSS}": {
       "get": {
         "summary": "Get network time",
@@ -1035,11 +1164,11 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "enum": [
-                "0",
-                "1",
-                "2"
+                0,
+                1,
+                2
               ]
             },
             "description": "The alarm clock number\n\ncurrently support max 3 alarm\n"
@@ -1049,14 +1178,14 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "enum": [
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5"
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
               ]
             },
             "description": "The alarm trigger\n\n\n0 cancel the alarm, for example: setAlarmClock:n:0\n\n1 once, day should be YYYYMMDD\n\n2 every day\n\n3 every week, day should be 2 bytes (00\"~\"06\"), means from Sunday to\nSaturday.\n\n4 every week, day should be 2 bytes, the bit 0 to bit 6 means the\neffect, for example,\n\n\"7F\" means every day in week, \"01\" means only Sunday\n\n5 every month, day should be 2 bytes (\"01\"~\"31\")\n"
@@ -1066,11 +1195,11 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "enum": [
-                "0",
-                "1",
-                "2"
+                0,
+                1,
+                2
               ]
             },
             "description": "The action\n\n0 shell execute\n1 playback or ring\n2 stop playback\n"
@@ -1133,13 +1262,13 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "enum": [
-                "0",
-                "1",
-                "2"
+                0,
+                1,
+                2
               ],
-              "default": ""
+              "default": 0
             },
             "description": "The alarm clock number"
           }
@@ -1150,7 +1279,9 @@
             "description": "Default response",
             "content": {
               "text/html": {
-                "schema": {}
+                "schema": {
+                  "type": "object"
+                }
               }
             }
           }
@@ -1240,21 +1371,22 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "enum": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12"
-              ]
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "default": 1
             },
             "description": "Preset number"
           }
@@ -1355,11 +1487,11 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "enum": [
-                "1",
-                "2",
-                "3"
+                1,
+                2,
+                3
               ]
             },
             "description": "Hardware Interface output mode:\n1: AUDIO_OUTPUT_SPDIF_MODE\n2: AUDIO_OUTPUT_AUX_MODE\n3: AUDIO_OUTPUT_COAX_MODE"
@@ -1374,6 +1506,140 @@
           "Audio Output Control"
         ],
         "operationId": "setAudioOutputHardwareMode"
+      }
+    },
+    "/getSpdifOutSwitchDelayMs": {
+      "get": {
+        "summary": "Get SPDIF sample rate switch latency",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=getSpdifOutSwitchDelayMs\n\nObservations:\n- This value only makes sense if the output interface is SPDIF (optical out).\n- Value can be retrieved even if output is not SPDIF",
+        "tags": [
+          "Audio Output Control"
+        ],
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getSpdifOutSwitchDelayMs",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "integer",
+                  "description": "milliseconds",
+                  "example": 800
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/setSpdifOutSwitchDelayMs:{Delay}": {
+      "get": {
+        "summary": "Set SPDIF sample rate switch latency",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=setSpdifOutSwitchDelayMs:800\n\nObservations:\n- Delay is in milliseconds\n- Value can be set even if output is not SPDIF\n- Delay is upper bound to 3000 milliseconds",
+        "tags": [
+          "Audio Output Control"
+        ],
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "setSpdifOutSwitchDelayMs",
+        "parameters": [
+          {
+            "name": "Delay",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The delay in milliseconds"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/StringOK"
+          }
+        }
+      }
+    },
+    "/getChannelBalance": {
+      "get": {
+        "summary": "Get left/right channel balance",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=getChannelBalance\n\nObservations:\n- The value will be a number ranging from -1.0 (fully panned left) to 1.0 (fully panned right).",
+        "tags": [
+          "Audio Output Control"
+        ],
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getChannelBalance",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "description": "-1.0 to 1.0, where 0.0 is centered",
+                  "example": "0.0"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/setChannelBalance:{n}": {
+      "get": {
+        "summary": "Set left/right channel balance",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=setChannelBalance:0\n\nObservations:\n- The value must be a number ranging from -1.0 (fully panned left) to 1.0 (fully panned right).",
+        "tags": [
+          "Audio Output Control"
+        ],
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "setChannelBalance",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Balance from -1.0 (left) to 1.0 (right)",
+            "example": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "OK": {
+                    "summary": "Response OK",
+                    "value": "OK"
+                  },
+                  "Failed": {
+                    "summary": "Response Failed",
+                    "value": "Failed"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/startbtdiscovery:3": {
@@ -1566,6 +1832,223 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/getMvRemoteSilenceUpdateTime": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getNetworkPreferDNS": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getWlanBandConfig": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getWlanRoamConfig": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getIPV6Enable": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getSpdifOutMaxCap": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getCoaxOutMaxCap": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/GetFadeFeature": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getAuxVoltageSupportList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/audio_cast:get_speaker_list": {
+      "get": {
+        "deprecated": true,
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getSoundCardModeSupportList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getActiveSoundCardOutputMode": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "...",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
           }
         }
       }

@@ -557,7 +557,7 @@ play.
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|n|path|string|true|Mute: n=1|
+|n|path|integer|true|Mute: n=1|
 
 #### Detailed descriptions
 
@@ -600,32 +600,41 @@ This operation does not require authentication
 https://10.10.10.254/httpapi.asp?command=setPlayerCmd:loopmode:n
 
 n = 
-0 - Sequence, no loop
-1 - Single loop
-2 - Shuffle loop
--1 - Sequence loop
+- -1: ...
+- 0: Shuffle disabled, Repeat enabled - loop
+- 1: Shuffle disabled, Repeat enabled - loop once
+- 2: Shuffle enabled, Repeat enabled - loop
+- 3: Shuffle enabled, Repeat disabled
+- 4: Shuffle disabled, Repeat disabled
+- 5: Shuffle enabled, Repeat enabled - loop once
 
 <h3 id="setplayercmdloopmode-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|n|path|string|true|0 Sequence, no loop|
+|n|path|integer|true|- -1: ...|
 
 #### Detailed descriptions
 
-**n**: 0 Sequence, no loop
-1 Single loop
-2 Shuffle loop
--1 Sequence loop
+**n**: - -1: ...
+- 0: Shuffle disabled, Repeat enabled - loop
+- 1: Shuffle disabled, Repeat enabled - loop once
+- 2: Shuffle enabled, Repeat enabled - loop
+- 3: Shuffle enabled, Repeat disabled
+- 4: Shuffle disabled, Repeat disabled
+- 5: Shuffle enabled, Repeat enabled - loop once
 
 #### Enumerated Values
 
 |Parameter|Value|
 |---|---|
+|n|-1|
 |n|0|
 |n|1|
 |n|2|
-|n|-1|
+|n|3|
+|n|4|
+|n|5|
 
 > Example responses
 
@@ -762,6 +771,47 @@ OK connected
 This operation does not require authentication
 </aside>
 
+## setWlanStaticIp
+
+<a id="opIdsetWlanStaticIp"></a>
+
+`GET /setWlanStaticIp:{IpAddress}:{GatewayIp}:{DnsServerIp}`
+
+*Set static WLAN network config*
+
+Example: https://10.10.10.254/httpapi.asp?command=setWlanStaticIp:ipAddr=192.168.1.100/24:gateWay=192.168.1.1:dnsServer=8.8.8.8
+
+Keyword args:
+- ipAddr: Static IP address to set + netmask
+- gateWay: Gateway
+- dnsServer: The DNS Server (default: 8.8.8.8)
+
+<h3 id="setwlanstaticip-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|IpAddress|path|string|true|Static IP address to set + netmask|
+|GatewayIp|path|string|true|Gateway IP address|
+|DnsServerIp|path|string|true|The DNS Server (default: 8.8.8.8)|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="setwlanstaticip-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-equalizer">Equalizer</h1>
 
 Get and set equalizer settings
@@ -861,7 +911,7 @@ JSON Response:
 
 > Example responses
 
-> 222 Response
+> 200 Response
 
 ```
 null
@@ -871,7 +921,7 @@ null
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|222|Unknown|Default response|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
 <h3 id="geteqstat-responseschema">Response Schema</h3>
 
@@ -1128,6 +1178,94 @@ Return the seconds
 This operation does not require authentication
 </aside>
 
+## setLedSwitch
+
+<a id="opIdsetLedSwitch"></a>
+
+`GET /LED_SWITCH_SET:{n}`
+
+*Turn on/off status LED ("Status Light" option from app)*
+
+Example: https://10.10.10.254/httpapi.asp?command=LED_SWITCH_SET:0
+
+Observations:
+- Value is either 1 (on) or 0 (off)
+
+<h3 id="setledswitch-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|1 (on) or 0 (off)|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|0|
+|n|1|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="setledswitch-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTouchControls
+
+<a id="opIdsetTouchControls"></a>
+
+`GET /Button_Enable_SET:{n}`
+
+*Turn on/off touch controls*
+
+Example: https://10.10.10.254/httpapi.asp?command=Button_Enable_SET:0
+
+Observations:
+- Value is either 1 (on) or 0 (off)
+
+<h3 id="settouchcontrols-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|1 (on) or 0 (off)|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|0|
+|n|1|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="settouchcontrols-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-alarm-clock">Alarm clock</h1>
 
 Get and set alarm clock
@@ -1239,9 +1377,9 @@ url: the shell path or playback url, should less than 256 bytes
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|n|path|string|true|The alarm clock number|
-|trig|path|string|true|The alarm trigger|
-|op|path|string|true|The action|
+|n|path|integer|true|The alarm clock number|
+|trig|path|integer|true|The alarm trigger|
+|op|path|integer|true|The action|
 |time|path|string|true|should be HHMMSS, in UTC|
 |day|path|string|true|if trigger is 0 or 2, no need to set.|
 |url|path|string|true|The shell path or playback url, should less than 256 bytes|
@@ -1349,7 +1487,7 @@ n: 0~2, currently support max 3 alarm
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|n|path|string|true|The alarm clock number|
+|n|path|integer|true|The alarm clock number|
 
 #### Enumerated Values
 
@@ -1364,7 +1502,7 @@ n: 0~2, currently support max 3 alarm
 > 200 Response
 
 ```
-null
+{}
 ```
 
 <h3 id="getalarmclock-responses">Responses</h3>
@@ -1489,7 +1627,7 @@ http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|n|path|string|true|Preset number|
+|n|path|integer|true|Preset number|
 
 #### Enumerated Values
 
@@ -1676,7 +1814,7 @@ Response is 'OK'
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|n|path|string|true|Hardware Interface output mode:|
+|n|path|integer|true|Hardware Interface output mode:|
 
 #### Detailed descriptions
 
@@ -1702,6 +1840,149 @@ Response is 'OK'
 ```
 
 <h3 id="setaudiooutputhardwaremode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getSpdifOutSwitchDelayMs
+
+<a id="opIdgetSpdifOutSwitchDelayMs"></a>
+
+`GET /getSpdifOutSwitchDelayMs`
+
+*Get SPDIF sample rate switch latency*
+
+Example: https://10.10.10.254/httpapi.asp?command=getSpdifOutSwitchDelayMs
+
+Observations:
+- This value only makes sense if the output interface is SPDIF (optical out).
+- Value can be retrieved even if output is not SPDIF
+
+> Example responses
+
+> 200 Response
+
+```
+800
+```
+
+<h3 id="getspdifoutswitchdelayms-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSpdifOutSwitchDelayMs
+
+<a id="opIdsetSpdifOutSwitchDelayMs"></a>
+
+`GET /setSpdifOutSwitchDelayMs:{Delay}`
+
+*Set SPDIF sample rate switch latency*
+
+Example: https://10.10.10.254/httpapi.asp?command=setSpdifOutSwitchDelayMs:800
+
+Observations:
+- Delay is in milliseconds
+- Value can be set even if output is not SPDIF
+- Delay is upper bound to 3000 milliseconds
+
+<h3 id="setspdifoutswitchdelayms-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|Delay|path|integer|true|The delay in milliseconds|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="setspdifoutswitchdelayms-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getChannelBalance
+
+<a id="opIdgetChannelBalance"></a>
+
+`GET /getChannelBalance`
+
+*Get left/right channel balance*
+
+Example: https://10.10.10.254/httpapi.asp?command=getChannelBalance
+
+Observations:
+- The value will be a number ranging from -1.0 (fully panned left) to 1.0 (fully panned right).
+
+> Example responses
+
+> 200 Response
+
+```
+"0.0"
+```
+
+<h3 id="getchannelbalance-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setChannelBalance
+
+<a id="opIdsetChannelBalance"></a>
+
+`GET /setChannelBalance:{n}`
+
+*Set left/right channel balance*
+
+Example: https://10.10.10.254/httpapi.asp?command=setChannelBalance:0
+
+Observations:
+- The value must be a number ranging from -1.0 (fully panned left) to 1.0 (fully panned right).
+
+<h3 id="setchannelbalance-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|number|true|Balance from -1.0 (left) to 1.0 (right)|
+
+> Example responses
+
+> Successful response
+
+```
+"OK"
+```
+
+```
+"Failed"
+```
+
+<h3 id="setchannelbalance-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -1972,6 +2253,226 @@ Status Code **200**
 |result|1|
 |result|2|
 |result|3|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="linkplay-wiim-http-api-other">Other</h1>
+
+Existing commands, purpose unkown. To research further...
+
+## get__getMvRemoteSilenceUpdateTime
+
+`GET /getMvRemoteSilenceUpdateTime`
+
+*...*
+
+...
+
+<h3 id="get__getmvremotesilenceupdatetime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getNetworkPreferDNS
+
+`GET /getNetworkPreferDNS`
+
+*...*
+
+...
+
+<h3 id="get__getnetworkpreferdns-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getWlanBandConfig
+
+`GET /getWlanBandConfig`
+
+*...*
+
+...
+
+<h3 id="get__getwlanbandconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getWlanRoamConfig
+
+`GET /getWlanRoamConfig`
+
+*...*
+
+...
+
+<h3 id="get__getwlanroamconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getIPV6Enable
+
+`GET /getIPV6Enable`
+
+*...*
+
+...
+
+<h3 id="get__getipv6enable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getSpdifOutMaxCap
+
+`GET /getSpdifOutMaxCap`
+
+*...*
+
+...
+
+<h3 id="get__getspdifoutmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getCoaxOutMaxCap
+
+`GET /getCoaxOutMaxCap`
+
+*...*
+
+...
+
+<h3 id="get__getcoaxoutmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__GetFadeFeature
+
+`GET /GetFadeFeature`
+
+*...*
+
+...
+
+<h3 id="get__getfadefeature-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getAuxVoltageSupportList
+
+`GET /getAuxVoltageSupportList`
+
+*...*
+
+...
+
+<h3 id="get__getauxvoltagesupportlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__audio_cast:get_speaker_list
+
+`GET /audio_cast:get_speaker_list`
+
+*...*
+
+...
+
+<h3 id="get__audio_cast:get_speaker_list-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getSoundCardModeSupportList
+
+`GET /getSoundCardModeSupportList`
+
+*...*
+
+...
+
+<h3 id="get__getsoundcardmodesupportlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## get__getActiveSoundCardOutputMode
+
+`GET /getActiveSoundCardOutputMode`
+
+*...*
+
+...
+
+<h3 id="get__getactivesoundcardoutputmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
