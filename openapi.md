@@ -970,13 +970,13 @@ null
 This operation does not require authentication
 </aside>
 
-## EQGetBand
+## getEQBand
 
-<a id="opIdEQGetBand"></a>
+<a id="opIdgetEQBand"></a>
 
 `GET /EQGetBand`
 
-*Get the EQ band*
+*Get the current EQ band*
 
 http://10.10.10.254/httpapi.asp?command=EQGetBand
 
@@ -992,13 +992,13 @@ Response:
 null
 ```
 
-<h3 id="eqgetband-responses">Responses</h3>
+<h3 id="geteqband-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
-<h3 id="eqgetband-responseschema">Response Schema</h3>
+<h3 id="geteqband-responseschema">Response Schema</h3>
 
 <aside class="success">
 This operation does not require authentication

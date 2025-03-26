@@ -731,7 +731,7 @@ paths:
       operationId: getEQList
   /EQGetBand:
     get:
-      summary: Get the EQ band
+      summary: Get the current EQ band
       description: |
         http://10.10.10.254/httpapi.asp?command=EQGetBand
 
@@ -750,7 +750,7 @@ paths:
               schema: {}
       tags:
         - Equalizer
-      operationId: EQGetBand
+      operationId: getEQBand
   "/EQLoad:{name}":
     get:
       summary: Set the specific EQ with name
