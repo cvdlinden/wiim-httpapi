@@ -970,6 +970,40 @@ null
 This operation does not require authentication
 </aside>
 
+## EQGetBand
+
+<a id="opIdEQGetBand"></a>
+
+`GET /EQGetBand`
+
+*Get the EQ band*
+
+http://10.10.10.254/httpapi.asp?command=EQGetBand
+
+Response:
+
+{"status":"OK","source_name":"wifi","EQStat":"Off","Name":"Rock","pluginURI":"http://moddevices.com/plugins/caps/Eq10HP","channelMode":"Stereo","EQBand":[{"index":0,"param_name":"band31hz","value":71},{"index":1,"param_name":"band63hz","value":67},{"index":2,"param_name":"band125hz","value":63},{"index":3,"param_name":"band250hz","value":56},{"index":4,"param_name":"band500hz","value":48},{"index":5,"param_name":"band1khz","value":46},{"index":6,"param_name":"band2khz","value":52},{"index":7,"param_name":"band4khz","value":60},{"index":8,"param_name":"band8khz","value":65},{"index":9,"param_name":"band16khz","value":56}]}
+
+> Example responses
+
+> 200 Response
+
+```
+null
+```
+
+<h3 id="eqgetband-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
+
+<h3 id="eqgetband-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## loadEQByName
 
 <a id="opIdloadEQByName"></a>
