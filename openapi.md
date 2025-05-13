@@ -1601,6 +1601,7 @@ the mode can be the text as below:
 - optical
 - udisk
 - wifi
+- HDMI
 
 <h3 id="setplayercmdswitchmode-parameters">Parameters</h3>
 
@@ -1617,6 +1618,7 @@ the mode can be the text as below:
 |mode|optical|
 |mode|udisk|
 |mode|wifi|
+|mode|HDMI|
 
 > Example responses
 

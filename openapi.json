@@ -1344,7 +1344,7 @@
     "/setPlayerCmd:switchmode:{mode}": {
       "get": {
         "summary": "Switch the source input",
-        "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:switchmode:%s\n\nthe mode can be the text as below:\n- line-in (it refers to aux-in too)\n- bluetooth\n- optical\n- udisk\n- wifi\n",
+        "description": "http://10.10.10.254/httpapi.asp?command=setPlayerCmd:switchmode:%s\n\nthe mode can be the text as below:\n- line-in (it refers to aux-in too)\n- bluetooth\n- optical\n- udisk\n- wifi\n- HDMI\n",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1361,7 +1361,8 @@
                 "bluetooth",
                 "optical",
                 "udisk",
-                "wifi"
+                "wifi",
+                "HDMI"
               ]
             }
           }

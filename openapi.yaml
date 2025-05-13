@@ -1250,6 +1250,7 @@ paths:
         - optical
         - udisk
         - wifi
+        - HDMI
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -1265,6 +1266,7 @@ paths:
               - optical
               - udisk
               - wifi
+              - HDMI
       operationId: setPlayerCmdSwitchMode
       responses:
         "200":
