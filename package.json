@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/cvdlinden/wiim-httpapi#readme",
   "dependencies": {
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "swagger-ui-express": "^5.0.1",
     "yamljs": "^0.3.0"
   }
