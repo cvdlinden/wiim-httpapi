@@ -26,7 +26,7 @@ Note: The WiiM device has a self-signed certificate, which is deemed unsafe by a
    or download the ZIP file and unpack to a folder
 2. Do an ```npm install``` to install the required packages
 3. Copy the ```config-sample.yaml``` file to ```config.yaml```
-4. Edit ```config.yaml``` in your favorite text editor and replace the IP-address with the address of your WiiM device.  
+4. Edit ```config.yaml``` in your favorite text editor and replace the IP-address(es) with the actual ip address(es) of your WiiM device(s).  
    > You can find your IP-address in the WiiM Home app > Devices > Settings > Network Status
 5. Run ```node .\index.js```
 6. You will find the interactive documentation at <http://localhost:3000/>

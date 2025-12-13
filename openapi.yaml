@@ -29,7 +29,7 @@ info:
 
 servers:
   - url: "http://localhost:3000/proxy"
-    description: Reverse proxy to access the device. See the README for more information.
+    description: Reverse proxy to access the device. The actual devices are set using config.yaml. Please see the README for more information.
 
 tags:
   - name: Generic
