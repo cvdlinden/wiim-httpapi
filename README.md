@@ -118,10 +118,10 @@ Note: You will need the following npm modules in order to run the ```generate```
 
 Use ```npm run openapi2json``` to create the JSON version of the OpenAPI documentation. It will create/overwrite the [openapi.json](openapi.json) file!
 
-Uses a global [yamljs](https://www.npmjs.com/package/yamljs) install:
+Uses a global [js-yaml](https://www.npmjs.com/package/js-yaml) install:
 
 ```shell
-npm install -g yamljs
+npm install -g js-yaml
 ```
 
 #### OpenAPI.yaml to OpenAPI.md (Markdown)
