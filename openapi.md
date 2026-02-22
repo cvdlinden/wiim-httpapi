@@ -120,6 +120,38 @@ device actually reports.
 This operation does not require authentication
 </aside>
 
+## getDebugInfo
+
+<a id="opIdgetDebugInfo"></a>
+
+`GET /getDebugInfo`
+
+*Get device debug information*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=getDebugInfo
+
+Retrieves debug information about a connected device. The output may or may not be complete or differ from what the device actually reports.
+
+The documented output may or may not be complete or differ from what the device actually reports.
+
+> Example responses
+
+> 200 Response
+
+```
+{"system_ready":"1","slave_status":"0","slave_playing":"0","slave_num":"0","slave_latency":"0","slave_default_latency":"0","connecting_type":"0","play_mode":"31","plm_notify_flag":"0","play_status":"0","bt_play_status":"1","spotify_play_status":"1","capture_play_status":"2","time_sync_ready":"1","asr_ongoing":"0","asr_ready":"1","asr_region":"en_us","asr_language":"en_us","asr_pause_request":"0","alexa_response_status":"0","pause_flag_for_alexa":"0","priv_languages":"4588","retail_mode":"0","ezlink_active":"0","device_status":"0","a01controller_crash":"0","asr_tts_crash":"0","mcu_crash":"0","process_deadlock":"0","power_ticks":"119159062","gapless":"0","imuzop_pid":"1","slave":"0","upnp_action_total0":"57","upnp_action_remain0":"0","upnp_action_lost0":"0","upnp_action_total1":"58","upnp_action_remain1":"0","upnp_action_lost1":"0","upnp_action_total2":"58","upnp_action_remain2":"0","upnp_action_lost2":"0","upnp_action_total3":"57","upnp_action_remain3":"0","upnp_action_lost3":"0","wifi_abort_date":"","smplay_skip_silence":"0"}
+```
+
+<h3 id="getdebuginfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[DeviceDebugInfo](#schemadevicedebuginfo)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-track-metadata">Track Metadata</h1>
 
 Get Current Track Metadata
@@ -3388,6 +3420,118 @@ This operation does not require authentication
 |privacy_mode|string|false|none|none|
 |DeviceName|string|false|none|The device UPnP and Airplay friendly name|
 |GroupName|string|false|none|The group name of the device that it belongs to|
+
+<h2 id="tocS_DeviceDebugInfo">DeviceDebugInfo</h2>
+<!-- backwards compatibility -->
+<a id="schemadevicedebuginfo"></a>
+<a id="schema_DeviceDebugInfo"></a>
+<a id="tocSdevicedebuginfo"></a>
+<a id="tocsdevicedebuginfo"></a>
+
+```json
+{
+  "system_ready": "1",
+  "slave_status": "0",
+  "slave_playing": "0",
+  "slave_num": "0",
+  "slave_latency": "0",
+  "slave_default_latency": "0",
+  "connecting_type": "0",
+  "play_mode": "31",
+  "plm_notify_flag": "0",
+  "play_status": "0",
+  "bt_play_status": "1",
+  "spotify_play_status": "1",
+  "capture_play_status": "2",
+  "time_sync_ready": "1",
+  "asr_ongoing": "0",
+  "asr_ready": "1",
+  "asr_region": "en_us",
+  "asr_language": "en_us",
+  "asr_pause_request": "0",
+  "alexa_response_status": "0",
+  "pause_flag_for_alexa": "0",
+  "priv_languages": "4588",
+  "retail_mode": "0",
+  "ezlink_active": "0",
+  "device_status": "0",
+  "a01controller_crash": "0",
+  "asr_tts_crash": "0",
+  "mcu_crash": "0",
+  "process_deadlock": "0",
+  "power_ticks": "119159062",
+  "gapless": "0",
+  "imuzop_pid": "1",
+  "slave": "0",
+  "upnp_action_total0": "57",
+  "upnp_action_remain0": "0",
+  "upnp_action_lost0": "0",
+  "upnp_action_total1": "58",
+  "upnp_action_remain1": "0",
+  "upnp_action_lost1": "0",
+  "upnp_action_total2": "58",
+  "upnp_action_remain2": "0",
+  "upnp_action_lost2": "0",
+  "upnp_action_total3": "57",
+  "upnp_action_remain3": "0",
+  "upnp_action_lost3": "0",
+  "wifi_abort_date": "",
+  "smplay_skip_silence": "0"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|system_ready|string|false|none|Indicates if the system is ready|
+|slave_status|string|false|none|Indicates if the device is a slave in multiroom mode|
+|slave_playing|string|false|none|Indicates if the slave device is currently playing audio in multiroom mode|
+|slave_num|string|false|none|Number of slave devices in multiroom mode|
+|slave_latency|string|false|none|Latency for slave devices in multiroom mode|
+|slave_default_latency|string|false|none|Default latency for slave devices in multiroom mode|
+|connecting_type|string|false|none|Indicates the type of connection for the device|
+|play_mode|string|false|none|Current play mode of the device|
+|plm_notify_flag|string|false|none|Indicates if there is a PLM notification|
+|play_status|string|false|none|Current play status of the device|
+|bt_play_status|string|false|none|Bluetooth play status|
+|spotify_play_status|string|false|none|Spotify play status|
+|capture_play_status|string|false|none|Capture play status|
+|time_sync_ready|string|false|none|Indicates if time synchronization is ready|
+|asr_ongoing|string|false|none|Indicates if ASR is ongoing|
+|asr_ready|string|false|none|Indicates if ASR is ready|
+|asr_region|string|false|none|ASR region setting|
+|asr_language|string|false|none|ASR language setting|
+|asr_pause_request|string|false|none|Indicates if there is a request to pause ASR|
+|alexa_response_status|string|false|none|Status of the response from Alexa|
+|pause_flag_for_alexa|string|false|none|Indicates if there is a pause flag for Alexa|
+|priv_languages|string|false|none|Supported languages for private use, bit mask|
+|retail_mode|string|false|none|Indicates if the device is in retail mode|
+|ezlink_active|string|false|none|Indicates if EZLink is active|
+|device_status|string|false|none|Device status|
+|a01controller_crash|string|false|none|Indicates if there has been a crash in the A01 controller|
+|asr_tts_crash|string|false|none|Indicates if there has been a crash in ASR or TTS|
+|mcu_crash|string|false|none|Indicates if there has been a crash in the MCU|
+|process_deadlock|string|false|none|Indicates if there has been a deadlock in any process|
+|power_ticks|string|false|none|Number of power ticks|
+|gapless|string|false|none|Indicates if gapless playback is enabled|
+|imuzop_pid|string|false|none|PID for IMUZOP process|
+|slave|string|false|none|Indicates if the device is a slave in multiroom mode|
+|upnp_action_total0|string|false|none|Total UPnP actions for zone 0|
+|upnp_action_remain0|string|false|none|Remaining UPnP actions for zone 0|
+|upnp_action_lost0|string|false|none|Lost UPnP actions for zone 0|
+|upnp_action_total1|string|false|none|Total UPnP actions for zone 1|
+|upnp_action_remain1|string|false|none|Remaining UPnP actions for zone 1|
+|upnp_action_lost1|string|false|none|Lost UPnP actions for zone 1|
+|upnp_action_total2|string|false|none|Total UPnP actions for zone 2|
+|upnp_action_remain2|string|false|none|Remaining UPnP actions for zone 2|
+|upnp_action_lost2|string|false|none|Lost UPnP actions for zone 2|
+|upnp_action_total3|string|false|none|Total UPnP actions for zone 3|
+|upnp_action_remain3|string|false|none|Remaining UPnP actions for zone 3|
+|upnp_action_lost3|string|false|none|Lost UPnP actions for zone 3|
+|wifi_abort_date|string|false|none|Date of the last WiFi abort|
+|smplay_skip_silence|string|false|none|Indicates if skip silence is enabled for SMPlay|
 
 <h2 id="tocS_PlayerStatus">PlayerStatus</h2>
 <!-- backwards compatibility -->
