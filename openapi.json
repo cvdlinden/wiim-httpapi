@@ -1428,6 +1428,61 @@
         ]
       }
     },
+    "/MCUKeyShortClick:{n}:{t}": {
+      "get": {
+        "summary": "Play preset with preset number and track number",
+        "description": "http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d:%t\n\n%d: Range is from 1 to 12  \n%t: Track number, start from 1, default is 1\n",
+        "externalDocs": {
+          "description": "Found by dnikles in the issue",
+          "url": "https://github.com/cvdlinden/wiim-httpapi/issues/5"
+        },
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "default": 1
+            },
+            "description": "Preset number"
+          },
+          {
+            "name": "t",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Track number, start from 1, default is 1"
+          }
+        ],
+        "operationId": "getMCUKeyShortClickTrack",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/StringOK"
+          }
+        },
+        "tags": [
+          "Presets"
+        ]
+      }
+    },
     "/getPresetInfo": {
       "get": {
         "summary": "Get Preset List",
