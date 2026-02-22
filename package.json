@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "openapi2md": "widdershins openapi.yaml -o openapi.md --omitHeader -c",
-    "openapi2json": "yaml2json -p openapi.yaml > openapi.json",
+    "openapi2json": "js-yaml openapi.yaml > openapi.json",
     "generate": "npm run openapi2md && npm run openapi2json"
   },
   "repository": {
@@ -23,6 +23,6 @@
   "dependencies": {
     "express": "^5.2.1",
     "swagger-ui-express": "^5.0.1",
-    "yamljs": "^0.3.0"
+    "yaml": "^2.8.2"
   }
 }

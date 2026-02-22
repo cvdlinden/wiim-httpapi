@@ -4,13 +4,16 @@
 // Load required modules
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
-const YAML = require("yamljs");
+const fs = require('fs');
+const YAML = require("yaml");
 const http = require("http");
 const https = require("https");
 
 // Load config and swagger document
-const config = YAML.load("config.yaml");
-const swaggerDocument = YAML.load("openapi.yaml");
+const configFile = fs.readFileSync("config.yaml", "utf8");
+const config = YAML.parse(configFile);
+const swaggerFile = fs.readFileSync("openapi.yaml", "utf8");
+const swaggerDocument = YAML.parse(swaggerFile);
 
 // Normalize device list from config and log configured device hosts
 const devices = config.deviceHosts || [];
