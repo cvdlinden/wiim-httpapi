@@ -1700,6 +1700,61 @@ http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d
 This operation does not require authentication
 </aside>
 
+## getMCUKeyShortClickTrack
+
+<a id="opIdgetMCUKeyShortClickTrack"></a>
+
+`GET /MCUKeyShortClick:{n}:{t}`
+
+*Play preset with preset number and track number*
+
+http://10.10.10.254/httpapi.asp?command=MCUKeyShortClick:%d:%t
+
+%d: Range is from 1 to 12  
+%t: Track number, start from 1, default is 1
+
+<h3 id="getmcukeyshortclicktrack-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Preset number|
+|t|path|integer|true|Track number, start from 1, default is 1|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|1|
+|n|2|
+|n|3|
+|n|4|
+|n|5|
+|n|6|
+|n|7|
+|n|8|
+|n|9|
+|n|10|
+|n|11|
+|n|12|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="getmcukeyshortclicktrack-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## getPresetInfo
 
 <a id="opIdgetPresetInfo"></a>
