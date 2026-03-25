@@ -23,6 +23,6 @@
   "dependencies": {
     "express": "^5.2.1",
     "swagger-ui-express": "^5.0.1",
-    "yaml": "^2.8.2"
+    "yaml": "^2.8.3"
   }
 }
