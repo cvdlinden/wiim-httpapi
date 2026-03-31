@@ -74,6 +74,9 @@ In no particular order:
 * [ ] <https://developer.arylic.com/httpapi/#http-api>
 * [ ] <https://forum.arylic.com/t/api-files-for-developers/1379>
 * [ ] <https://github.com/shumatech/wiimplay/blob/main/wiimdev/wiim.go>
+* [ ] <https://github.com/AndersFluur/LinkPlayApi/blob/master/api.md>
+* [ ] <https://github.com/Velleman/python-linkplay>
+* [ ] <https://github.com/mjcumming/pywiim>
 
 <https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/>
 
