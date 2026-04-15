@@ -1839,6 +1839,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getMvRemoteSilenceUpdateTime
       responses:
         "200":
           description: Successful response
@@ -1852,6 +1853,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getNetworkPreferDNS
       responses:
         "200":
           description: Successful response
@@ -1865,6 +1867,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getWlanBandConfig
       responses:
         "200":
           description: Successful response
@@ -1878,6 +1881,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getWlanRoamConfig
       responses:
         "200":
           description: Successful response
@@ -1891,6 +1895,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getIPV6Enable
       responses:
         "200":
           description: Successful response
@@ -1904,6 +1909,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getSpdifOutMaxCap
       responses:
         "200":
           description: Successful response
@@ -1917,6 +1923,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getCoaxOutMaxCap
       responses:
         "200":
           description: Successful response
@@ -1930,6 +1937,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getFadeFeature
       responses:
         "200":
           description: Successful response
@@ -1943,6 +1951,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getAuxVoltageSupportList
       responses:
         "200":
           description: Successful response
@@ -1957,6 +1966,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: audioCastGetSpeakerList
       responses:
         "200":
           description: Successful response
@@ -1970,6 +1980,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getSoundCardModeSupportList
       responses:
         "200":
           description: Successful response
@@ -1983,6 +1994,7 @@ paths:
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getActiveSoundCardOutputMode
       responses:
         "200":
           description: Successful response
@@ -2066,6 +2078,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomGetSlaveList
       responses:
         "200":
           description: Successful response
@@ -2081,6 +2094,14 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomSlaveKickout
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The IP address of the LinkPlay device to be removed from multi-room mode.
       responses:
         "200":
           description: Successful response
@@ -2096,6 +2117,14 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomSlaveMask
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The IP address of the LinkPlay device to be hidden from the IP network in multi-room mode.
       responses:
         "200":
           description: Successful response
@@ -2111,6 +2140,14 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomSlaveUnMask
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The IP address of the LinkPlay device to be released from multi-room mode.
       responses:
         "200":
           description: Successful response
@@ -2126,6 +2163,22 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomSlaveVolume
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The IP address of the LinkPlay device to adjust the volume for in multi-room mode.
+        - name: "volume"
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          description: The volume level to set for the specified LinkPlay device, ranging from 1 to 100.
       responses:
         "200":
           description: Successful response
@@ -2141,6 +2194,16 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setPlayerCmdSlaveVolume
+      parameters:
+        - name: "volume"
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          description: The overall volume level to set for multi-room mode, ranging from 1 to 100.
       responses:
         "200":
           description: Successful response
@@ -2156,6 +2219,23 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomSlaveMute
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The IP address of the LinkPlay device to adjust the mute status for in multi-room mode.
+        - name: "mute"
+          in: path
+          required: true
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+          description: Mute status to set for the specified LinkPlay device, where 1 enables mute and 0 disables mute.
       responses:
         "200":
           description: Successful response
@@ -2171,6 +2251,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setPlayerCmdSlaveMute
       responses:
         "200":
           description: Successful response
@@ -2186,6 +2267,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setPlayerCmdSlaveUnmute
       responses:
         "200":
           description: Successful response
@@ -2201,6 +2283,23 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomSlaveChannel
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The IP address of the LinkPlay device to adjust the audio channel for in multi-room mode.
+        - name: "channel"
+          in: path
+          required: true
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+          description: Audio channel to set for the specified LinkPlay device, where 0 signals right only and 1 signals left only.
       responses:
         "200":
           description: Successful response
@@ -2216,6 +2315,23 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setPlayerCmdSlaveChannel
+      parameters:
+        - name: "slave_channel"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: IP address of the device
+        - name: "channel"
+          in: path
+          required: true
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+          description: Audio channel to set for all devices in multi-room mode, where 0 signals right only and 1 signals left only.
       responses:
         "200":
           description: Successful response
@@ -2231,6 +2347,20 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomSlaveSetDeviceName
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The IP address of the LinkPlay device to set the device name for in multi-room mode.
+        - name: "s"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The device name to set for the specified LinkPlay device in multi-room mode.
       responses:
         "200":
           description: Successful response
@@ -2246,6 +2376,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: multiroomUngroup
       responses:
         "200":
           description: Successful response
@@ -2261,6 +2392,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: getMvRemoteUpdateStartCheck
       responses:
         "200":
           description: Successful response
@@ -2277,6 +2409,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: getMvRemoteUpdateStart
       responses:
         "200":
           description: Successful response
@@ -2303,6 +2436,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: getMvRemoteUpdateStatus
       responses:
         "200":
           description: Successful response
@@ -2327,6 +2461,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: getMvRomBurnPrecent
       responses:
         "200":
           description: Successful response
@@ -2342,6 +2477,14 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setSSID
+      parameters:
+        - name: "value"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The new SSID name to set for the device, in hexadecimal format.
       responses:
         "200":
           description: Successful response
@@ -2359,6 +2502,23 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setNetwork
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+          description: Network security type, where 1 secures the WIFI network with WPAPSK and 0 makes the network open.
+        - name: "password"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The new password to set for the WIFI network, using letters and/or numbers.
       responses:
         "200":
           description: Successful response
@@ -2374,6 +2534,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: restoreToDefault
       responses:
         "200":
           description: Successful response
@@ -2389,6 +2550,7 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setPowerWifiDown
       responses:
         "200":
           description: Successful response
@@ -2404,6 +2566,14 @@ paths:
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setDeviceName
+      parameters:
+        - name: "name"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The new device name to set for UPnP, DLNA, and Airplay, in hexadecimal format.
       responses:
         "200":
           description: Successful response

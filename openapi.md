@@ -2385,7 +2385,9 @@ This operation does not require authentication
 
 Existing commands, purpose unkown. To research further...
 
-## get__getMvRemoteSilenceUpdateTime
+## getMvRemoteSilenceUpdateTime
+
+<a id="opIdgetMvRemoteSilenceUpdateTime"></a>
 
 `GET /getMvRemoteSilenceUpdateTime`
 
@@ -2393,7 +2395,7 @@ Existing commands, purpose unkown. To research further...
 
 ...
 
-<h3 id="get__getmvremotesilenceupdatetime-responses">Responses</h3>
+<h3 id="getmvremotesilenceupdatetime-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2403,7 +2405,9 @@ Existing commands, purpose unkown. To research further...
 This operation does not require authentication
 </aside>
 
-## get__getNetworkPreferDNS
+## getNetworkPreferDNS
+
+<a id="opIdgetNetworkPreferDNS"></a>
 
 `GET /getNetworkPreferDNS`
 
@@ -2411,7 +2415,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getnetworkpreferdns-responses">Responses</h3>
+<h3 id="getnetworkpreferdns-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2421,7 +2425,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__getWlanBandConfig
+## getWlanBandConfig
+
+<a id="opIdgetWlanBandConfig"></a>
 
 `GET /getWlanBandConfig`
 
@@ -2429,7 +2435,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getwlanbandconfig-responses">Responses</h3>
+<h3 id="getwlanbandconfig-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2439,7 +2445,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__getWlanRoamConfig
+## getWlanRoamConfig
+
+<a id="opIdgetWlanRoamConfig"></a>
 
 `GET /getWlanRoamConfig`
 
@@ -2447,7 +2455,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getwlanroamconfig-responses">Responses</h3>
+<h3 id="getwlanroamconfig-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2457,7 +2465,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__getIPV6Enable
+## getIPV6Enable
+
+<a id="opIdgetIPV6Enable"></a>
 
 `GET /getIPV6Enable`
 
@@ -2465,7 +2475,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getipv6enable-responses">Responses</h3>
+<h3 id="getipv6enable-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2475,7 +2485,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__getSpdifOutMaxCap
+## getSpdifOutMaxCap
+
+<a id="opIdgetSpdifOutMaxCap"></a>
 
 `GET /getSpdifOutMaxCap`
 
@@ -2483,7 +2495,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getspdifoutmaxcap-responses">Responses</h3>
+<h3 id="getspdifoutmaxcap-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2493,7 +2505,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__getCoaxOutMaxCap
+## getCoaxOutMaxCap
+
+<a id="opIdgetCoaxOutMaxCap"></a>
 
 `GET /getCoaxOutMaxCap`
 
@@ -2501,7 +2515,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getcoaxoutmaxcap-responses">Responses</h3>
+<h3 id="getcoaxoutmaxcap-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2511,7 +2525,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__GetFadeFeature
+## getFadeFeature
+
+<a id="opIdgetFadeFeature"></a>
 
 `GET /GetFadeFeature`
 
@@ -2519,7 +2535,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getfadefeature-responses">Responses</h3>
+<h3 id="getfadefeature-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2529,7 +2545,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__getAuxVoltageSupportList
+## getAuxVoltageSupportList
+
+<a id="opIdgetAuxVoltageSupportList"></a>
 
 `GET /getAuxVoltageSupportList`
 
@@ -2537,7 +2555,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getauxvoltagesupportlist-responses">Responses</h3>
+<h3 id="getauxvoltagesupportlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2547,7 +2565,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__audio_cast:get_speaker_list
+## audioCastGetSpeakerList
+
+<a id="opIdaudioCastGetSpeakerList"></a>
 
 `GET /audio_cast:get_speaker_list`
 
@@ -2555,7 +2575,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__audio_cast:get_speaker_list-responses">Responses</h3>
+<h3 id="audiocastgetspeakerlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2565,7 +2585,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__getSoundCardModeSupportList
+## getSoundCardModeSupportList
+
+<a id="opIdgetSoundCardModeSupportList"></a>
 
 `GET /getSoundCardModeSupportList`
 
@@ -2573,7 +2595,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getsoundcardmodesupportlist-responses">Responses</h3>
+<h3 id="getsoundcardmodesupportlist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2583,7 +2605,9 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## get__getActiveSoundCardOutputMode
+## getActiveSoundCardOutputMode
+
+<a id="opIdgetActiveSoundCardOutputMode"></a>
 
 `GET /getActiveSoundCardOutputMode`
 
@@ -2591,7 +2615,7 @@ This operation does not require authentication
 
 ...
 
-<h3 id="get__getactivesoundcardoutputmode-responses">Responses</h3>
+<h3 id="getactivesoundcardoutputmode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2638,7 +2662,9 @@ Turns the screen of the WiiM Ultra on or off
 This operation does not require authentication
 </aside>
 
-## get__multiroom:getSlaveList
+## multiroomGetSlaveList
+
+<a id="opIdmultiroomGetSlaveList"></a>
 
 `GET /multiroom:getSlaveList`
 
@@ -2675,7 +2701,7 @@ Channel	Wifi channel
 ip	IP address of the LinkPlay Boot
 version	firmware version
 
-<h3 id="get__multiroom:getslavelist-responses">Responses</h3>
+<h3 id="multiroomgetslavelist-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2685,7 +2711,9 @@ version	firmware version
 This operation does not require authentication
 </aside>
 
-## get__multiroom:SlaveKickout:{ip}
+## multiroomSlaveKickout
+
+<a id="opIdmultiroomSlaveKickout"></a>
 
 `GET /multiroom:SlaveKickout:{ip}`
 
@@ -2695,7 +2723,13 @@ Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveKickout:ip
 
 Allows to remove from the multiroom mode a device Based on its IP address.
 
-<h3 id="get__multiroom:slavekickout:{ip}-responses">Responses</h3>
+<h3 id="multiroomslavekickout-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to be removed from multi-room mode.|
+
+<h3 id="multiroomslavekickout-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2705,7 +2739,9 @@ Allows to remove from the multiroom mode a device Based on its IP address.
 This operation does not require authentication
 </aside>
 
-## get__multiroom:SlaveMask:{ip}
+## multiroomSlaveMask
+
+<a id="opIdmultiroomSlaveMask"></a>
 
 `GET /multiroom:SlaveMask:{ip}`
 
@@ -2715,7 +2751,13 @@ Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMask:ip
 
 Allows to integrate a multi-room mode a device Based on its IP address. It is thus rendered invisible from the IP network.
 
-<h3 id="get__multiroom:slavemask:{ip}-responses">Responses</h3>
+<h3 id="multiroomslavemask-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to be hidden from the IP network in multi-room mode.|
+
+<h3 id="multiroomslavemask-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2725,7 +2767,9 @@ Allows to integrate a multi-room mode a device Based on its IP address. It is th
 This operation does not require authentication
 </aside>
 
-## get__multiroom:SlaveUnMask:{ip}
+## multiroomSlaveUnMask
+
+<a id="opIdmultiroomSlaveUnMask"></a>
 
 `GET /multiroom:SlaveUnMask:{ip}`
 
@@ -2735,7 +2779,13 @@ Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveUnMask:ip
 
 Allows to release from the multi-room mode based on its IP address. It is thus visible on the IP network.
 
-<h3 id="get__multiroom:slaveunmask:{ip}-responses">Responses</h3>
+<h3 id="multiroomslaveunmask-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to be released from multi-room mode.|
+
+<h3 id="multiroomslaveunmask-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2745,7 +2795,9 @@ Allows to release from the multi-room mode based on its IP address. It is thus v
 This operation does not require authentication
 </aside>
 
-## get__multiroom:SlaveVolume:{ip}:{volume}
+## multiroomSlaveVolume
+
+<a id="opIdmultiroomSlaveVolume"></a>
 
 `GET /multiroom:SlaveVolume:{ip}:{volume}`
 
@@ -2755,7 +2807,14 @@ Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveVolume:ip:volume
 
 Allows you to adjust the individual volume of the each of the devicees via the IP address of the device and the definition of a value going from from 1 to 100. Note: these settings will be lost when deactivating multi-room mode (kickout)
 
-<h3 id="get__multiroom:slavevolume:{ip}:{volume}-responses">Responses</h3>
+<h3 id="multiroomslavevolume-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to adjust the volume for in multi-room mode.|
+|volume|path|integer|true|The volume level to set for the specified LinkPlay device, ranging from 1 to 100.|
+
+<h3 id="multiroomslavevolume-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2765,7 +2824,9 @@ Allows you to adjust the individual volume of the each of the devicees via the I
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:slave_vol:{volume}
+## setPlayerCmdSlaveVolume
+
+<a id="opIdsetPlayerCmdSlaveVolume"></a>
 
 `GET /setPlayerCmd:slave_vol:{volume}`
 
@@ -2775,7 +2836,13 @@ Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_vol:volume
 
 Adjusts the overal volume of the multi-room with the definition of a value ranging from 1 to 100. Note: thesis settings will be lost When disabling multi-room mode
 
-<h3 id="get__setplayercmd:slave_vol:{volume}-responses">Responses</h3>
+<h3 id="setplayercmdslavevolume-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|volume|path|integer|true|The overall volume level to set for multi-room mode, ranging from 1 to 100.|
+
+<h3 id="setplayercmdslavevolume-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2785,7 +2852,9 @@ Adjusts the overal volume of the multi-room with the definition of a value rangi
 This operation does not require authentication
 </aside>
 
-## get__multiroom:SlaveMute:{ip}:{mute}
+## multiroomSlaveMute
+
+<a id="opIdmultiroomSlaveMute"></a>
 
 `GET /multiroom:SlaveMute:{ip}:{mute}`
 
@@ -2795,7 +2864,21 @@ Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMute:ip:mute
 
 Enables the Mute on each device via the IP address of the device and by enabling (1) and disabling (0)
 
-<h3 id="get__multiroom:slavemute:{ip}:{mute}-responses">Responses</h3>
+<h3 id="multiroomslavemute-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to adjust the mute status for in multi-room mode.|
+|mute|path|integer|true|Mute status to set for the specified LinkPlay device, where 1 enables mute and 0 disables mute.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|mute|0|
+|mute|1|
+
+<h3 id="multiroomslavemute-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2805,7 +2888,9 @@ Enables the Mute on each device via the IP address of the device and by enabling
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:slave_mute:mute
+## setPlayerCmdSlaveMute
+
+<a id="opIdsetPlayerCmdSlaveMute"></a>
 
 `GET /setPlayerCmd:slave_mute:mute`
 
@@ -2815,7 +2900,7 @@ Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:mute
 
 Enables the Mute on all devices
 
-<h3 id="get__setplayercmd:slave_mute:mute-responses">Responses</h3>
+<h3 id="setplayercmdslavemute-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2825,7 +2910,9 @@ Enables the Mute on all devices
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:slave_mute:unmute
+## setPlayerCmdSlaveUnmute
+
+<a id="opIdsetPlayerCmdSlaveUnmute"></a>
 
 `GET /setPlayerCmd:slave_mute:unmute`
 
@@ -2835,7 +2922,7 @@ Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:unmute
 
 To disable the mute mode overall the
 
-<h3 id="get__setplayercmd:slave_mute:unmute-responses">Responses</h3>
+<h3 id="setplayercmdslaveunmute-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2845,7 +2932,9 @@ To disable the mute mode overall the
 This operation does not require authentication
 </aside>
 
-## get__multiroom:SlaveChannel:{ip}:{channel}
+## multiroomSlaveChannel
+
+<a id="opIdmultiroomSlaveChannel"></a>
 
 `GET /multiroom:SlaveChannel:{ip}:{channel}`
 
@@ -2855,7 +2944,21 @@ Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveChannel:ip:chann
 
 Enables the Mute on Each of the devices via the IP address of the device and by this parameter to signal right only Channe0 = left and only 1 = Channel signal
 
-<h3 id="get__multiroom:slavechannel:{ip}:{channel}-responses">Responses</h3>
+<h3 id="multiroomslavechannel-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to adjust the audio channel for in multi-room mode.|
+|channel|path|integer|true|Audio channel to set for the specified LinkPlay device, where 0 signals right only and 1 signals left only.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|channel|0|
+|channel|1|
+
+<h3 id="multiroomslavechannel-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2865,7 +2968,9 @@ Enables the Mute on Each of the devices via the IP address of the device and by 
 This operation does not require authentication
 </aside>
 
-## get__setPlayerCmd:{slave_channel}:{channel}
+## setPlayerCmdSlaveChannel
+
+<a id="opIdsetPlayerCmdSlaveChannel"></a>
 
 `GET /setPlayerCmd:{slave_channel}:{channel}`
 
@@ -2875,7 +2980,21 @@ Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_channel:chan
 
 Enables the Mute on Each of devices via the IP address of the device and by this parameter to signal right only Channel= 0 and left signal only 1 = Channel
 
-<h3 id="get__setplayercmd:{slave_channel}:{channel}-responses">Responses</h3>
+<h3 id="setplayercmdslavechannel-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|slave_channel|path|string|true|IP address of the device|
+|channel|path|integer|true|Audio channel to set for all devices in multi-room mode, where 0 signals right only and 1 signals left only.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|channel|0|
+|channel|1|
+
+<h3 id="setplayercmdslavechannel-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2885,7 +3004,9 @@ Enables the Mute on Each of devices via the IP address of the device and by this
 This operation does not require authentication
 </aside>
 
-## get__multiroom:SlaveSetDeviceName:{ip}:{s}
+## multiroomSlaveSetDeviceName
+
+<a id="opIdmultiroomSlaveSetDeviceName"></a>
 
 `GET /multiroom:SlaveSetDeviceName:{ip}:{s}`
 
@@ -2895,7 +3016,14 @@ Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveSetDeviceName:%i
 
 Individual settings of the name of the square in mode UPnP / Airplay
 
-<h3 id="get__multiroom:slavesetdevicename:{ip}:{s}-responses">Responses</h3>
+<h3 id="multiroomslavesetdevicename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to set the device name for in multi-room mode.|
+|s|path|string|true|The device name to set for the specified LinkPlay device in multi-room mode.|
+
+<h3 id="multiroomslavesetdevicename-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2905,7 +3033,9 @@ Individual settings of the name of the square in mode UPnP / Airplay
 This operation does not require authentication
 </aside>
 
-## get__multiroom:Ungroup
+## multiroomUngroup
+
+<a id="opIdmultiroomUngroup"></a>
 
 `GET /multiroom:Ungroup`
 
@@ -2915,7 +3045,7 @@ Example: http://10.10.10.254/httpapi.asp?command=multiroom:Ungroup
 
 Disables the multi-room mode
 
-<h3 id="get__multiroom:ungroup-responses">Responses</h3>
+<h3 id="multiroomungroup-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2925,7 +3055,9 @@ Disables the multi-room mode
 This operation does not require authentication
 </aside>
 
-## get__getMvRemoteUpdateStartCheck
+## getMvRemoteUpdateStartCheck
+
+<a id="opIdgetMvRemoteUpdateStartCheck"></a>
 
 `GET /getMvRemoteUpdateStartCheck`
 
@@ -2935,7 +3067,7 @@ Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStartCheck
 
 Search for the firmware updates available
 
-<h3 id="get__getmvremoteupdatestartcheck-responses">Responses</h3>
+<h3 id="getmvremoteupdatestartcheck-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2945,7 +3077,9 @@ Search for the firmware updates available
 This operation does not require authentication
 </aside>
 
-## get__getMvRemoteUpdateStart
+## getMvRemoteUpdateStart
+
+<a id="opIdgetMvRemoteUpdateStart"></a>
 
 `GET /getMvRemoteUpdateStart`
 
@@ -2956,7 +3090,7 @@ Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStart
 After calling the interface, if a new version is available, the device starts to download updates. At the end of the download, the update process starts.
 WARNING: DO NOT POWER OFF DURING THIS PROCESS!!
 
-<h3 id="get__getmvremoteupdatestart-responses">Responses</h3>
+<h3 id="getmvremoteupdatestart-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2966,7 +3100,9 @@ WARNING: DO NOT POWER OFF DURING THIS PROCESS!!
 This operation does not require authentication
 </aside>
 
-## get__getMvRemoteUpdateStatus
+## getMvRemoteUpdateStatus
+
+<a id="opIdgetMvRemoteUpdateStatus"></a>
 
 `GET /getMvRemoteUpdateStatus`
 
@@ -2986,7 +3122,7 @@ Value	Meaning
 - 27	Download complete
 - 30	Downloading and verification completed
 
-<h3 id="get__getmvremoteupdatestatus-responses">Responses</h3>
+<h3 id="getmvremoteupdatestatus-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -2996,7 +3132,9 @@ Value	Meaning
 This operation does not require authentication
 </aside>
 
-## get__getMvRomBurnPrecent
+## getMvRomBurnPrecent
+
+<a id="opIdgetMvRomBurnPrecent"></a>
 
 `GET /getMvRomBurnPrecent`
 
@@ -3014,7 +3152,7 @@ Fields	Meaning
 status	State
 progress	Progress between 0 to 100%
 
-<h3 id="get__getmvromburnprecent-responses">Responses</h3>
+<h3 id="getmvromburnprecent-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3024,7 +3162,9 @@ progress	Progress between 0 to 100%
 This operation does not require authentication
 </aside>
 
-## get__setSSID:{value}
+## setSSID
+
+<a id="opIdsetSSID"></a>
 
 `GET /setSSID:{value}`
 
@@ -3034,7 +3174,13 @@ Example: http://10.10.10.254/httpapi.asp?command=setSSID:value
 
 Sets a new network name (SSID) of the device in hexadecimal format
 
-<h3 id="get__setssid:{value}-responses">Responses</h3>
+<h3 id="setssid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|value|path|string|true|The new SSID name to set for the device, in hexadecimal format.|
+
+<h3 id="setssid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3044,7 +3190,9 @@ Sets a new network name (SSID) of the device in hexadecimal format
 This operation does not require authentication
 </aside>
 
-## get__setNetwork:{n}:{password}
+## setNetwork
+
+<a id="opIdsetNetwork"></a>
 
 `GET /setNetwork:{n}:{password}`
 
@@ -3056,7 +3204,21 @@ Setting a new password using letters and / or numbers and crossing of setnetwork
 
 No response The system restarts after the validation of the new password.
 
-<h3 id="get__setnetwork:{n}:{password}-responses">Responses</h3>
+<h3 id="setnetwork-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Network security type, where 1 secures the WIFI network with WPAPSK and 0 makes the network open.|
+|password|path|string|true|The new password to set for the WIFI network, using letters and/or numbers.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|0|
+|n|1|
+
+<h3 id="setnetwork-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3066,7 +3228,9 @@ No response The system restarts after the validation of the new password.
 This operation does not require authentication
 </aside>
 
-## get__restoreToDefault
+## restoreToDefault
+
+<a id="opIdrestoreToDefault"></a>
 
 `GET /restoreToDefault`
 
@@ -3076,7 +3240,7 @@ Example: http://10.10.10.254/httpapi.asp?command=restoreToDefault
 
 To restore factory settings, erasing defined configurations. The device restarts.
 
-<h3 id="get__restoretodefault-responses">Responses</h3>
+<h3 id="restoretodefault-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3086,7 +3250,9 @@ To restore factory settings, erasing defined configurations. The device restarts
 This operation does not require authentication
 </aside>
 
-## get__setPowerWifiDown
+## setPowerWifiDown
+
+<a id="opIdsetPowerWifiDown"></a>
 
 `GET /setPowerWifiDown`
 
@@ -3096,7 +3262,7 @@ Example: http://10.10.10.254/httpapi.asp?command=setPowerWifiDown
 
 Turns off the wifi
 
-<h3 id="get__setpowerwifidown-responses">Responses</h3>
+<h3 id="setpowerwifidown-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3106,7 +3272,9 @@ Turns off the wifi
 This operation does not require authentication
 </aside>
 
-## get__setDeviceName:{name}
+## setDeviceName
+
+<a id="opIdsetDeviceName"></a>
 
 `GET /setDeviceName:{name}`
 
@@ -3116,7 +3284,13 @@ Example: http://10.10.10.254/httpapi.asp?command=setDeviceName:%s
 
 Sets the name UPnP, DLNA and Airplay of the device (Hex)
 
-<h3 id="get__setdevicename:{name}-responses">Responses</h3>
+<h3 id="setdevicename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|name|path|string|true|The new device name to set for UPnP, DLNA, and Airplay, in hexadecimal format.|
+
+<h3 id="setdevicename-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
