@@ -1,10 +1,15 @@
 # wiim-httpapi
 
-Exploring the HTTP API for WiiM products.  
-The HTTP API can be found on your WiiM device like so: https://{ip-address}/httpapi.asp?command={command}
+> Status: Work in progress!
 
-Status: Work in progress!  
+Exploring the HTTP API for WiiM products by documenting the known endpoints.
+
+The HTTP API can be found on your WiiM device like so:  
+```https://{ip-address}/httpapi.asp?command={command}```
+
 First I'll gather all endpoints, then test and elaborate the documentation.
+
+## Swagger/OpenAPI
 
 Idea: Use [Swagger UI](https://swagger.io/tools/swagger-ui/) to document the Linkplay HTTP API, that is used by WiiM.
 Swagger/OpenAPI has a nice documentation format, with a 'try it out' option so you can test to see what the responses are.
