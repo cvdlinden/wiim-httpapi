@@ -1,10 +1,10 @@
 ---
 aside: false
 outline: false
-title: vitepress-openapi
+title: API Reference
 ---
 
-<script setup lang="ts">
+<script setup>
 import { useRoute } from 'vitepress'
 import spec from '../../openapi.json'
 

@@ -1,4 +1,6 @@
-# wiim-httpapi
+# WiiM HTTP API Docs
+
+[![Documentation](https://shields.io)](https://cvdlinden.github.io/wiim-httpapi/)
 
 > Status: Work in progress!
 
@@ -43,9 +45,10 @@ Requirements:
 
 ## "I don't want to install anything!"
 
-Sure, please see [openapi.md](openapi.md) for a static version of the current API documentation.
+Sure! We've got you!  
+The entire API documentation is also available on GitHub Pages: [WiiM HTTP API Documentation](https://cvdlinden.github.io/wiim-httpapi/)
 
-Note that you won't have the interactive part to see what the response of your WiiM device actually is.
+Note that you won't have the interactive part to talk to your WiiM device and see what the response actually is.
 
 ## "I found another command that isn't in the list!"
 
