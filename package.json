@@ -1,12 +1,15 @@
 {
   "name": "wiim-httpapi",
-  "version": "1.0.0",
+  "version": "1.1",
   "description": "Exploring the HTTP API for WiiM products. Work in progress...",
   "main": "index.js",
   "scripts": {
     "openapi2md": "widdershins openapi.yaml -o openapi.md --omitHeader -c",
     "openapi2json": "js-yaml openapi.yaml > openapi.json",
-    "generate": "npm run openapi2md && npm run openapi2json"
+    "generate": "npm run openapi2md && npm run openapi2json",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,10 @@
   "dependencies": {
     "express": "^5.2.1",
     "swagger-ui-express": "^5.0.1",
-    "yaml": "^2.8.3"
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4",
+    "vitepress-openapi": "^0.1.20"
   }
 }

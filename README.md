@@ -1,10 +1,20 @@
-# wiim-httpapi
+# WiiM HTTP API Docs
 
-Exploring the HTTP API for WiiM products.  
-The HTTP API can be found on your WiiM device like so: https://{ip-address}/httpapi.asp?command={command}
+<!-- Badges -->
+[![Documentation](https://img.shields.io/badge/github_pages-Documentation-blue?logo=github)](https://cvdlinden.github.io/wiim-httpapi/)
+![Version](https://img.shields.io/github/package-json/v/cvdlinden/wiim-httpapi)
+![License](https://img.shields.io/github/license/cvdlinden/wiim-httpapi)
 
-Status: Work in progress!  
+> Status: Work in progress!
+
+Exploring the HTTP API for WiiM products by documenting the known endpoints.
+
+The HTTP API can be found on your WiiM device like so:  
+```https://{ip-address}/httpapi.asp?command={command}```
+
 First I'll gather all endpoints, then test and elaborate the documentation.
+
+## Swagger/OpenAPI
 
 Idea: Use [Swagger UI](https://swagger.io/tools/swagger-ui/) to document the Linkplay HTTP API, that is used by WiiM.
 Swagger/OpenAPI has a nice documentation format, with a 'try it out' option so you can test to see what the responses are.
@@ -38,9 +48,10 @@ Requirements:
 
 ## "I don't want to install anything!"
 
-Sure, please see [openapi.md](openapi.md) for a static version of the current API documentation.
+Sure! We've got you!  
+The entire API documentation is also available on GitHub Pages: [WiiM HTTP API Documentation](https://cvdlinden.github.io/wiim-httpapi/)
 
-Note that you won't have the interactive part to see what the response of your WiiM device actually is.
+Note that you won't have the interactive part to talk to your WiiM device and see what the response actually is.
 
 ## "I found another command that isn't in the list!"
 
