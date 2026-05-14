@@ -5,6 +5,7 @@ export default defineConfig({
   description: "Exploring the HTTP API for WiiM products",
 
   ignoreDeadLinks: true,
+  base: '/wiim-httpapi/',
 
   themeConfig: {
     nav: [
