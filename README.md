@@ -1,6 +1,9 @@
 # WiiM HTTP API Docs
 
-[![Documentation](https://shields.io)](https://cvdlinden.github.io/wiim-httpapi/)
+<!-- Badges -->
+[![Documentation](https://img.shields.io/badge/github_pages-Documentation-blue?logo=github)](https://cvdlinden.github.io/wiim-httpapi/)
+![Version](https://img.shields.io/github/package-json/v/cvdlinden/wiim-httpapi)
+![License](https://img.shields.io/github/license/cvdlinden/wiim-httpapi)
 
 > Status: Work in progress!
 
