@@ -1,0 +1,40 @@
+name: Deploy VitePress Docs
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'openapi.json'
+      - '.github/workflows/deploy-docs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build VitePress Site
+        run: npm run docs:build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/.vitepress/dist
