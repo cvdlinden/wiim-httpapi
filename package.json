@@ -1,6 +1,6 @@
 {
   "name": "wiim-httpapi",
-  "version": "1.0.0",
+  "version": "1.1",
   "description": "Exploring the HTTP API for WiiM products. Work in progress...",
   "main": "index.js",
   "scripts": {
