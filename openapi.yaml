@@ -5145,6 +5145,35 @@ paths:
       responses:
         "200":
           description: Successful response
+  /EQGetLV2BandEx:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqGetLV2BandEx
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getFirmwareVersion:
+    get:
+      tags:
+        - Device control
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getFirmwareVersion
+      responses:
+        "200":
+          description: Successful response
 
 externalDocs:
   url: "https://github.com/cvdlinden/wiim-httpapi"
