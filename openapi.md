@@ -686,6 +686,693 @@ n =
 This operation does not require authentication
 </aside>
 
+<h1 id="linkplay-wiim-http-api-multiroom">Multiroom</h1>
+
+Get and set multirroom settings
+
+## multiroomGetSlaveList
+
+<a id="opIdmultiroomGetSlaveList"></a>
+
+`GET /multiroom:getSlaveList`
+
+*Get a list of LinkPlay available*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:getSlaveList
+
+Allows to obtain the list of the devices using the same communication protocol.
+
+JSON output:
+{
+  "Slaves": "1",
+  "Slave_list": [
+    {
+      "Name": "FA5100_a3f4",
+      "Mask": "0",
+      "Volume": "90",
+      "Mute": "0",
+      "Channel": "0",
+      "Ip": "10.10.10.100",
+      "Version": "WIFIAudio.1.2.2321"
+    }
+  ]
+}
+
+Field	Description
+Slaves	Number of LinkPlay available
+Slave_list	Information about each Sonoé iEast case available
+name	Name
+mask	Case already in Multi-Room mode, Yes = 1, No = 0
+Volume	Volume level
+Mute	Enable Mute mode, Yes = 1, Off = 0
+Channel	Wifi channel
+ip	IP address of the LinkPlay Boot
+version	firmware version
+
+<h3 id="multiroomgetslavelist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveKickout
+
+<a id="opIdmultiroomSlaveKickout"></a>
+
+`GET /multiroom:SlaveKickout:{ip}`
+
+*Removing a LinkPlay from the multi-room*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveKickout:ip
+
+Allows to remove from the multiroom mode a device Based on its IP address.
+
+<h3 id="multiroomslavekickout-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to be removed from multi-room mode.|
+
+<h3 id="multiroomslavekickout-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveMask
+
+<a id="opIdmultiroomSlaveMask"></a>
+
+`GET /multiroom:SlaveMask:{ip}`
+
+*Hide the IP address of a LinkPlay*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMask:ip
+
+Allows to integrate a multi-room mode a device Based on its IP address. It is thus rendered invisible from the IP network.
+
+<h3 id="multiroomslavemask-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to be hidden from the IP network in multi-room mode.|
+
+<h3 id="multiroomslavemask-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveUnMask
+
+<a id="opIdmultiroomSlaveUnMask"></a>
+
+`GET /multiroom:SlaveUnMask:{ip}`
+
+*Releasing a Multi-Room Mode*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveUnMask:ip
+
+Allows to release from the multi-room mode based on its IP address. It is thus visible on the IP network.
+
+<h3 id="multiroomslaveunmask-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to be released from multi-room mode.|
+
+<h3 id="multiroomslaveunmask-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveVolume
+
+<a id="opIdmultiroomSlaveVolume"></a>
+
+`GET /multiroom:SlaveVolume:{ip}:{volume}`
+
+*Individual volume adjustment*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveVolume:ip:volume
+
+Allows you to adjust the individual volume of the each of the devicees via the IP address of the device and the definition of a value going from from 1 to 100. Note: these settings will be lost when deactivating multi-room mode (kickout)
+
+<h3 id="multiroomslavevolume-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to adjust the volume for in multi-room mode.|
+|volume|path|integer|true|The volume level to set for the specified LinkPlay device, ranging from 1 to 100.|
+
+<h3 id="multiroomslavevolume-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayerCmdSlaveVolume
+
+<a id="opIdsetPlayerCmdSlaveVolume"></a>
+
+`GET /setPlayerCmd:slave_vol:{volume}`
+
+*General Volume Adjustment*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_vol:volume
+
+Adjusts the overal volume of the multi-room with the definition of a value ranging from 1 to 100. Note: thesis settings will be lost When disabling multi-room mode
+
+<h3 id="setplayercmdslavevolume-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|volume|path|integer|true|The overall volume level to set for multi-room mode, ranging from 1 to 100.|
+
+<h3 id="setplayercmdslavevolume-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveMute
+
+<a id="opIdmultiroomSlaveMute"></a>
+
+`GET /multiroom:SlaveMute:{ip}:{mute}`
+
+*Individual muting*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMute:ip:mute
+
+Enables the Mute on each device via the IP address of the device and by enabling (1) and disabling (0)
+
+<h3 id="multiroomslavemute-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to adjust the mute status for in multi-room mode.|
+|mute|path|integer|true|Mute status to set for the specified LinkPlay device, where 1 enables mute and 0 disables mute.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|mute|0|
+|mute|1|
+
+<h3 id="multiroomslavemute-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayerCmdSlaveMute
+
+<a id="opIdsetPlayerCmdSlaveMute"></a>
+
+`GET /setPlayerCmd:slave_mute:mute`
+
+*General activation Mute*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:mute
+
+Enables the Mute on all devices
+
+<h3 id="setplayercmdslavemute-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayerCmdSlaveUnmute
+
+<a id="opIdsetPlayerCmdSlaveUnmute"></a>
+
+`GET /setPlayerCmd:slave_mute:unmute`
+
+*General Mute Disabling*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:unmute
+
+To disable the mute mode overall the
+
+<h3 id="setplayercmdslaveunmute-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveChannel
+
+<a id="opIdmultiroomSlaveChannel"></a>
+
+`GET /multiroom:SlaveChannel:{ip}:{channel}`
+
+*Individual management of the audio signal Right / left*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveChannel:ip:channel
+
+Enables the Mute on Each of the devices via the IP address of the device and by this parameter to signal right only Channe0 = left and only 1 = Channel signal
+
+<h3 id="multiroomslavechannel-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to adjust the audio channel for in multi-room mode.|
+|channel|path|integer|true|Audio channel to set for the specified LinkPlay device, where 0 signals right only and 1 signals left only.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|channel|0|
+|channel|1|
+
+<h3 id="multiroomslavechannel-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayerCmdSlaveChannel
+
+<a id="opIdsetPlayerCmdSlaveChannel"></a>
+
+`GET /setPlayerCmd:{slave_channel}:{channel}`
+
+*Overal management of the audio signal Right / left*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_channel:channel
+
+Enables the Mute on Each of devices via the IP address of the device and by this parameter to signal right only Channel= 0 and left signal only 1 = Channel
+
+<h3 id="setplayercmdslavechannel-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|slave_channel|path|string|true|IP address of the device|
+|channel|path|integer|true|Audio channel to set for all devices in multi-room mode, where 0 signals right only and 1 signals left only.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|channel|0|
+|channel|1|
+
+<h3 id="setplayercmdslavechannel-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveSetDeviceName
+
+<a id="opIdmultiroomSlaveSetDeviceName"></a>
+
+`GET /multiroom:SlaveSetDeviceName:{ip}:{s}`
+
+*Individual definition of the device Name*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveSetDeviceName:%ip:%s
+
+Individual settings of the name of the square in mode UPnP / Airplay
+
+<h3 id="multiroomslavesetdevicename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to set the device name for in multi-room mode.|
+|s|path|string|true|The device name to set for the specified LinkPlay device in multi-room mode.|
+
+<h3 id="multiroomslavesetdevicename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomUngroup
+
+<a id="opIdmultiroomUngroup"></a>
+
+`GET /multiroom:Ungroup`
+
+*Disabling Multi-Room*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:Ungroup
+
+Disables the multi-room mode
+
+<h3 id="multiroomungroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomLeaveGroup
+
+<a id="opIdmultiroomLeaveGroup"></a>
+
+`GET /multiroom:LeaveGroup`
+
+*Leaving the multi-room mode*
+
+...
+
+<h3 id="multiroomleavegroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomJoinGroup
+
+<a id="opIdmultiroomJoinGroup"></a>
+
+`GET /multiroom:JoinGroup:IP={IP}:uuid={uuid}`
+
+*Joining a multi-room group*
+
+...
+
+<h3 id="multiroomjoingroup-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|IP|path|string|true|The IP address of the multi-room group to join.|
+|uuid|path|string|true|The UUID of the multi-room group to join.|
+
+<h3 id="multiroomjoingroup-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveDeviceName
+
+<a id="opIdmultiroomSlaveDeviceName"></a>
+
+`GET /multiroom:SlaveDeviceName:{ip}:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="multiroomslavedevicename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|Unknown|
+|str|path|string|true|Unknown|
+
+<h3 id="multiroomslavedevicename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setMRMSubLPF
+
+<a id="opIdsetMRMSubLPF"></a>
+
+`GET /setMRMSubLPF:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setmrmsublpf-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setmrmsublpf-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getSubLPF
+
+<a id="opIdgetSubLPF"></a>
+
+`GET /getSubLPF`
+
+*Unknown*
+
+...
+
+<h3 id="getsublpf-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSubLPF
+
+<a id="opIdsetSubLPF"></a>
+
+`GET /setSubLPF:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setsublpf-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setsublpf-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSubwooferForget
+
+<a id="opIdmultiroomSubwooferForget"></a>
+
+`GET /multiroom:subwooferForget:%7B%22uuid%22:%22{uuid}%22%7D`
+
+*Unknown*
+
+...
+
+<h3 id="multiroomsubwooferforget-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|uuid|path|string|true|Unknown|
+
+<h3 id="multiroomsubwooferforget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSubwooferGetPairInfo
+
+<a id="opIdmultiroomSubwooferGetPairInfo"></a>
+
+`GET /multiroom:subwooferGetPairInfo`
+
+*Unknown*
+
+...
+
+<h3 id="multiroomsubwoofergetpairinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomConfigGetLeadtime
+
+<a id="opIdmultiroomConfigGetLeadtime"></a>
+
+`GET /multiroom:ConfigGet:leadtime`
+
+*Unknown*
+
+...
+
+<h3 id="multiroomconfiggetleadtime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSubwooferPair
+
+<a id="opIdmultiroomSubwooferPair"></a>
+
+`GET /multiroom:subwooferPair:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="multiroomsubwooferpair-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="multiroomsubwooferpair-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getMRMSubLPF
+
+<a id="opIdgetMRMSubLPF"></a>
+
+`GET /getMRMSubLPF:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="getmrmsublpf-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="getmrmsublpf-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomConfigSetLeadtime
+
+<a id="opIdmultiroomConfigSetLeadtime"></a>
+
+`GET /multiroom:ConfigSet:leadtime:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="multiroomconfigsetleadtime-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="multiroomconfigsetleadtime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-network">Network</h1>
 
 Get the network status
@@ -839,6 +1526,378 @@ Keyword args:
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setEthStaticIp
+
+<a id="opIdsetEthStaticIp"></a>
+
+`GET /setEthStaticIp:{IpAddress}:{GatewayIp}:{DnsServerIp}`
+
+*Set static Ethernet network config*
+
+Example: https://10.10.10.254/httpapi.asp?command=setEthStaticIp:ipAddr=192.168.1.100/24:gateWay=192.168.1.1:dnsServer=8.8.8.8
+
+Keyword args:
+- ipAddr: Static IP address to set + netmask
+- gateWay: Gateway
+- dnsServer: The DNS Server (default: 8.8.8.8)
+
+<h3 id="setethstaticip-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|IpAddress|path|string|true|Static IP address to set + netmask|
+|GatewayIp|path|string|true|Gateway IP address|
+|DnsServerIp|path|string|true|The DNS Server (default: 8.8.8.8)|
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
+<h3 id="setethstaticip-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## wlanConnectHideAp
+
+<a id="opIdwlanConnectHideAp"></a>
+
+`GET /wlanConnectHideAp:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="wlanconnecthideap-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="wlanconnecthideap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## wlanConnectHideApEx
+
+<a id="opIdwlanConnectHideApEx"></a>
+
+`GET /wlanConnectHideApEx:{str1}:{str2}:{str3}`
+
+*Unknown*
+
+...
+
+<h3 id="wlanconnecthideapex-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str1|path|string|true|Unknown|
+|str2|path|string|true|Unknown|
+|str3|path|string|true|Unknown|
+
+<h3 id="wlanconnecthideapex-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getNetwork
+
+<a id="opIdgetNetwork"></a>
+
+`GET /getNetwork`
+
+*Get the network configuration*
+
+...
+
+<h3 id="getnetwork-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## wlanGetApListEx
+
+<a id="opIdwlanGetApListEx"></a>
+
+`GET /wlanGetApListEx`
+
+*Unknown*
+
+...
+
+<h3 id="wlangetaplistex-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setHideSSID
+
+<a id="opIdsetHideSSID"></a>
+
+`GET /setHideSSID:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="sethidessid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="sethidessid-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setNetworkExAES
+
+<a id="opIdsetNetworkExAES"></a>
+
+`GET /setNetworkExAES:{n}:{password}`
+
+*Unknown*
+
+...
+
+<h3 id="setnetworkexaes-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+|password|path|string|true|Unknown|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|0|
+|n|1|
+
+<h3 id="setnetworkexaes-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setWlanBandConfig
+
+<a id="opIdsetWlanBandConfig"></a>
+
+`GET /setWlanBandConfig:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setwlanbandconfig-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setwlanbandconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setWlanConnectDisable
+
+<a id="opIdsetWlanConnectDisable"></a>
+
+`GET /setWlanConnectDisable:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setwlanconnectdisable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setwlanconnectdisable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setWlanRoamConfig
+
+<a id="opIdsetWlanRoamConfig"></a>
+
+`GET /setWlanRoamConfig:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setwlanroamconfig-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setwlanroamconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setNetworkPreferDNS
+
+<a id="opIdsetNetworkPreferDNS"></a>
+
+`GET /setNetworkPreferDNS:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setnetworkpreferdns-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setnetworkpreferdns-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## wlanGetApFullList
+
+<a id="opIdwlanGetApFullList"></a>
+
+`GET /wlanGetApFullList`
+
+*Unknown*
+
+...
+
+<h3 id="wlangetapfulllist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## wlanSwitchConnectedAp
+
+<a id="opIdwlanSwitchConnectedAp"></a>
+
+`GET /wlanSwitchConnectedAp:ssid={ssid}:bssid={bssid}`
+
+*Unknown*
+
+...
+
+<h3 id="wlanswitchconnectedap-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ssid|path|string|true|Unknown|
+|bssid|path|string|true|Unknown|
+
+<h3 id="wlanswitchconnectedap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setIPV6Enable
+
+<a id="opIdsetIPV6Enable"></a>
+
+`GET /setIPV6Enable:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setipv6enable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setipv6enable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -1112,6 +2171,566 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+## eqSetBass
+
+<a id="opIdeqSetBass"></a>
+
+`GET /EQSet:Bass:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsetbass-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="eqsetbass-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSetTreble
+
+<a id="opIdeqSetTreble"></a>
+
+`GET /EQSet:Treble:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsettreble-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="eqsettreble-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqEnable
+
+<a id="opIdeqEnable"></a>
+
+`GET /EQEnable`
+
+*Unknown*
+
+...
+
+<h3 id="eqenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqDisable
+
+<a id="opIdeqDisable"></a>
+
+`GET /EQDisable`
+
+*Unknown*
+
+...
+
+<h3 id="eqdisable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSetBand
+
+<a id="opIdeqSetBand"></a>
+
+`GET /EQSetBand:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsetband-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqsetband-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSetLV2Band
+
+<a id="opIdeqSetLV2Band"></a>
+
+`GET /EQSetLV2Band:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsetlv2band-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqsetlv2band-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSetLV2SourceBand
+
+<a id="opIdeqSetLV2SourceBand"></a>
+
+`GET /EQSetLV2SourceBand:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsetlv2sourceband-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqsetlv2sourceband-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqv2Delete
+
+<a id="opIdeqv2Delete"></a>
+
+`GET /EQv2Delete:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqv2delete-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqv2delete-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqv2Rename
+
+<a id="opIdeqv2Rename"></a>
+
+`GET /EQv2Rename:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqv2rename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqv2rename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqChangeSourceFX
+
+<a id="opIdeqChangeSourceFX"></a>
+
+`GET /EQChangeSourceFX:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqchangesourcefx-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqchangesourcefx-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqChangeFX
+
+<a id="opIdeqChangeFX"></a>
+
+`GET /EQChangeFX:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqchangefx-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqchangefx-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqGetLV2Band
+
+<a id="opIdeqGetLV2Band"></a>
+
+`GET /EQGetLV2Band:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqgetlv2band-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqgetlv2band-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqGetLV2SourceBand
+
+<a id="opIdeqGetLV2SourceBand"></a>
+
+`GET /EQGetLV2SourceBand:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqgetlv2sourceband-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqgetlv2sourceband-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqGetLV2SourceBandEx
+
+<a id="opIdeqGetLV2SourceBandEx"></a>
+
+`GET /EQGetLV2SourceBandEx:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqgetlv2sourcebandex-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqgetlv2sourcebandex-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqv2GetList
+
+<a id="opIdeqv2GetList"></a>
+
+`GET /EQv2GetList:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqv2getlist-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqv2getlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqv2GetNewList
+
+<a id="opIdeqv2GetNewList"></a>
+
+`GET /EQv2GetNewList:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqv2getnewlist-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqv2getnewlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqv2Load
+
+<a id="opIdeqv2Load"></a>
+
+`GET /EQv2Load:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqv2load-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqv2load-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqv2SourceLoad
+
+<a id="opIdeqv2SourceLoad"></a>
+
+`GET /EQv2SourceLoad:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqv2sourceload-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqv2sourceload-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSourceOff
+
+<a id="opIdeqSourceOff"></a>
+
+`GET /EQSourceOff:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsourceoff-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqsourceoff-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSetChannelMode
+
+<a id="opIdeqSetChannelMode"></a>
+
+`GET /EQSetChannelMode:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsetchannelmode-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqsetchannelmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSourceSave
+
+<a id="opIdeqSourceSave"></a>
+
+`GET /EQSourceSave:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsourcesave-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqsourcesave-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSave
+
+<a id="opIdeqSave"></a>
+
+`GET /EQSave:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqsave-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqsave-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-device-control">Device control</h1>
 
 Control the device
@@ -1327,6 +2946,26 @@ Observations:
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## buttonEnableGet
+
+<a id="opIdbuttonEnableGet"></a>
+
+`GET /Button_Enable_GET`
+
+*Unknown*
+
+...
+
+<h3 id="buttonenableget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -2123,11 +3762,17 @@ Get and set Bluetooth settings
 
 <a id="opIdstartBtDiscovery"></a>
 
-`GET /startbtdiscovery:3`
+`GET /startbtdiscovery:{n}`
 
 *Start Bluetooth device scan*
 
 Args: 3 (Not sure what this argument means, I've only seen the app use the value 3 for it. Works with other integers and successfully starts a BT scan. Maybe a max list size?)
+
+<h3 id="startbtdiscovery-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Not sure what this argument means, I've only seen the app use the value 3 for it. Works with other integers and successfully starts a BT scan. Maybe a max list size?|
 
 > Example responses
 
@@ -2381,6 +4026,356 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+## connectbta2dpsource
+
+<a id="opIdconnectbta2dpsource"></a>
+
+`GET /connectbta2dpsource:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="connectbta2dpsource-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="connectbta2dpsource-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## delbthistory
+
+<a id="opIddelbthistory"></a>
+
+`GET /delbthistory:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="delbthistory-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="delbthistory-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## btdisconnectall
+
+<a id="opIdbtdisconnectall"></a>
+
+`GET /btdisconnectall`
+
+*Unknown*
+
+...
+
+<h3 id="btdisconnectall-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getbtPairDevStat
+
+<a id="opIdgetbtPairDevStat"></a>
+
+`GET /getbtPairDevStat`
+
+*Unknown*
+
+...
+
+<h3 id="getbtpairdevstat-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getbtstatus
+
+<a id="opIdgetbtstatus"></a>
+
+`GET /getbtstatus`
+
+*Unknown*
+
+...
+
+<h3 id="getbtstatus-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## startbtserver
+
+<a id="opIdstartbtserver"></a>
+
+`GET /startbtserver`
+
+*Unknown*
+
+...
+
+<h3 id="startbtserver-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## startgetbtPairDevStat
+
+<a id="opIdstartgetbtPairDevStat"></a>
+
+`GET /startgetbtPairDevStat`
+
+*Unknown*
+
+...
+
+<h3 id="startgetbtpairdevstat-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## stopbtdiscovery
+
+<a id="opIdstopbtdiscovery"></a>
+
+`GET /stopbtdiscovery`
+
+*Unknown*
+
+...
+
+<h3 id="stopbtdiscovery-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## stopbtserver
+
+<a id="opIdstopbtserver"></a>
+
+`GET /stopbtserver:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="stopbtserver-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="stopbtserver-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## btavkenterpair
+
+<a id="opIdbtavkenterpair"></a>
+
+`GET /btavkenterpair`
+
+*Unknown*
+
+...
+
+<h3 id="btavkenterpair-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## blehidpair
+
+<a id="opIdblehidpair"></a>
+
+`GET /blehidpair:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="blehidpair-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="blehidpair-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## blehidremoveall
+
+<a id="opIdblehidremoveall"></a>
+
+`GET /blehidremoveall`
+
+*Unknown*
+
+...
+
+<h3 id="blehidremoveall-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## btrecovery
+
+<a id="opIdbtrecovery"></a>
+
+`GET /btrecovery`
+
+*Unknown*
+
+...
+
+<h3 id="btrecovery-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getBleHidStatus
+
+<a id="opIdgetBleHidStatus"></a>
+
+`GET /getblehidstatus`
+
+*Unknown*
+
+...
+
+<h3 id="getblehidstatus-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## startBleScan
+
+<a id="opIdstartBleScan"></a>
+
+`GET /startblescan:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="startblescan-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="startblescan-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getBleDiscoveryResult
+
+<a id="opIdgetBleDiscoveryResult"></a>
+
+`GET /getblediscoveryresult`
+
+*Unknown*
+
+...
+
+<h3 id="getblediscoveryresult-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-other">Other</h1>
 
 Existing commands, purpose unkown. To research further...
@@ -2391,7 +4386,7 @@ Existing commands, purpose unkown. To research further...
 
 `GET /getMvRemoteSilenceUpdateTime`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2411,7 +4406,7 @@ This operation does not require authentication
 
 `GET /getNetworkPreferDNS`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2431,7 +4426,7 @@ This operation does not require authentication
 
 `GET /getWlanBandConfig`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2451,7 +4446,7 @@ This operation does not require authentication
 
 `GET /getWlanRoamConfig`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2471,7 +4466,7 @@ This operation does not require authentication
 
 `GET /getIPV6Enable`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2491,7 +4486,7 @@ This operation does not require authentication
 
 `GET /getSpdifOutMaxCap`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2511,7 +4506,7 @@ This operation does not require authentication
 
 `GET /getCoaxOutMaxCap`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2531,7 +4526,7 @@ This operation does not require authentication
 
 `GET /GetFadeFeature`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2551,7 +4546,7 @@ This operation does not require authentication
 
 `GET /getAuxVoltageSupportList`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2571,7 +4566,7 @@ This operation does not require authentication
 
 `GET /audio_cast:get_speaker_list`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2591,7 +4586,7 @@ This operation does not require authentication
 
 `GET /getSoundCardModeSupportList`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2611,7 +4606,7 @@ This operation does not require authentication
 
 `GET /getActiveSoundCardOutputMode`
 
-*...*
+*Unknown*
 
 ...
 
@@ -2653,399 +4648,6 @@ Turns the screen of the WiiM Ultra on or off
 |d|1|
 
 <h3 id="setlightoperationbrightconfig-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomGetSlaveList
-
-<a id="opIdmultiroomGetSlaveList"></a>
-
-`GET /multiroom:getSlaveList`
-
-*Get a list of LinkPlay available*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:getSlaveList
-
-Allows to obtain the list of the devices using the same communication protocol.
-
-JSON output:
-{
-  "Slaves": "1",
-  "Slave_list": [
-    {
-      "Name": "FA5100_a3f4",
-      "Mask": "0",
-      "Volume": "90",
-      "Mute": "0",
-      "Channel": "0",
-      "Ip": "10.10.10.100",
-      "Version": "WIFIAudio.1.2.2321"
-    }
-  ]
-}
-
-Field	Description
-Slaves	Number of LinkPlay available
-Slave_list	Information about each Sonoé iEast case available
-name	Name
-mask	Case already in Multi-Room mode, Yes = 1, No = 0
-Volume	Volume level
-Mute	Enable Mute mode, Yes = 1, Off = 0
-Channel	Wifi channel
-ip	IP address of the LinkPlay Boot
-version	firmware version
-
-<h3 id="multiroomgetslavelist-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomSlaveKickout
-
-<a id="opIdmultiroomSlaveKickout"></a>
-
-`GET /multiroom:SlaveKickout:{ip}`
-
-*Removing a LinkPlay from the multi-room*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveKickout:ip
-
-Allows to remove from the multiroom mode a device Based on its IP address.
-
-<h3 id="multiroomslavekickout-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|ip|path|string|true|The IP address of the LinkPlay device to be removed from multi-room mode.|
-
-<h3 id="multiroomslavekickout-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomSlaveMask
-
-<a id="opIdmultiroomSlaveMask"></a>
-
-`GET /multiroom:SlaveMask:{ip}`
-
-*Hide the IP address of a LinkPlay*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMask:ip
-
-Allows to integrate a multi-room mode a device Based on its IP address. It is thus rendered invisible from the IP network.
-
-<h3 id="multiroomslavemask-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|ip|path|string|true|The IP address of the LinkPlay device to be hidden from the IP network in multi-room mode.|
-
-<h3 id="multiroomslavemask-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomSlaveUnMask
-
-<a id="opIdmultiroomSlaveUnMask"></a>
-
-`GET /multiroom:SlaveUnMask:{ip}`
-
-*Releasing a Multi-Room Mode*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveUnMask:ip
-
-Allows to release from the multi-room mode based on its IP address. It is thus visible on the IP network.
-
-<h3 id="multiroomslaveunmask-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|ip|path|string|true|The IP address of the LinkPlay device to be released from multi-room mode.|
-
-<h3 id="multiroomslaveunmask-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomSlaveVolume
-
-<a id="opIdmultiroomSlaveVolume"></a>
-
-`GET /multiroom:SlaveVolume:{ip}:{volume}`
-
-*Individual volume adjustment*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveVolume:ip:volume
-
-Allows you to adjust the individual volume of the each of the devicees via the IP address of the device and the definition of a value going from from 1 to 100. Note: these settings will be lost when deactivating multi-room mode (kickout)
-
-<h3 id="multiroomslavevolume-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|ip|path|string|true|The IP address of the LinkPlay device to adjust the volume for in multi-room mode.|
-|volume|path|integer|true|The volume level to set for the specified LinkPlay device, ranging from 1 to 100.|
-
-<h3 id="multiroomslavevolume-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setPlayerCmdSlaveVolume
-
-<a id="opIdsetPlayerCmdSlaveVolume"></a>
-
-`GET /setPlayerCmd:slave_vol:{volume}`
-
-*General Volume Adjustment*
-
-Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_vol:volume
-
-Adjusts the overal volume of the multi-room with the definition of a value ranging from 1 to 100. Note: thesis settings will be lost When disabling multi-room mode
-
-<h3 id="setplayercmdslavevolume-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|volume|path|integer|true|The overall volume level to set for multi-room mode, ranging from 1 to 100.|
-
-<h3 id="setplayercmdslavevolume-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomSlaveMute
-
-<a id="opIdmultiroomSlaveMute"></a>
-
-`GET /multiroom:SlaveMute:{ip}:{mute}`
-
-*Individual muting*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMute:ip:mute
-
-Enables the Mute on each device via the IP address of the device and by enabling (1) and disabling (0)
-
-<h3 id="multiroomslavemute-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|ip|path|string|true|The IP address of the LinkPlay device to adjust the mute status for in multi-room mode.|
-|mute|path|integer|true|Mute status to set for the specified LinkPlay device, where 1 enables mute and 0 disables mute.|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|mute|0|
-|mute|1|
-
-<h3 id="multiroomslavemute-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setPlayerCmdSlaveMute
-
-<a id="opIdsetPlayerCmdSlaveMute"></a>
-
-`GET /setPlayerCmd:slave_mute:mute`
-
-*General activation Mute*
-
-Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:mute
-
-Enables the Mute on all devices
-
-<h3 id="setplayercmdslavemute-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setPlayerCmdSlaveUnmute
-
-<a id="opIdsetPlayerCmdSlaveUnmute"></a>
-
-`GET /setPlayerCmd:slave_mute:unmute`
-
-*General Mute Disabling*
-
-Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:unmute
-
-To disable the mute mode overall the
-
-<h3 id="setplayercmdslaveunmute-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomSlaveChannel
-
-<a id="opIdmultiroomSlaveChannel"></a>
-
-`GET /multiroom:SlaveChannel:{ip}:{channel}`
-
-*Individual management of the audio signal Right / left*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveChannel:ip:channel
-
-Enables the Mute on Each of the devices via the IP address of the device and by this parameter to signal right only Channe0 = left and only 1 = Channel signal
-
-<h3 id="multiroomslavechannel-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|ip|path|string|true|The IP address of the LinkPlay device to adjust the audio channel for in multi-room mode.|
-|channel|path|integer|true|Audio channel to set for the specified LinkPlay device, where 0 signals right only and 1 signals left only.|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|channel|0|
-|channel|1|
-
-<h3 id="multiroomslavechannel-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setPlayerCmdSlaveChannel
-
-<a id="opIdsetPlayerCmdSlaveChannel"></a>
-
-`GET /setPlayerCmd:{slave_channel}:{channel}`
-
-*Overal management of the audio signal Right / left*
-
-Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_channel:channel
-
-Enables the Mute on Each of devices via the IP address of the device and by this parameter to signal right only Channel= 0 and left signal only 1 = Channel
-
-<h3 id="setplayercmdslavechannel-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|slave_channel|path|string|true|IP address of the device|
-|channel|path|integer|true|Audio channel to set for all devices in multi-room mode, where 0 signals right only and 1 signals left only.|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|channel|0|
-|channel|1|
-
-<h3 id="setplayercmdslavechannel-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomSlaveSetDeviceName
-
-<a id="opIdmultiroomSlaveSetDeviceName"></a>
-
-`GET /multiroom:SlaveSetDeviceName:{ip}:{s}`
-
-*Individual definition of the device Name*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveSetDeviceName:%ip:%s
-
-Individual settings of the name of the square in mode UPnP / Airplay
-
-<h3 id="multiroomslavesetdevicename-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|ip|path|string|true|The IP address of the LinkPlay device to set the device name for in multi-room mode.|
-|s|path|string|true|The device name to set for the specified LinkPlay device in multi-room mode.|
-
-<h3 id="multiroomslavesetdevicename-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## multiroomUngroup
-
-<a id="opIdmultiroomUngroup"></a>
-
-`GET /multiroom:Ungroup`
-
-*Disabling Multi-Room*
-
-Example: http://10.10.10.254/httpapi.asp?command=multiroom:Ungroup
-
-Disables the multi-room mode
-
-<h3 id="multiroomungroup-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -3291,6 +4893,2310 @@ Sets the name UPnP, DLNA and Airplay of the device (Hex)
 |name|path|string|true|The new device name to set for UPnP, DLNA, and Airplay, in hexadecimal format.|
 
 <h3 id="setdevicename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## easyLinkResponseStop
+
+<a id="opIdeasyLinkResponseStop"></a>
+
+`GET /EasyLinkResponseStop`
+
+*Unknown*
+
+...
+
+<h3 id="easylinkresponsestop-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## notifyUpgradeTypeFirmware
+
+<a id="opIdnotifyUpgradeTypeFirmware"></a>
+
+`GET /NotifyUpgradeType:firmware`
+
+*Unknown*
+
+...
+
+<h3 id="notifyupgradetypefirmware-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getLMPFilterCapability
+
+<a id="opIdgetLMPFilterCapability"></a>
+
+`GET /getLMPFilterCapability`
+
+*Unknown*
+
+...
+
+<h3 id="getlmpfiltercapability-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getStreamServiceConfig
+
+<a id="opIdgetStreamServiceConfig"></a>
+
+`GET /getStreamServiceConfig:{source}`
+
+*Unknown*
+
+...
+
+<h3 id="getstreamserviceconfig-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|source|path|string|true|Unknown|
+
+<h3 id="getstreamserviceconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setHandshakeCode
+
+<a id="opIdsetHandshakeCode"></a>
+
+`GET /setHandshakeCode:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="sethandshakecode-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="sethandshakecode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getsyslog
+
+<a id="opIdgetsyslog"></a>
+
+`GET /getsyslog`
+
+*Unknown*
+
+...
+
+<h3 id="getsyslog-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getsyslogIp
+
+<a id="opIdgetsyslogIp"></a>
+
+`GET /getsyslog:ip:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="getsyslogip-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="getsyslogip-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getStatusIp
+
+<a id="opIdgetStatusIp"></a>
+
+`GET /getStatus:ip:{str}`
+
+*Get the device status*
+
+...
+
+<h3 id="getstatusip-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="getstatusip-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getUpdateServer
+
+<a id="opIdgetUpdateServer"></a>
+
+`GET /GetUpdateServer`
+
+*Unknown*
+
+...
+
+<h3 id="getupdateserver-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getWeatherInfo
+
+<a id="opIdgetWeatherInfo"></a>
+
+`GET /getWeatherInfo`
+
+*Unknown*
+
+...
+
+<h3 id="getweatherinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAccessPIN
+
+<a id="opIdsetAccessPIN"></a>
+
+`GET /setAccessPIN:%7B%22PIN%22:%22{str}%22%7D`
+
+*Unknown*
+
+...
+
+<h3 id="setaccesspin-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setaccesspin-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setLanguage
+
+<a id="opIdsetLanguage"></a>
+
+`GET /setLanguage:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setlanguage-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setlanguage-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## autoPlaySet
+
+<a id="opIdautoPlaySet"></a>
+
+`GET /AutoPlaySet`
+
+*Unknown*
+
+...
+
+<h3 id="autoplayset-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getMvRomDownloadStatus
+
+<a id="opIdgetMvRomDownloadStatus"></a>
+
+`GET /getMvRomDownloadStatus`
+
+*Unknown*
+
+...
+
+<h3 id="getmvromdownloadstatus-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getMvRomDownloadV2Status
+
+<a id="opIdgetMvRomDownloadV2Status"></a>
+
+`GET /getMvRomDownloadV2Status`
+
+*Unknown*
+
+...
+
+<h3 id="getmvromdownloadv2status-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setHexDeviceName
+
+<a id="opIdsetHexDeviceName"></a>
+
+`GET /setHexDeviceName:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="sethexdevicename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="sethexdevicename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setMvRemoteSilenceOTATime
+
+<a id="opIdsetMvRemoteSilenceOTATime"></a>
+
+`GET /setMvRemoteSilenceOTATime:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setmvremotesilenceotatime-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setmvremotesilenceotatime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setMvRemoteSilenceUpdateTime
+
+<a id="opIdsetMvRemoteSilenceUpdateTime"></a>
+
+`GET /setMvRemoteSilenceUpdateTime:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setmvremotesilenceupdatetime-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setmvremotesilenceupdatetime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaEnableBetaId
+
+<a id="opIdalexaEnableBetaId"></a>
+
+`GET /alexaEnableBetaId:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="alexaenablebetaid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="alexaenablebetaid-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTimezone
+
+<a id="opIdsetTimezone"></a>
+
+`GET /setTimezone:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="settimezone-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="settimezone-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## checkAccessPIN
+
+<a id="opIdcheckAccessPIN"></a>
+
+`GET /checkAccessPIN`
+
+*Unknown*
+
+...
+
+<h3 id="checkaccesspin-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setUpdateServer
+
+<a id="opIdsetUpdateServer"></a>
+
+`GET /SetUpdateServer:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setupdateserver-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setupdateserver-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setWeatherLocation
+
+<a id="opIdsetWeatherLocation"></a>
+
+`GET /setWeatherLocation:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setweatherlocation-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setweatherlocation-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## startCheck
+
+<a id="opIdstartCheck"></a>
+
+`GET /StartCheck`
+
+*Unknown*
+
+...
+
+<h3 id="startcheck-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getbatteryval
+
+<a id="opIdgetbatteryval"></a>
+
+`GET /getbatteryval`
+
+*Unknown*
+
+...
+
+<h3 id="getbatteryval-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAlexaProfile
+
+<a id="opIdgetAlexaProfile"></a>
+
+`GET /getAlexaProfile`
+
+*Unknown*
+
+...
+
+<h3 id="getalexaprofile-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAvsDevInfo
+
+<a id="opIdgetAvsDevInfo"></a>
+
+`GET /getAvsDevInfo`
+
+*Unknown*
+
+...
+
+<h3 id="getavsdevinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaLogOut
+
+<a id="opIdalexaLogOut"></a>
+
+`GET /alexaLogOut`
+
+*Unknown*
+
+...
+
+<h3 id="alexalogout-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAlexaCountry
+
+<a id="opIdgetAlexaCountry"></a>
+
+`GET /getAlexaCountry`
+
+*Unknown*
+
+...
+
+<h3 id="getalexacountry-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaLanguageListGet
+
+<a id="opIdalexaLanguageListGet"></a>
+
+`GET /alexaLanguageListGet`
+
+*Unknown*
+
+...
+
+<h3 id="alexalanguagelistget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAsrStatus
+
+<a id="opIdgetAsrStatus"></a>
+
+`GET /getAsrStatus`
+
+*Unknown*
+
+...
+
+<h3 id="getasrstatus-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getLPAuthCode
+
+<a id="opIdgetLPAuthCode"></a>
+
+`GET /getLPAuthCode:hostId={str}:clientId={str2}`
+
+*Unknown*
+
+...
+
+<h3 id="getlpauthcode-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+|str2|path|string|true|Unknown|
+
+<h3 id="getlpauthcode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaGetLanguage
+
+<a id="opIdalexaGetLanguage"></a>
+
+`GET /alexaGetLanguage`
+
+*Unknown*
+
+...
+
+<h3 id="alexagetlanguage-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAlexaCountry
+
+<a id="opIdsetAlexaCountry"></a>
+
+`GET /setAlexaCountry:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setalexacountry-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setalexacountry-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaSetLanguage
+
+<a id="opIdalexaSetLanguage"></a>
+
+`GET /alexaSetLanguage:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="alexasetlanguage-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="alexasetlanguage-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTokenParams
+
+<a id="opIdsetTokenParams"></a>
+
+`GET /setTokenParams:code={str}:redirect_uri={str2}`
+
+*Unknown*
+
+...
+
+<h3 id="settokenparams-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+|str2|path|string|true|Unknown|
+
+<h3 id="settokenparams-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## talksetPrompt
+
+<a id="opIdtalksetPrompt"></a>
+
+`GET /talksetPrompt:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="talksetprompt-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="talksetprompt-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAmazonAccessToken
+
+<a id="opIdsetAmazonAccessToken"></a>
+
+`GET /setAmazonAccessToken:{str}:{str2}`
+
+*Unknown*
+
+...
+
+<h3 id="setamazonaccesstoken-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+|str2|path|string|true|Unknown|
+
+<h3 id="setamazonaccesstoken-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSyncPlayExtraDelay
+
+<a id="opIdsetSyncPlayExtraDelay"></a>
+
+`GET /SetSyncPlayExtraDelay:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="setsyncplayextradelay-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="setsyncplayextradelay-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setInitialConfiguration
+
+<a id="opIdsetInitialConfiguration"></a>
+
+`GET /setInitialConfiguration:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="setinitialconfiguration-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="setinitialconfiguration-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getUiConfig
+
+<a id="opIdgetUiConfig"></a>
+
+`GET /get_ui_config`
+
+*Unknown*
+
+...
+
+<h3 id="getuiconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getSpdifAutoSenseEnable
+
+<a id="opIdgetSpdifAutoSenseEnable"></a>
+
+`GET /getSpdifAutoSenseEnable`
+
+*Unknown*
+
+...
+
+<h3 id="getspdifautosenseenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getSpdifInNoiseRemove
+
+<a id="opIdgetSpdifInNoiseRemove"></a>
+
+`GET /getSpdifInNoiseRemove`
+
+*Unknown*
+
+...
+
+<h3 id="getspdifinnoiseremove-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## phonoModeSwitchSet
+
+<a id="opIdphonoModeSwitchSet"></a>
+
+`GET /PHONO_MODE_SWITCH_SET:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="phonomodeswitchset-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="phonomodeswitchset-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayModeVolumeEnable
+
+<a id="opIdsetPlayModeVolumeEnable"></a>
+
+`GET /setPlayModeVolumeEnable:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setplaymodevolumeenable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setplaymodevolumeenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getUiWallpaperList
+
+<a id="opIdgetUiWallpaperList"></a>
+
+`GET /get_ui_wallpaper_list`
+
+*Unknown*
+
+...
+
+<h3 id="getuiwallpaperlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayModeVolumeValue
+
+<a id="opIdsetPlayModeVolumeValue"></a>
+
+`GET /setPlayModeVolumeValue:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setplaymodevolumevalue-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setplaymodevolumevalue-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPowerModeTime
+
+<a id="opIdsetPowerModeTime"></a>
+
+`GET /setPowerModeTime:%7B%22idleInterval%22:%22{str}%22%7D`
+
+*Unknown*
+
+...
+
+<h3 id="setpowermodetime-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setpowermodetime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## roomCorrSet
+
+<a id="opIdroomCorrSet"></a>
+
+`GET /RoomCorrSet:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="roomcorrset-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="roomcorrset-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getButtonVolumeStep
+
+<a id="opIdgetButtonVolumeStep"></a>
+
+`GET /get_button_volume_step`
+
+*Unknown*
+
+...
+
+<h3 id="getbuttonvolumestep-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## roomCorrSetLR
+
+<a id="opIdroomCorrSetLR"></a>
+
+`GET /RoomCorrSetLR:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="roomcorrsetlr-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="roomcorrsetlr-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAvsMusicHDEnable
+
+<a id="opIdgetAvsMusicHDEnable"></a>
+
+`GET /getAvsMusicHDEnable`
+
+*Unknown*
+
+...
+
+<h3 id="getavsmusichdenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## roomCorrSetMode
+
+<a id="opIdroomCorrSetMode"></a>
+
+`GET /RoomCorrSetMode:%7B%22Mode%22:%22{str}%22%7D`
+
+*Unknown*
+
+...
+
+<h3 id="roomcorrsetmode-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="roomcorrsetmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAuxAutoSenseEnable
+
+<a id="opIdgetAuxAutoSenseEnable"></a>
+
+`GET /getAuxAutoSenseEnable`
+
+*Unknown*
+
+...
+
+<h3 id="getauxautosenseenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setRoomCorrection
+
+<a id="opIdsetRoomCorrection"></a>
+
+`GET /setRoomCorrection:%7B%22RC_Version%22:%22{str}%22,%22Time%22:%22{time}%22%7D`
+
+*Unknown*
+
+...
+
+<h3 id="setroomcorrection-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+|time|path|string|true|Format yyyy:MM:dd HH:mm|
+
+<h3 id="setroomcorrection-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setUiConfig
+
+<a id="opIdsetUiConfig"></a>
+
+`GET /set_ui_config:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setuiconfig-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setuiconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSpdifAutoSenseEnable
+
+<a id="opIdsetSpdifAutoSenseEnable"></a>
+
+`GET /setSpdifAutoSenseEnable:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="setspdifautosenseenable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="setspdifautosenseenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSpdifInNoiseRemove
+
+<a id="opIdsetSpdifInNoiseRemove"></a>
+
+`GET /setSpdifInNoiseRemove:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setspdifinnoiseremove-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setspdifinnoiseremove-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getChannelMode
+
+<a id="opIdgetChannelMode"></a>
+
+`GET /getChannelMode`
+
+*Unknown*
+
+...
+
+<h3 id="getchannelmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getDeviceNameChangeable
+
+<a id="opIdgetDeviceNameChangeable"></a>
+
+`GET /getDeviceNameChangeable`
+
+*Unknown*
+
+...
+
+<h3 id="getdevicenamechangeable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setButtonVolumeStep
+
+<a id="opIdsetButtonVolumeStep"></a>
+
+`GET /set_button_volume_step:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setbuttonvolumestep-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setbuttonvolumestep-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAutoSenseEnable
+
+<a id="opIdgetAutoSenseEnable"></a>
+
+`GET /getAutoSenseEnable`
+
+*Unknown*
+
+...
+
+<h3 id="getautosenseenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## startRebootTime
+
+<a id="opIdstartRebootTime"></a>
+
+`GET /StartRebootTime:1`
+
+*Unknown*
+
+...
+
+<h3 id="startreboottime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## ledSwitchGet
+
+<a id="opIdledSwitchGet"></a>
+
+`GET /LED_SWITCH_GET`
+
+*Unknown*
+
+...
+
+<h3 id="ledswitchget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getMQAReceiverCap
+
+<a id="opIdgetMQAReceiverCap"></a>
+
+`GET /getMQAReceiverCap`
+
+*Unknown*
+
+...
+
+<h3 id="getmqareceivercap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAvsMusicHDEnable
+
+<a id="opIdsetAvsMusicHDEnable"></a>
+
+`GET /setAvsMusicHDEnable:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setavsmusichdenable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setavsmusichdenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## reloadButtonGet
+
+<a id="opIdreloadButtonGet"></a>
+
+`GET /Reload_Button_GET`
+
+*Unknown*
+
+...
+
+<h3 id="reloadbuttonget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAuxAutoSenseEnable
+
+<a id="opIdsetAuxAutoSenseEnable"></a>
+
+`GET /setAuxAutoSenseEnable:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="setauxautosenseenable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="setauxautosenseenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getLowPriorityPromptDisable
+
+<a id="opIdgetLowPriorityPromptDisable"></a>
+
+`GET /getLowPriorityPromptDisable`
+
+*Unknown*
+
+...
+
+<h3 id="getlowprioritypromptdisable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getSoftMute
+
+<a id="opIdgetSoftMute"></a>
+
+`GET /getSoftMute`
+
+*Unknown*
+
+...
+
+<h3 id="getsoftmute-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getLineInMaxCap
+
+<a id="opIdgetLineInMaxCap"></a>
+
+`GET /getLineInMaxCap`
+
+*Unknown*
+
+...
+
+<h3 id="getlineinmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAuxInMaxCap
+
+<a id="opIdgetAuxInMaxCap"></a>
+
+`GET /getAuxInMaxCap`
+
+*Unknown*
+
+...
+
+<h3 id="getauxinmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getUacOutMaxCap
+
+<a id="opIdgetUacOutMaxCap"></a>
+
+`GET /getUacOutMaxCap`
+
+*Unknown*
+
+...
+
+<h3 id="getuacoutmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getHDMIAutoSenseEnable
+
+<a id="opIdgetHDMIAutoSenseEnable"></a>
+
+`GET /getHDMIAutoSenseEnable`
+
+*Unknown*
+
+...
+
+<h3 id="gethdmiautosenseenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setChannelMode
+
+<a id="opIdsetChannelMode"></a>
+
+`GET /setChannelMode:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="setchannelmode-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="setchannelmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getSyncPlayExtraDelay
+
+<a id="opIdgetSyncPlayExtraDelay"></a>
+
+`GET /GetSyncPlayExtraDelay`
+
+*Unknown*
+
+...
+
+<h3 id="getsyncplayextradelay-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getLightOperationBrightConfig
+
+<a id="opIdgetLightOperationBrightConfig"></a>
+
+`GET /getLightOperationBrightConfig`
+
+*Unknown*
+
+...
+
+<h3 id="getlightoperationbrightconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setUiWallpaperList
+
+<a id="opIdsetUiWallpaperList"></a>
+
+`GET /set_ui_wallpaper_list:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setuiwallpaperlist-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setuiwallpaperlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getMainSubExtraDelay
+
+<a id="opIdgetMainSubExtraDelay"></a>
+
+`GET /getMainSubExtraDelay`
+
+*Unknown*
+
+...
+
+<h3 id="getmainsubextradelay-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## castDisable
+
+<a id="opIdcastDisable"></a>
+
+`GET /Cast:Disable`
+
+*Unknown*
+
+...
+
+<h3 id="castdisable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## castDisableUsageReport
+
+<a id="opIdcastDisableUsageReport"></a>
+
+`GET /Cast:DisableUsageReport`
+
+*Unknown*
+
+...
+
+<h3 id="castdisableusagereport-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAutoSenseEnable
+
+<a id="opIdsetAutoSenseEnable"></a>
+
+`GET /setAutoSenseEnable:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setautosenseenable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setautosenseenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## phonoModeSwitchGet
+
+<a id="opIdphonoModeSwitchGet"></a>
+
+`GET /PHONO_MODE_SWITCH_GET`
+
+*Unknown*
+
+...
+
+<h3 id="phonomodeswitchget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getPlayModeVolumeEnable
+
+<a id="opIdgetPlayModeVolumeEnable"></a>
+
+`GET /getPlayModeVolumeEnable`
+
+*Unknown*
+
+...
+
+<h3 id="getplaymodevolumeenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setVolumeControl
+
+<a id="opIdsetVolumeControl"></a>
+
+`GET /setVolumeControl:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="setvolumecontrol-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="setvolumecontrol-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getPlayModeVolumeValue
+
+<a id="opIdgetPlayModeVolumeValue"></a>
+
+`GET /getPlayModeVolumeValue`
+
+*Unknown*
+
+...
+
+<h3 id="getplaymodevolumevalue-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setMQAReceiverCap
+
+<a id="opIdsetMQAReceiverCap"></a>
+
+`GET /setMQAReceiverCap:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setmqareceivercap-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setmqareceivercap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getPowerModeTime
+
+<a id="opIdgetPowerModeTime"></a>
+
+`GET /getPowerModeTime`
+
+*Unknown*
+
+...
+
+<h3 id="getpowermodetime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setMaxVolume
+
+<a id="opIdsetMaxVolume"></a>
+
+`GET /setMaxVolume:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="setmaxvolume-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="setmaxvolume-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## enableCast
+
+<a id="opIdenableCast"></a>
+
+`GET /Cast:EnableCast`
+
+*Unknown*
+
+...
+
+<h3 id="enablecast-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## reloadButtonUpdate
+
+<a id="opIdreloadButtonUpdate"></a>
+
+`GET /Reload_Button_UPDATE:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="reloadbuttonupdate-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="reloadbuttonupdate-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## enableCastUsageReport
+
+<a id="opIdenableCastUsageReport"></a>
+
+`GET /Cast:EnableUsageReport`
+
+*Unknown*
+
+...
+
+<h3 id="enablecastusagereport-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## disableLowPriorityPrompt
+
+<a id="opIddisableLowPriorityPrompt"></a>
+
+`GET /disableLowPriorityPrompt:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="disablelowpriorityprompt-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="disablelowpriorityprompt-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSoftMute
+
+<a id="opIdsetSoftMute"></a>
+
+`GET /setSoftMute:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setsoftmute-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setsoftmute-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setHDMIAutoSenseEnable
+
+<a id="opIdsetHDMIAutoSenseEnable"></a>
+
+`GET /setHDMIAutoSenseEnable:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="sethdmiautosenseenable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="sethdmiautosenseenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSpdifOutMaxCap
+
+<a id="opIdsetSpdifOutMaxCap"></a>
+
+`GET /setSpdifOutMaxCap:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setspdifoutmaxcap-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setspdifoutmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setCoaxOutMaxCap
+
+<a id="opIdsetCoaxOutMaxCap"></a>
+
+`GET /setCoaxOutMaxCap:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setcoaxoutmaxcap-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setcoaxoutmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setLineInMaxCap
+
+<a id="opIdsetLineInMaxCap"></a>
+
+`GET /setLineInMaxCap:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setlineinmaxcap-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setlineinmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAuxInMaxCap
+
+<a id="opIdsetAuxInMaxCap"></a>
+
+`GET /setAuxInMaxCap:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setauxinmaxcap-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setauxinmaxcap-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setUacOutMaxCap
+
+<a id="opIdsetUacOutMaxCap"></a>
+
+`GET /setUacOutMaxCap:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setuacoutmaxcap-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setuacoutmaxcap-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|

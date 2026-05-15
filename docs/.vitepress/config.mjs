@@ -27,6 +27,7 @@ export default defineConfig({
           { text: 'Device information', link: '/tags/Device information' },
           { text: 'Track Metadata', link: '/tags/Track Metadata' },
           { text: 'Playback control', link: '/tags/Playback control' },
+          { text: 'Multiroom', link: '/tags/Multiroom' },
           { text: 'Network', link: '/tags/Network' },
           { text: 'Equalizer', link: '/tags/Equalizer' },
           { text: 'Device control', link: '/tags/Device control' },
