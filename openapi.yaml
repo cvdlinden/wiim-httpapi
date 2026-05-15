@@ -40,6 +40,8 @@ tags:
     description: Get Current Track Metadata
   - name: Playback control
     description: Get and set playback controls
+  - name: Multiroom
+    description: Get and set multirroom settings
   - name: Network
     description: Get the network status
   - name: Equalizer
@@ -594,7 +596,7 @@ paths:
                   summary: Connected
                   value: OK
       parameters: []
-  "/setWlanStaticIp:{IpAddress}:{GatewayIp}:{DnsServerIp}":
+  /setWlanStaticIp:{IpAddress}:{GatewayIp}:{DnsServerIp}:
     get:
       tags:
         - Network
@@ -610,6 +612,47 @@ paths:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
       operationId: setWlanStaticIp
+      parameters:
+        - name: IpAddress
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Static IP address to set + netmask
+          example: "192.168.0.123/24"
+        - name: GatewayIp
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "192.168.0.1"
+          description: Gateway IP address
+        - name: DnsServerIp
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "The DNS Server (default: 8.8.8.8)"
+          example: "8.8.8.8"
+      responses:
+        "200":
+          $ref: "#/components/responses/StringOK"
+  /setEthStaticIp:{IpAddress}:{GatewayIp}:{DnsServerIp}:
+    get:
+      tags:
+        - Network
+      summary: Set static Ethernet network config
+      description: |-
+        Example: https://10.10.10.254/httpapi.asp?command=setEthStaticIp:ipAddr=192.168.1.100/24:gateWay=192.168.1.1:dnsServer=8.8.8.8
+
+        Keyword args:
+        - ipAddr: Static IP address to set + netmask
+        - gateWay: Gateway
+        - dnsServer: The DNS Server (default: 8.8.8.8)
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: setEthStaticIp
       parameters:
         - name: IpAddress
           in: path
@@ -1655,7 +1698,7 @@ paths:
                   value: Failed
 
   # Bluetooth
-  /startbtdiscovery:3:
+  /startbtdiscovery:{n}:
     get:
       tags:
         - Bluetooth
@@ -1666,6 +1709,13 @@ paths:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
       operationId: startBtDiscovery
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Not sure what this argument means, I've only seen the app use the value 3 for it. Works with other integers and successfully starts a BT scan. Maybe a max list size?
       responses:
         "200":
           $ref: "#/components/responses/StringOK"
@@ -1833,7 +1883,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1847,7 +1897,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1861,7 +1911,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1875,7 +1925,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1889,7 +1939,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1903,7 +1953,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1917,7 +1967,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1931,7 +1981,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1945,7 +1995,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1960,7 +2010,7 @@ paths:
       deprecated: true
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1974,7 +2024,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -1988,7 +2038,7 @@ paths:
     get:
       tags:
         - Other
-      summary: ...
+      summary: Unknown
       description: |-
         ...
       externalDocs:
@@ -2042,7 +2092,7 @@ paths:
   "/multiroom:getSlaveList":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Get a list of LinkPlay available
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:getSlaveList
@@ -2085,7 +2135,7 @@ paths:
   "/multiroom:SlaveKickout:{ip}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Removing a LinkPlay from the multi-room
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveKickout:ip
@@ -2108,7 +2158,7 @@ paths:
   "/multiroom:SlaveMask:{ip}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Hide the IP address of a LinkPlay
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMask:ip
@@ -2131,7 +2181,7 @@ paths:
   "/multiroom:SlaveUnMask:{ip}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Releasing a Multi-Room Mode
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveUnMask:ip
@@ -2154,7 +2204,7 @@ paths:
   "/multiroom:SlaveVolume:{ip}:{volume}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Individual volume adjustment
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveVolume:ip:volume
@@ -2185,7 +2235,7 @@ paths:
   "/setPlayerCmd:slave_vol:{volume}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: General Volume Adjustment
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_vol:volume
@@ -2210,7 +2260,7 @@ paths:
   "/multiroom:SlaveMute:{ip}:{mute}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Individual muting
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveMute:ip:mute
@@ -2242,7 +2292,7 @@ paths:
   "/setPlayerCmd:slave_mute:mute":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: General activation Mute
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:mute
@@ -2258,7 +2308,7 @@ paths:
   "/setPlayerCmd:slave_mute:unmute":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: General Mute Disabling
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_mute:unmute
@@ -2274,7 +2324,7 @@ paths:
   "/multiroom:SlaveChannel:{ip}:{channel}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Individual management of the audio signal Right / left
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveChannel:ip:channel
@@ -2306,7 +2356,7 @@ paths:
   "/setPlayerCmd:{slave_channel}:{channel}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Overal management of the audio signal Right / left
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=setPlayerCmd:slave_channel:channel
@@ -2338,7 +2388,7 @@ paths:
   "/multiroom:SlaveSetDeviceName:{ip}:{s}":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Individual definition of the device Name
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveSetDeviceName:%ip:%s
@@ -2367,7 +2417,7 @@ paths:
   "/multiroom:Ungroup":
     get:
       tags:
-        - Other
+        - Multiroom
       summary: Disabling Multi-Room
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=multiroom:Ungroup
@@ -2574,6 +2624,2524 @@ paths:
           schema:
             type: string
           description: The new device name to set for UPnP, DLNA, and Airplay, in hexadecimal format.
+      responses:
+        "200":
+          description: Successful response
+  /EasyLinkResponseStop:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: easyLinkResponseStop
+      responses:
+        "200":
+          description: Successful response
+  "/wlanConnectHideAp:{str}":
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: wlanConnectHideAp
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  "/wlanConnectHideApEx:{str1}:{str2}:{str3}":
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: wlanConnectHideApEx
+      parameters:
+        - name: "str1"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "str2"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "str3"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  "/NotifyUpgradeType:firmware":
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: notifyUpgradeTypeFirmware
+      responses:
+        "200":
+          description: Successful response
+  /getLMPFilterCapability:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getLMPFilterCapability
+      responses:
+        "200":
+          description: Successful response
+  /getStreamServiceConfig:{source}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getStreamServiceConfig
+      parameters:
+        - name: "source"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /multiroom:LeaveGroup:
+    get:
+      tags:
+        - Multiroom
+      summary: Leaving the multi-room mode
+      description: |-
+        ...
+      operationId: multiroomLeaveGroup
+      responses:
+        "200":
+          description: Successful response
+  /multiroom:JoinGroup:IP={IP}:uuid={uuid}:
+    get:
+      tags:
+        - Multiroom
+      summary: Joining a multi-room group
+      description: |-
+        ...
+      operationId: multiroomJoinGroup
+      parameters:
+        - name: "IP"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The IP address of the multi-room group to join.
+        - name: "uuid"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The UUID of the multi-room group to join.
+      responses:
+        "200":
+          description: Successful response
+  /connectbta2dpsource:{str}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: connectbta2dpsource
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /delbthistory:{str}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: delbthistory
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /btdisconnectall:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: btdisconnectall
+      responses:
+        "200":
+          description: Successful response
+  /getbtPairDevStat:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getbtPairDevStat
+      responses:
+        "200":
+          description: Successful response
+  /getbtstatus:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getbtstatus
+      responses:
+        "200":
+          description: Successful response
+  /startbtserver:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: startbtserver
+      responses:
+        "200":
+          description: Successful response
+  /startgetbtPairDevStat:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: startgetbtPairDevStat
+      responses:
+        "200":
+          description: Successful response
+  /stopbtdiscovery:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: stopbtdiscovery
+      responses:
+        "200":
+          description: Successful response
+  /stopbtserver:{n}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: stopbtserver
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setHandshakeCode:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setHandshakeCode
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getNetwork:
+    get:
+      tags:
+        - Network
+      summary: Get the network configuration
+      description: |-
+        ...
+      operationId: getNetwork
+      responses:
+        "200":
+          description: Successful response
+  /getsyslog:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getsyslog
+      responses:
+        "200":
+          description: Successful response
+  /getsyslog:ip:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getsyslogIp
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getStatus:ip:{str}:
+    get:
+      tags:
+        - Other
+      summary: Get the device status
+      description: |-
+        ...
+      operationId: getStatusIp
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /GetUpdateServer:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getUpdateServer
+      responses:
+        "200":
+          description: Successful response
+  /getWeatherInfo:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getWeatherInfo
+      responses:
+        "200":
+          description: Successful response
+  /wlanGetApListEx:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: wlanGetApListEx
+      responses:
+        "200":
+          description: Successful response
+  /setAccessPIN:%7B%22PIN%22:%22{str}%22%7D:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setAccessPIN
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setLanguage:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setLanguage
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /AutoPlaySet:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: autoPlaySet
+      responses:
+        "200":
+          description: Successful response
+  /EQSet:Bass:{n}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSetBass
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQSet:Treble:{n}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSetTreble
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQEnable:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqEnable
+      responses:
+        "200":
+          description: Successful response
+  /EQDisable:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqDisable
+      responses:
+        "200":
+          description: Successful response
+  /getMvRomDownloadStatus:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getMvRomDownloadStatus
+      responses:
+        "200":
+          description: Successful response
+  /getMvRomDownloadV2Status:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getMvRomDownloadV2Status
+      responses:
+        "200":
+           description: Successful response
+  /setHexDeviceName:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setHexDeviceName
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setHideSSID:{str}:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setHideSSID
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setMvRemoteSilenceOTATime:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setMvRemoteSilenceOTATime
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setMvRemoteSilenceUpdateTime:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setMvRemoteSilenceUpdateTime
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setNetworkExAES:{n}:{password}:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setNetworkExAES
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+          description: Unknown
+        - name: "password"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /multiroom:SlaveDeviceName:{ip}:{str}:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: multiroomSlaveDeviceName
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /alexaEnableBetaId:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: alexaEnableBetaId
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setTimezone:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setTimezone
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /checkAccessPIN:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: checkAccessPIN
+      responses:
+        "200":
+          description: Successful response
+  /SetUpdateServer:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setUpdateServer
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setWeatherLocation:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setWeatherLocation
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /btavkenterpair:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: btavkenterpair
+      responses:
+        "200":
+          description: Successful response
+  /StartCheck:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: startCheck
+      responses:
+        "200":
+          description: Successful response
+  /getbatteryval:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getbatteryval
+      responses:
+        "200":
+          description: Successful response
+  /getAlexaProfile:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getAlexaProfile
+      responses:
+        "200":
+          description: Successful response
+  /getAvsDevInfo:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getAvsDevInfo
+      responses:
+        "200":
+          description: Successful response
+  /alexaLogOut:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: alexaLogOut
+      responses:
+        "200":
+          description: Successful response
+  /getAlexaCountry:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getAlexaCountry
+      responses:
+        "200":
+          description: Successful response
+  /alexaLanguageListGet:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: alexaLanguageListGet
+      responses:
+        "200":
+          description: Successful response
+  /getAsrStatus:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getAsrStatus
+      responses:
+        "200":
+          description: Successful response
+  /getLPAuthCode:hostId={str}:clientId={str2}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getLPAuthCode
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "str2"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /alexaGetLanguage:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: alexaGetLanguage
+      responses:
+        "200":
+          description: Successful response
+  /setAlexaCountry:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setAlexaCountry
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /alexaSetLanguage:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: alexaSetLanguage
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setTokenParams:code={str}:redirect_uri={str2}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setTokenParams
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "str2"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /talksetPrompt:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: talksetPrompt
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setAmazonAccessToken:{str}:{str2}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setAmazonAccessToken
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "str2"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /SetSyncPlayExtraDelay:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setSyncPlayExtraDelay
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQSetBand:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSetBand
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setInitialConfiguration:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setInitialConfiguration
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setWlanBandConfig:{str}:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setWlanBandConfig
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /get_ui_config:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getUiConfig
+      responses:
+        "200":
+          description: Successful response
+  /setWlanConnectDisable:{str}:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setWlanConnectDisable
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getSpdifAutoSenseEnable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getSpdifAutoSenseEnable
+      responses:
+        "200":
+          description: Successful response
+  /setMRMSubLPF:{str}:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setMRMSubLPF
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setWlanRoamConfig:{str}:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setWlanRoamConfig
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getSpdifInNoiseRemove:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getSpdifInNoiseRemove
+      responses:
+        "200":
+          description: Successful response
+  /setNetworkPreferDNS:{str}:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setNetworkPreferDNS
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /blehidpair:{str}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: blehidpair
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQSetLV2Band:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSetLV2Band
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /blehidremoveall:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: blehidremoveall
+      responses:
+        "200":
+          description: Successful response
+  /EQSetLV2SourceBand:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSetLV2SourceBand
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /btrecovery:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: btrecovery
+      responses:
+        "200":
+          description: Successful response
+  /PHONO_MODE_SWITCH_SET:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: phonoModeSwitchSet
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getSubLPF:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getSubLPF
+      responses:
+        "200":
+          description: Successful response
+  /setPlayModeVolumeEnable:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setPlayModeVolumeEnable
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQv2Delete:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqv2Delete
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /get_ui_wallpaper_list:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getUiWallpaperList
+      responses:
+        "200":
+          description: Successful response
+  /setPlayModeVolumeValue:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setPlayModeVolumeValue
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQv2Rename:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqv2Rename
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setPowerModeTime:%7B%22idleInterval%22:%22{str}%22%7D:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setPowerModeTime
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQChangeSourceFX:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqChangeSourceFX
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /RoomCorrSet:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: roomCorrSet
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQChangeFX:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqChangeFX
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /get_button_volume_step:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getButtonVolumeStep
+      responses:
+        "200":
+          description: Successful response
+  /RoomCorrSetLR:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: roomCorrSetLR
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getAvsMusicHDEnable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getAvsMusicHDEnable
+      responses:
+        "200":
+          description: Successful response
+  /wlanGetApFullList:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: wlanGetApFullList
+      responses:
+        "200":
+          description: Successful response
+  /RoomCorrSetMode:%7B%22Mode%22:%22{str}%22%7D:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: roomCorrSetMode
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getAuxAutoSenseEnable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getAuxAutoSenseEnable
+      responses:
+        "200":
+          description: Successful response
+  /wlanSwitchConnectedAp:ssid={ssid}:bssid={bssid}:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: wlanSwitchConnectedAp
+      parameters:
+        - name: "ssid"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "bssid"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setRoomCorrection:%7B%22RC_Version%22:%22{str}%22,%22Time%22:%22{time}%22%7D:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setRoomCorrection
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "time"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Format yyyy:MM:dd HH:mm
+      responses:
+        "200":
+          description: Successful response
+  /set_ui_config:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setUiConfig
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getblehidstatus:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getBleHidStatus
+      responses:
+        "200":
+          description: Successful response
+  /setSpdifAutoSenseEnable:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setSpdifAutoSenseEnable
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /Button_Enable_GET:
+    get:
+      tags:
+        - Device control
+      summary: Unknown
+      description: |-
+        ...
+      operationId: buttonEnableGet
+      responses:
+        "200":
+          description: Successful response
+  /setSpdifInNoiseRemove:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setSpdifInNoiseRemove
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getChannelMode:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getChannelMode
+      responses:
+        "200":
+          description: Successful response
+  /setSubLPF:{str}:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setSubLPF
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getDeviceNameChangeable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getDeviceNameChangeable
+      responses:
+        "200":
+          description: Successful response
+  /EQGetLV2Band:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqGetLV2Band
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQGetLV2SourceBand:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqGetLV2SourceBand
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQGetLV2SourceBandEx:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqGetLV2SourceBandEx
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /set_button_volume_step:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setButtonVolumeStep
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getAutoSenseEnable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getAutoSenseEnable
+      responses:
+        "200":
+          description: Successful response
+  /EQv2GetList:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqv2GetList
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /StartRebootTime:1:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: startRebootTime
+      responses:
+        "200":
+          description: Successful response
+  /EQv2GetNewList:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqv2GetNewList
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /LED_SWITCH_GET:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: ledSwitchGet
+      responses:
+        "200":
+          description: Successful response
+  /EQv2Load:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqv2Load
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /startblescan:{n}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: startBleScan
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getMQAReceiverCap:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getMQAReceiverCap
+      responses:
+        "200":
+          description: Successful response
+  /EQv2SourceLoad:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqv2SourceLoad
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setAvsMusicHDEnable:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setAvsMusicHDEnable
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /Reload_Button_GET:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: reloadButtonGet
+      responses:
+        "200":
+          description: Successful response
+  /EQSourceOff:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSourceOff
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setAuxAutoSenseEnable:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setAuxAutoSenseEnable
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /multiroom:subwooferForget:%7B%22uuid%22:%22{uuid}%22%7D:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: multiroomSubwooferForget
+      parameters:
+        - name: "uuid"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getLowPriorityPromptDisable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getLowPriorityPromptDisable
+      responses:
+        "200":
+          description: Successful response
+  /multiroom:subwooferGetPairInfo:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: multiroomSubwooferGetPairInfo
+      responses:
+        "200":
+          description: Successful response
+  /getSoftMute:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getSoftMute
+      responses:
+        "200":
+          description: Successful response
+  /multiroom:ConfigGet:leadtime:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: multiroomConfigGetLeadtime
+      responses:
+        "200":
+          description: Successful response
+  /multiroom:subwooferPair:{str}:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: multiroomSubwooferPair
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getLineInMaxCap:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getLineInMaxCap
+      responses:
+        "200":
+          description: Successful response
+  /getAuxInMaxCap:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getAuxInMaxCap
+      responses:
+        "200":
+          description: Successful response
+  /getUacOutMaxCap:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getUacOutMaxCap
+      responses:
+        "200":
+          description: Successful response
+  /getHDMIAutoSenseEnable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getHDMIAutoSenseEnable
+      responses:
+        "200":
+          description: Successful response
+  /setChannelMode:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setChannelMode
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getblediscoveryresult:
+    get:
+      tags:
+        - Bluetooth
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getBleDiscoveryResult
+      responses:
+        "200":
+          description: Successful response
+  /GetSyncPlayExtraDelay:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getSyncPlayExtraDelay
+      responses:
+        "200":
+          description: Successful response
+  /getLightOperationBrightConfig:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getLightOperationBrightConfig
+      responses:
+        "200":
+          description: Successful response
+  /set_ui_wallpaper_list:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setUiWallpaperList
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+           description: Successful response
+  /getMRMSubLPF:{str}:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getMRMSubLPF
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getMainSubExtraDelay:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getMainSubExtraDelay
+      responses:
+        "200":
+          description: Successful response
+  /Cast:Disable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: castDisable
+      responses:
+        "200":
+          description: Successful response
+  /Cast:DisableUsageReport:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: castDisableUsageReport
+      responses:
+        "200":
+          description: Successful response
+  /setAutoSenseEnable:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setAutoSenseEnable
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQSetChannelMode:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSetChannelMode
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setIPV6Enable:{str}:
+    get:
+      tags:
+        - Network
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setIPV6Enable
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /PHONO_MODE_SWITCH_GET:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: phonoModeSwitchGet
+      responses:
+        "200":
+          description: Successful response
+  /getPlayModeVolumeEnable:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getPlayModeVolumeEnable
+      responses:
+        "200":
+          description: Successful response
+  /setVolumeControl:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setVolumeControl
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getPlayModeVolumeValue:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getPlayModeVolumeValue
+      responses:
+        "200":
+          description: Successful response
+  /EQSourceSave:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSourceSave
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setMQAReceiverCap:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setMQAReceiverCap
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getPowerModeTime:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: getPowerModeTime
+      responses:
+        "200":
+          description: Successful response
+  /setMaxVolume:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setMaxVolume
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /Cast:EnableCast:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: enableCast
+      responses:
+        "200":
+          description: Successful response
+  /Reload_Button_UPDATE:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: reloadButtonUpdate
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /Cast:EnableUsageReport:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: enableCastUsageReport
+      responses:
+        "200":
+          description: Successful response
+  /disableLowPriorityPrompt:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: disableLowPriorityPrompt
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /multiroom:ConfigSet:leadtime:{str}:
+    get:
+      tags:
+        - Multiroom
+      summary: Unknown
+      description: |-
+        ...
+      operationId: multiroomConfigSetLeadtime
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setSoftMute:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setSoftMute
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setHDMIAutoSenseEnable:{n}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setHDMIAutoSenseEnable
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setSpdifOutMaxCap:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setSpdifOutMaxCap
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setCoaxOutMaxCap:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setCoaxOutMaxCap
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setLineInMaxCap:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setLineInMaxCap
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setAuxInMaxCap:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setAuxInMaxCap
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setUacOutMaxCap:{str}:
+    get:
+      tags:
+        - Other
+      summary: Unknown
+      description: |-
+        ...
+      operationId: setUacOutMaxCap
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /EQSave:{str}:
+    get:
+      tags:
+        - Equalizer
+      summary: Unknown
+      description: |-
+        ...
+      operationId: eqSave
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
       responses:
         "200":
           description: Successful response
