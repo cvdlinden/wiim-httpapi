@@ -6,12 +6,47 @@ export default defineConfig({
 
   ignoreDeadLinks: true,
   base: '/wiim-httpapi/',
+  lastUpdated: true,
+
+  head: [
+    [
+      'meta',
+      { name: 'google-site-verification', content: 'yPm8E8x36ekuDpChm-70rwUF5w-_-XcmH72Lf_OuXQM' }
+    ],
+    [
+      'script',
+      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-Q2V26LJJ2D' }
+    ],
+    [
+      'script',
+      {},
+      `window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Q2V26LJJ2D');`
+    ]
+  ],
+
+  sitemap: {
+    hostname: 'https://cvdlinden.github.io/wiim-httpapi/'
+  },
 
   themeConfig: {
+
+    search: {
+      provider: 'local'
+    },
+
     nav: [
       { text: 'Home', link: '/' },
       { text: 'API Reference', link: '/api-reference' }
     ],
+
+    footer: {
+      message: 'Released under the <a href="https://github.com/cvdlinden/wiim-httpapi/blob/main/LICENSE">GNU General Public License v3.0</a>.',
+      copyright: 'Copyright © 2026-present, <a href="https://github.com/cvdlinden/wiim-httpapi">WiiM HTTP API</a>'
+    },
+
     sidebar: [
       {
         text: 'Getting Started',
