@@ -1,6 +1,4 @@
 ---
-aside: false
-outline: false
 title: Introduction
 ---
 

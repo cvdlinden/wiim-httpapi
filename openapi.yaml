@@ -83,7 +83,7 @@ paths:
         -  'getStatusEx' will do an /httpapi.asp?command=getStatusEx
         -  'setPlayerCmd:pause' will do an /httpapi.asp?command=setPlayerCmd:pause
         -  'setPlayerCmd:resume' will do an /httpapi.asp?command=setPlayerCmd:resume
-        
+
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -165,7 +165,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/DeviceDebugInfo"
       parameters: []
-        
+
   # Track Metadata
   /getMetaInfo:
     get:
@@ -3116,7 +3116,7 @@ paths:
       operationId: getMvRomDownloadV2Status
       responses:
         "200":
-           description: Successful response
+          description: Successful response
   /setHexDeviceName:{str}:
     get:
       tags:
@@ -3577,21 +3577,57 @@ paths:
       responses:
         "200":
           description: Successful response
-  /EQSetBand:{str}:
+  /EQSetBand:%7B%22EQBand%22:[%7B%22index%22:{n1},%22param_name%22:{str},%22value%22:{n2}%7D]%7D:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Set (a specific) band of the 10-band EQ
       description: |-
-        ...
+        https://10.10.10.254/httpapi.asp?command=EQSetBand:{"EQBand":[{"index":0,"param_name":"band31hz","value":10}]}
+        
+        A way to control the 10-band EQ, including real-time updates from external inputs.
+
+        Example 1 - single band change to 10:
+
+        https://10.10.10.254/httpapi.asp?command=EQSetBand:{"EQBand":[{"index":0,"param_name":"band31hz","value":10}]}'
+
+        Example 2 - sets all bands to 52:
+
+        https://10.10.10.254/httpapi.asp?command=EQSetBand:{"EQBand":[{"index":0,"param_name":"band31hz","value":52},{"index":1,"param_name":"band63hz","value":52},{"index":2,"param_name":"band125hz","value":52},{"index":3,"param_name":"band250hz","value":52},{"index":4,"param_name":"band500hz","value":52},{"index":5,"param_name":"band1khz","value":52},{"index":6,"param_name":"band2khz","value":52},{"index":7,"param_name":"band4khz","value":52},{"index":8,"param_name":"band8khz","value":52},{"index":9,"param_name":"band16khz","value":52}]}'
+
+
+        Notes:
+        - using WiiM Ultra with firmware version 5.2.809757 (beta), build date 20260304
+        - works instantly on the device
+        - changes the currently selected source's EQ
+        - values are 0-99 (50 = flat)
+        - app UI reflects changes after leaving/re-entering the EQ screen for that source
+        - driven from a wireless EQ deck that posts physical slider positions to MQTT, which are then read, scaled, and sent on to the WiiM
+        - with ~0.4s throttle the WiiM keeps up and tracks slider movements well
+        - EQGetBand tells you info about your current source, including the band values, which is how I worked this out.
+      externalDocs:
+        description: "Found by 'steve prior' at 'Working EQ API (real-time control)'"
+        url: "https://forum.wiimhome.com/threads/working-eq-api-real-time-control.9627/"
       operationId: eqSetBand
       parameters:
+        - name: "n1"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Index of the EQ band to set, where 0 corresponds to the 31Hz band, 1 to the 62Hz band, and so on up to 9 for the 16kHz band.
         - name: "str"
           in: path
           required: true
           schema:
             type: string
-          description: Unknown
+          description: Name of the parameter to set, which should be in the format "band{frequency}hz", where {frequency} is the center frequency of the band (e.g., "band31hz", "band63hz", "band125hz", "band250hz", "band500hz", "band1khz", "band2khz", "band4khz", "band8khz", "band16khz").
+        - name: "n2"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Value to set for the specified EQ band, where 0-99 represents the gain level (50 = flat, values above 50 boost the band, and values below 50 cut the band).
       responses:
         "200":
           description: Successful response
@@ -4703,7 +4739,7 @@ paths:
           description: Unknown
       responses:
         "200":
-           description: Successful response
+          description: Successful response
   /getMRMSubLPF:{str}:
     get:
       tags:
@@ -5778,7 +5814,7 @@ components:
           type: string
           description: "Number of slave devices in multiroom mode"
           example: "0"
-        slave_latency: 
+        slave_latency:
           type: string
           description: "Latency for slave devices in multiroom mode"
           example: "0"
@@ -5790,7 +5826,7 @@ components:
           type: string
           description: "Indicates the type of connection for the device"
           example: "0"
-        play_mode: 
+        play_mode:
           type: string
           description: "Current play mode of the device"
           example: "31"
@@ -5826,7 +5862,7 @@ components:
           type: string
           description: "Indicates if ASR is ready"
           example: "1"
-        asr_region: 
+        asr_region:
           type: string
           description: "ASR region setting"
           example: "en_us"
@@ -5870,15 +5906,15 @@ components:
           type: string
           description: "Indicates if there has been a crash in ASR or TTS"
           example: "0"
-        mcu_crash: 
+        mcu_crash:
           type: string
           description: "Indicates if there has been a crash in the MCU"
           example: "0"
-        process_deadlock: 
+        process_deadlock:
           type: string
           description: "Indicates if there has been a deadlock in any process"
           example: "0"
-        power_ticks: 
+        power_ticks:
           type: string
           description: "Number of power ticks"
           example: "119159062"
@@ -6234,4 +6270,3 @@ components:
           schema:
             type: string
             example: OK
-

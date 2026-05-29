@@ -2267,17 +2267,39 @@ This operation does not require authentication
 
 <a id="opIdeqSetBand"></a>
 
-`GET /EQSetBand:{str}`
+`GET /EQSetBand:%7B%22EQBand%22:[%7B%22index%22:{n1},%22param_name%22:{str},%22value%22:{n2}%7D]%7D`
 
-*Unknown*
+*Set (a specific) band of the 10-band EQ*
 
-...
+https://10.10.10.254/httpapi.asp?command=EQSetBand:{"EQBand":[{"index":0,"param_name":"band31hz","value":10}]}
+
+A way to control the 10-band EQ, including real-time updates from external inputs.
+
+Example 1 - single band change to 10:
+
+https://10.10.10.254/httpapi.asp?command=EQSetBand:{"EQBand":[{"index":0,"param_name":"band31hz","value":10}]}'
+
+Example 2 - sets all bands to 52:
+
+https://10.10.10.254/httpapi.asp?command=EQSetBand:{"EQBand":[{"index":0,"param_name":"band31hz","value":52},{"index":1,"param_name":"band63hz","value":52},{"index":2,"param_name":"band125hz","value":52},{"index":3,"param_name":"band250hz","value":52},{"index":4,"param_name":"band500hz","value":52},{"index":5,"param_name":"band1khz","value":52},{"index":6,"param_name":"band2khz","value":52},{"index":7,"param_name":"band4khz","value":52},{"index":8,"param_name":"band8khz","value":52},{"index":9,"param_name":"band16khz","value":52}]}'
+
+Notes:
+- using WiiM Ultra with firmware version 5.2.809757 (beta), build date 20260304
+- works instantly on the device
+- changes the currently selected source's EQ
+- values are 0-99 (50 = flat)
+- app UI reflects changes after leaving/re-entering the EQ screen for that source
+- driven from a wireless EQ deck that posts physical slider positions to MQTT, which are then read, scaled, and sent on to the WiiM
+- with ~0.4s throttle the WiiM keeps up and tracks slider movements well
+- EQGetBand tells you info about your current source, including the band values, which is how I worked this out.
 
 <h3 id="eqsetband-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|str|path|string|true|Unknown|
+|n1|path|integer|true|Index of the EQ band to set, where 0 corresponds to the 31Hz band, 1 to the 62Hz band, and so on up to 9 for the 16kHz band.|
+|str|path|string|true|Name of the parameter to set, which should be in the format "band{frequency}hz", where {frequency} is the center frequency of the band (e.g., "band31hz", "band63hz", "band125hz", "band250hz", "band500hz", "band1khz", "band2khz", "band4khz", "band8khz", "band16khz").|
+|n2|path|integer|true|Value to set for the specified EQ band, where 0-99 represents the gain level (50 = flat, values above 50 boost the band, and values below 50 cut the band).|
 
 <h3 id="eqsetband-responses">Responses</h3>
 
@@ -2731,6 +2753,32 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
+## eqGetLV2BandEx
+
+<a id="opIdeqGetLV2BandEx"></a>
+
+`GET /EQGetLV2BandEx:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="eqgetlv2bandex-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="eqgetlv2bandex-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-device-control">Device control</h1>
 
 Control the device
@@ -2962,6 +3010,26 @@ This operation does not require authentication
 ...
 
 <h3 id="buttonenableget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getFirmwareVersion
+
+<a id="opIdgetFirmwareVersion"></a>
+
+`GET /getFirmwareVersion`
+
+*Unknown*
+
+...
+
+<h3 id="getfirmwareversion-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
