@@ -1083,6 +1083,126 @@ Disables the multi-room mode
 This operation does not require authentication
 </aside>
 
+## multiroomConfigGetRealtimeCacheLimit
+
+<a id="opIdmultiroomConfigGetRealtimeCacheLimit"></a>
+
+`GET /multiroom:ConfigGet:realtime_cache_limit`
+
+*Get the real-time cache limit*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:ConfigGet:realtime_cache_limit
+
+Get the real-time cache limit in multi-room mode. The value is in seconds.
+
+<h3 id="multiroomconfiggetrealtimecachelimit-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomConfigSetRealtimeCacheLimit
+
+<a id="opIdmultiroomConfigSetRealtimeCacheLimit"></a>
+
+`GET /multiroom:ConfigSet:realtime_cache_limit:{value}`
+
+*Set the real-time cache limit*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:ConfigSet:realtime_cache_limit:%d
+
+Set the real-time cache limit in multi-room mode. The value is in seconds.
+
+<h3 id="multiroomconfigsetrealtimecachelimit-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|value|path|integer|true|The real-time cache limit to set for multi-room mode, in seconds.|
+
+<h3 id="multiroomconfigsetrealtimecachelimit-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomSlaveStartWPS
+
+<a id="opIdmultiroomSlaveStartWPS"></a>
+
+`GET /multiroom:SlaveStartWPS:{ip}`
+
+*Start WPS on a LinkPlay device*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveStartWPS:%s
+
+Start WPS on a LinkPlay device based on its IP address. This can be used to connect the device to a new Wi-Fi network.
+
+<h3 id="multiroomslavestartwps-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|ip|path|string|true|The IP address of the LinkPlay device to start WPS on.|
+
+<h3 id="multiroomslavestartwps-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## multiroomGetNameGroupList
+
+<a id="opIdmultiroomGetNameGroupList"></a>
+
+`GET /multiroom:getnamegrouplist`
+
+*Get the list of group names in multi-room mode*
+
+Example: http://10.10.10.254/httpapi.asp?command=multiroom:getnamegrouplist
+
+Get the list of group names in multi-room mode. The output is a JSON array of strings, where each string is a group name.
+
+Response example:
+{ "grouplist": [ ], "current_group_id": "" }
+
+> Example responses
+
+> 200 Response
+
+```
+{"grouplist":["Group 1","Group 2"],"current_group_id":"Group 1"}
+```
+
+<h3 id="multiroomgetnamegrouplist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="multiroomgetnamegrouplist-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» grouplist|array|false|none|List of group names in multi-room mode|
+|» current_group_id|string|false|none|The ID of the currently selected group|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## multiroomLeaveGroup
 
 <a id="opIdmultiroomLeaveGroup"></a>
@@ -4444,6 +4564,204 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
+<h1 id="linkplay-wiim-http-api-room-correction">Room correction</h1>
+
+Get and set room correction settings
+
+## roomCorrGet
+
+<a id="opIdroomCorrGet"></a>
+
+`GET /RoomCorrGet`
+
+*Get the current room correction settings*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=RoomCorrGet
+
+It returns a JSON object with the current room correction settings, including the EQ levels for each band, the source name, and other related information.  
+The "EQBand" array contains objects for each EQ band, with parameters such as "mode", "freq", "q", and "gain".  
+This information can be used to understand the current room correction configuration and make informed adjustments if needed.
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "status": "string",
+  "EQLevel": 0,
+  "source_name": "string",
+  "EQStat": "string",
+  "Name": "string",
+  "pluginURI": "string",
+  "channelMode": "string",
+  "EQBand": [
+    {
+      "index": 0,
+      "param_name": "string",
+      "value": 0
+    }
+  ]
+}
+```
+
+<h3 id="roomcorrget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="roomcorrget-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|Status of the response, typically "OK" if the request was successful.|
+|» EQLevel|integer|false|none|The current EQ level setting.|
+|» source_name|string|false|none|The name of the current audio source.|
+|» EQStat|string|false|none|The status of the EQ, such as "On" or "Off".|
+|» Name|string|false|none|The name of the current room correction profile.|
+|» pluginURI|string|false|none|The URI of the plugin used for room correction.|
+|» channelMode|string|false|none|The channel mode, such as "Stereo".|
+|» EQBand|[object]|false|none|none|
+|»» index|integer|false|none|The index of the EQ band.|
+|»» param_name|string|false|none|The name of the parameter for this band (e.g., "a_mode", "a_freq", "a_q", "a_gain").|
+|»» value|number|false|none|The value of the parameter for this band.|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## roomCorrGetMode
+
+<a id="opIdroomCorrGetMode"></a>
+
+`GET /RoomCorrGetMode`
+
+*Get the current room correction mode*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=RoomCorrGetMode
+
+Same as RoomCorrGet?
+
+<h3 id="roomcorrgetmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## roomCorrSet
+
+<a id="opIdroomCorrSet"></a>
+
+`GET /RoomCorrSet:{str}`
+
+*Set the room correction settings*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=RoomCorrSet:{str}
+
+<h3 id="roomcorrset-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="roomcorrset-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## roomCorrSetLR
+
+<a id="opIdroomCorrSetLR"></a>
+
+`GET /RoomCorrSetLR:{str}`
+
+*Set the room correction settings for left and right channels*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=RoomCorrSetLR:{str}
+
+Same as RoomCorrSet?
+
+<h3 id="roomcorrsetlr-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="roomcorrsetlr-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## roomCorrSetMode
+
+<a id="opIdroomCorrSetMode"></a>
+
+`GET /RoomCorrSetMode:%7B%22Mode%22:%22{str}%22%7D`
+
+*Set the room correction mode*
+
+...
+
+<h3 id="roomcorrsetmode-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="roomcorrsetmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setRoomCorrection
+
+<a id="opIdsetRoomCorrection"></a>
+
+`GET /setRoomCorrection:%7B%22RC_Version%22:%22{str}%22,%22Time%22:%22{time}%22%7D`
+
+*Set the room correction settings with version and time parameters*
+
+...
+
+<h3 id="setroomcorrection-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+|time|path|string|true|Format yyyy:MM:dd HH:mm|
+
+<h3 id="setroomcorrection-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-other">Other</h1>
 
 Existing commands, purpose unkown. To research further...
@@ -6083,32 +6401,6 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## roomCorrSet
-
-<a id="opIdroomCorrSet"></a>
-
-`GET /RoomCorrSet:{str}`
-
-*Unknown*
-
-...
-
-<h3 id="roomcorrset-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="roomcorrset-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## getButtonVolumeStep
 
 <a id="opIdgetButtonVolumeStep"></a>
@@ -6120,32 +6412,6 @@ This operation does not require authentication
 ...
 
 <h3 id="getbuttonvolumestep-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## roomCorrSetLR
-
-<a id="opIdroomCorrSetLR"></a>
-
-`GET /RoomCorrSetLR:{str}`
-
-*Unknown*
-
-...
-
-<h3 id="roomcorrsetlr-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="roomcorrsetlr-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -6175,32 +6441,6 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## roomCorrSetMode
-
-<a id="opIdroomCorrSetMode"></a>
-
-`GET /RoomCorrSetMode:%7B%22Mode%22:%22{str}%22%7D`
-
-*Unknown*
-
-...
-
-<h3 id="roomcorrsetmode-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="roomcorrsetmode-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## getAuxAutoSenseEnable
 
 <a id="opIdgetAuxAutoSenseEnable"></a>
@@ -6212,33 +6452,6 @@ This operation does not require authentication
 ...
 
 <h3 id="getauxautosenseenable-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setRoomCorrection
-
-<a id="opIdsetRoomCorrection"></a>
-
-`GET /setRoomCorrection:%7B%22RC_Version%22:%22{str}%22,%22Time%22:%22{time}%22%7D`
-
-*Unknown*
-
-...
-
-<h3 id="setroomcorrection-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-|time|path|string|true|Format yyyy:MM:dd HH:mm|
-
-<h3 id="setroomcorrection-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|

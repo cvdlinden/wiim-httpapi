@@ -66,6 +66,10 @@
       "description": "Get and set Bluetooth settings"
     },
     {
+      "name": "Room correction",
+      "description": "Get and set room correction settings"
+    },
+    {
       "name": "Other",
       "description": "Existing commands, purpose unkown. To research further..."
     }
@@ -2010,6 +2014,210 @@
         }
       }
     },
+    "/RoomCorrGet": {
+      "get": {
+        "tags": [
+          "Room correction"
+        ],
+        "summary": "Get the current room correction settings",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=RoomCorrGet\n\nIt returns a JSON object with the current room correction settings, including the EQ levels for each band, the source name, and other related information.  \nThe \"EQBand\" array contains objects for each EQ band, with parameters such as \"mode\", \"freq\", \"q\", and \"gain\".  \nThis information can be used to understand the current room correction configuration and make informed adjustments if needed.",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "roomCorrGet",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the response, typically \"OK\" if the request was successful."
+                    },
+                    "EQLevel": {
+                      "type": "integer",
+                      "description": "The current EQ level setting."
+                    },
+                    "source_name": {
+                      "type": "string",
+                      "description": "The name of the current audio source."
+                    },
+                    "EQStat": {
+                      "type": "string",
+                      "description": "The status of the EQ, such as \"On\" or \"Off\"."
+                    },
+                    "Name": {
+                      "type": "string",
+                      "description": "The name of the current room correction profile."
+                    },
+                    "pluginURI": {
+                      "type": "string",
+                      "description": "The URI of the plugin used for room correction."
+                    },
+                    "channelMode": {
+                      "type": "string",
+                      "description": "The channel mode, such as \"Stereo\"."
+                    },
+                    "EQBand": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "index": {
+                            "type": "integer",
+                            "description": "The index of the EQ band."
+                          },
+                          "param_name": {
+                            "type": "string",
+                            "description": "The name of the parameter for this band (e.g., \"a_mode\", \"a_freq\", \"a_q\", \"a_gain\")."
+                          },
+                          "value": {
+                            "type": "number",
+                            "description": "The value of the parameter for this band."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RoomCorrGetMode": {
+      "get": {
+        "tags": [
+          "Room correction"
+        ],
+        "summary": "Get the current room correction mode",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=RoomCorrGetMode\n\nSame as RoomCorrGet?",
+        "operationId": "roomCorrGetMode",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/RoomCorrSet:{str}": {
+      "get": {
+        "tags": [
+          "Room correction"
+        ],
+        "summary": "Set the room correction settings",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=RoomCorrSet:{str}",
+        "operationId": "roomCorrSet",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/RoomCorrSetLR:{str}": {
+      "get": {
+        "tags": [
+          "Room correction"
+        ],
+        "summary": "Set the room correction settings for left and right channels",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=RoomCorrSetLR:{str}\n\nSame as RoomCorrSet?",
+        "operationId": "roomCorrSetLR",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/RoomCorrSetMode:%7B%22Mode%22:%22{str}%22%7D": {
+      "get": {
+        "tags": [
+          "Room correction"
+        ],
+        "summary": "Set the room correction mode",
+        "description": "...",
+        "operationId": "roomCorrSetMode",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setRoomCorrection:%7B%22RC_Version%22:%22{str}%22,%22Time%22:%22{time}%22%7D": {
+      "get": {
+        "tags": [
+          "Room correction"
+        ],
+        "summary": "Set the room correction settings with version and time parameters",
+        "description": "...",
+        "operationId": "setRoomCorrection",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          },
+          {
+            "name": "time",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Format yyyy:MM:dd HH:mm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/getMvRemoteSilenceUpdateTime": {
       "get": {
         "tags": [
@@ -2697,6 +2905,128 @@
         "responses": {
           "200": {
             "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:ConfigGet:realtime_cache_limit": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Get the real-time cache limit",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:ConfigGet:realtime_cache_limit\n\nGet the real-time cache limit in multi-room mode. The value is in seconds.",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "multiroomConfigGetRealtimeCacheLimit",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:ConfigSet:realtime_cache_limit:{value}": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Set the real-time cache limit",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:ConfigSet:realtime_cache_limit:%d\n\nSet the real-time cache limit in multi-room mode. The value is in seconds.",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "multiroomConfigSetRealtimeCacheLimit",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The real-time cache limit to set for multi-room mode, in seconds."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveStartWPS:{ip}": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Start WPS on a LinkPlay device",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:SlaveStartWPS:%s\n\nStart WPS on a LinkPlay device based on its IP address. This can be used to connect the device to a new Wi-Fi network.",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "multiroomSlaveStartWPS",
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The IP address of the LinkPlay device to start WPS on."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:getnamegrouplist": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Get the list of group names in multi-room mode",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=multiroom:getnamegrouplist\n\nGet the list of group names in multi-room mode. The output is a JSON array of strings, where each string is a group name.\n\nResponse example:\n{ \"grouplist\": [ ], \"current_group_id\": \"\" }",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "multiroomGetNameGroupList",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "grouplist": {
+                      "type": "array",
+                      "description": "List of group names in multi-room mode"
+                    },
+                    "current_group_id": {
+                      "type": "string",
+                      "description": "The ID of the currently selected group"
+                    }
+                  }
+                },
+                "example": {
+                  "grouplist": [
+                    "Group 1",
+                    "Group 2"
+                  ],
+                  "current_group_id": "Group 1"
+                }
+              }
+            }
           }
         }
       }
@@ -4834,32 +5164,6 @@
         }
       }
     },
-    "/RoomCorrSet:{str}": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "roomCorrSet",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/EQChangeFX:{str}": {
       "get": {
         "tags": [
@@ -4901,32 +5205,6 @@
         }
       }
     },
-    "/RoomCorrSetLR:{str}": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "roomCorrSetLR",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/getAvsMusicHDEnable": {
       "get": {
         "tags": [
@@ -4950,32 +5228,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "wlanGetApFullList",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/RoomCorrSetMode:%7B%22Mode%22:%22{str}%22%7D": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "roomCorrSetMode",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -5024,41 +5276,6 @@
               "type": "string"
             },
             "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/setRoomCorrection:%7B%22RC_Version%22:%22{str}%22,%22Time%22:%22{time}%22%7D": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "setRoomCorrection",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          },
-          {
-            "name": "time",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Format yyyy:MM:dd HH:mm"
           }
         ],
         "responses": {
