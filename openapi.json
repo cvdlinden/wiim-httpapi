@@ -70,6 +70,10 @@
       "description": "Get and set room correction settings"
     },
     {
+      "name": "Alexa",
+      "description": "Get and set Alexa settings"
+    },
+    {
       "name": "Other",
       "description": "Existing commands, purpose unkown. To research further..."
     }
@@ -885,8 +889,19 @@
           "200": {
             "description": "Default response",
             "content": {
-              "text/html": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "EQStat": {
+                      "type": "string",
+                      "enum": [
+                        "On",
+                        "Off"
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -1025,6 +1040,672 @@
         "tags": [
           "Equalizer"
         ]
+      }
+    },
+    "/EQSet:Bass:{n}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqSetBass",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQSet:Treble:{n}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqSetTreble",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQEnable": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqEnable",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQDisable": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqDisable",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQSetBand:%7B%22EQBand%22:[%7B%22index%22:{n1},%22param_name%22:{str},%22value%22:{n2}%7D]%7D": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Set (a specific) band of the 10-band EQ",
+        "description": "https://10.10.10.254/httpapi.asp?command=EQSetBand:{\"EQBand\":[{\"index\":0,\"param_name\":\"band31hz\",\"value\":10}]}\n\nA way to control the 10-band EQ, including real-time updates from external inputs.\n\nExample 1 - single band change to 10:\n\nhttps://10.10.10.254/httpapi.asp?command=EQSetBand:{\"EQBand\":[{\"index\":0,\"param_name\":\"band31hz\",\"value\":10}]}'\n\nExample 2 - sets all bands to 52:\n\nhttps://10.10.10.254/httpapi.asp?command=EQSetBand:{\"EQBand\":[{\"index\":0,\"param_name\":\"band31hz\",\"value\":52},{\"index\":1,\"param_name\":\"band63hz\",\"value\":52},{\"index\":2,\"param_name\":\"band125hz\",\"value\":52},{\"index\":3,\"param_name\":\"band250hz\",\"value\":52},{\"index\":4,\"param_name\":\"band500hz\",\"value\":52},{\"index\":5,\"param_name\":\"band1khz\",\"value\":52},{\"index\":6,\"param_name\":\"band2khz\",\"value\":52},{\"index\":7,\"param_name\":\"band4khz\",\"value\":52},{\"index\":8,\"param_name\":\"band8khz\",\"value\":52},{\"index\":9,\"param_name\":\"band16khz\",\"value\":52}]}'\n\n\nNotes:\n- using WiiM Ultra with firmware version 5.2.809757 (beta), build date 20260304\n- works instantly on the device\n- changes the currently selected source's EQ\n- values are 0-99 (50 = flat)\n- app UI reflects changes after leaving/re-entering the EQ screen for that source\n- driven from a wireless EQ deck that posts physical slider positions to MQTT, which are then read, scaled, and sent on to the WiiM\n- with ~0.4s throttle the WiiM keeps up and tracks slider movements well\n- EQGetBand tells you info about your current source, including the band values, which is how I worked this out.",
+        "externalDocs": {
+          "description": "Found by 'steve prior' at 'Working EQ API (real-time control)'",
+          "url": "https://forum.wiimhome.com/threads/working-eq-api-real-time-control.9627/"
+        },
+        "operationId": "eqSetBand",
+        "parameters": [
+          {
+            "name": "n1",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Index of the EQ band to set, where 0 corresponds to the 31Hz band, 1 to the 62Hz band, and so on up to 9 for the 16kHz band."
+          },
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the parameter to set, which should be in the format \"band{frequency}hz\", where {frequency} is the center frequency of the band (e.g., \"band31hz\", \"band63hz\", \"band125hz\", \"band250hz\", \"band500hz\", \"band1khz\", \"band2khz\", \"band4khz\", \"band8khz\", \"band16khz\")."
+          },
+          {
+            "name": "n2",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Value to set for the specified EQ band, where 0-99 represents the gain level (50 = flat, values above 50 boost the band, and values below 50 cut the band)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQSetLV2Band:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqSetLV2Band",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQSetLV2SourceBand:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqSetLV2SourceBand",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQv2Delete:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqv2Delete",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQv2Rename:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqv2Rename",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQChangeSourceFX:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqChangeSourceFX",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQChangeFX:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqChangeFX",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQGetLV2Band:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqGetLV2Band",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQGetLV2SourceBand:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqGetLV2SourceBand",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQGetLV2SourceBandEx:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqGetLV2SourceBandEx",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQv2GetList:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqv2GetList",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQv2GetNewList:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqv2GetNewList",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQv2Load:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqv2Load",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQv2SourceLoad:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqv2SourceLoad",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQSourceOff:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqSourceOff",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQSetChannelMode:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqSetChannelMode",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQSourceSave:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqSourceSave",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQSave:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqSave",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQGetLV2BandEx:{str}": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "eqGetLV2BandEx",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EQGetSourceModes": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Get the EQ source modes",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=EQGetSourceModes",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "eqGetSourceModes",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "source_name": {
+                        "type": "string"
+                      },
+                      "NameLR": {
+                        "type": "string"
+                      },
+                      "EQStat": {
+                        "type": "string"
+                      },
+                      "Name": {
+                        "type": "string"
+                      },
+                      "pluginURI": {
+                        "type": "string"
+                      },
+                      "channelMode": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/EQSave:Custom": {
+      "get": {
+        "tags": [
+          "Equalizer"
+        ],
+        "summary": "Save the current EQ setting as \"Custom\"",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=EQSave:Custom",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "eqSaveCustom",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
       }
     },
     "/reboot": {
@@ -2218,281 +2899,150 @@
         }
       }
     },
-    "/getMvRemoteSilenceUpdateTime": {
+    "/alexaEnableBetaId:{n}": {
       "get": {
         "tags": [
-          "Other"
+          "Alexa"
         ],
         "summary": "Unknown",
         "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getMvRemoteSilenceUpdateTime",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getNetworkPreferDNS": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getNetworkPreferDNS",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getWlanBandConfig": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getWlanBandConfig",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getWlanRoamConfig": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getWlanRoamConfig",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getIPV6Enable": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getIPV6Enable",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getSpdifOutMaxCap": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getSpdifOutMaxCap",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getCoaxOutMaxCap": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getCoaxOutMaxCap",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/GetFadeFeature": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getFadeFeature",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getAuxVoltageSupportList": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getAuxVoltageSupportList",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/audio_cast:get_speaker_list": {
-      "get": {
-        "deprecated": true,
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "audioCastGetSpeakerList",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getSoundCardModeSupportList": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getSoundCardModeSupportList",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getActiveSoundCardOutputMode": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getActiveSoundCardOutputMode",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/setLightOperationBrightConfig:%7B%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7D": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "WiiM Ultra enable/disable LCD",
-        "description": "Example: https://10.10.10.254/httpapi.asp?command=setLightOperationBrightConfig:{%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:1}\n\nTurns the screen of the WiiM Ultra on or off",
-        "externalDocs": {
-          "description": "WiiM Forums - API for Wiim Amp?",
-          "url": "https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/#post-108841"
-        },
-        "operationId": "setLightOperationBrightConfig",
+        "operationId": "alexaEnableBetaId",
         "parameters": [
           {
-            "name": "s",
+            "name": "n",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "default": 0
+              "type": "integer"
             },
-            "description": "autosense?"
-          },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getAlexaProfile": {
+      "get": {
+        "tags": [
+          "Alexa"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "getAlexaProfile",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/alexaLogOut": {
+      "get": {
+        "tags": [
+          "Alexa"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "alexaLogOut",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getAlexaCountry": {
+      "get": {
+        "tags": [
+          "Alexa"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "getAlexaCountry",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/alexaLanguageListGet": {
+      "get": {
+        "tags": [
+          "Alexa"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "alexaLanguageListGet",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/alexaGetLanguage": {
+      "get": {
+        "tags": [
+          "Alexa"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "alexaGetLanguage",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setAlexaCountry:{str}": {
+      "get": {
+        "tags": [
+          "Alexa"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "setAlexaCountry",
+        "parameters": [
           {
-            "name": "b",
+            "name": "str",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "default": 1
+              "type": "string"
             },
-            "description": "brightness?"
-          },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/alexaSetLanguage:{str}": {
+      "get": {
+        "tags": [
+          "Alexa"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "alexaSetLanguage",
+        "parameters": [
           {
-            "name": "d",
+            "name": "str",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "enum": [
-                0,
-                1
-              ],
-              "default": 1
+              "type": "string"
             },
-            "description": "disable: 1 (off) or 0 (on)"
+            "description": "Unknown"
           }
         ],
         "responses": {
@@ -3031,6 +3581,483 @@
         }
       }
     },
+    "/multiroom:LeaveGroup": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Leaving the multi-room mode",
+        "description": "...",
+        "operationId": "multiroomLeaveGroup",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:JoinGroup:IP={IP}:uuid={uuid}": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Joining a multi-room group",
+        "description": "...",
+        "operationId": "multiroomJoinGroup",
+        "parameters": [
+          {
+            "name": "IP",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The IP address of the multi-room group to join."
+          },
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The UUID of the multi-room group to join."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:SlaveDeviceName:{ip}:{str}": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "multiroomSlaveDeviceName",
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          },
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:subwooferForget:%7B%22uuid%22:%22{uuid}%22%7D": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "multiroomSubwooferForget",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:subwooferGetPairInfo": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "multiroomSubwooferGetPairInfo",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:ConfigGet:leadtime": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "multiroomConfigGetLeadtime",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:subwooferPair:{str}": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "multiroomSubwooferPair",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/multiroom:ConfigSet:leadtime:{str}": {
+      "get": {
+        "tags": [
+          "Multiroom"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "operationId": "multiroomConfigSetLeadtime",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getMvRemoteSilenceUpdateTime": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getMvRemoteSilenceUpdateTime",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getNetworkPreferDNS": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getNetworkPreferDNS",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getWlanBandConfig": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getWlanBandConfig",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getWlanRoamConfig": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getWlanRoamConfig",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getIPV6Enable": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getIPV6Enable",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getSpdifOutMaxCap": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getSpdifOutMaxCap",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getCoaxOutMaxCap": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getCoaxOutMaxCap",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/GetFadeFeature": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getFadeFeature",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getAuxVoltageSupportList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getAuxVoltageSupportList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/audio_cast:get_speaker_list": {
+      "get": {
+        "deprecated": true,
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "audioCastGetSpeakerList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getSoundCardModeSupportList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getSoundCardModeSupportList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getActiveSoundCardOutputMode": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getActiveSoundCardOutputMode",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setLightOperationBrightConfig:%7B%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7D": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "WiiM Ultra enable/disable LCD",
+        "description": "Example: https://10.10.10.254/httpapi.asp?command=setLightOperationBrightConfig:{%22auto_sense_enable%22:0,%22default_bright%22:1,%22disable%22:1}\n\nTurns the screen of the WiiM Ultra on or off",
+        "externalDocs": {
+          "description": "WiiM Forums - API for Wiim Amp?",
+          "url": "https://forum.wiimhome.com/threads/api-for-wiim-amp.3306/#post-108841"
+        },
+        "operationId": "setLightOperationBrightConfig",
+        "parameters": [
+          {
+            "name": "s",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "autosense?"
+          },
+          {
+            "name": "b",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "brightness?"
+          },
+          {
+            "name": "d",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "default": 1
+            },
+            "description": "disable: 1 (off) or 0 (on)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/getMvRemoteUpdateStartCheck": {
       "get": {
         "tags": [
@@ -3110,7 +4137,7 @@
     "/setSSID:{value}": {
       "get": {
         "tags": [
-          "Other"
+          "Network"
         ],
         "summary": "Change the SSID name of the device",
         "description": "Example: http://10.10.10.254/httpapi.asp?command=setSSID:value\n\nSets a new network name (SSID) of the device in hexadecimal format",
@@ -3140,7 +4167,7 @@
     "/setNetwork:{n}:{password}": {
       "get": {
         "tags": [
-          "Other"
+          "Network"
         ],
         "summary": "Setting the password WIFI",
         "description": "Example: http://10.10.10.254/httpapi.asp?command=setNetwork:1:password\n\nSetting a new password using letters and / or numbers and crossing of setnetwork setting: 1 (Securing WIFI network (WPAPSK) in contrast, setnetwork: 0 (OPEN) makes the network open WIFI.\n\nNo response The system restarts after the validation of the new password.",
@@ -3202,7 +4229,7 @@
     "/setPowerWifiDown": {
       "get": {
         "tags": [
-          "Other"
+          "Network"
         ],
         "summary": "Stop WIFI signal",
         "description": "Example: http://10.10.10.254/httpapi.asp?command=setPowerWifiDown\n\nTurns off the wifi",
@@ -3380,56 +4407,6 @@
               "type": "string"
             },
             "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/multiroom:LeaveGroup": {
-      "get": {
-        "tags": [
-          "Multiroom"
-        ],
-        "summary": "Leaving the multi-room mode",
-        "description": "...",
-        "operationId": "multiroomLeaveGroup",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/multiroom:JoinGroup:IP={IP}:uuid={uuid}": {
-      "get": {
-        "tags": [
-          "Multiroom"
-        ],
-        "summary": "Joining a multi-room group",
-        "description": "...",
-        "operationId": "multiroomJoinGroup",
-        "parameters": [
-          {
-            "name": "IP",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The IP address of the multi-room group to join."
-          },
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The UUID of the multi-room group to join."
           }
         ],
         "responses": {
@@ -3827,88 +4804,6 @@
         }
       }
     },
-    "/EQSet:Bass:{n}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqSetBass",
-        "parameters": [
-          {
-            "name": "n",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQSet:Treble:{n}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqSetTreble",
-        "parameters": [
-          {
-            "name": "n",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQEnable": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqEnable",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQDisable": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqDisable",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/getMvRomDownloadStatus": {
       "get": {
         "tags": [
@@ -4082,67 +4977,6 @@
         }
       }
     },
-    "/multiroom:SlaveDeviceName:{ip}:{str}": {
-      "get": {
-        "tags": [
-          "Multiroom"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "multiroomSlaveDeviceName",
-        "parameters": [
-          {
-            "name": "ip",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          },
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/alexaEnableBetaId:{n}": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "alexaEnableBetaId",
-        "parameters": [
-          {
-            "name": "n",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/setTimezone:{str}": {
       "get": {
         "tags": [
@@ -4281,21 +5115,6 @@
         }
       }
     },
-    "/getAlexaProfile": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "getAlexaProfile",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/getAvsDevInfo": {
       "get": {
         "tags": [
@@ -4304,51 +5123,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "getAvsDevInfo",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/alexaLogOut": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "alexaLogOut",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/getAlexaCountry": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "getAlexaCountry",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/alexaLanguageListGet": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "alexaLanguageListGet",
         "responses": {
           "200": {
             "description": "Successful response"
@@ -4391,73 +5165,6 @@
           },
           {
             "name": "str2",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/alexaGetLanguage": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "alexaGetLanguage",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/setAlexaCountry:{str}": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "setAlexaCountry",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/alexaSetLanguage:{str}": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "alexaSetLanguage",
-        "parameters": [
-          {
-            "name": "str",
             "in": "path",
             "required": true,
             "schema": {
@@ -4586,54 +5293,6 @@
               "type": "integer"
             },
             "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQSetBand:%7B%22EQBand%22:[%7B%22index%22:{n1},%22param_name%22:{str},%22value%22:{n2}%7D]%7D": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Set (a specific) band of the 10-band EQ",
-        "description": "https://10.10.10.254/httpapi.asp?command=EQSetBand:{\"EQBand\":[{\"index\":0,\"param_name\":\"band31hz\",\"value\":10}]}\n\nA way to control the 10-band EQ, including real-time updates from external inputs.\n\nExample 1 - single band change to 10:\n\nhttps://10.10.10.254/httpapi.asp?command=EQSetBand:{\"EQBand\":[{\"index\":0,\"param_name\":\"band31hz\",\"value\":10}]}'\n\nExample 2 - sets all bands to 52:\n\nhttps://10.10.10.254/httpapi.asp?command=EQSetBand:{\"EQBand\":[{\"index\":0,\"param_name\":\"band31hz\",\"value\":52},{\"index\":1,\"param_name\":\"band63hz\",\"value\":52},{\"index\":2,\"param_name\":\"band125hz\",\"value\":52},{\"index\":3,\"param_name\":\"band250hz\",\"value\":52},{\"index\":4,\"param_name\":\"band500hz\",\"value\":52},{\"index\":5,\"param_name\":\"band1khz\",\"value\":52},{\"index\":6,\"param_name\":\"band2khz\",\"value\":52},{\"index\":7,\"param_name\":\"band4khz\",\"value\":52},{\"index\":8,\"param_name\":\"band8khz\",\"value\":52},{\"index\":9,\"param_name\":\"band16khz\",\"value\":52}]}'\n\n\nNotes:\n- using WiiM Ultra with firmware version 5.2.809757 (beta), build date 20260304\n- works instantly on the device\n- changes the currently selected source's EQ\n- values are 0-99 (50 = flat)\n- app UI reflects changes after leaving/re-entering the EQ screen for that source\n- driven from a wireless EQ deck that posts physical slider positions to MQTT, which are then read, scaled, and sent on to the WiiM\n- with ~0.4s throttle the WiiM keeps up and tracks slider movements well\n- EQGetBand tells you info about your current source, including the band values, which is how I worked this out.",
-        "externalDocs": {
-          "description": "Found by 'steve prior' at 'Working EQ API (real-time control)'",
-          "url": "https://forum.wiimhome.com/threads/working-eq-api-real-time-control.9627/"
-        },
-        "operationId": "eqSetBand",
-        "parameters": [
-          {
-            "name": "n1",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Index of the EQ band to set, where 0 corresponds to the 31Hz band, 1 to the 62Hz band, and so on up to 9 for the 16kHz band."
-          },
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Name of the parameter to set, which should be in the format \"band{frequency}hz\", where {frequency} is the center frequency of the band (e.g., \"band31hz\", \"band63hz\", \"band125hz\", \"band250hz\", \"band500hz\", \"band1khz\", \"band2khz\", \"band4khz\", \"band8khz\", \"band16khz\")."
-          },
-          {
-            "name": "n2",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Value to set for the specified EQ band, where 0-99 represents the gain level (50 = flat, values above 50 boost the band, and values below 50 cut the band)."
           }
         ],
         "responses": {
@@ -4870,32 +5529,6 @@
         }
       }
     },
-    "/EQSetLV2Band:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqSetLV2Band",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/blehidremoveall": {
       "get": {
         "tags": [
@@ -4904,32 +5537,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "blehidremoveall",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQSetLV2SourceBand:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqSetLV2SourceBand",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -5019,32 +5626,6 @@
         }
       }
     },
-    "/EQv2Delete:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqv2Delete",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/get_ui_wallpaper_list": {
       "get": {
         "tags": [
@@ -5086,32 +5667,6 @@
         }
       }
     },
-    "/EQv2Rename:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqv2Rename",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/setPowerModeTime:%7B%22idleInterval%22:%22{str}%22%7D": {
       "get": {
         "tags": [
@@ -5120,58 +5675,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "setPowerModeTime",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQChangeSourceFX:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqChangeSourceFX",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQChangeFX:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqChangeFX",
         "parameters": [
           {
             "name": "str",
@@ -5449,84 +5952,6 @@
         }
       }
     },
-    "/EQGetLV2Band:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqGetLV2Band",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQGetLV2SourceBand:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqGetLV2SourceBand",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQGetLV2SourceBandEx:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqGetLV2SourceBandEx",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/set_button_volume_step:{str}": {
       "get": {
         "tags": [
@@ -5568,32 +5993,6 @@
         }
       }
     },
-    "/EQv2GetList:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqv2GetList",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/StartRebootTime:1": {
       "get": {
         "tags": [
@@ -5609,32 +6008,6 @@
         }
       }
     },
-    "/EQv2GetNewList:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqv2GetNewList",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/LED_SWITCH_GET": {
       "get": {
         "tags": [
@@ -5643,32 +6016,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "ledSwitchGet",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQv2Load:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqv2Load",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -5717,32 +6064,6 @@
         }
       }
     },
-    "/EQv2SourceLoad:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqv2SourceLoad",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/setAvsMusicHDEnable:{str}": {
       "get": {
         "tags": [
@@ -5784,32 +6105,6 @@
         }
       }
     },
-    "/EQSourceOff:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqSourceOff",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/setAuxAutoSenseEnable:{n}": {
       "get": {
         "tags": [
@@ -5836,32 +6131,6 @@
         }
       }
     },
-    "/multiroom:subwooferForget:%7B%22uuid%22:%22{uuid}%22%7D": {
-      "get": {
-        "tags": [
-          "Multiroom"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "multiroomSubwooferForget",
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/getLowPriorityPromptDisable": {
       "get": {
         "tags": [
@@ -5877,21 +6146,6 @@
         }
       }
     },
-    "/multiroom:subwooferGetPairInfo": {
-      "get": {
-        "tags": [
-          "Multiroom"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "multiroomSubwooferGetPairInfo",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/getSoftMute": {
       "get": {
         "tags": [
@@ -5900,47 +6154,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "getSoftMute",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/multiroom:ConfigGet:leadtime": {
-      "get": {
-        "tags": [
-          "Multiroom"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "multiroomConfigGetLeadtime",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/multiroom:subwooferPair:{str}": {
-      "get": {
-        "tags": [
-          "Multiroom"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "multiroomSubwooferPair",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -6202,32 +6415,6 @@
         }
       }
     },
-    "/EQSetChannelMode:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqSetChannelMode",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/setIPV6Enable:{str}": {
       "get": {
         "tags": [
@@ -6318,32 +6505,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "getPlayModeVolumeValue",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQSourceSave:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqSourceSave",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -6482,32 +6643,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "disableLowPriorityPrompt",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/multiroom:ConfigSet:leadtime:{str}": {
-      "get": {
-        "tags": [
-          "Multiroom"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "multiroomConfigSetLeadtime",
         "parameters": [
           {
             "name": "str",
@@ -6690,58 +6825,6 @@
         "summary": "Unknown",
         "description": "...",
         "operationId": "setUacOutMaxCap",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQSave:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqSave",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/EQGetLV2BandEx:{str}": {
-      "get": {
-        "tags": [
-          "Equalizer"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "eqGetLV2BandEx",
         "parameters": [
           {
             "name": "str",

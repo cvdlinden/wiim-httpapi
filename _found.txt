@@ -1,13 +1,13 @@
 More (undocumented) API calls
 https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3
 
-command=EQGetSourceModes
-command=EQSave:Custom
 command=EnableAmazonAtmos:%d
 command=EnableAmazonHD:%d
+command=GetAmazonHD
+command=getAmazonConfig
+command=setAmazonMusicParams:code=%@:redirect_uri=%@:client_id=%@:code_verifier=%@
 command=EnableSysInfo:%d
 command=GetAirplayExtraDelay
-command=GetAmazonHD
 command=GetCurrentWirelessConnect
 command=SetFadeFeature:%d
 command=SlaveIP:%@:alertget
@@ -26,7 +26,6 @@ command=audio_cast:speaker_set_password:%@:%@
 command=audio_cast:speaker_set_volume:%@:%d
 command=createRoutine:%@
 command=getAllRoutines
-command=getAmazonConfig
 command=getAudioInputCapbility
 command=getAudioOutMax32bit
 command=getAudioOutputVrms:%@
@@ -55,7 +54,6 @@ command=get_remote_volume_step
 command=mediaserver:scan
 command=mediaserver:udiskumount
 command=noSendMoreDeviceEvent:1
-command=setAmazonMusicParams:code=%@:redirect_uri=%@:client_id=%@:code_verifier=%@
 command=setAudioOutMax32bit:%d
 command=setAudioOutputVrms:%@
 command=setCecPowerCtrl:%d

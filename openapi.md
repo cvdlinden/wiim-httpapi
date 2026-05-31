@@ -1277,78 +1277,6 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## setMRMSubLPF
-
-<a id="opIdsetMRMSubLPF"></a>
-
-`GET /setMRMSubLPF:{str}`
-
-*Unknown*
-
-...
-
-<h3 id="setmrmsublpf-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="setmrmsublpf-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getSubLPF
-
-<a id="opIdgetSubLPF"></a>
-
-`GET /getSubLPF`
-
-*Unknown*
-
-...
-
-<h3 id="getsublpf-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setSubLPF
-
-<a id="opIdsetSubLPF"></a>
-
-`GET /setSubLPF:{str}`
-
-*Unknown*
-
-...
-
-<h3 id="setsublpf-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="setsublpf-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## multiroomSubwooferForget
 
 <a id="opIdmultiroomSubwooferForget"></a>
@@ -1441,32 +1369,6 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## getMRMSubLPF
-
-<a id="opIdgetMRMSubLPF"></a>
-
-`GET /getMRMSubLPF:{str}`
-
-*Unknown*
-
-...
-
-<h3 id="getmrmsublpf-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="getmrmsublpf-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## multiroomConfigSetLeadtime
 
 <a id="opIdmultiroomConfigSetLeadtime"></a>
@@ -1484,6 +1386,104 @@ This operation does not require authentication
 |str|path|string|true|Unknown|
 
 <h3 id="multiroomconfigsetleadtime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setMRMSubLPF
+
+<a id="opIdsetMRMSubLPF"></a>
+
+`GET /setMRMSubLPF:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setmrmsublpf-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setmrmsublpf-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getSubLPF
+
+<a id="opIdgetSubLPF"></a>
+
+`GET /getSubLPF`
+
+*Unknown*
+
+...
+
+<h3 id="getsublpf-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSubLPF
+
+<a id="opIdsetSubLPF"></a>
+
+`GET /setSubLPF:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setsublpf-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setsublpf-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getMRMSubLPF
+
+<a id="opIdgetMRMSubLPF"></a>
+
+`GET /getMRMSubLPF:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="getmrmsublpf-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="getmrmsublpf-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -1687,6 +1687,94 @@ Keyword args:
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSSID
+
+<a id="opIdsetSSID"></a>
+
+`GET /setSSID:{value}`
+
+*Change the SSID name of the device*
+
+Example: http://10.10.10.254/httpapi.asp?command=setSSID:value
+
+Sets a new network name (SSID) of the device in hexadecimal format
+
+<h3 id="setssid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|value|path|string|true|The new SSID name to set for the device, in hexadecimal format.|
+
+<h3 id="setssid-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setNetwork
+
+<a id="opIdsetNetwork"></a>
+
+`GET /setNetwork:{n}:{password}`
+
+*Setting the password WIFI*
+
+Example: http://10.10.10.254/httpapi.asp?command=setNetwork:1:password
+
+Setting a new password using letters and / or numbers and crossing of setnetwork setting: 1 (Securing WIFI network (WPAPSK) in contrast, setnetwork: 0 (OPEN) makes the network open WIFI.
+
+No response The system restarts after the validation of the new password.
+
+<h3 id="setnetwork-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Network security type, where 1 secures the WIFI network with WPAPSK and 0 makes the network open.|
+|password|path|string|true|The new password to set for the WIFI network, using letters and/or numbers.|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|n|0|
+|n|1|
+
+<h3 id="setnetwork-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPowerWifiDown
+
+<a id="opIdsetPowerWifiDown"></a>
+
+`GET /setPowerWifiDown`
+
+*Stop WIFI signal*
+
+Example: http://10.10.10.254/httpapi.asp?command=setPowerWifiDown
+
+Turns off the wifi
+
+<h3 id="setpowerwifidown-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -2124,8 +2212,10 @@ JSON Response:
 
 > 200 Response
 
-```
-null
+```json
+{
+  "EQStat": "On"
+}
 ```
 
 <h3 id="geteqstat-responses">Responses</h3>
@@ -2135,6 +2225,19 @@ null
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Default response|Inline|
 
 <h3 id="geteqstat-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» EQStat|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|EQStat|On|
+|EQStat|Off|
 
 <aside class="success">
 This operation does not require authentication
@@ -2890,6 +2993,76 @@ This operation does not require authentication
 |str|path|string|true|Unknown|
 
 <h3 id="eqgetlv2bandex-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqGetSourceModes
+
+<a id="opIdeqGetSourceModes"></a>
+
+`GET /EQGetSourceModes`
+
+*Get the EQ source modes*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=EQGetSourceModes
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "source_name": "string",
+    "NameLR": "string",
+    "EQStat": "string",
+    "Name": "string",
+    "pluginURI": "string",
+    "channelMode": "string"
+  }
+]
+```
+
+<h3 id="eqgetsourcemodes-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="eqgetsourcemodes-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» source_name|string|false|none|none|
+|» NameLR|string|false|none|none|
+|» EQStat|string|false|none|none|
+|» Name|string|false|none|none|
+|» pluginURI|string|false|none|none|
+|» channelMode|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## eqSaveCustom
+
+<a id="opIdeqSaveCustom"></a>
+
+`GET /EQSave:Custom`
+
+*Save the current EQ setting as "Custom"*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=EQSave:Custom
+
+<h3 id="eqsavecustom-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -4762,6 +4935,188 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
+<h1 id="linkplay-wiim-http-api-alexa">Alexa</h1>
+
+Get and set Alexa settings
+
+## alexaEnableBetaId
+
+<a id="opIdalexaEnableBetaId"></a>
+
+`GET /alexaEnableBetaId:{n}`
+
+*Unknown*
+
+...
+
+<h3 id="alexaenablebetaid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Unknown|
+
+<h3 id="alexaenablebetaid-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAlexaProfile
+
+<a id="opIdgetAlexaProfile"></a>
+
+`GET /getAlexaProfile`
+
+*Unknown*
+
+...
+
+<h3 id="getalexaprofile-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaLogOut
+
+<a id="opIdalexaLogOut"></a>
+
+`GET /alexaLogOut`
+
+*Unknown*
+
+...
+
+<h3 id="alexalogout-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAlexaCountry
+
+<a id="opIdgetAlexaCountry"></a>
+
+`GET /getAlexaCountry`
+
+*Unknown*
+
+...
+
+<h3 id="getalexacountry-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaLanguageListGet
+
+<a id="opIdalexaLanguageListGet"></a>
+
+`GET /alexaLanguageListGet`
+
+*Unknown*
+
+...
+
+<h3 id="alexalanguagelistget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaGetLanguage
+
+<a id="opIdalexaGetLanguage"></a>
+
+`GET /alexaGetLanguage`
+
+*Unknown*
+
+...
+
+<h3 id="alexagetlanguage-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAlexaCountry
+
+<a id="opIdsetAlexaCountry"></a>
+
+`GET /setAlexaCountry:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="setalexacountry-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setalexacountry-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alexaSetLanguage
+
+<a id="opIdalexaSetLanguage"></a>
+
+`GET /alexaSetLanguage:{str}`
+
+*Unknown*
+
+...
+
+<h3 id="alexasetlanguage-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="alexasetlanguage-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-other">Other</h1>
 
 Existing commands, purpose unkown. To research further...
@@ -5150,72 +5505,6 @@ progress	Progress between 0 to 100%
 This operation does not require authentication
 </aside>
 
-## setSSID
-
-<a id="opIdsetSSID"></a>
-
-`GET /setSSID:{value}`
-
-*Change the SSID name of the device*
-
-Example: http://10.10.10.254/httpapi.asp?command=setSSID:value
-
-Sets a new network name (SSID) of the device in hexadecimal format
-
-<h3 id="setssid-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|value|path|string|true|The new SSID name to set for the device, in hexadecimal format.|
-
-<h3 id="setssid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setNetwork
-
-<a id="opIdsetNetwork"></a>
-
-`GET /setNetwork:{n}:{password}`
-
-*Setting the password WIFI*
-
-Example: http://10.10.10.254/httpapi.asp?command=setNetwork:1:password
-
-Setting a new password using letters and / or numbers and crossing of setnetwork setting: 1 (Securing WIFI network (WPAPSK) in contrast, setnetwork: 0 (OPEN) makes the network open WIFI.
-
-No response The system restarts after the validation of the new password.
-
-<h3 id="setnetwork-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|n|path|integer|true|Network security type, where 1 secures the WIFI network with WPAPSK and 0 makes the network open.|
-|password|path|string|true|The new password to set for the WIFI network, using letters and/or numbers.|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|n|0|
-|n|1|
-
-<h3 id="setnetwork-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## restoreToDefault
 
 <a id="opIdrestoreToDefault"></a>
@@ -5229,28 +5518,6 @@ Example: http://10.10.10.254/httpapi.asp?command=restoreToDefault
 To restore factory settings, erasing defined configurations. The device restarts.
 
 <h3 id="restoretodefault-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setPowerWifiDown
-
-<a id="opIdsetPowerWifiDown"></a>
-
-`GET /setPowerWifiDown`
-
-*Stop WIFI signal*
-
-Example: http://10.10.10.254/httpapi.asp?command=setPowerWifiDown
-
-Turns off the wifi
-
-<h3 id="setpowerwifidown-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -5702,32 +5969,6 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## alexaEnableBetaId
-
-<a id="opIdalexaEnableBetaId"></a>
-
-`GET /alexaEnableBetaId:{n}`
-
-*Unknown*
-
-...
-
-<h3 id="alexaenablebetaid-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|n|path|integer|true|Unknown|
-
-<h3 id="alexaenablebetaid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## setTimezone
 
 <a id="opIdsetTimezone"></a>
@@ -5866,26 +6107,6 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## getAlexaProfile
-
-<a id="opIdgetAlexaProfile"></a>
-
-`GET /getAlexaProfile`
-
-*Unknown*
-
-...
-
-<h3 id="getalexaprofile-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## getAvsDevInfo
 
 <a id="opIdgetAvsDevInfo"></a>
@@ -5897,66 +6118,6 @@ This operation does not require authentication
 ...
 
 <h3 id="getavsdevinfo-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## alexaLogOut
-
-<a id="opIdalexaLogOut"></a>
-
-`GET /alexaLogOut`
-
-*Unknown*
-
-...
-
-<h3 id="alexalogout-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getAlexaCountry
-
-<a id="opIdgetAlexaCountry"></a>
-
-`GET /getAlexaCountry`
-
-*Unknown*
-
-...
-
-<h3 id="getalexacountry-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## alexaLanguageListGet
-
-<a id="opIdalexaLanguageListGet"></a>
-
-`GET /alexaLanguageListGet`
-
-*Unknown*
-
-...
-
-<h3 id="alexalanguagelistget-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -6004,78 +6165,6 @@ This operation does not require authentication
 |str2|path|string|true|Unknown|
 
 <h3 id="getlpauthcode-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## alexaGetLanguage
-
-<a id="opIdalexaGetLanguage"></a>
-
-`GET /alexaGetLanguage`
-
-*Unknown*
-
-...
-
-<h3 id="alexagetlanguage-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setAlexaCountry
-
-<a id="opIdsetAlexaCountry"></a>
-
-`GET /setAlexaCountry:{str}`
-
-*Unknown*
-
-...
-
-<h3 id="setalexacountry-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="setalexacountry-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## alexaSetLanguage
-
-<a id="opIdalexaSetLanguage"></a>
-
-`GET /alexaSetLanguage:{str}`
-
-*Unknown*
-
-...
-
-<h3 id="alexasetlanguage-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="alexasetlanguage-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
