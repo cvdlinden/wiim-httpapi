@@ -695,6 +695,388 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/StringOK"
+  "/setSSID:{value}":
+    get:
+      tags:
+        - Network
+      summary: Change the SSID name of the device
+      description: |-
+        Example: http://10.10.10.254/httpapi.asp?command=setSSID:value
+
+        Sets a new network name (SSID) of the device in hexadecimal format
+      externalDocs:
+        description: LinkPlayAPI by n4archive
+        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setSSID
+      parameters:
+        - name: "value"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The new SSID name to set for the device, in hexadecimal format.
+      responses:
+        "200":
+          description: Successful response
+  "/setNetwork:{n}:{password}":
+    get:
+      tags:
+        - Network
+      summary: Setting the password WIFI
+      description: |-
+        Example: http://10.10.10.254/httpapi.asp?command=setNetwork:1:password
+
+        Setting a new password using letters and / or numbers and crossing of setnetwork setting: 1 (Securing WIFI network (WPAPSK) in contrast, setnetwork: 0 (OPEN) makes the network open WIFI.
+
+        No response The system restarts after the validation of the new password.
+      externalDocs:
+        description: LinkPlayAPI by n4archive
+        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setNetwork
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+          description: Network security type, where 1 secures the WIFI network with WPAPSK and 0 makes the network open.
+        - name: "password"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The new password to set for the WIFI network, using letters and/or numbers.
+      responses:
+        "200":
+          description: Successful response
+  /getNetworkPreferDNS:
+    get:
+      tags:
+        - Network
+      summary: Get the preferred DNS server
+      description: |-
+        ...
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getNetworkPreferDNS
+      responses:
+        "200":
+          description: Successful response
+  /getWlanBandConfig:
+    get:
+      tags:
+        - Network
+      summary: Get the WLAN band configuration
+      description: |-
+        ...
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getWlanBandConfig
+      responses:
+        "200":
+          description: Successful response
+  /getWlanRoamConfig:
+    get:
+      tags:
+        - Network
+      summary: Get the WLAN roaming configuration
+      description: |-
+        ...
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getWlanRoamConfig
+      responses:
+        "200":
+          description: Successful response
+  /getIPV6Enable:
+    get:
+      tags:
+        - Network
+      summary: Get IPV6 enable status
+      description: |-
+        ...
+      externalDocs:
+        description: WiiM Extended HTTP API by DanBrezeanu
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
+      operationId: getIPV6Enable
+      responses:
+        "200":
+          description: Successful response
+  /setPowerWifiDown:
+    get:
+      tags:
+        - Network
+      summary: Stop WIFI signal
+      description: |-
+        Example: http://10.10.10.254/httpapi.asp?command=setPowerWifiDown
+
+        Turns off the wifi
+      externalDocs:
+        description: LinkPlayAPI by n4archive
+        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setPowerWifiDown
+      responses:
+        "200":
+          description: Successful response
+  /wlanConnectHideAp:{str}:
+    get:
+      tags:
+        - Network
+      summary: WLAN connect to hidden AP
+      description: |-
+        ...
+      operationId: wlanConnectHideAp
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /wlanConnectHideApEx:{str1}:{str2}:{str3}:
+    get:
+      tags:
+        - Network
+      summary: WLAN connect to hidden AP with extra parameters
+      description: |-
+        ...
+      operationId: wlanConnectHideApEx
+      parameters:
+        - name: "str1"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "str2"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "str3"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getNetwork:
+    get:
+      tags:
+        - Network
+      summary: Get the network configuration
+      description: |-
+        ...
+      operationId: getNetwork
+      responses:
+        "200":
+          description: Successful response
+  /wlanGetApListEx:
+    get:
+      tags:
+        - Network
+      summary: Get WLAN AP list
+      description: |-
+        ...
+
+        Returns: {"res":"0"}
+      operationId: wlanGetApListEx
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  res:
+                    type: string
+              examples:
+                example1:
+                  summary: Example response
+                  value: {"res":"0"}
+  /setHideSSID:{str}:
+    get:
+      tags:
+        - Network
+      summary: Set hide SSID
+      description: |-
+        ...
+      operationId: setHideSSID
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setNetworkExAES:{n}:{password}:
+    get:
+      tags:
+        - Network
+      summary: Set network with AES encryption
+      description: |-
+        ...
+      operationId: setNetworkExAES
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+          description: Unknown
+        - name: "password"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setWlanBandConfig:{str}:
+    get:
+      tags:
+        - Network
+      summary: Set WLAN band configuration
+      description: |-
+        ...
+      operationId: setWlanBandConfig
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setWlanConnectDisable:{str}:
+    get:
+      tags:
+        - Network
+      summary: Set WLAN connect disable
+      description: |-
+        ...
+      operationId: setWlanConnectDisable
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setWlanRoamConfig:{str}:
+    get:
+      tags:
+        - Network
+      summary: Set WLAN roam configuration
+      description: |-
+        ...
+      operationId: setWlanRoamConfig
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setNetworkPreferDNS:{str}:
+    get:
+      tags:
+        - Network
+      summary: Set network preferred DNS
+      description: |-
+        ...
+      operationId: setNetworkPreferDNS
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /wlanGetApFullList:
+    get:
+      tags:
+        - Network
+      summary: Get WLAN AP list
+      description: |-
+        ...
+      operationId: wlanGetApFullList
+      responses:
+        "200":
+          description: Successful response
+  /wlanSwitchConnectedAp:ssid={ssid}:bssid={bssid}:
+    get:
+      tags:
+        - Network
+      summary: Wlan switch connected AP
+      description: |-
+        ...
+      operationId: wlanSwitchConnectedAp
+      parameters:
+        - name: "ssid"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "bssid"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /setIPV6Enable:{str}:
+    get:
+      tags:
+        - Network
+      summary: Set IPv6 enable
+      description: |-
+        ...
+      operationId: setIPV6Enable
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
 
   # ====================================================================
   # Equalizer
@@ -911,7 +1293,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Set Bass level
       description: |-
         ...
       operationId: eqSetBass
@@ -929,7 +1311,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Set Treble level
       description: |-
         ...
       operationId: eqSetTreble
@@ -947,7 +1329,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Equalizer enable
       description: |-
         ...
       operationId: eqEnable
@@ -958,7 +1340,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Equalizer disable
       description: |-
         ...
       operationId: eqDisable
@@ -1023,7 +1405,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Set LV2 band
       description: |-
         ...
       operationId: eqSetLV2Band
@@ -1041,7 +1423,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Set LV2 source band
       description: |-
         ...
       operationId: eqSetLV2SourceBand
@@ -1059,7 +1441,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Delete EQ v2 settings
       description: |-
         ...
       operationId: eqv2Delete
@@ -1077,7 +1459,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Rename EQ v2 settings
       description: |-
         ...
       operationId: eqv2Rename
@@ -1095,7 +1477,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Change source FX
       description: |-
         ...
       operationId: eqChangeSourceFX
@@ -1113,7 +1495,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Change FX
       description: |-
         ...
       operationId: eqChangeFX
@@ -1127,21 +1509,22 @@ paths:
       responses:
         "200":
           description: Successful response
-  /EQGetLV2Band:{str}:
+  /EQGetLV2Band:{pluginURI}:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Get LV2 band
       description: |-
         ...
       operationId: eqGetLV2Band
       parameters:
-        - name: "str"
+        - name: "pluginURI"
           in: path
           required: true
           schema:
             type: string
           description: Unknown
+          example: "http://moddevices.com/plugins/caps/Eq10HP"
       responses:
         "200":
           description: Successful response
@@ -1149,7 +1532,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Get LV2 source band
       description: |-
         ...
       operationId: eqGetLV2SourceBand
@@ -1167,7 +1550,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Get LV2 source band with extra parameters
       description: |-
         ...
       operationId: eqGetLV2SourceBandEx
@@ -1185,7 +1568,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Get EQ v2 list
       description: |-
         ...
       operationId: eqv2GetList
@@ -1203,7 +1586,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Get new EQ v2 list
       description: |-
         ...
       operationId: eqv2GetNewList
@@ -1221,7 +1604,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Load EQ v2 settings
       description: |-
         ...
       operationId: eqv2Load
@@ -1239,7 +1622,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Source load EQ v2 settings
       description: |-
         ...
       operationId: eqv2SourceLoad
@@ -1257,7 +1640,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Turn off EQ source
       description: |-
         ...
       operationId: eqSourceOff
@@ -1275,7 +1658,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Set channel mode
       description: |-
         ...
       operationId: eqSetChannelMode
@@ -1293,7 +1676,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Save EQ source settings
       description: |-
         ...
       operationId: eqSourceSave
@@ -1311,7 +1694,7 @@ paths:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Save EQ settings
       description: |-
         ...
       operationId: eqSave
@@ -1325,21 +1708,22 @@ paths:
       responses:
         "200":
           description: Successful response
-  /EQGetLV2BandEx:{str}:
+  /EQGetLV2BandEx:{pluginURI}:
     get:
       tags:
         - Equalizer
-      summary: Unknown
+      summary: Get LV2 band with extra parameters
       description: |-
         ...
       operationId: eqGetLV2BandEx
       parameters:
-        - name: "str"
+        - name: "pluginURI"
           in: path
           required: true
           schema:
             type: string
           description: Unknown
+          example: "http://moddevices.com/plugins/caps/Eq10HP"
       responses:
         "200":
           description: Successful response
@@ -2444,6 +2828,217 @@ paths:
                       - 1
                       - 2
                       - 3
+  /connectbta2dpsource:{str}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Connect to a Bluetooth source device
+      description: |-
+        ...
+      operationId: connectbta2dpsource
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /delbthistory:{str}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Delete Bluetooth history
+      description: |-
+        ...
+      operationId: delbthistory
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /btdisconnectall:
+    get:
+      tags:
+        - Bluetooth
+      summary: Disconnect all Bluetooth devices
+      description: |-
+        ...
+      operationId: btdisconnectall
+      responses:
+        "200":
+          description: Successful response
+  /getbtPairDevStat:
+    get:
+      tags:
+        - Bluetooth
+      summary: Get Bluetooth pair device status
+      description: |-
+        ...
+      operationId: getbtPairDevStat
+      responses:
+        "200":
+          description: Successful response
+  /getbtstatus:
+    get:
+      tags:
+        - Bluetooth
+      summary: Get Bluetooth status
+      description: |-
+        ...
+      operationId: getbtstatus
+      responses:
+        "200":
+          description: Successful response
+  /startbtserver:
+    get:
+      tags:
+        - Bluetooth
+      summary: Start Bluetooth server
+      description: |-
+        ...
+      operationId: startbtserver
+      responses:
+        "200":
+          description: Successful response
+  /startgetbtPairDevStat:
+    get:
+      tags:
+        - Bluetooth
+      summary: Start getting Bluetooth pair device status
+      description: |-
+        ...
+      operationId: startgetbtPairDevStat
+      responses:
+        "200":
+          description: Successful response
+  /stopbtdiscovery:
+    get:
+      tags:
+        - Bluetooth
+      summary: Stop Bluetooth discovery
+      description: |-
+        ...
+      operationId: stopbtdiscovery
+      responses:
+        "200":
+          description: Successful response
+  /stopbtserver:{n}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Stop Bluetooth server
+      description: |-
+        ...
+      operationId: stopbtserver
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /btavkenterpair:
+    get:
+      tags:
+        - Bluetooth
+      summary: Enter Bluetooth pairing mode
+      description: |-
+        ...
+      operationId: btavkenterpair
+      responses:
+        "200":
+          description: Successful response
+  /blehidpair:{str}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Pair with a BLE HID device
+      description: |-
+        ...
+      operationId: blehidpair
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /blehidremoveall:
+    get:
+      tags:
+        - Bluetooth
+      summary: Remove all paired BLE HID devices
+      description: |-
+        ...
+      operationId: blehidremoveall
+      responses:
+        "200":
+          description: Successful response
+  /btrecovery:
+    get:
+      tags:
+        - Bluetooth
+      summary: Recovery Bluetooth
+      description: |-
+        ...
+      operationId: btrecovery
+      responses:
+        "200":
+          description: Successful response
+  /getblehidstatus:
+    get:
+      tags:
+        - Bluetooth
+      summary: Get BLE HID status
+      description: |-
+        ...
+      operationId: getBleHidStatus
+      responses:
+        "200":
+          description: Successful response
+  /startblescan:{n}:
+    get:
+      tags:
+        - Bluetooth
+      summary: Start BLE scan
+      description: |-
+        ...
+      operationId: startBleScan
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /getblediscoveryresult:
+    get:
+      tags:
+        - Bluetooth
+      summary: Get BLE discovery result
+      description: |-
+        ...
+      operationId: getBleDiscoveryResult
+      responses:
+        "200":
+          description: Successful response
 
   # ====================================================================
   # Room correction
@@ -3331,7 +3926,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Multi-room get slave device name
       description: |-
         ...
       operationId: multiroomSlaveDeviceName
@@ -3341,7 +3936,7 @@ paths:
           required: true
           schema:
             type: string
-          description: Unknown
+          description: The IP address of the slave device
         - name: "str"
           in: path
           required: true
@@ -3355,7 +3950,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Multi-room subwoofer forget
       description: |-
         ...
       operationId: multiroomSubwooferForget
@@ -3373,7 +3968,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Multi-room subwoofer get pair info
       description: |-
         ...
       operationId: multiroomSubwooferGetPairInfo
@@ -3384,7 +3979,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Multi-room get lead time
       description: |-
         ...
       operationId: multiroomConfigGetLeadtime
@@ -3395,7 +3990,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Multi-room subwoofer pair
       description: |-
         ...
       operationId: multiroomSubwooferPair
@@ -3413,7 +4008,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Multi-room set lead time
       description: |-
         ...
       operationId: multiroomConfigSetLeadtime
@@ -3487,7 +4082,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get the MV remote silence update time
       description: |-
         ...
       externalDocs:
@@ -3497,67 +4092,11 @@ paths:
       responses:
         "200":
           description: Successful response
-  /getNetworkPreferDNS:
-    get:
-      tags:
-        - Other
-      summary: Unknown
-      description: |-
-        ...
-      externalDocs:
-        description: WiiM Extended HTTP API by DanBrezeanu
-        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
-      operationId: getNetworkPreferDNS
-      responses:
-        "200":
-          description: Successful response
-  /getWlanBandConfig:
-    get:
-      tags:
-        - Other
-      summary: Unknown
-      description: |-
-        ...
-      externalDocs:
-        description: WiiM Extended HTTP API by DanBrezeanu
-        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
-      operationId: getWlanBandConfig
-      responses:
-        "200":
-          description: Successful response
-  /getWlanRoamConfig:
-    get:
-      tags:
-        - Other
-      summary: Unknown
-      description: |-
-        ...
-      externalDocs:
-        description: WiiM Extended HTTP API by DanBrezeanu
-        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
-      operationId: getWlanRoamConfig
-      responses:
-        "200":
-          description: Successful response
-  /getIPV6Enable:
-    get:
-      tags:
-        - Other
-      summary: Unknown
-      description: |-
-        ...
-      externalDocs:
-        description: WiiM Extended HTTP API by DanBrezeanu
-        url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
-      operationId: getIPV6Enable
-      responses:
-        "200":
-          description: Successful response
   /getSpdifOutMaxCap:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get SPDIF output maximum capabilities
       description: |-
         ...
       externalDocs:
@@ -3571,7 +4110,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get the maximum capabilities of the coaxial output
       description: |-
         ...
       externalDocs:
@@ -3585,7 +4124,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get auxiliary voltage support list
       description: |-
         ...
       externalDocs:
@@ -3600,7 +4139,7 @@ paths:
       deprecated: true
       tags:
         - Other
-      summary: Unknown
+      summary: Audio Cast get speaker list
       description: |-
         ...
       externalDocs:
@@ -3615,7 +4154,7 @@ paths:
       deprecated: true
       tags:
         - Other
-      summary: Unknown
+      summary: Audio Cast scan speaker
       description: |-
         ...
       externalDocs:
@@ -3630,7 +4169,7 @@ paths:
       deprecated: true
       tags:
         - Other
-      summary: Unknown
+      summary: Audio Cast get speaker transcode buffer time
       description: |-
         ...
       externalDocs:
@@ -3645,7 +4184,7 @@ paths:
       deprecated: true
       tags:
         - Other
-      summary: Unknown
+      summary: Audio Cast get speaker transcode profile
       description: |-
         ...
       externalDocs:
@@ -3660,7 +4199,7 @@ paths:
       deprecated: true
       tags:
         - Other
-      summary: Unknown
+      summary: Audio Cast set speaker password
       description: |-
         ...
       externalDocs:
@@ -3688,7 +4227,7 @@ paths:
       deprecated: true
       tags:
         - Other
-      summary: Unknown
+      summary: Audio Cast set speaker volume
       description: |-
         ...
       externalDocs:
@@ -3717,7 +4256,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get sound card mode support list
       description: |-
         ...
       externalDocs:
@@ -3731,7 +4270,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get the active sound card output mode
       description: |-
         ...
       externalDocs:
@@ -3867,63 +4406,6 @@ paths:
       responses:
         "200":
           description: Successful response
-  "/setSSID:{value}":
-    get:
-      tags:
-        - Network
-      summary: Change the SSID name of the device
-      description: |-
-        Example: http://10.10.10.254/httpapi.asp?command=setSSID:value
-
-        Sets a new network name (SSID) of the device in hexadecimal format
-      externalDocs:
-        description: LinkPlayAPI by n4archive
-        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
-      operationId: setSSID
-      parameters:
-        - name: "value"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The new SSID name to set for the device, in hexadecimal format.
-      responses:
-        "200":
-          description: Successful response
-  "/setNetwork:{n}:{password}":
-    get:
-      tags:
-        - Network
-      summary: Setting the password WIFI
-      description: |-
-        Example: http://10.10.10.254/httpapi.asp?command=setNetwork:1:password
-
-        Setting a new password using letters and / or numbers and crossing of setnetwork setting: 1 (Securing WIFI network (WPAPSK) in contrast, setnetwork: 0 (OPEN) makes the network open WIFI.
-
-        No response The system restarts after the validation of the new password.
-      externalDocs:
-        description: LinkPlayAPI by n4archive
-        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
-      operationId: setNetwork
-      parameters:
-        - name: "n"
-          in: path
-          required: true
-          schema:
-            type: integer
-            enum:
-              - 0
-              - 1
-          description: Network security type, where 1 secures the WIFI network with WPAPSK and 0 makes the network open.
-        - name: "password"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The new password to set for the WIFI network, using letters and/or numbers.
-      responses:
-        "200":
-          description: Successful response
   /restoreToDefault:
     get:
       tags:
@@ -3937,22 +4419,6 @@ paths:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
       operationId: restoreToDefault
-      responses:
-        "200":
-          description: Successful response
-  /setPowerWifiDown:
-    get:
-      tags:
-        - Network
-      summary: Stop WIFI signal
-      description: |-
-        Example: http://10.10.10.254/httpapi.asp?command=setPowerWifiDown
-
-        Turns off the wifi
-      externalDocs:
-        description: LinkPlayAPI by n4archive
-        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
-      operationId: setPowerWifiDown
       responses:
         "200":
           description: Successful response
@@ -3983,58 +4449,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: EasyLink response stop
       description: |-
         ...
       operationId: easyLinkResponseStop
-      responses:
-        "200":
-          description: Successful response
-  "/wlanConnectHideAp:{str}":
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: wlanConnectHideAp
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  "/wlanConnectHideApEx:{str1}:{str2}:{str3}":
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: wlanConnectHideApEx
-      parameters:
-        - name: "str1"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-        - name: "str2"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-        - name: "str3"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
       responses:
         "200":
           description: Successful response
@@ -4042,7 +4460,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Notify upgrade type firmware
       description: |-
         ...
       operationId: notifyUpgradeTypeFirmware
@@ -4053,7 +4471,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get LMP filter capability
       description: |-
         ...
       operationId: getLMPFilterCapability
@@ -4064,7 +4482,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get stream service config for a specific source
       description: |-
         ...
       operationId: getStreamServiceConfig
@@ -4078,131 +4496,11 @@ paths:
       responses:
         "200":
           description: Successful response
-  /connectbta2dpsource:{str}:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: connectbta2dpsource
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  /delbthistory:{str}:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: delbthistory
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  /btdisconnectall:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: btdisconnectall
-      responses:
-        "200":
-          description: Successful response
-  /getbtPairDevStat:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: getbtPairDevStat
-      responses:
-        "200":
-          description: Successful response
-  /getbtstatus:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: getbtstatus
-      responses:
-        "200":
-          description: Successful response
-  /startbtserver:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: startbtserver
-      responses:
-        "200":
-          description: Successful response
-  /startgetbtPairDevStat:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: startgetbtPairDevStat
-      responses:
-        "200":
-          description: Successful response
-  /stopbtdiscovery:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: stopbtdiscovery
-      responses:
-        "200":
-          description: Successful response
-  /stopbtserver:{n}:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: stopbtserver
-      parameters:
-        - name: "n"
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
   /setHandshakeCode:{str}:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set handshake code
       description: |-
         ...
       operationId: setHandshakeCode
@@ -4216,22 +4514,11 @@ paths:
       responses:
         "200":
           description: Successful response
-  /getNetwork:
-    get:
-      tags:
-        - Network
-      summary: Get the network configuration
-      description: |-
-        ...
-      operationId: getNetwork
-      responses:
-        "200":
-          description: Successful response
   /getsyslog:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get system log
       description: |-
         ...
       operationId: getsyslog
@@ -4242,7 +4529,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get system log for a specific IP address
       description: |-
         ...
       operationId: getsyslogIp
@@ -4278,7 +4565,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get update server
       description: |-
         ...
       operationId: getUpdateServer
@@ -4289,21 +4576,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get weather info
       description: |-
         ...
       operationId: getWeatherInfo
-      responses:
-        "200":
-          description: Successful response
-  /wlanGetApListEx:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: wlanGetApListEx
       responses:
         "200":
           description: Successful response
@@ -4311,7 +4587,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set access PIN
       description: |-
         ...
       operationId: setAccessPIN
@@ -4329,7 +4605,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set language
       description: |-
         ...
       operationId: setLanguage
@@ -4347,7 +4623,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Auto play setting
       description: |-
         ...
       operationId: autoPlaySet
@@ -4358,7 +4634,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get MV ROM download status
       description: |-
         ...
       operationId: getMvRomDownloadStatus
@@ -4369,7 +4645,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get MV ROM download status V2
       description: |-
         ...
       operationId: getMvRomDownloadV2Status
@@ -4380,28 +4656,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set hex device name
       description: |-
         ...
       operationId: setHexDeviceName
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  /setHideSSID:{str}:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: setHideSSID
       parameters:
         - name: "str"
           in: path
@@ -4416,7 +4674,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set MV remote silence OTA time
       description: |-
         ...
       operationId: setMvRemoteSilenceOTATime
@@ -4434,7 +4692,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set MV remote silence update time
       description: |-
         ...
       operationId: setMvRemoteSilenceUpdateTime
@@ -4448,38 +4706,11 @@ paths:
       responses:
         "200":
           description: Successful response
-  /setNetworkExAES:{n}:{password}:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: setNetworkExAES
-      parameters:
-        - name: "n"
-          in: path
-          required: true
-          schema:
-            type: integer
-            enum:
-              - 0
-              - 1
-          description: Unknown
-        - name: "password"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
   /setTimezone:{str}:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set timezone
       description: |-
         ...
       operationId: setTimezone
@@ -4497,7 +4728,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Check access PIN
       description: |-
         ...
       operationId: checkAccessPIN
@@ -4508,7 +4739,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set update server
       description: |-
         ...
       operationId: setUpdateServer
@@ -4526,7 +4757,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set weather location
       description: |-
         ...
       operationId: setWeatherLocation
@@ -4540,22 +4771,11 @@ paths:
       responses:
         "200":
           description: Successful response
-  /btavkenterpair:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: btavkenterpair
-      responses:
-        "200":
-          description: Successful response
   /StartCheck:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Start check
       description: |-
         ...
       operationId: startCheck
@@ -4566,7 +4786,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get battery value
       description: |-
         ...
       operationId: getbatteryval
@@ -4577,7 +4797,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get AVS Device Info
       description: |-
         ...
       operationId: getAvsDevInfo
@@ -4588,7 +4808,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get ASR Status
       description: |-
         ...
       operationId: getAsrStatus
@@ -4599,7 +4819,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get LP Auth Code
       description: |-
         ...
       operationId: getLPAuthCode
@@ -4623,7 +4843,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set token parameters
       description: |-
         ...
       operationId: setTokenParams
@@ -4647,7 +4867,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set talk prompt
       description: |-
         ...
       operationId: talksetPrompt
@@ -4661,11 +4881,128 @@ paths:
       responses:
         "200":
           description: Successful response
+  /talksetAlarmPreWake:{str}:
+    get:
+      tags:
+        - Other
+      summary: Set talk alarm pre-wake
+      description: |-
+        ...
+      externalDocs:
+        description: More (undocumented) API calls
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: talksetAlarmPreWake
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /talksetAlarmTone:{n}:
+    get:
+      tags:
+        - Other
+      summary: Set talk alarm tone
+      description: |-
+        ...
+      externalDocs:
+        description: More (undocumented) API calls
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: talksetAlarmTone
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /talksetAlarmTonePreview:{n}:
+    get:
+      tags:
+        - Other
+      summary: Set talk alarm tone preview
+      description: |-
+        ...
+      externalDocs:
+        description: More (undocumented) API calls
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: talksetAlarmTonePreview
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /talksetAlarmVolume:{n}:
+    get:
+      tags:
+        - Other
+      summary: Set talk alarm volume
+      description: |-
+        ...
+      externalDocs:
+        description: More (undocumented) API calls
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: talksetAlarmVolume
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /talksetAlarmcommon:prewake:{str}:vol:{n1}:tone:{n2}:
+    get:
+      tags:
+        - Other
+      summary: Set talk alarm common settings
+      description: |-
+        ...
+      externalDocs:
+        description: More (undocumented) API calls
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: talksetAlarmcommon
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "n1"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+        - name: "n2"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
   /SetSyncPlayExtraDelay:{n}:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set sync play extra delay
       description: |-
         ...
       operationId: setSyncPlayExtraDelay
@@ -4683,7 +5020,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set initial configuration
       description: |-
         ...
       operationId: setInitialConfiguration
@@ -4697,50 +5034,14 @@ paths:
       responses:
         "200":
           description: Successful response
-  /setWlanBandConfig:{str}:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: setWlanBandConfig
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
   /get_ui_config:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get UI config
       description: |-
         ...
       operationId: getUiConfig
-      responses:
-        "200":
-          description: Successful response
-  /setWlanConnectDisable:{str}:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: setWlanConnectDisable
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
       responses:
         "200":
           description: Successful response
@@ -4748,7 +5049,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get SPDIF auto-sense enable status
       description: |-
         ...
       operationId: getSpdifAutoSenseEnable
@@ -4759,28 +5060,10 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Set multiroom subwoofer LPF
       description: |-
         ...
       operationId: setMRMSubLPF
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  /setWlanRoamConfig:{str}:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: setWlanRoamConfig
       parameters:
         - name: "str"
           in: path
@@ -4795,68 +5078,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get SPDIF input noise removal status
       description: |-
         ...
       operationId: getSpdifInNoiseRemove
-      responses:
-        "200":
-          description: Successful response
-  /setNetworkPreferDNS:{str}:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: setNetworkPreferDNS
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  /blehidpair:{str}:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: blehidpair
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  /blehidremoveall:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: blehidremoveall
-      responses:
-        "200":
-          description: Successful response
-  /btrecovery:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: btrecovery
       responses:
         "200":
           description: Successful response
@@ -4864,7 +5089,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Phono mode switch set
       description: |-
         ...
       operationId: phonoModeSwitchSet
@@ -4882,7 +5107,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Get subwoofer LPF
       description: |-
         ...
       operationId: getSubLPF
@@ -4893,7 +5118,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set play mode volume enable
       description: |-
         ...
       operationId: setPlayModeVolumeEnable
@@ -4911,7 +5136,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get UI wallpaper list
       description: |-
         ...
       operationId: getUiWallpaperList
@@ -4922,7 +5147,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set play mode volume value
       description: |-
         ...
       operationId: setPlayModeVolumeValue
@@ -4940,7 +5165,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set power mode time
       description: |-
         ...
       operationId: setPowerModeTime
@@ -4958,10 +5183,41 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get the volume step of the buttons
       description: |-
-        ...
+        Makes a call to https://10.10.10.254/httpapi.asp?command=get_button_volume_step
+
+        Returns: {"status":"OK","button_volume_step":2}
       operationId: getButtonVolumeStep
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  button_volume_step:
+                    type: integer
+                    example: 2
+  /set_button_volume_step:{str}:
+    get:
+      tags:
+        - Other
+      summary: Set the volume step of the buttons
+      description: |-
+        Makes a call to https://10.10.10.254/httpapi.asp?command=set_button_volume_step:{str}
+      operationId: setButtonVolumeStep
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
       responses:
         "200":
           description: Successful response
@@ -4969,21 +5225,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get AVS Music HD enable status
       description: |-
         ...
       operationId: getAvsMusicHDEnable
-      responses:
-        "200":
-          description: Successful response
-  /wlanGetApFullList:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: wlanGetApFullList
       responses:
         "200":
           description: Successful response
@@ -4991,34 +5236,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get AUX auto-sense enable status
       description: |-
         ...
       operationId: getAuxAutoSenseEnable
-      responses:
-        "200":
-          description: Successful response
-  /wlanSwitchConnectedAp:ssid={ssid}:bssid={bssid}:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: wlanSwitchConnectedAp
-      parameters:
-        - name: "ssid"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-        - name: "bssid"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
       responses:
         "200":
           description: Successful response
@@ -5026,7 +5247,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set UI config
       description: |-
         ...
       operationId: setUiConfig
@@ -5040,22 +5261,11 @@ paths:
       responses:
         "200":
           description: Successful response
-  /getblehidstatus:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: getBleHidStatus
-      responses:
-        "200":
-          description: Successful response
   /setSpdifAutoSenseEnable:{n}:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set SPDIF auto-sense enable
       description: |-
         ...
       operationId: setSpdifAutoSenseEnable
@@ -5073,7 +5283,7 @@ paths:
     get:
       tags:
         - Device control
-      summary: Unknown
+      summary: Get button enable status
       description: |-
         ...
       operationId: buttonEnableGet
@@ -5084,7 +5294,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set SPDIF input noise removal
       description: |-
         ...
       operationId: setSpdifInNoiseRemove
@@ -5102,7 +5312,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get channel mode
       description: |-
         ...
       operationId: getChannelMode
@@ -5113,7 +5323,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Set subwoofer LPF
       description: |-
         ...
       operationId: setSubLPF
@@ -5131,28 +5341,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get device name changeable status
       description: |-
         ...
       operationId: getDeviceNameChangeable
-      responses:
-        "200":
-          description: Successful response
-  /set_button_volume_step:{str}:
-    get:
-      tags:
-        - Other
-      summary: Unknown
-      description: |-
-        ...
-      operationId: setButtonVolumeStep
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
       responses:
         "200":
           description: Successful response
@@ -5160,7 +5352,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get auto-sense enable status
       description: |-
         ...
       operationId: getAutoSenseEnable
@@ -5171,7 +5363,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Start reboot time
       description: |-
         ...
       operationId: startRebootTime
@@ -5182,28 +5374,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get LED switch status
       description: |-
         ...
       operationId: ledSwitchGet
-      responses:
-        "200":
-          description: Successful response
-  /startblescan:{n}:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: startBleScan
-      parameters:
-        - name: "n"
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: Unknown
       responses:
         "200":
           description: Successful response
@@ -5211,7 +5385,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get MQA receiver capacity
       description: |-
         ...
       operationId: getMQAReceiverCap
@@ -5222,7 +5396,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set AVS Music HD enable
       description: |-
         ...
       operationId: setAvsMusicHDEnable
@@ -5240,7 +5414,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Reload button status
       description: |-
         ...
       operationId: reloadButtonGet
@@ -5251,7 +5425,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set AUX auto-sense enable
       description: |-
         ...
       operationId: setAuxAutoSenseEnable
@@ -5269,7 +5443,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get low priority prompt disable status
       description: |-
         ...
       operationId: getLowPriorityPromptDisable
@@ -5280,7 +5454,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get soft mute status
       description: |-
         ...
       operationId: getSoftMute
@@ -5291,7 +5465,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get LINE IN maximum capacity
       description: |-
         ...
       operationId: getLineInMaxCap
@@ -5302,7 +5476,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get AUX input maximum capacity
       description: |-
         ...
       operationId: getAuxInMaxCap
@@ -5313,7 +5487,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get UAC output maximum capacity
       description: |-
         ...
       operationId: getUacOutMaxCap
@@ -5324,7 +5498,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get HDMI auto-sense enable
       description: |-
         ...
       operationId: getHDMIAutoSenseEnable
@@ -5335,7 +5509,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set channel mode
       description: |-
         ...
       operationId: setChannelMode
@@ -5349,22 +5523,11 @@ paths:
       responses:
         "200":
           description: Successful response
-  /getblediscoveryresult:
-    get:
-      tags:
-        - Bluetooth
-      summary: Unknown
-      description: |-
-        ...
-      operationId: getBleDiscoveryResult
-      responses:
-        "200":
-          description: Successful response
   /GetSyncPlayExtraDelay:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get sync play extra delay
       description: |-
         ...
       operationId: getSyncPlayExtraDelay
@@ -5375,7 +5538,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get light operation brightness configuration
       description: |-
         ...
       operationId: getLightOperationBrightConfig
@@ -5386,7 +5549,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set UI wallpaper list
       description: |-
         ...
       operationId: setUiWallpaperList
@@ -5404,7 +5567,7 @@ paths:
     get:
       tags:
         - Multiroom
-      summary: Unknown
+      summary: Get multi-room sub LPF
       description: |-
         ...
       operationId: getMRMSubLPF
@@ -5422,7 +5585,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get main/sub extra delay
       description: |-
         ...
       operationId: getMainSubExtraDelay
@@ -5433,7 +5596,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Disable Cast
       description: |-
         ...
       operationId: castDisable
@@ -5444,7 +5607,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Disable usage report for Cast
       description: |-
         ...
       operationId: castDisableUsageReport
@@ -5455,28 +5618,10 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set auto-sense enable
       description: |-
         ...
       operationId: setAutoSenseEnable
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  /setIPV6Enable:{str}:
-    get:
-      tags:
-        - Network
-      summary: Unknown
-      description: |-
-        ...
-      operationId: setIPV6Enable
       parameters:
         - name: "str"
           in: path
@@ -5491,7 +5636,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get phono mode switch state
       description: |-
         ...
       operationId: phonoModeSwitchGet
@@ -5502,7 +5647,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get play mode volume enable
       description: |-
         ...
       operationId: getPlayModeVolumeEnable
@@ -5513,7 +5658,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set volume control
       description: |-
         ...
       operationId: setVolumeControl
@@ -5531,7 +5676,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get play mode volume value
       description: |-
         ...
       operationId: getPlayModeVolumeValue
@@ -5542,7 +5687,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set MQA receiver capacity
       description: |-
         ...
       operationId: setMQAReceiverCap
@@ -5560,7 +5705,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Get power mode time
       description: |-
         ...
       operationId: getPowerModeTime
@@ -5571,7 +5716,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set max volume
       description: |-
         ...
       operationId: setMaxVolume
@@ -5589,7 +5734,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Enable Cast
       description: |-
         ...
       operationId: enableCast
@@ -5600,7 +5745,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Reload button update
       description: |-
         ...
       operationId: reloadButtonUpdate
@@ -5618,7 +5763,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Enable usage report for Cast
       description: |-
         ...
       operationId: enableCastUsageReport
@@ -5629,7 +5774,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Disable low priority prompt
       description: |-
         ...
       operationId: disableLowPriorityPrompt
@@ -5647,7 +5792,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set soft mute
       description: |-
         ...
       operationId: setSoftMute
@@ -5665,7 +5810,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set HDMI auto-sense enable
       description: |-
         ...
       operationId: setHDMIAutoSenseEnable
@@ -5683,7 +5828,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set SPDIF output max capacity
       description: |-
         ...
       operationId: setSpdifOutMaxCap
@@ -5701,7 +5846,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set coaxial output max capacity
       description: |-
         ...
       operationId: setCoaxOutMaxCap
@@ -5719,7 +5864,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set line input max capacity
       description: |-
         ...
       operationId: setLineInMaxCap
@@ -5737,7 +5882,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set auxiliary input max capacity
       description: |-
         ...
       operationId: setAuxInMaxCap
@@ -5755,7 +5900,7 @@ paths:
     get:
       tags:
         - Other
-      summary: Unknown
+      summary: Set UAC out max cap
       description: |-
         ...
       operationId: setUacOutMaxCap
@@ -5773,10 +5918,188 @@ paths:
     get:
       tags:
         - Device control
-      summary: Unknown
+      summary: Get firmware version
       description: |-
         ...
       operationId: getFirmwareVersion
+      responses:
+        "200":
+          description: Successful response
+  /EnableSysInfo:{n}:
+    get:
+      tags:
+        - Other
+      summary: Enable system information output
+      description: |-
+        ...
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: enableSysInfo
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /GetAirplayExtraDelay:
+    get:
+      tags:
+        - Other
+      summary: Get AirPlay extra delay
+      description: |-
+        Makes a call to https://10.10.10.254/httpapi?command=GetAirplayExtraDelay
+
+        Returns: {"AirplayExtraDelay":-10}
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: getAirplayExtraDelay
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  AirplayExtraDelay:
+                    type: integer
+                    description: AirPlay extra delay in milliseconds
+                    example: -10
+  /GetCurrentWirelessConnect:
+    get:
+      tags:
+        - Other
+      summary: Get current wireless connection information
+      description: |-
+        Makes a call to https://10.10.10.254/httpapi?command=GetCurrentWirelessConnect
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: getCurrentWirelessConnect
+      responses:
+        "200":
+          description: Successful response
+  /SlaveIP:{ip}:alertget:
+    get:
+      tags:
+        - Other
+      summary: Slave alert get
+      description: |-
+        ...
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: slaveAlertGet
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /SlaveIP:{ip}:talksetAlarmVolume:{n}:
+    get:
+      tags:
+        - Other
+      summary: Slave set alarm volume
+      description: |-
+        ...
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: slaveTalkSetAlarmVolume
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /Squeezelite:autoConnectEnable:{n}:
+    get:
+      tags:
+        - Other
+      summary: Squeezelite auto connect enable
+      description: |-
+        ...
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: squeezeliteAutoConnectEnable
+      parameters:
+        - name: "n"
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /Squeezelite:connectServer:{ip}:
+    get:
+      tags:
+        - Other
+      summary: Squeezelite connect server
+      description: |-
+        ...
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: squeezeliteConnectServer
+      parameters:
+        - name: "ip"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /Squeezelite:discover:
+    get:
+      tags:
+        - Other
+      summary: Squeezelite discover
+      description: |-
+        ...
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: squeezeliteDiscover
+      responses:
+        "200":
+          description: Successful response
+  /Squeezelite:getState:
+    get:
+      tags:
+        - Other
+      summary: Squeezelite get state
+      description: |-
+        ...
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: squeezeliteGetState
       responses:
         "200":
           description: Successful response

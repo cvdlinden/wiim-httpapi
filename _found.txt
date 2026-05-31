@@ -1,15 +1,6 @@
 More (undocumented) API calls
 https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3
 
-command=EnableSysInfo:%d
-command=GetAirplayExtraDelay
-command=GetCurrentWirelessConnect
-command=SlaveIP:%@:alertget
-command=SlaveIP:%@:talksetAlarmVolume:%d
-command=Squeezelite:autoConnectEnable:%d
-command=Squeezelite:connectServer:%@
-command=Squeezelite:discover
-command=Squeezelite:getState
 command=TvsLogout
 command=TvsState
 command=alertget
@@ -35,6 +26,8 @@ command=getNetworkHealth
 command=getOutputDigitalFilterType:%@
 command=getOutputDigitalFilterTypeSupportList
 command=getOutputVoltage
+command=setOutputDigitalFilterType:%@
+command=setOutputVoltage:%d
 command=getPlayModeGainConfig
 command=getSetupRouterInfo
 command=getTvsDevInfo
@@ -49,8 +42,6 @@ command=setDigitalFilterType:%d
 command=setHexGroupName:%@
 command=setModeRename:%@
 command=setMusicExplicit:%d
-command=setOutputDigitalFilterType:%@
-command=setOutputVoltage:%d
 command=setPlayModeGainConfig:%@
 command=setPrimeToken:username=%@:token=%@:refreshToken=%@:expires_in=%ld
 command=setSetupRouterInfo:%@
@@ -61,11 +52,6 @@ command=setTuneinLocation:latitude=%@:longitude=%@:serial=%@
 command=setTuneinToken:username=%@:token=%@:refreshToken=%@:expires_in=%ld:userid=%@
 command=setTvsClientID
 command=streamServicesCapability
-command=talksetAlarmPreWake:%@
-command=talksetAlarmTone:%d
-command=talksetAlarmTonePreview:%d
-command=talksetAlarmVolume:%d
-command=talksetAlarmcommon:prewake:%@:vol:%d:tone:%d
 command=tidallogin:oauthcode=%@
 command=wpscannel
 command=wpsclientmode
