@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 
 export default defineConfig({
   title: "WiiM HTTP API Docs",
@@ -31,11 +32,15 @@ export default defineConfig({
     hostname: 'https://cvdlinden.github.io/wiim-httpapi/'
   },
 
+  vite: {
+    plugins: [pagefindPlugin()],
+  },
+
   themeConfig: {
 
-    search: {
-      provider: 'local'
-    },
+    // search: {
+    //   provider: 'local'
+    // },
 
     nav: [
       { text: 'Home', link: '/' },
@@ -60,16 +65,16 @@ export default defineConfig({
           { text: 'Introduction', link: '/api-reference' },
           { text: 'Generic', link: '/tags/Generic' },
           { text: 'Device information', link: '/tags/Device information' },
-          { text: 'Track Metadata', link: '/tags/Track Metadata' },
+          { text: 'Track metadata', link: '/tags/Track metadata' },
           { text: 'Playback control', link: '/tags/Playback control' },
           { text: 'Multiroom', link: '/tags/Multiroom' },
           { text: 'Network', link: '/tags/Network' },
           { text: 'Equalizer', link: '/tags/Equalizer' },
           { text: 'Device control', link: '/tags/Device control' },
           { text: 'Alarm clock', link: '/tags/Alarm clock' },
-          { text: 'Source Input Switch', link: '/tags/Source Input Switch' },
+          { text: 'Source input switch', link: '/tags/Source input switch' },
           { text: 'Presets', link: '/tags/Presets' },
-          { text: 'Audio Output Control', link: '/tags/Audio Output Control' },
+          { text: 'Audio output control', link: '/tags/Audio output control' },
           { text: 'Bluetooth', link: '/tags/Bluetooth' },
           { text: 'Room correction', link: '/tags/Room correction' },
           { text: 'Alexa', link: '/tags/Alexa' },
@@ -80,5 +85,17 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/cvdlinden/wiim-httpapi' }
     ]
-  }
+  },
+
+  /** Give each dynamic page its own <title> */
+  transformPageData(pageData) {
+    // params returned from [*].paths.js|ts are available here
+    const pageTitle = pageData.params?.pageTitle;
+
+    if (pageTitle) {
+      pageData.title = pageTitle;
+      pageData.frontmatter ??= {};
+      pageData.frontmatter.title = pageTitle;
+    }
+  },
 })

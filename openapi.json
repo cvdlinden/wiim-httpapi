@@ -15,15 +15,15 @@
   "tags": [
     {
       "name": "Generic",
-      "description": "Generic command for testing"
+      "description": "Generic command for testing  \nThis not an actual endpoint, but a means to test for commands not explicitly defined in the HTTP API."
     },
     {
       "name": "Device information",
       "description": "Get the device information"
     },
     {
-      "name": "Track Metadata",
-      "description": "Get Current Track Metadata"
+      "name": "Track metadata",
+      "description": "Get Current Track metadata"
     },
     {
       "name": "Playback control",
@@ -50,7 +50,7 @@
       "description": "Get and set alarm clock"
     },
     {
-      "name": "Source Input Switch",
+      "name": "Source input switch",
       "description": "Switch between inputs"
     },
     {
@@ -58,7 +58,7 @@
       "description": "Manage presets\n\nThe WiiM Home App allows users to configure 12 presets for quick access to\npreferred radio stations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned number."
     },
     {
-      "name": "Audio Output Control",
+      "name": "Audio output control",
       "description": "Get and set audio output mode"
     },
     {
@@ -137,7 +137,7 @@
           "Device information"
         ],
         "summary": "Get device information",
-        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx\n\n\nRetrieves detailed informations about a connected device.\n\nThe documented output may or may not be complete or differ from what the\ndevice actually reports.",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx\n\nRetrieves detailed informations about a connected device.\n\nThe documented output may or may not be complete or differ from what the device actually reports.",
         "externalDocs": {
           "description": "HTTP API for WiiM PRODUCTS Version 1.2",
           "url": "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -164,7 +164,7 @@
           "Device information"
         ],
         "summary": "Get device debug information",
-        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getDebugInfo\n\nRetrieves debug information about a connected device. The output may or may not be complete or differ from what the device actually reports.\n\nThe documented output may or may not be complete or differ from what the device actually reports.",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getDebugInfo\n\nRetrieves debug information about a connected device.\n\nThe documented output may or may not be complete or differ from what the device actually reports.",
         "externalDocs": {
           "description": "...",
           "url": "..."
@@ -207,7 +207,7 @@
           }
         },
         "tags": [
-          "Track Metadata"
+          "Track metadata"
         ],
         "operationId": "getMetaInfo"
       }
@@ -2146,7 +2146,7 @@
           }
         },
         "tags": [
-          "Source Input Switch"
+          "Source input switch"
         ]
       }
     },
@@ -2316,7 +2316,7 @@
           }
         },
         "tags": [
-          "Audio Output Control"
+          "Audio output control"
         ],
         "operationId": "getNewAudioOutputHardwareMode"
       }
@@ -2351,7 +2351,7 @@
           }
         },
         "tags": [
-          "Audio Output Control"
+          "Audio output control"
         ],
         "operationId": "setAudioOutputHardwareMode"
       }
@@ -2361,7 +2361,7 @@
         "summary": "Get SPDIF sample rate switch latency",
         "description": "Example: https://10.10.10.254/httpapi.asp?command=getSpdifOutSwitchDelayMs\n\nObservations:\n- This value only makes sense if the output interface is SPDIF (optical out).\n- Value can be retrieved even if output is not SPDIF",
         "tags": [
-          "Audio Output Control"
+          "Audio output control"
         ],
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",
@@ -2389,7 +2389,7 @@
         "summary": "Set SPDIF sample rate switch latency",
         "description": "Example: https://10.10.10.254/httpapi.asp?command=setSpdifOutSwitchDelayMs:800\n\nObservations:\n- Delay is in milliseconds\n- Value can be set even if output is not SPDIF\n- Delay is upper bound to 3000 milliseconds",
         "tags": [
-          "Audio Output Control"
+          "Audio output control"
         ],
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",
@@ -2419,7 +2419,7 @@
         "summary": "Get left/right channel balance",
         "description": "Example: https://10.10.10.254/httpapi.asp?command=getChannelBalance\n\nObservations:\n- The value will be a number ranging from -1.0 (fully panned left) to 1.0 (fully panned right).",
         "tags": [
-          "Audio Output Control"
+          "Audio output control"
         ],
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",
@@ -2447,7 +2447,7 @@
         "summary": "Set left/right channel balance",
         "description": "Example: https://10.10.10.254/httpapi.asp?command=setChannelBalance:0\n\nObservations:\n- The value must be a number ranging from -1.0 (fully panned left) to 1.0 (fully panned right).",
         "tags": [
-          "Audio Output Control"
+          "Audio output control"
         ],
         "externalDocs": {
           "description": "WiiM Extended HTTP API by DanBrezeanu",

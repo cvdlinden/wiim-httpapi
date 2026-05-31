@@ -9,7 +9,7 @@ export default {
                 return {
                     params: {
                         tag: name,
-                        pageTitle: `${name} - wiim-httpapi`,
+                        pageTitle: `${name} | API Reference`,
                     },
                 }
             })

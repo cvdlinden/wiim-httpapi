@@ -33,11 +33,13 @@ servers:
 
 tags:
   - name: Generic
-    description: Generic command for testing
+    description: |-
+      Generic command for testing  
+      This not an actual endpoint, but a means to test for commands not explicitly defined in the HTTP API.
   - name: Device information
     description: Get the device information
-  - name: Track Metadata
-    description: Get Current Track Metadata
+  - name: Track metadata
+    description: Get Current Track metadata
   - name: Playback control
     description: Get and set playback controls
   - name: Multiroom
@@ -50,7 +52,7 @@ tags:
     description: Control the device
   - name: Alarm clock
     description: Get and set alarm clock
-  - name: Source Input Switch
+  - name: Source input switch
     description: Switch between inputs
   - name: Presets
     description: |-
@@ -58,7 +60,7 @@ tags:
 
       The WiiM Home App allows users to configure 12 presets for quick access to
       preferred radio stations, playlists, mixes, albums, or artists. Each preset is accessible through its assigned number.
-  - name: Audio Output Control
+  - name: Audio output control
     description: Get and set audio output mode
   - name: Bluetooth
     description: Get and set Bluetooth settings
@@ -70,7 +72,10 @@ tags:
     description: Existing commands, purpose unkown. To research further...
 
 paths:
+
+  # ====================================================================
   # Generic
+  # --------------------------------------------------------------------
   /{command}:
     get:
       summary: Generic command
@@ -120,7 +125,9 @@ paths:
         - Generic
       operationId: genericCommand
 
+  # ====================================================================
   # Device information
+  # --------------------------------------------------------------------
   /getStatusEx:
     get:
       tags:
@@ -129,11 +136,9 @@ paths:
       description: |-
         Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx
 
-
         Retrieves detailed informations about a connected device.
 
-        The documented output may or may not be complete or differ from what the
-        device actually reports.
+        The documented output may or may not be complete or differ from what the device actually reports.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -154,7 +159,7 @@ paths:
       description: |-
         Makes a call to https://10.10.10.254/httpapi.asp?command=getDebugInfo
 
-        Retrieves debug information about a connected device. The output may or may not be complete or differ from what the device actually reports.
+        Retrieves debug information about a connected device.
 
         The documented output may or may not be complete or differ from what the device actually reports.
       externalDocs:
@@ -170,7 +175,9 @@ paths:
                 $ref: "#/components/schemas/DeviceDebugInfo"
       parameters: []
 
+  # ====================================================================
   # Track Metadata
+  # --------------------------------------------------------------------
   /getMetaInfo:
     get:
       summary: Get Current Track Metadata
@@ -201,10 +208,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/TrackMetadata"
       tags:
-        - Track Metadata
+        - Track metadata
       operationId: getMetaInfo
 
+  # ====================================================================
   # Playback control
+  # --------------------------------------------------------------------
   /getPlayerStatus:
     get:
       tags:
@@ -510,7 +519,9 @@ paths:
         - Playback control
       operationId: setPlayerCmdLoopmode
 
+  # ====================================================================
   # Network
+  # --------------------------------------------------------------------
   /getStaticIpInfo:
     get:
       tags:
@@ -683,7 +694,9 @@ paths:
         "200":
           $ref: "#/components/responses/StringOK"
 
+  # ====================================================================
   # Equalizer
+  # --------------------------------------------------------------------
   /EQOn:
     get:
       summary: Turn on the EQ
@@ -1376,7 +1389,9 @@ paths:
         "200":
           description: Successful response
 
+  # ====================================================================
   # Device control
+  # --------------------------------------------------------------------
   /reboot:
     get:
       summary: Reboot
@@ -1538,7 +1553,9 @@ paths:
         "200":
           $ref: "#/components/responses/StringOK"
 
+  # ====================================================================
   # Alarm clock
+  # --------------------------------------------------------------------
   "/timeSync:{YYYYMMDDHHMMSS}":
     get:
       summary: Get network time
@@ -1797,7 +1814,9 @@ paths:
       tags:
         - Alarm clock
 
+  # ====================================================================
   # Source input switch
+  # --------------------------------------------------------------------
   "/setPlayerCmd:switchmode:{mode}":
     get:
       summary: Switch the source input
@@ -1835,9 +1854,11 @@ paths:
             text/html:
               schema: {}
       tags:
-        - Source Input Switch
+        - Source input switch
 
+  # ====================================================================
   # Presets
+  # --------------------------------------------------------------------
   "/MCUKeyShortClick:{n}":
     get:
       summary: Play preset with preset number
@@ -1990,7 +2011,9 @@ paths:
       tags:
         - Presets
 
+  # ====================================================================
   # Audio output control
+  # --------------------------------------------------------------------
   /getNewAudioOutputHardwareMode:
     get:
       summary: Get audio output mode
@@ -2045,7 +2068,7 @@ paths:
                       1: active
                     example: "0"
       tags:
-        - Audio Output Control
+        - Audio output control
       operationId: getNewAudioOutputHardwareMode
   "/setAudioOutputHardwareMode:{n}":
     get:
@@ -2079,7 +2102,7 @@ paths:
         "200":
           $ref: "#/components/responses/StringOK"
       tags:
-        - Audio Output Control
+        - Audio output control
       operationId: setAudioOutputHardwareMode
   /getSpdifOutSwitchDelayMs:
     get:
@@ -2091,7 +2114,7 @@ paths:
         - This value only makes sense if the output interface is SPDIF (optical out).
         - Value can be retrieved even if output is not SPDIF
       tags:
-        - Audio Output Control
+        - Audio output control
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -2116,7 +2139,7 @@ paths:
         - Value can be set even if output is not SPDIF
         - Delay is upper bound to 3000 milliseconds
       tags:
-        - Audio Output Control
+        - Audio output control
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -2140,7 +2163,7 @@ paths:
         Observations:
         - The value will be a number ranging from -1.0 (fully panned left) to 1.0 (fully panned right).
       tags:
-        - Audio Output Control
+        - Audio output control
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -2163,7 +2186,7 @@ paths:
         Observations:
         - The value must be a number ranging from -1.0 (fully panned left) to 1.0 (fully panned right).
       tags:
-        - Audio Output Control
+        - Audio output control
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -2191,7 +2214,9 @@ paths:
                   summary: Response Failed
                   value: Failed
 
+  # ====================================================================
   # Bluetooth
+  # --------------------------------------------------------------------
   /startbtdiscovery:{n}:
     get:
       tags:
@@ -2372,7 +2397,9 @@ paths:
                       - 2
                       - 3
 
+  # ====================================================================
   # Room correction
+  # --------------------------------------------------------------------
   /RoomCorrGet:
     get:
       tags:
@@ -2525,7 +2552,9 @@ paths:
         "200":
           description: Successful response
 
+  # ====================================================================
   # Alexa
+  # --------------------------------------------------------------------
   /alexaEnableBetaId:{n}:
     get:
       tags:
@@ -2636,7 +2665,9 @@ paths:
         "200":
           description: Successful response
 
+  # ====================================================================
   # Multiroom
+  # --------------------------------------------------------------------
   /multiroom:getSlaveList:
     get:
       tags:
@@ -3211,7 +3242,9 @@ paths:
         "200":
           description: Successful response
 
+  # ====================================================================
   # Other
+  # --------------------------------------------------------------------
   /getMvRemoteSilenceUpdateTime:
     get:
       tags:
