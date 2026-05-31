@@ -74,6 +74,10 @@
       "description": "Get and set Alexa settings"
     },
     {
+      "name": "Amazon music",
+      "description": "Get and set Amazon Music settings"
+    },
+    {
       "name": "Other",
       "description": "Existing commands, purpose unkown. To research further..."
     }
@@ -2490,6 +2494,69 @@
         }
       }
     },
+    "/GetFadeFeature": {
+      "get": {
+        "tags": [
+          "Audio output control"
+        ],
+        "summary": "Get fade in/out feature status",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=GetFadeFeature\n\nReturns {\"FadeFeature\": 1}",
+        "externalDocs": {
+          "description": "WiiM Extended HTTP API by DanBrezeanu",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
+        },
+        "operationId": "getFadeFeature",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "FadeFeature": {
+                      "type": "integer",
+                      "description": "0 or 1",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/SetFadeFeature:{n}": {
+      "get": {
+        "tags": [
+          "Audio output control"
+        ],
+        "summary": "Set fade in/out feature",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=SetFadeFeature:0",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setFadeFeature",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Fade feature value (0 or 1)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/startbtdiscovery:{n}": {
       "get": {
         "tags": [
@@ -2904,8 +2971,8 @@
         "tags": [
           "Alexa"
         ],
-        "summary": "Unknown",
-        "description": "...",
+        "summary": "Enable Alexa Beta ID",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=alexaEnableBetaId:{n}",
         "operationId": "alexaEnableBetaId",
         "parameters": [
           {
@@ -2915,7 +2982,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Unknown"
+            "description": "The beta ID to enable"
           }
         ],
         "responses": {
@@ -2930,8 +2997,8 @@
         "tags": [
           "Alexa"
         ],
-        "summary": "Unknown",
-        "description": "...",
+        "summary": "Get Alexa Profile",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getAlexaProfile",
         "operationId": "getAlexaProfile",
         "responses": {
           "200": {
@@ -2945,8 +3012,8 @@
         "tags": [
           "Alexa"
         ],
-        "summary": "Unknown",
-        "description": "...",
+        "summary": "Log out of Alexa",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=alexaLogOut",
         "operationId": "alexaLogOut",
         "responses": {
           "200": {
@@ -2960,8 +3027,8 @@
         "tags": [
           "Alexa"
         ],
-        "summary": "Unknown",
-        "description": "...",
+        "summary": "Get Alexa Country",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getAlexaCountry",
         "operationId": "getAlexaCountry",
         "responses": {
           "200": {
@@ -2975,8 +3042,8 @@
         "tags": [
           "Alexa"
         ],
-        "summary": "Unknown",
-        "description": "...",
+        "summary": "Get Alexa Language List",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=alexaLanguageListGet",
         "operationId": "alexaLanguageListGet",
         "responses": {
           "200": {
@@ -2990,8 +3057,8 @@
         "tags": [
           "Alexa"
         ],
-        "summary": "Unknown",
-        "description": "...",
+        "summary": "Get Alexa Language",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=alexaGetLanguage",
         "operationId": "alexaGetLanguage",
         "responses": {
           "200": {
@@ -3005,8 +3072,8 @@
         "tags": [
           "Alexa"
         ],
-        "summary": "Unknown",
-        "description": "...",
+        "summary": "Set Alexa Country",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=setAlexaCountry:{str}",
         "operationId": "setAlexaCountry",
         "parameters": [
           {
@@ -3016,7 +3083,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unknown"
+            "description": "Country code to set for Alexa"
           }
         ],
         "responses": {
@@ -3031,8 +3098,8 @@
         "tags": [
           "Alexa"
         ],
-        "summary": "Unknown",
-        "description": "...",
+        "summary": "Set Alexa Language",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=alexaSetLanguage:{str}",
         "operationId": "alexaSetLanguage",
         "parameters": [
           {
@@ -3042,7 +3109,197 @@
             "schema": {
               "type": "string"
             },
+            "description": "Language code to set for Alexa"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setAmazonAccessToken:{str}:{str2}": {
+      "get": {
+        "tags": [
+          "Amazon music"
+        ],
+        "summary": "Set Amazon access token",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=setAmazonAccessToken:{str}:{str2}",
+        "operationId": "setAmazonAccessToken",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
             "description": "Unknown"
+          },
+          {
+            "name": "str2",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EnableAmazonAtmos:{n}": {
+      "get": {
+        "tags": [
+          "Amazon music"
+        ],
+        "summary": "Enable Amazon Atmos",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=EnableAmazonAtmos:%d",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "enableAmazonAtmos",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "1 to enable, 0 to disable Amazon Atmos"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/EnableAmazonHD:{n}": {
+      "get": {
+        "tags": [
+          "Amazon music"
+        ],
+        "summary": "Enable Amazon HD",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=EnableAmazonHD:%d",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "enableAmazonHD",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "1 to enable, 0 to disable Amazon HD"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/GetAmazonHD": {
+      "get": {
+        "tags": [
+          "Amazon music"
+        ],
+        "summary": "Get Amazon HD status",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=GetAmazonHD",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getAmazonHD",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getAmazonConfig": {
+      "get": {
+        "tags": [
+          "Amazon music"
+        ],
+        "summary": "Get Amazon Music configuration",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=getAmazonConfig",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getAmazonConfig",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setAmazonMusicParams:code={str1}:redirect_uri={str2}:client_id={str3}:code_verifier={str4}": {
+      "get": {
+        "tags": [
+          "Amazon music"
+        ],
+        "summary": "Set Amazon Music parameters",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=setAmazonMusicParams:code=%@:redirect_uri=%@:client_id=%@:code_verifier=%@\nNote: The parameters in the command should be replaced with actual values when making the request.",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setAmazonMusicParams",
+        "parameters": [
+          {
+            "name": "str1",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The code parameter for Amazon Music"
+          },
+          {
+            "name": "str2",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The redirect URI for Amazon Music"
+          },
+          {
+            "name": "str3",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The client ID for Amazon Music"
+          },
+          {
+            "name": "str4",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The code verifier for Amazon Music"
           }
         ],
         "responses": {
@@ -3774,6 +4031,74 @@
         }
       }
     },
+    "/get_remote_volume_step": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get the remote volume step",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=get_remote_volume_step\n\nReturns: {\"status\":\"OK\",\"remote_volume_step\":1}",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getRemoteVolumeStep",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the response, typically \"OK\""
+                    },
+                    "remote_volume_step": {
+                      "type": "integer",
+                      "description": "The current remote volume step value"
+                    }
+                  }
+                },
+                "example": {
+                  "status": "OK",
+                  "remote_volume_step": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/set_remote_volume_step:{n}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set the remote volume step",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=set_remote_volume_step:{n}",
+        "operationId": "setRemoteVolumeStep",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "description": "The volume step value"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/getMvRemoteSilenceUpdateTime": {
       "get": {
         "tags": [
@@ -3907,25 +4232,6 @@
         }
       }
     },
-    "/GetFadeFeature": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "externalDocs": {
-          "description": "WiiM Extended HTTP API by DanBrezeanu",
-          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
-        },
-        "operationId": "getFadeFeature",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
     "/getAuxVoltageSupportList": {
       "get": {
         "tags": [
@@ -3958,6 +4264,148 @@
           "url": "https://github.com/DanBrezeanu/wiim-extended-http-api"
         },
         "operationId": "audioCastGetSpeakerList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/audio_cast:scan_speaker": {
+      "get": {
+        "deprecated": true,
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "audioCastScanSpeaker",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/audio_cast:speaker_get_transcode_buffer_time": {
+      "get": {
+        "deprecated": true,
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "audioCastSpeakerGetTranscodeBufferTime",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/audio_cast:speaker_get_transcode_profile": {
+      "get": {
+        "deprecated": true,
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "audioCastSpeakerGetTranscodeProfile",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/audio_cast:speaker_set_password:{str1}:{str2}": {
+      "get": {
+        "deprecated": true,
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "audioCastSpeakerSetPassword",
+        "parameters": [
+          {
+            "name": "str1",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          },
+          {
+            "name": "str2",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/audio_cast:speaker_set_volume:{str}:{volume}": {
+      "get": {
+        "deprecated": true,
+        "tags": [
+          "Other"
+        ],
+        "summary": "Unknown",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "audioCastSpeakerSetVolume",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          },
+          {
+            "name": "volume",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "description": "Unknown"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -5230,41 +5678,6 @@
             "required": true,
             "schema": {
               "type": "integer"
-            },
-            "description": "Unknown"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        }
-      }
-    },
-    "/setAmazonAccessToken:{str}:{str2}": {
-      "get": {
-        "tags": [
-          "Other"
-        ],
-        "summary": "Unknown",
-        "description": "...",
-        "operationId": "setAmazonAccessToken",
-        "parameters": [
-          {
-            "name": "str",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
-          },
-          {
-            "name": "str2",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
             },
             "description": "Unknown"
           }

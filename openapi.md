@@ -4115,6 +4115,70 @@ Observations:
 This operation does not require authentication
 </aside>
 
+## getFadeFeature
+
+<a id="opIdgetFadeFeature"></a>
+
+`GET /GetFadeFeature`
+
+*Get fade in/out feature status*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=GetFadeFeature
+
+Returns {"FadeFeature": 1}
+
+> Example responses
+
+> 200 Response
+
+```
+{"FadeFeature":1}
+```
+
+<h3 id="getfadefeature-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getfadefeature-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» FadeFeature|integer|false|none|0 or 1|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setFadeFeature
+
+<a id="opIdsetFadeFeature"></a>
+
+`GET /SetFadeFeature:{n}`
+
+*Set fade in/out feature*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=SetFadeFeature:0
+
+<h3 id="setfadefeature-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|Fade feature value (0 or 1)|
+
+<h3 id="setfadefeature-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-bluetooth">Bluetooth</h1>
 
 Get and set Bluetooth settings
@@ -4945,15 +5009,15 @@ Get and set Alexa settings
 
 `GET /alexaEnableBetaId:{n}`
 
-*Unknown*
+*Enable Alexa Beta ID*
 
-...
+Makes a call to https://10.10.10.254/httpapi.asp?command=alexaEnableBetaId:{n}
 
 <h3 id="alexaenablebetaid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|n|path|integer|true|Unknown|
+|n|path|integer|true|The beta ID to enable|
 
 <h3 id="alexaenablebetaid-responses">Responses</h3>
 
@@ -4971,9 +5035,9 @@ This operation does not require authentication
 
 `GET /getAlexaProfile`
 
-*Unknown*
+*Get Alexa Profile*
 
-...
+Makes a call to https://10.10.10.254/httpapi.asp?command=getAlexaProfile
 
 <h3 id="getalexaprofile-responses">Responses</h3>
 
@@ -4991,9 +5055,9 @@ This operation does not require authentication
 
 `GET /alexaLogOut`
 
-*Unknown*
+*Log out of Alexa*
 
-...
+Makes a call to https://10.10.10.254/httpapi.asp?command=alexaLogOut
 
 <h3 id="alexalogout-responses">Responses</h3>
 
@@ -5011,9 +5075,9 @@ This operation does not require authentication
 
 `GET /getAlexaCountry`
 
-*Unknown*
+*Get Alexa Country*
 
-...
+Makes a call to https://10.10.10.254/httpapi.asp?command=getAlexaCountry
 
 <h3 id="getalexacountry-responses">Responses</h3>
 
@@ -5031,9 +5095,9 @@ This operation does not require authentication
 
 `GET /alexaLanguageListGet`
 
-*Unknown*
+*Get Alexa Language List*
 
-...
+Makes a call to https://10.10.10.254/httpapi.asp?command=alexaLanguageListGet
 
 <h3 id="alexalanguagelistget-responses">Responses</h3>
 
@@ -5051,9 +5115,9 @@ This operation does not require authentication
 
 `GET /alexaGetLanguage`
 
-*Unknown*
+*Get Alexa Language*
 
-...
+Makes a call to https://10.10.10.254/httpapi.asp?command=alexaGetLanguage
 
 <h3 id="alexagetlanguage-responses">Responses</h3>
 
@@ -5071,15 +5135,15 @@ This operation does not require authentication
 
 `GET /setAlexaCountry:{str}`
 
-*Unknown*
+*Set Alexa Country*
 
-...
+Makes a call to https://10.10.10.254/httpapi.asp?command=setAlexaCountry:{str}
 
 <h3 id="setalexacountry-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|str|path|string|true|Unknown|
+|str|path|string|true|Country code to set for Alexa|
 
 <h3 id="setalexacountry-responses">Responses</h3>
 
@@ -5097,17 +5161,170 @@ This operation does not require authentication
 
 `GET /alexaSetLanguage:{str}`
 
-*Unknown*
+*Set Alexa Language*
 
-...
+Makes a call to https://10.10.10.254/httpapi.asp?command=alexaSetLanguage:{str}
 
 <h3 id="alexasetlanguage-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|str|path|string|true|Unknown|
+|str|path|string|true|Language code to set for Alexa|
 
 <h3 id="alexasetlanguage-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="linkplay-wiim-http-api-amazon-music">Amazon music</h1>
+
+Get and set Amazon Music settings
+
+## setAmazonAccessToken
+
+<a id="opIdsetAmazonAccessToken"></a>
+
+`GET /setAmazonAccessToken:{str}:{str2}`
+
+*Set Amazon access token*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=setAmazonAccessToken:{str}:{str2}
+
+<h3 id="setamazonaccesstoken-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+|str2|path|string|true|Unknown|
+
+<h3 id="setamazonaccesstoken-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## enableAmazonAtmos
+
+<a id="opIdenableAmazonAtmos"></a>
+
+`GET /EnableAmazonAtmos:{n}`
+
+*Enable Amazon Atmos*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=EnableAmazonAtmos:%d
+
+<h3 id="enableamazonatmos-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|1 to enable, 0 to disable Amazon Atmos|
+
+<h3 id="enableamazonatmos-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## enableAmazonHD
+
+<a id="opIdenableAmazonHD"></a>
+
+`GET /EnableAmazonHD:{n}`
+
+*Enable Amazon HD*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=EnableAmazonHD:%d
+
+<h3 id="enableamazonhd-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|1 to enable, 0 to disable Amazon HD|
+
+<h3 id="enableamazonhd-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAmazonHD
+
+<a id="opIdgetAmazonHD"></a>
+
+`GET /GetAmazonHD`
+
+*Get Amazon HD status*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=GetAmazonHD
+
+<h3 id="getamazonhd-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAmazonConfig
+
+<a id="opIdgetAmazonConfig"></a>
+
+`GET /getAmazonConfig`
+
+*Get Amazon Music configuration*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=getAmazonConfig
+
+<h3 id="getamazonconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAmazonMusicParams
+
+<a id="opIdsetAmazonMusicParams"></a>
+
+`GET /setAmazonMusicParams:code={str1}:redirect_uri={str2}:client_id={str3}:code_verifier={str4}`
+
+*Set Amazon Music parameters*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=setAmazonMusicParams:code=%@:redirect_uri=%@:client_id=%@:code_verifier=%@
+Note: The parameters in the command should be replaced with actual values when making the request.
+
+<h3 id="setamazonmusicparams-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str1|path|string|true|The code parameter for Amazon Music|
+|str2|path|string|true|The redirect URI for Amazon Music|
+|str3|path|string|true|The client ID for Amazon Music|
+|str4|path|string|true|The code verifier for Amazon Music|
+
+<h3 id="setamazonmusicparams-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -5120,6 +5337,74 @@ This operation does not require authentication
 <h1 id="linkplay-wiim-http-api-other">Other</h1>
 
 Existing commands, purpose unkown. To research further...
+
+## getRemoteVolumeStep
+
+<a id="opIdgetRemoteVolumeStep"></a>
+
+`GET /get_remote_volume_step`
+
+*Get the remote volume step*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=get_remote_volume_step
+
+Returns: {"status":"OK","remote_volume_step":1}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "status": "OK",
+  "remote_volume_step": 1
+}
+```
+
+<h3 id="getremotevolumestep-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getremotevolumestep-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|The status of the response, typically "OK"|
+|» remote_volume_step|integer|false|none|The current remote volume step value|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setRemoteVolumeStep
+
+<a id="opIdsetRemoteVolumeStep"></a>
+
+`GET /set_remote_volume_step:{n}`
+
+*Set the remote volume step*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=set_remote_volume_step:{n}
+
+<h3 id="setremotevolumestep-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|The volume step value|
+
+<h3 id="setremotevolumestep-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 ## getMvRemoteSilenceUpdateTime
 
@@ -5261,26 +5546,6 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## getFadeFeature
-
-<a id="opIdgetFadeFeature"></a>
-
-`GET /GetFadeFeature`
-
-*Unknown*
-
-...
-
-<h3 id="getfadefeature-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## getAuxVoltageSupportList
 
 <a id="opIdgetAuxVoltageSupportList"></a>
@@ -5312,6 +5577,120 @@ This operation does not require authentication
 ...
 
 <h3 id="audiocastgetspeakerlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## audioCastScanSpeaker
+
+<a id="opIdaudioCastScanSpeaker"></a>
+
+`GET /audio_cast:scan_speaker`
+
+*Unknown*
+
+...
+
+<h3 id="audiocastscanspeaker-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## audioCastSpeakerGetTranscodeBufferTime
+
+<a id="opIdaudioCastSpeakerGetTranscodeBufferTime"></a>
+
+`GET /audio_cast:speaker_get_transcode_buffer_time`
+
+*Unknown*
+
+...
+
+<h3 id="audiocastspeakergettranscodebuffertime-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## audioCastSpeakerGetTranscodeProfile
+
+<a id="opIdaudioCastSpeakerGetTranscodeProfile"></a>
+
+`GET /audio_cast:speaker_get_transcode_profile`
+
+*Unknown*
+
+...
+
+<h3 id="audiocastspeakergettranscodeprofile-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## audioCastSpeakerSetPassword
+
+<a id="opIdaudioCastSpeakerSetPassword"></a>
+
+`GET /audio_cast:speaker_set_password:{str1}:{str2}`
+
+*Unknown*
+
+...
+
+<h3 id="audiocastspeakersetpassword-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str1|path|string|true|Unknown|
+|str2|path|string|true|Unknown|
+
+<h3 id="audiocastspeakersetpassword-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## audioCastSpeakerSetVolume
+
+<a id="opIdaudioCastSpeakerSetVolume"></a>
+
+`GET /audio_cast:speaker_set_volume:{str}:{volume}`
+
+*Unknown*
+
+...
+
+<h3 id="audiocastspeakersetvolume-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+|volume|path|integer|true|Unknown|
+
+<h3 id="audiocastspeakersetvolume-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -6218,33 +6597,6 @@ This operation does not require authentication
 |n|path|integer|true|Unknown|
 
 <h3 id="talksetprompt-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setAmazonAccessToken
-
-<a id="opIdsetAmazonAccessToken"></a>
-
-`GET /setAmazonAccessToken:{str}:{str2}`
-
-*Unknown*
-
-...
-
-<h3 id="setamazonaccesstoken-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-|str2|path|string|true|Unknown|
-
-<h3 id="setamazonaccesstoken-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
