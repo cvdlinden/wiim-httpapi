@@ -71,6 +71,8 @@ export default defineConfig({
           { text: 'Presets', link: '/tags/Presets' },
           { text: 'Audio Output Control', link: '/tags/Audio Output Control' },
           { text: 'Bluetooth', link: '/tags/Bluetooth' },
+          { text: 'Room correction', link: '/tags/Room correction' },
+          { text: 'Alexa', link: '/tags/Alexa' },
           { text: 'Other', link: '/tags/Other' },
         ]
       }
