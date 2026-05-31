@@ -30,7 +30,8 @@ Base URLs:
 
 <h1 id="linkplay-wiim-http-api-generic">Generic</h1>
 
-Generic command for testing
+Generic command for testing  
+This not an actual endpoint, but a means to test for commands not explicitly defined in the HTTP API.
 
 ## genericCommand
 
@@ -99,8 +100,7 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=getStatusEx
 
 Retrieves detailed informations about a connected device.
 
-The documented output may or may not be complete or differ from what the
-device actually reports.
+The documented output may or may not be complete or differ from what the device actually reports.
 
 > Example responses
 
@@ -130,7 +130,7 @@ This operation does not require authentication
 
 Makes a call to https://10.10.10.254/httpapi.asp?command=getDebugInfo
 
-Retrieves debug information about a connected device. The output may or may not be complete or differ from what the device actually reports.
+Retrieves debug information about a connected device.
 
 The documented output may or may not be complete or differ from what the device actually reports.
 
@@ -152,9 +152,9 @@ The documented output may or may not be complete or differ from what the device 
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-track-metadata">Track Metadata</h1>
+<h1 id="linkplay-wiim-http-api-track-metadata">Track metadata</h1>
 
-Get Current Track Metadata
+Get Current Track metadata
 
 ## getMetaInfo
 
@@ -3613,7 +3613,7 @@ null
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-source-input-switch">Source Input Switch</h1>
+<h1 id="linkplay-wiim-http-api-source-input-switch">Source input switch</h1>
 
 Switch between inputs
 
@@ -3862,7 +3862,7 @@ picurl string Cover picture url
 This operation does not require authentication
 </aside>
 
-<h1 id="linkplay-wiim-http-api-audio-output-control">Audio Output Control</h1>
+<h1 id="linkplay-wiim-http-api-audio-output-control">Audio output control</h1>
 
 Get and set audio output mode
 
