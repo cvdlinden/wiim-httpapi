@@ -1321,6 +1321,101 @@
         }
       }
     },
+    "/getWlanConnectDisableStatus": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "Get WLAN connect disable status",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getWlanConnectDisableStatus",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getNetworkHealth": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "Get network health status",
+        "description": "...\n\nReturns: {\"wlanDhcpTime\":0, \"ethDhcpTime\":1, \"wlanIpChanged\":0, \"wlanRoamingOn\":0, \"wlanBand\":0, \"wlanHistoryNum\":0, \"disconnectedCount\":1, \"lastDisconnectedTime\":1, \"ethDisconnectedCount\":0, \"lastDisconnectedMsg\":\"\",  \"ethNotReady\":0, \"pingCheckFailedCount\":0, \"wlanConnectTime\":0, \"wlanAbnormalRebootTimes\":0, \"wlanIsStaticIp\":0, \"ethIsStaticIp\":0}",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getNetworkHealth",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "wlanDhcpTime": {
+                      "type": "integer"
+                    },
+                    "ethDhcpTime": {
+                      "type": "integer"
+                    },
+                    "wlanIpChanged": {
+                      "type": "integer"
+                    },
+                    "wlanRoamingOn": {
+                      "type": "integer"
+                    },
+                    "wlanBand": {
+                      "type": "integer"
+                    },
+                    "wlanHistoryNum": {
+                      "type": "integer"
+                    },
+                    "disconnectedCount": {
+                      "type": "integer"
+                    },
+                    "lastDisconnectedTime": {
+                      "type": "integer"
+                    },
+                    "ethDisconnectedCount": {
+                      "type": "integer"
+                    },
+                    "lastDisconnectedMsg": {
+                      "type": "string"
+                    },
+                    "ethNotReady": {
+                      "type": "integer"
+                    },
+                    "pingCheckFailedCount": {
+                      "type": "integer"
+                    },
+                    "wlanConnectTime": {
+                      "type": "integer"
+                    },
+                    "wlanAbnormalRebootTimes": {
+                      "type": "integer"
+                    },
+                    "wlanIsStaticIp": {
+                      "type": "integer"
+                    },
+                    "ethIsStaticIp": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/EQOn": {
       "get": {
         "summary": "Turn on the EQ",
@@ -7723,6 +7818,934 @@
         "responses": {
           "200": {
             "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getSetupRouterInfo": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get setup router information",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getSetupRouterInfo",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setSetupRouterInfo:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set setup router information",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setSetupRouterInfo",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/alertget": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Alert get",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "alertGet",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/TvsLogout": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "TVS logout",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "tvsLogout",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/TvsState": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get TVS state",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getTvsState",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getTvsDevInfo": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get TVS device information",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getTvsDevInfo",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setTVSAccessToken:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set TVS access token",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setTVSAccessToken",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setTVSDebugMode:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set TVS debug mode",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setTVSDebugMode",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setTvsClientID:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set TVS client ID",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setTvsClientID",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/createRoutine:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Create routine",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "createRoutine",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getAllRoutines": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get all routines",
+        "description": "...\n\nReturns: { \"routines\": [ { \"updateDate\": \"2025-10-12T12:03:48Z\", \"steps\": [ { \"type\": \"subwoofer\", \"payload\": { \"subOutput\": 0 } }, { \"type\": \"loopMode\", \"payload\": { \"mode\": 3 } } ], \"createDate\": \"2025-10-12T12:03:48Z\", \"id\": \"E59E781B-CE00-4347-9E5B-A82F47C675AC\", \"name\": \"Spotify Liked\", \"index\": 1 } ] }",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getAllRoutines",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "routines": {
+                      "type": "array",
+                      "description": "List of routines",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "updateDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Last update date of the routine",
+                            "example": "2025-10-12T12:03:48Z"
+                          },
+                          "steps": {
+                            "type": "array",
+                            "description": "List of steps in the routine",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "description": "Type of the step",
+                                  "example": "subwoofer"
+                                },
+                                "payload": {
+                                  "type": "object",
+                                  "description": "Payload for the step"
+                                }
+                              }
+                            }
+                          },
+                          "createDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Creation date of the routine",
+                            "example": "2025-10-12T12:03:48Z"
+                          },
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for the routine",
+                            "example": "E59E781B-CE00-4347-9E5B-A82F47C675AC"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the routine",
+                            "example": "Spotify Liked"
+                          },
+                          "index": {
+                            "type": "integer",
+                            "description": "Index of the routine",
+                            "example": 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getRoutineCapability": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get routine capability",
+        "description": "...\n\nReturns: { \"version\": \"1.1\" }",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getRoutineCapability",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string",
+                      "description": "Routine capability version",
+                      "example": "1.1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getAudioInputCapbility": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get audio input capability",
+        "description": "...\n\nReturns: { \"ver\": \"1.0\", \"audioInput\": [ { \"mode\": \"wifi\" }, { \"mode\": \"line-in\" }, { \"mode\": \"bluetooth\" }, { \"mode\": \"optical\" }, { \"mode\": \"HDMI\" } ] }",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getAudioInputCapability",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ver": {
+                      "type": "string",
+                      "description": "Audio input capability version",
+                      "example": "1.0"
+                    },
+                    "audioInput": {
+                      "type": "array",
+                      "description": "List of supported audio input modes",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "description": "Audio input mode",
+                            "example": "wifi"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getAudioOutMax32bit": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get audio output maximum 32-bit support",
+        "description": "...\n\nReturns: 0 or 1",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getAudioOutMax32bit",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "audioOutMax32bit": {
+                      "type": "integer",
+                      "description": "Indicates if 32-bit audio output is supported (0 or 1)",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getAudioOutputVrms:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get audio output VRMS for a specific output",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getAudioOutputVrms",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown (possibly the output type or identifier)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getAudioOutputVrmsSupportList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get list of audio outputs that support VRMS",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getAudioOutputVrmsSupportList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getCBLStatus": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get CBL status",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getCBLStatus",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getCecPowerCtrl": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get CEC power control status",
+        "description": "...\n\nReturns: 0 or 1",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getCecPowerCtrl",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cecPowerCtrl": {
+                      "type": "integer",
+                      "description": "Indicates if CEC power control is enabled (0 or 1)",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getCxdishPrecent": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get CXDISH percentage",
+        "description": "...\n\nReturns: {\"status\":\"0\",\"progress\":\"0\"}",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getCxdishPrecent",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the CXDISH operation",
+                      "example": "0"
+                    },
+                    "progress": {
+                      "type": "string",
+                      "description": "Progress percentage of the CXDISH operation",
+                      "example": "0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getDigitalFilterTypeSupportList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get list of supported digital filter types",
+        "description": "...\n\nReturns: [ { \"index\": 1, \"args\": [ \"amixer cset name='ES9018 DigiFilt' 0\" ], \"value\": \"Fast Roll-Off\" }, { \"index\": 2, \"args\": [ \"amixer cset name='ES9018 DigiFilt' 1\" ], \"value\": \"Slow Roll-Off\" }, { \"index\": 3, \"args\": [ \"amixer cset name='ES9018 DigiFilt' 2\" ], \"value\": \"Minimum Phase\" } ]",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getDigitalFilterTypeSupportList",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "digitalFilterTypes": {
+                      "type": "array",
+                      "description": "List of supported digital filter types",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "index": {
+                            "type": "integer",
+                            "description": "Index of the digital filter type",
+                            "example": 1
+                          },
+                          "args": {
+                            "type": "array",
+                            "description": "List of arguments to set this filter type",
+                            "items": {
+                              "type": "string",
+                              "example": "amixer cset name='ES9018 DigiFilt' 0"
+                            }
+                          },
+                          "value": {
+                            "type": "string",
+                            "description": "Name of the digital filter type",
+                            "example": "Fast Roll-Off"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getDigitalFilterType": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get current digital filter type",
+        "description": "...\n\nReturns: 1, 2, or 3 corresponding to the supported digital filter types",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getDigitalFilterType",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "description": "Current digital filter type (1, 2, or 3)",
+                  "example": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getDigitalInputAudioTypeSupport": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get supported digital input audio types",
+        "description": "...\n\nReturns: 0x1",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getDigitalInputAudioTypeSupport",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "description": "Supported digital input audio types (bitmask)",
+                  "example": "0x1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getFeatureCapbility": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get feature capability",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getFeatureCapability",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getHwErrorInfo": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get hardware error information",
+        "description": "...\n\nReturns: { \"ethError\": 0, \"mfiChipError\": 0, \"flashSpaceError\": 0, \"badBlockNum\": 3, \"totalBlockNum\": 2000, \"hdmiError\": 0, \"temperatureSensorError\": 0, \"ledError\": 0, \"soundCardHwError\": { \"es9018\": 0, \"pcm5121\": 0 } }",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getHwErrorInfo",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ethError": {
+                      "type": "integer",
+                      "description": "Ethernet error code",
+                      "example": 0
+                    },
+                    "mfiChipError": {
+                      "type": "integer",
+                      "description": "MFi chip error code",
+                      "example": 0
+                    },
+                    "flashSpaceError": {
+                      "type": "integer",
+                      "description": "Flash space error code",
+                      "example": 0
+                    },
+                    "badBlockNum": {
+                      "type": "integer",
+                      "description": "Number of bad blocks in flash memory",
+                      "example": 3
+                    },
+                    "totalBlockNum": {
+                      "type": "integer",
+                      "description": "Total number of blocks in flash memory",
+                      "example": 2000
+                    },
+                    "hdmiError": {
+                      "type": "integer",
+                      "description": "HDMI error code",
+                      "example": 0
+                    },
+                    "temperatureSensorError": {
+                      "type": "integer",
+                      "description": "Temperature sensor error code",
+                      "example": 0
+                    },
+                    "ledError": {
+                      "type": "integer",
+                      "description": "LED error code",
+                      "example": 0
+                    },
+                    "soundCardHwError": {
+                      "type": "object",
+                      "description": "Sound card hardware error codes for different components",
+                      "properties": {
+                        "es9018": {
+                          "type": "integer",
+                          "description": "ES9018 DAC error code",
+                          "example": 0
+                        },
+                        "pcm5121": {
+                          "type": "integer",
+                          "description": "PCM5121 DAC error code",
+                          "example": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getInputModeSupportList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get list of supported input modes",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getInputModeSupportList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getModeRename": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get input mode rename information",
+        "description": "...\n\nReturns: {\"Line-In\" : \"\", \"SPDIF-In\" : \"PC\"}",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getModeRename",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "Mapping of input modes to their renamed values",
+                  "example": {
+                    "Line-In": "",
+                    "SPDIF-In": "PC"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getMvRemoteUpdateDeviceOtaInfo": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get MV remote update device OTA information",
+        "description": "...\n\nReturns: {\"language\":\"en_us\",\"projectId\":\"0fb639765679eb9a7cf7d68761e2d71b6a2d62ea47cc049db3c7df61d6816fc9\",\"fwVersion\":\"Linkplay.5.0.739659\",\"version\":\"1.0\",\"macAddr\":\"E8:2D:29:7C:45:40\",\"serialNumber\":\"\",\"deviceUid\":\"FA98F353DDFE707499E52529\",\"imgList\":[{\"imgName\":\"hdmi\",\"imgVersion\":\"71\"},{\"imgName\":\"moduleMulti\",\"imgVersion\":\"Linkplay.5.0.739659\"},{\"imgName\":\"gc4a_zip\",\"imgVersion\":\"Linkplay.5.0.739659\"}]}",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getMvRemoteUpdateDeviceOtaInfo",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "language": {
+                      "type": "string",
+                      "description": "Device language",
+                      "example": "en_us"
+                    },
+                    "projectId": {
+                      "type": "string",
+                      "description": "Project identifier",
+                      "example": "0fb639765679eb9a7cf7d68761e2d71b6a2d62ea47cc049db3c7df61d6816fc9"
+                    },
+                    "fwVersion": {
+                      "type": "string",
+                      "description": "Firmware version",
+                      "example": "Linkplay.5.0.739659"
+                    },
+                    "version": {
+                      "type": "string",
+                      "description": "Version",
+                      "example": "1.0"
+                    },
+                    "macAddr": {
+                      "type": "string",
+                      "description": "MAC address",
+                      "example": "E8:2D:29:7C:45:40"
+                    },
+                    "serialNumber": {
+                      "type": "string",
+                      "description": "Serial number",
+                      "example": ""
+                    },
+                    "deviceUid": {
+                      "type": "string",
+                      "description": "Device UID",
+                      "example": "FA98F353DDFE707499E52529"
+                    },
+                    "imgList": {
+                      "type": "array",
+                      "description": "List of images",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "imgName": {
+                            "type": "string",
+                            "description": "Image name",
+                            "example": "hdmi"
+                          },
+                          "imgVersion": {
+                            "type": "string",
+                            "description": "Image version",
+                            "example": "71"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

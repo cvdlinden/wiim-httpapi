@@ -2209,6 +2209,79 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
+## getWlanConnectDisableStatus
+
+<a id="opIdgetWlanConnectDisableStatus"></a>
+
+`GET /getWlanConnectDisableStatus`
+
+*Get WLAN connect disable status*
+
+...
+
+<h3 id="getwlanconnectdisablestatus-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getNetworkHealth
+
+<a id="opIdgetNetworkHealth"></a>
+
+`GET /getNetworkHealth`
+
+*Get network health status*
+
+...
+
+Returns: {"wlanDhcpTime":0, "ethDhcpTime":1, "wlanIpChanged":0, "wlanRoamingOn":0, "wlanBand":0, "wlanHistoryNum":0, "disconnectedCount":1, "lastDisconnectedTime":1, "ethDisconnectedCount":0, "lastDisconnectedMsg":"",  "ethNotReady":0, "pingCheckFailedCount":0, "wlanConnectTime":0, "wlanAbnormalRebootTimes":0, "wlanIsStaticIp":0, "ethIsStaticIp":0}
+
+> Example responses
+
+> 200 Response
+
+```
+{"wlanDhcpTime":0,"ethDhcpTime":0,"wlanIpChanged":0,"wlanRoamingOn":0,"wlanBand":0,"wlanHistoryNum":0,"disconnectedCount":0,"lastDisconnectedTime":0,"ethDisconnectedCount":0,"lastDisconnectedMsg":"string","ethNotReady":0,"pingCheckFailedCount":0,"wlanConnectTime":0,"wlanAbnormalRebootTimes":0,"wlanIsStaticIp":0,"ethIsStaticIp":0}
+```
+
+<h3 id="getnetworkhealth-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getnetworkhealth-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» wlanDhcpTime|integer|false|none|none|
+|» ethDhcpTime|integer|false|none|none|
+|» wlanIpChanged|integer|false|none|none|
+|» wlanRoamingOn|integer|false|none|none|
+|» wlanBand|integer|false|none|none|
+|» wlanHistoryNum|integer|false|none|none|
+|» disconnectedCount|integer|false|none|none|
+|» lastDisconnectedTime|integer|false|none|none|
+|» ethDisconnectedCount|integer|false|none|none|
+|» lastDisconnectedMsg|string|false|none|none|
+|» ethNotReady|integer|false|none|none|
+|» pingCheckFailedCount|integer|false|none|none|
+|» wlanConnectTime|integer|false|none|none|
+|» wlanAbnormalRebootTimes|integer|false|none|none|
+|» wlanIsStaticIp|integer|false|none|none|
+|» ethIsStaticIp|integer|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-equalizer">Equalizer</h1>
 
 Get and set equalizer settings
@@ -8326,6 +8399,889 @@ This operation does not require authentication
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getSetupRouterInfo
+
+<a id="opIdgetSetupRouterInfo"></a>
+
+`GET /getSetupRouterInfo`
+
+*Get setup router information*
+
+...
+
+<h3 id="getsetuprouterinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setSetupRouterInfo
+
+<a id="opIdsetSetupRouterInfo"></a>
+
+`GET /setSetupRouterInfo:{str}`
+
+*Set setup router information*
+
+...
+
+<h3 id="setsetuprouterinfo-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setsetuprouterinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## alertGet
+
+<a id="opIdalertGet"></a>
+
+`GET /alertget`
+
+*Alert get*
+
+...
+
+<h3 id="alertget-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## tvsLogout
+
+<a id="opIdtvsLogout"></a>
+
+`GET /TvsLogout`
+
+*TVS logout*
+
+...
+
+<h3 id="tvslogout-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getTvsState
+
+<a id="opIdgetTvsState"></a>
+
+`GET /TvsState`
+
+*Get TVS state*
+
+...
+
+<h3 id="gettvsstate-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getTvsDevInfo
+
+<a id="opIdgetTvsDevInfo"></a>
+
+`GET /getTvsDevInfo`
+
+*Get TVS device information*
+
+...
+
+<h3 id="gettvsdevinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTVSAccessToken
+
+<a id="opIdsetTVSAccessToken"></a>
+
+`GET /setTVSAccessToken:{str}`
+
+*Set TVS access token*
+
+...
+
+<h3 id="settvsaccesstoken-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="settvsaccesstoken-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTVSDebugMode
+
+<a id="opIdsetTVSDebugMode"></a>
+
+`GET /setTVSDebugMode:{str}`
+
+*Set TVS debug mode*
+
+...
+
+<h3 id="settvsdebugmode-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="settvsdebugmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTvsClientID
+
+<a id="opIdsetTvsClientID"></a>
+
+`GET /setTvsClientID:{str}`
+
+*Set TVS client ID*
+
+...
+
+<h3 id="settvsclientid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="settvsclientid-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## createRoutine
+
+<a id="opIdcreateRoutine"></a>
+
+`GET /createRoutine:{str}`
+
+*Create routine*
+
+...
+
+<h3 id="createroutine-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="createroutine-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAllRoutines
+
+<a id="opIdgetAllRoutines"></a>
+
+`GET /getAllRoutines`
+
+*Get all routines*
+
+...
+
+Returns: { "routines": [ { "updateDate": "2025-10-12T12:03:48Z", "steps": [ { "type": "subwoofer", "payload": { "subOutput": 0 } }, { "type": "loopMode", "payload": { "mode": 3 } } ], "createDate": "2025-10-12T12:03:48Z", "id": "E59E781B-CE00-4347-9E5B-A82F47C675AC", "name": "Spotify Liked", "index": 1 } ] }
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "routines": [
+    {
+      "updateDate": "2025-10-12T12:03:48Z",
+      "steps": [
+        {
+          "type": "subwoofer",
+          "payload": {}
+        }
+      ],
+      "createDate": "2025-10-12T12:03:48Z",
+      "id": "E59E781B-CE00-4347-9E5B-A82F47C675AC",
+      "name": "Spotify Liked",
+      "index": 1
+    }
+  ]
+}
+```
+
+<h3 id="getallroutines-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getallroutines-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» routines|[object]|false|none|List of routines|
+|»» updateDate|string(date-time)|false|none|Last update date of the routine|
+|»» steps|[object]|false|none|List of steps in the routine|
+|»»» type|string|false|none|Type of the step|
+|»»» payload|object|false|none|Payload for the step|
+|»» createDate|string(date-time)|false|none|Creation date of the routine|
+|»» id|string|false|none|Unique identifier for the routine|
+|»» name|string|false|none|Name of the routine|
+|»» index|integer|false|none|Index of the routine|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getRoutineCapability
+
+<a id="opIdgetRoutineCapability"></a>
+
+`GET /getRoutineCapability`
+
+*Get routine capability*
+
+...
+
+Returns: { "version": "1.1" }
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "version": "1.1"
+}
+```
+
+<h3 id="getroutinecapability-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getroutinecapability-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» version|string|false|none|Routine capability version|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAudioInputCapability
+
+<a id="opIdgetAudioInputCapability"></a>
+
+`GET /getAudioInputCapbility`
+
+*Get audio input capability*
+
+...
+
+Returns: { "ver": "1.0", "audioInput": [ { "mode": "wifi" }, { "mode": "line-in" }, { "mode": "bluetooth" }, { "mode": "optical" }, { "mode": "HDMI" } ] }
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "ver": "1.0",
+  "audioInput": [
+    {
+      "mode": "wifi"
+    }
+  ]
+}
+```
+
+<h3 id="getaudioinputcapability-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getaudioinputcapability-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» ver|string|false|none|Audio input capability version|
+|» audioInput|[object]|false|none|List of supported audio input modes|
+|»» mode|string|false|none|Audio input mode|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAudioOutMax32bit
+
+<a id="opIdgetAudioOutMax32bit"></a>
+
+`GET /getAudioOutMax32bit`
+
+*Get audio output maximum 32-bit support*
+
+...
+
+Returns: 0 or 1
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "audioOutMax32bit": 1
+}
+```
+
+<h3 id="getaudiooutmax32bit-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getaudiooutmax32bit-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» audioOutMax32bit|integer|false|none|Indicates if 32-bit audio output is supported (0 or 1)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAudioOutputVrms
+
+<a id="opIdgetAudioOutputVrms"></a>
+
+`GET /getAudioOutputVrms:{str}`
+
+*Get audio output VRMS for a specific output*
+
+...
+
+<h3 id="getaudiooutputvrms-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown (possibly the output type or identifier)|
+
+<h3 id="getaudiooutputvrms-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAudioOutputVrmsSupportList
+
+<a id="opIdgetAudioOutputVrmsSupportList"></a>
+
+`GET /getAudioOutputVrmsSupportList`
+
+*Get list of audio outputs that support VRMS*
+
+...
+
+<h3 id="getaudiooutputvrmssupportlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getCBLStatus
+
+<a id="opIdgetCBLStatus"></a>
+
+`GET /getCBLStatus`
+
+*Get CBL status*
+
+...
+
+<h3 id="getcblstatus-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getCecPowerCtrl
+
+<a id="opIdgetCecPowerCtrl"></a>
+
+`GET /getCecPowerCtrl`
+
+*Get CEC power control status*
+
+...
+
+Returns: 0 or 1
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "cecPowerCtrl": 1
+}
+```
+
+<h3 id="getcecpowerctrl-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getcecpowerctrl-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» cecPowerCtrl|integer|false|none|Indicates if CEC power control is enabled (0 or 1)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getCxdishPrecent
+
+<a id="opIdgetCxdishPrecent"></a>
+
+`GET /getCxdishPrecent`
+
+*Get CXDISH percentage*
+
+...
+
+Returns: {"status":"0","progress":"0"}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "status": "0",
+  "progress": "0"
+}
+```
+
+<h3 id="getcxdishprecent-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getcxdishprecent-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|Status of the CXDISH operation|
+|» progress|string|false|none|Progress percentage of the CXDISH operation|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getDigitalFilterTypeSupportList
+
+<a id="opIdgetDigitalFilterTypeSupportList"></a>
+
+`GET /getDigitalFilterTypeSupportList`
+
+*Get list of supported digital filter types*
+
+...
+
+Returns: [ { "index": 1, "args": [ "amixer cset name='ES9018 DigiFilt' 0" ], "value": "Fast Roll-Off" }, { "index": 2, "args": [ "amixer cset name='ES9018 DigiFilt' 1" ], "value": "Slow Roll-Off" }, { "index": 3, "args": [ "amixer cset name='ES9018 DigiFilt' 2" ], "value": "Minimum Phase" } ]
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "digitalFilterTypes": [
+    {
+      "index": 1,
+      "args": [
+        "amixer cset name='ES9018 DigiFilt' 0"
+      ],
+      "value": "Fast Roll-Off"
+    }
+  ]
+}
+```
+
+<h3 id="getdigitalfiltertypesupportlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getdigitalfiltertypesupportlist-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» digitalFilterTypes|[object]|false|none|List of supported digital filter types|
+|»» index|integer|false|none|Index of the digital filter type|
+|»» args|[string]|false|none|List of arguments to set this filter type|
+|»» value|string|false|none|Name of the digital filter type|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getDigitalFilterType
+
+<a id="opIdgetDigitalFilterType"></a>
+
+`GET /getDigitalFilterType`
+
+*Get current digital filter type*
+
+...
+
+Returns: 1, 2, or 3 corresponding to the supported digital filter types
+
+> Example responses
+
+> 200 Response
+
+```json
+1
+```
+
+<h3 id="getdigitalfiltertype-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getDigitalInputAudioTypeSupport
+
+<a id="opIdgetDigitalInputAudioTypeSupport"></a>
+
+`GET /getDigitalInputAudioTypeSupport`
+
+*Get supported digital input audio types*
+
+...
+
+Returns: 0x1
+
+> Example responses
+
+> 200 Response
+
+```json
+"0x1"
+```
+
+<h3 id="getdigitalinputaudiotypesupport-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getFeatureCapability
+
+<a id="opIdgetFeatureCapability"></a>
+
+`GET /getFeatureCapbility`
+
+*Get feature capability*
+
+...
+
+<h3 id="getfeaturecapability-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getHwErrorInfo
+
+<a id="opIdgetHwErrorInfo"></a>
+
+`GET /getHwErrorInfo`
+
+*Get hardware error information*
+
+...
+
+Returns: { "ethError": 0, "mfiChipError": 0, "flashSpaceError": 0, "badBlockNum": 3, "totalBlockNum": 2000, "hdmiError": 0, "temperatureSensorError": 0, "ledError": 0, "soundCardHwError": { "es9018": 0, "pcm5121": 0 } }
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "ethError": 0,
+  "mfiChipError": 0,
+  "flashSpaceError": 0,
+  "badBlockNum": 3,
+  "totalBlockNum": 2000,
+  "hdmiError": 0,
+  "temperatureSensorError": 0,
+  "ledError": 0,
+  "soundCardHwError": {
+    "es9018": 0,
+    "pcm5121": 0
+  }
+}
+```
+
+<h3 id="gethwerrorinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="gethwerrorinfo-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» ethError|integer|false|none|Ethernet error code|
+|» mfiChipError|integer|false|none|MFi chip error code|
+|» flashSpaceError|integer|false|none|Flash space error code|
+|» badBlockNum|integer|false|none|Number of bad blocks in flash memory|
+|» totalBlockNum|integer|false|none|Total number of blocks in flash memory|
+|» hdmiError|integer|false|none|HDMI error code|
+|» temperatureSensorError|integer|false|none|Temperature sensor error code|
+|» ledError|integer|false|none|LED error code|
+|» soundCardHwError|object|false|none|Sound card hardware error codes for different components|
+|»» es9018|integer|false|none|ES9018 DAC error code|
+|»» pcm5121|integer|false|none|PCM5121 DAC error code|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getInputModeSupportList
+
+<a id="opIdgetInputModeSupportList"></a>
+
+`GET /getInputModeSupportList`
+
+*Get list of supported input modes*
+
+...
+
+<h3 id="getinputmodesupportlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getModeRename
+
+<a id="opIdgetModeRename"></a>
+
+`GET /getModeRename`
+
+*Get input mode rename information*
+
+...
+
+Returns: {"Line-In" : "", "SPDIF-In" : "PC"}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "Line-In": "",
+  "SPDIF-In": "PC"
+}
+```
+
+<h3 id="getmoderename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getmoderename-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+*Mapping of input modes to their renamed values*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» **additionalProperties**|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getMvRemoteUpdateDeviceOtaInfo
+
+<a id="opIdgetMvRemoteUpdateDeviceOtaInfo"></a>
+
+`GET /getMvRemoteUpdateDeviceOtaInfo`
+
+*Get MV remote update device OTA information*
+
+...
+
+Returns: {"language":"en_us","projectId":"0fb639765679eb9a7cf7d68761e2d71b6a2d62ea47cc049db3c7df61d6816fc9","fwVersion":"Linkplay.5.0.739659","version":"1.0","macAddr":"E8:2D:29:7C:45:40","serialNumber":"","deviceUid":"FA98F353DDFE707499E52529","imgList":[{"imgName":"hdmi","imgVersion":"71"},{"imgName":"moduleMulti","imgVersion":"Linkplay.5.0.739659"},{"imgName":"gc4a_zip","imgVersion":"Linkplay.5.0.739659"}]}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "language": "en_us",
+  "projectId": "0fb639765679eb9a7cf7d68761e2d71b6a2d62ea47cc049db3c7df61d6816fc9",
+  "fwVersion": "Linkplay.5.0.739659",
+  "version": "1.0",
+  "macAddr": "E8:2D:29:7C:45:40",
+  "serialNumber": "",
+  "deviceUid": "FA98F353DDFE707499E52529",
+  "imgList": [
+    {
+      "imgName": "hdmi",
+      "imgVersion": "71"
+    }
+  ]
+}
+```
+
+<h3 id="getmvremoteupdatedeviceotainfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getmvremoteupdatedeviceotainfo-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» language|string|false|none|Device language|
+|» projectId|string|false|none|Project identifier|
+|» fwVersion|string|false|none|Firmware version|
+|» version|string|false|none|Version|
+|» macAddr|string|false|none|MAC address|
+|» serialNumber|string|false|none|Serial number|
+|» deviceUid|string|false|none|Device UID|
+|» imgList|[object]|false|none|List of images|
+|»» imgName|string|false|none|Image name|
+|»» imgVersion|string|false|none|Image version|
 
 <aside class="success">
 This operation does not require authentication
