@@ -78,6 +78,7 @@ export default defineConfig({
           { text: 'Bluetooth', link: '/tags/Bluetooth' },
           { text: 'Room correction', link: '/tags/Room correction' },
           { text: 'Alexa', link: '/tags/Alexa' },
+          { text: 'Amazon music', link: '/tags/Amazon music' },
           { text: 'Other', link: '/tags/Other' },
         ]
       }
