@@ -3587,6 +3587,203 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
+## getDeviceNameChangeable
+
+<a id="opIdgetDeviceNameChangeable"></a>
+
+`GET /getDeviceNameChangeable`
+
+*Get device name changeable status*
+
+...
+
+<h3 id="getdevicenamechangeable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## restoreToDefault
+
+<a id="opIdrestoreToDefault"></a>
+
+`GET /restoreToDefault`
+
+*Restoring the factory setting*
+
+Example: http://10.10.10.254/httpapi.asp?command=restoreToDefault
+
+To restore factory settings, erasing defined configurations. The device restarts.
+
+<h3 id="restoretodefault-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setDeviceName
+
+<a id="opIdsetDeviceName"></a>
+
+`GET /setDeviceName:{name}`
+
+*Setting the name of device*
+
+Example: http://10.10.10.254/httpapi.asp?command=setDeviceName:%s
+
+Sets the name UPnP, DLNA and Airplay of the device (Hex)
+
+<h3 id="setdevicename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|name|path|string|true|The new device name to set for UPnP, DLNA, and Airplay, in hexadecimal format.|
+
+<h3 id="setdevicename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getsyslog
+
+<a id="opIdgetsyslog"></a>
+
+`GET /getsyslog`
+
+*Get system log*
+
+...
+
+<h3 id="getsyslog-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setHexDeviceName
+
+<a id="opIdsetHexDeviceName"></a>
+
+`GET /setHexDeviceName:{str}`
+
+*Set hex device name*
+
+...
+
+<h3 id="sethexdevicename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="sethexdevicename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## noSendMoreDeviceEvent
+
+<a id="opIdnoSendMoreDeviceEvent"></a>
+
+`GET /noSendMoreDeviceEvent:1`
+
+*Disable sending more device events*
+
+...
+
+<h3 id="nosendmoredeviceevent-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getHwErrorInfo
+
+<a id="opIdgetHwErrorInfo"></a>
+
+`GET /getHwErrorInfo`
+
+*Get hardware error information*
+
+...
+
+Returns: { "ethError": 0, "mfiChipError": 0, "flashSpaceError": 0, "badBlockNum": 3, "totalBlockNum": 2000, "hdmiError": 0, "temperatureSensorError": 0, "ledError": 0, "soundCardHwError": { "es9018": 0, "pcm5121": 0 } }
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "ethError": 0,
+  "mfiChipError": 0,
+  "flashSpaceError": 0,
+  "badBlockNum": 3,
+  "totalBlockNum": 2000,
+  "hdmiError": 0,
+  "temperatureSensorError": 0,
+  "ledError": 0,
+  "soundCardHwError": {
+    "es9018": 0,
+    "pcm5121": 0
+  }
+}
+```
+
+<h3 id="gethwerrorinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="gethwerrorinfo-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» ethError|integer|false|none|Ethernet error code|
+|» mfiChipError|integer|false|none|MFi chip error code|
+|» flashSpaceError|integer|false|none|Flash space error code|
+|» badBlockNum|integer|false|none|Number of bad blocks in flash memory|
+|» totalBlockNum|integer|false|none|Total number of blocks in flash memory|
+|» hdmiError|integer|false|none|HDMI error code|
+|» temperatureSensorError|integer|false|none|Temperature sensor error code|
+|» ledError|integer|false|none|LED error code|
+|» soundCardHwError|object|false|none|Sound card hardware error codes for different components|
+|»» es9018|integer|false|none|ES9018 DAC error code|
+|»» pcm5121|integer|false|none|PCM5121 DAC error code|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-alarm-clock">Alarm clock</h1>
 
 Get and set alarm clock
@@ -5436,6 +5633,72 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=alexaSetLanguage:{str}
 This operation does not require authentication
 </aside>
 
+## getAvsDevInfo
+
+<a id="opIdgetAvsDevInfo"></a>
+
+`GET /getAvsDevInfo`
+
+*Get Alexa Voice Service Device Info*
+
+...
+
+<h3 id="getavsdevinfo-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getAvsMusicHDEnable
+
+<a id="opIdgetAvsMusicHDEnable"></a>
+
+`GET /getAvsMusicHDEnable`
+
+*Get Alexa Voice Service Music HD enable status*
+
+...
+
+<h3 id="getavsmusichdenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAvsMusicHDEnable
+
+<a id="opIdsetAvsMusicHDEnable"></a>
+
+`GET /setAvsMusicHDEnable:{str}`
+
+*Set Alexa Voice Service Music HD enable*
+
+...
+
+<h3 id="setavsmusichdenable-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setavsmusichdenable-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-amazon-music">Amazon music</h1>
 
 Get and set Amazon Music settings
@@ -5700,11 +5963,33 @@ This operation does not require authentication
 
 ...
 
+Returns: {"start":"0:1", "end":"23:59"}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "start": "0:1",
+  "end": "23:59"
+}
+```
+
 <h3 id="getmvremotesilenceupdatetime-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getmvremotesilenceupdatetime-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» start|string|false|none|The start time of the MV remote silence period in "HH:mm" format|
+|» end|string|false|none|The end time of the MV remote silence period in "HH:mm" format|
 
 <aside class="success">
 This operation does not require authentication
@@ -5740,11 +6025,21 @@ This operation does not require authentication
 
 ...
 
+Returns: 48000:16:0
+
+> Example responses
+
+> 200 Response
+
+```
+"48000:16:0"
+```
+
 <h3 id="getcoaxoutmaxcap-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -5934,11 +6229,41 @@ This operation does not require authentication
 
 ...
 
+Returns: {"index":"1","mode":"AUDIO_OUTPUT_AUX_MODE","cardId":"hw:0,1","devName":"Speaker Out","btSource":"0","audioCast":"0"}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "index": "1",
+  "mode": "AUDIO_OUTPUT_AUX_MODE",
+  "cardId": "hw:0,1",
+  "devName": "Speaker Out",
+  "btSource": "0",
+  "audioCast": "0"
+}
+```
+
 <h3 id="getactivesoundcardoutputmode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getactivesoundcardoutputmode-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» index|string|false|none|The index of the active sound card output mode|
+|» mode|string|false|none|The name of the active sound card output mode|
+|» cardId|string|false|none|The card ID of the active sound card output mode|
+|» devName|string|false|none|The device name of the active sound card output mode|
+|» btSource|string|false|none|Unknown|
+|» audioCast|string|false|none|Unknown|
 
 <aside class="success">
 This operation does not require authentication
@@ -5987,17 +6312,27 @@ This operation does not require authentication
 
 `GET /getMvRemoteUpdateStartCheck`
 
-*Update search*
+*Search for firmware updates available (check for updates)*
 
 Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStartCheck
 
 Search for the firmware updates available
 
+Returns: OK
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
+
 <h3 id="getmvremoteupdatestartcheck-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -6009,18 +6344,29 @@ This operation does not require authentication
 
 `GET /getMvRemoteUpdateStart`
 
-*Notification updates*
+*Start firmware update*
 
 Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStart
 
 After calling the interface, if a new version is available, the device starts to download updates. At the end of the download, the update process starts.
+
 WARNING: DO NOT POWER OFF DURING THIS PROCESS!!
+
+Returns: OK
+
+> Example responses
+
+> 200 Response
+
+```
+"OK"
+```
 
 <h3 id="getmvremoteupdatestart-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -6040,7 +6386,7 @@ Get the download progress.
 
 Value	Meaning
 - 10	Under review
-- 20  ...
+- 20  OK
 - 21	The verification of the downloaded update file failed
 - 22	Downloading the update file failed
 - 23	The verification of the downloaded update file failed
@@ -6048,11 +6394,19 @@ Value	Meaning
 - 27	Download complete
 - 30	Downloading and verification completed
 
+> Example responses
+
+> 200 Response
+
+```
+20
+```
+
 <h3 id="getmvremoteupdatestatus-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -6070,69 +6424,38 @@ Example: http://10.10.10.254/httpapi.asp?command=getMvRomBurnPrecent
 
 Status of updating
 
-{
-  " status ":" 0 "," progress ":" 50 "
-}
+Returns: { "status" : "0", "progress" : "50"}
 
-Fields	Meaning
-status	State
-progress	Progress between 0 to 100%
+| Fields	 | Meaning |
+| ---------|---------|
+| status	 | State   |
+| progress | Progress between 0 to 100% |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "status": "0",
+  "progress": "50"
+}
+```
 
 <h3 id="getmvromburnprecent-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+<h3 id="getmvromburnprecent-responseschema">Response Schema</h3>
 
-## restoreToDefault
+Status Code **200**
 
-<a id="opIdrestoreToDefault"></a>
-
-`GET /restoreToDefault`
-
-*Restoring the factory setting*
-
-Example: http://10.10.10.254/httpapi.asp?command=restoreToDefault
-
-To restore factory settings, erasing defined configurations. The device restarts.
-
-<h3 id="restoretodefault-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setDeviceName
-
-<a id="opIdsetDeviceName"></a>
-
-`GET /setDeviceName:{name}`
-
-*Setting the name of device*
-
-Example: http://10.10.10.254/httpapi.asp?command=setDeviceName:%s
-
-Sets the name UPnP, DLNA and Airplay of the device (Hex)
-
-<h3 id="setdevicename-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
+|Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|path|string|true|The new device name to set for UPnP, DLNA, and Airplay, in hexadecimal format.|
-
-<h3 id="setdevicename-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|» status|string|false|none|The current state of the update process, where "0" typically indicates that the update is in progress and "1" indicates that the update is complete.|
+|» progress|string|false|none|The progress of the update process as a percentage, ranging from "0" to "100".|
 
 <aside class="success">
 This operation does not require authentication
@@ -6188,11 +6511,31 @@ This operation does not require authentication
 
 ...
 
+Returns: { "version": "1.1" }
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "version": "1.1"
+}
+```
+
 <h3 id="getlmpfiltercapability-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getlmpfiltercapability-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» version|string|false|none|The version of the LMP filter capability|
 
 <aside class="success">
 This operation does not require authentication
@@ -6241,26 +6584,6 @@ This operation does not require authentication
 |str|path|string|true|Unknown|
 
 <h3 id="sethandshakecode-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getsyslog
-
-<a id="opIdgetsyslog"></a>
-
-`GET /getsyslog`
-
-*Get system log*
-
-...
-
-<h3 id="getsyslog-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -6444,11 +6767,57 @@ This operation does not require authentication
 
 ...
 
+Returns: {"status":"0","count":"0","dcount":"0","wcount":"0","tsize":"0","dsize":"0","wsize":"0","csize":"0", "cdsize":"0", "cwsize":"0", "progress":"0","name":"","ver":"0","new_ver":"0"}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "status": "0",
+  "count": "0",
+  "dcount": "0",
+  "wcount": "0",
+  "tsize": "0",
+  "dsize": "0",
+  "wsize": "0",
+  "csize": "0",
+  "cdsize": "0",
+  "cwsize": "0",
+  "progress": "0",
+  "name": "",
+  "ver": "0",
+  "new_ver": "0"
+}
+```
+
 <h3 id="getmvromdownloadstatus-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getmvromdownloadstatus-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» status|string|false|none|The current status of the MV ROM download process, where "0" typically indicates that the download is in progress and "1" indicates that the download is complete.|
+|» count|string|false|none|The total number of items to be downloaded|
+|» dcount|string|false|none|The number of items that have been downloaded so far|
+|» wcount|string|false|none|The number of items that are currently being downloaded|
+|» tsize|string|false|none|The total size of the items to be downloaded, in bytes|
+|» dsize|string|false|none|The size of the items that have been downloaded so far, in bytes|
+|» wsize|string|false|none|The size of the items that are currently being downloaded, in bytes|
+|» csize|string|false|none|The size of the items that have been downloaded and verified, in bytes|
+|» cdsize|string|false|none|The size of the items that have been downloaded but not yet verified, in bytes|
+|» cwsize|string|false|none|The size of the items that are currently being downloaded but not yet verified, in bytes|
+|» progress|string|false|none|The overall progress of the MV ROM download process as a percentage, ranging from "0" to "100"|
+|» name|string|false|none|The name of the item currently being downloaded or processed|
+|» ver|string|false|none|The current version of the firmware or software being updated|
+|» new_ver|string|false|none|The new version of the firmware or software being updated to after the download is complete and successful verification is done.|
 
 <aside class="success">
 This operation does not require authentication
@@ -6464,37 +6833,39 @@ This operation does not require authentication
 
 ...
 
+Returns: {"status":"0","progress":"0","name":"","ver":"0","new_ver":"0"}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "status": "0",
+  "progress": "0",
+  "name": "",
+  "ver": "0",
+  "new_ver": "0"
+}
+```
+
 <h3 id="getmvromdownloadv2status-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+<h3 id="getmvromdownloadv2status-responseschema">Response Schema</h3>
 
-## setHexDeviceName
+Status Code **200**
 
-<a id="opIdsetHexDeviceName"></a>
-
-`GET /setHexDeviceName:{str}`
-
-*Set hex device name*
-
-...
-
-<h3 id="sethexdevicename-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
+|Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="sethexdevicename-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|» status|string|false|none|The current status of the MV ROM download process, where "0" typically indicates that the download is in progress and "1" indicates that the download is complete.|
+|» progress|string|false|none|The overall progress of the MV ROM download process as a percentage, ranging from "0" to "100"|
+|» name|string|false|none|The name of the item currently being downloaded or processed|
+|» ver|string|false|none|The current version of the firmware or software being updated|
+|» new_ver|string|false|none|The new version of the firmware or software being updated to after the download is complete and successful verification is done.|
 
 <aside class="success">
 This operation does not require authentication
@@ -6716,41 +7087,83 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
-## getAvsDevInfo
-
-<a id="opIdgetAvsDevInfo"></a>
-
-`GET /getAvsDevInfo`
-
-*Get AVS Device Info*
-
-...
-
-<h3 id="getavsdevinfo-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## getAsrStatus
 
 <a id="opIdgetAsrStatus"></a>
 
 `GET /getAsrStatus`
 
-*Get ASR Status*
+*Get Automatic Speech Recognition Status*
 
 ...
+
+Returns: { "times_talk_on": "0", "times_request_succeed": "0", "times_request_failed": "0", "times_vad_time_out": "0", "times_play_failed": "0", "open_failed": "0", "capture_failed": "0", "mode": "normal", "score": "0", "volume": "18", "play_status": "0", "config_score": "0", "config_interval": "0", "trigger_test_mode": "0", "trigger_mis_test_mode": "0", "trigger_recording": "0", "have_prompt": "0", "fallback_enable": "0", "profile": "near", "hands_free": "0", "status": "ok", "id": "0" }
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "times_talk_on": "0",
+  "times_request_succeed": "0",
+  "times_request_failed": "0",
+  "times_vad_time_out": "0",
+  "times_play_failed": "0",
+  "open_failed": "0",
+  "capture_failed": "0",
+  "mode": "normal",
+  "score": "0",
+  "volume": "18",
+  "play_status": "0",
+  "config_score": "0",
+  "config_interval": "0",
+  "trigger_test_mode": "0",
+  "trigger_mis_test_mode": "0",
+  "trigger_recording": "0",
+  "have_prompt": "0",
+  "fallback_enable": "0",
+  "profile": "near",
+  "hands_free": "0",
+  "status": "ok",
+  "id": "0"
+}
+```
 
 <h3 id="getasrstatus-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getasrstatus-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» times_talk_on|string|false|none|Unknown|
+|» times_request_succeed|string|false|none|Unknown|
+|» times_request_failed|string|false|none|Unknown|
+|» times_vad_time_out|string|false|none|Unknown|
+|» times_play_failed|string|false|none|Unknown|
+|» open_failed|string|false|none|Unknown|
+|» capture_failed|string|false|none|Unknown|
+|» mode|string|false|none|Unknown|
+|» score|string|false|none|Unknown|
+|» volume|string|false|none|Unknown|
+|» play_status|string|false|none|Unknown|
+|» config_score|string|false|none|Unknown|
+|» config_interval|string|false|none|Unknown|
+|» trigger_test_mode|string|false|none|Unknown|
+|» trigger_mis_test_mode|string|false|none|Unknown|
+|» trigger_recording|string|false|none|Unknown|
+|» have_prompt|string|false|none|Unknown|
+|» fallback_enable|string|false|none|Unknown|
+|» profile|string|false|none|Unknown|
+|» hands_free|string|false|none|Unknown|
+|» status|string|false|none|The status of the ASR system, typically "ok"|
+|» id|string|false|none|Unknown|
 
 <aside class="success">
 This operation does not require authentication
@@ -7272,26 +7685,6 @@ Makes a call to https://10.10.10.254/httpapi.asp?command=set_button_volume_step:
 This operation does not require authentication
 </aside>
 
-## getAvsMusicHDEnable
-
-<a id="opIdgetAvsMusicHDEnable"></a>
-
-`GET /getAvsMusicHDEnable`
-
-*Get AVS Music HD enable status*
-
-...
-
-<h3 id="getavsmusichdenable-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 ## getAuxAutoSenseEnable
 
 <a id="opIdgetAuxAutoSenseEnable"></a>
@@ -7302,11 +7695,21 @@ This operation does not require authentication
 
 ...
 
+Returns: 0 or 1, where 0 means AUX auto-sense is disabled and 1 means AUX auto-sense is enabled
+
+> Example responses
+
+> 200 Response
+
+```
+1
+```
+
 <h3 id="getauxautosenseenable-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
 
 <aside class="success">
 This operation does not require authentication
@@ -7400,31 +7803,21 @@ This operation does not require authentication
 
 ...
 
+Returns an integer representing the current channel mode. The meaning of the values is currently unknown.
+
+> Example responses
+
+> 200 Response
+
+```
+0
+```
+
 <h3 id="getchannelmode-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getDeviceNameChangeable
-
-<a id="opIdgetDeviceNameChangeable"></a>
-
-`GET /getDeviceNameChangeable`
-
-*Get device name changeable status*
-
-...
-
-<h3 id="getdevicenamechangeable-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
 
 <aside class="success">
 This operation does not require authentication
@@ -7440,11 +7833,21 @@ This operation does not require authentication
 
 ...
 
+Returns: 0 or 1, where 0 means auto-sense is disabled and 1 means auto-sense is enabled
+
+> Example responses
+
+> 200 Response
+
+```
+1
+```
+
 <h3 id="getautosenseenable-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
 
 <aside class="success">
 This operation does not require authentication
@@ -7500,37 +7903,21 @@ This operation does not require authentication
 
 ...
 
+Returns: 0 or 1, where 0 means MQA is not supported and 1 means MQA is supported
+
+> Example responses
+
+> 200 Response
+
+```
+1
+```
+
 <h3 id="getmqareceivercap-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## setAvsMusicHDEnable
-
-<a id="opIdsetAvsMusicHDEnable"></a>
-
-`GET /setAvsMusicHDEnable:{str}`
-
-*Set AVS Music HD enable*
-
-...
-
-<h3 id="setavsmusichdenable-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|str|path|string|true|Unknown|
-
-<h3 id="setavsmusichdenable-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
 
 <aside class="success">
 This operation does not require authentication
@@ -7592,11 +7979,21 @@ This operation does not require authentication
 
 ...
 
+Returns: 0 or 1, where 0 means low priority prompts are enabled and 1 means low priority prompts are disabled
+
+> Example responses
+
+> 200 Response
+
+```
+1
+```
+
 <h3 id="getlowprioritypromptdisable-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
 
 <aside class="success">
 This operation does not require authentication
@@ -7632,11 +8029,21 @@ This operation does not require authentication
 
 ...
 
+Returns: 48000:16:0, which means a maximum sampling rate of 48000 Hz, a maximum bit depth of 16 bits, and a maximum channel count of 0 (unknown)
+
+> Example responses
+
+> 200 Response
+
+```
+"48000:16:0"
+```
+
 <h3 id="getlineinmaxcap-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -7652,11 +8059,21 @@ This operation does not require authentication
 
 ...
 
+Returns: 48000:16:0, which means a maximum sampling rate of 48000 Hz, a maximum bit depth of 16 bits, and a maximum channel count of 0 (unknown)
+
+> Example responses
+
+> 200 Response
+
+```
+"48000:16:0"
+```
+
 <h3 id="getauxinmaxcap-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
 
 <aside class="success">
 This operation does not require authentication
@@ -7692,11 +8109,21 @@ This operation does not require authentication
 
 ...
 
+Returns: 0 or 1, where 0 means HDMI auto-sense is disabled and 1 means HDMI auto-sense is enabled
+
+> Example responses
+
+> 200 Response
+
+```
+1
+```
+
 <h3 id="gethdmiautosenseenable-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
 
 <aside class="success">
 This operation does not require authentication
@@ -7804,11 +8231,44 @@ This operation does not require authentication
 
 ...
 
+Returns, without Subwoofer attached: {"category": "mainsubdelay", "body": {"errorType": "-1000", "mainSubExtraDelay": "-1000.000", "mainDelay": "-1000.000", "subDelay": "-1000.000", "errorDescribe": "unknow error"}}
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "category": "mainsubdelay",
+  "body": {
+    "errorType": "-1000",
+    "mainSubExtraDelay": "-1000.000",
+    "mainDelay": "-1000.000",
+    "subDelay": "-1000.000",
+    "errorDescribe": "unknow error"
+  }
+}
+```
+
 <h3 id="getmainsubextradelay-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="getmainsubextradelay-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» category|string|false|none|none|
+|» body|object|false|none|none|
+|»» errorType|string|false|none|none|
+|»» mainSubExtraDelay|string|false|none|none|
+|»» mainDelay|string|false|none|none|
+|»» subDelay|string|false|none|none|
+|»» errorDescribe|string|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
@@ -9098,25 +9558,15 @@ Returns: 0 or 1
 
 > 200 Response
 
-```json
-{
-  "cecPowerCtrl": 1
-}
+```
+1
 ```
 
 <h3 id="getcecpowerctrl-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
-
-<h3 id="getcecpowerctrl-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» cecPowerCtrl|integer|false|none|Indicates if CEC power control is enabled (0 or 1)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
 
 <aside class="success">
 This operation does not require authentication
@@ -9558,87 +10008,6 @@ This operation does not require authentication
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## noSendMoreDeviceEvent
-
-<a id="opIdnoSendMoreDeviceEvent"></a>
-
-`GET /noSendMoreDeviceEvent:1`
-
-*Disable sending more device events*
-
-...
-
-<h3 id="nosendmoredeviceevent-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getHwErrorInfo
-
-<a id="opIdgetHwErrorInfo"></a>
-
-`GET /getHwErrorInfo`
-
-*Get hardware error information*
-
-...
-
-Returns: { "ethError": 0, "mfiChipError": 0, "flashSpaceError": 0, "badBlockNum": 3, "totalBlockNum": 2000, "hdmiError": 0, "temperatureSensorError": 0, "ledError": 0, "soundCardHwError": { "es9018": 0, "pcm5121": 0 } }
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "ethError": 0,
-  "mfiChipError": 0,
-  "flashSpaceError": 0,
-  "badBlockNum": 3,
-  "totalBlockNum": 2000,
-  "hdmiError": 0,
-  "temperatureSensorError": 0,
-  "ledError": 0,
-  "soundCardHwError": {
-    "es9018": 0,
-    "pcm5121": 0
-  }
-}
-```
-
-<h3 id="gethwerrorinfo-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
-
-<h3 id="gethwerrorinfo-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» ethError|integer|false|none|Ethernet error code|
-|» mfiChipError|integer|false|none|MFi chip error code|
-|» flashSpaceError|integer|false|none|Flash space error code|
-|» badBlockNum|integer|false|none|Number of bad blocks in flash memory|
-|» totalBlockNum|integer|false|none|Total number of blocks in flash memory|
-|» hdmiError|integer|false|none|HDMI error code|
-|» temperatureSensorError|integer|false|none|Temperature sensor error code|
-|» ledError|integer|false|none|LED error code|
-|» soundCardHwError|object|false|none|Sound card hardware error codes for different components|
-|»» es9018|integer|false|none|ES9018 DAC error code|
-|»» pcm5121|integer|false|none|PCM5121 DAC error code|
 
 <aside class="success">
 This operation does not require authentication

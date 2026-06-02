@@ -2071,6 +2071,186 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/StringOK"
+  /Button_Enable_GET:
+    get:
+      tags:
+        - Device control
+      summary: Get button enable status
+      description: |-
+        ...
+      operationId: buttonEnableGet
+      responses:
+        "200":
+          description: Successful response
+  /getFirmwareVersion:
+    get:
+      tags:
+        - Device control
+      summary: Get firmware version
+      description: |-
+        ...
+      operationId: getFirmwareVersion
+      responses:
+        "200":
+          description: Successful response
+  /getDeviceNameChangeable:
+    get:
+      tags:
+        - Device control
+      summary: Get device name changeable status
+      description: |-
+        ...
+      operationId: getDeviceNameChangeable
+      responses:
+        "200":
+          description: Successful response
+  /restoreToDefault:
+    get:
+      tags:
+        - Device control
+      summary: Restoring the factory setting
+      description: |-
+        Example: http://10.10.10.254/httpapi.asp?command=restoreToDefault
+
+        To restore factory settings, erasing defined configurations. The device restarts.
+      externalDocs:
+        description: LinkPlayAPI by n4archive
+        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: restoreToDefault
+      responses:
+        "200":
+          description: Successful response
+  /setDeviceName:{name}:
+    get:
+      tags:
+        - Device control
+      summary: Setting the name of device
+      description: |-
+        Example: http://10.10.10.254/httpapi.asp?command=setDeviceName:%s
+
+        Sets the name UPnP, DLNA and Airplay of the device (Hex)
+      externalDocs:
+        description: LinkPlayAPI by n4archive
+        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
+      operationId: setDeviceName
+      parameters:
+        - name: "name"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The new device name to set for UPnP, DLNA, and Airplay, in hexadecimal format.
+      responses:
+        "200":
+          description: Successful response
+  /getsyslog:
+    get:
+      tags:
+        - Device control
+      summary: Get system log
+      description: |-
+        ...
+      operationId: getsyslog
+      responses:
+        "200":
+          description: Successful response
+  /setHexDeviceName:{str}:
+    get:
+      tags:
+        - Device control
+      summary: Set hex device name
+      description: |-
+        ...
+      operationId: setHexDeviceName
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
+  /noSendMoreDeviceEvent:1:
+    get:
+      tags:
+        - Device control
+      summary: Disable sending more device events
+      description: |-
+        ...
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: noSendMoreDeviceEvent
+      responses:
+        "200":
+          description: Successful response
+  /getHwErrorInfo:
+    get:
+      tags:
+        - Device control
+      summary: Get hardware error information
+      description: |-
+        ...
+
+        Returns: { "ethError": 0, "mfiChipError": 0, "flashSpaceError": 0, "badBlockNum": 3, "totalBlockNum": 2000, "hdmiError": 0, "temperatureSensorError": 0, "ledError": 0, "soundCardHwError": { "es9018": 0, "pcm5121": 0 } }
+      externalDocs:
+        description: "More (undocumented) API calls"
+        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+      operationId: getHwErrorInfo
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ethError:
+                    type: integer
+                    description: Ethernet error code
+                    example: 0
+                  mfiChipError:
+                    type: integer
+                    description: MFi chip error code
+                    example: 0
+                  flashSpaceError:
+                    type: integer
+                    description: Flash space error code
+                    example: 0
+                  badBlockNum:
+                    type: integer
+                    description: Number of bad blocks in flash memory
+                    example: 3
+                  totalBlockNum:
+                    type: integer
+                    description: Total number of blocks in flash memory
+                    example: 2000
+                  hdmiError:
+                    type: integer
+                    description: HDMI error code
+                    example: 0
+                  temperatureSensorError:
+                    type: integer
+                    description: Temperature sensor error code
+                    example: 0
+                  ledError:
+                    type: integer
+                    description: LED error code
+                    example: 0
+                  soundCardHwError:
+                    type: object
+                    description: Sound card hardware error codes for different components
+                    properties:
+                      es9018:
+                        type: integer
+                        description: ES9018 DAC error code
+                        example: 0
+                      pcm5121:
+                        type: integer
+                        description: PCM5121 DAC error code
+                        example: 0
 
   # ====================================================================
   # Alarm clock
@@ -3440,6 +3620,46 @@ paths:
       responses:
         "200":
           description: Successful response
+  /getAvsDevInfo:
+    get:
+      tags:
+        - Alexa
+      summary: Get Alexa Voice Service Device Info
+      description: |-
+        ...
+      operationId: getAvsDevInfo
+      responses:
+        "200":
+          description: Successful response
+  /getAvsMusicHDEnable:
+    get:
+      tags:
+        - Alexa
+      summary: Get Alexa Voice Service Music HD enable status
+      description: |-
+        ...
+      operationId: getAvsMusicHDEnable
+      responses:
+        "200":
+          description: Successful response
+  /setAvsMusicHDEnable:{str}:
+    get:
+      tags:
+        - Alexa
+      summary: Set Alexa Voice Service Music HD enable
+      description: |-
+        ...
+      operationId: setAvsMusicHDEnable
+      parameters:
+        - name: "str"
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unknown
+      responses:
+        "200":
+          description: Successful response
 
   # ====================================================================
   # Amazon Music
@@ -4257,6 +4477,8 @@ paths:
       summary: Get the MV remote silence update time
       description: |-
         ...
+
+        Returns: {"start":"0:1", "end":"23:59"}
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -4264,6 +4486,22 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  start:
+                    type: string
+                    description: The start time of the MV remote silence period in "HH:mm" format
+                  end:
+                    type: string
+                    description: The end time of the MV remote silence period in "HH:mm" format
+              example:
+                {
+                  "start": "0:1",
+                  "end": "23:59"
+                }
   /getSpdifOutMaxCap:
     get:
       tags:
@@ -4285,6 +4523,8 @@ paths:
       summary: Get the maximum capabilities of the coaxial output
       description: |-
         ...
+
+        Returns: 48000:16:0
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -4292,6 +4532,11 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "48000:16:0"
   /getAuxVoltageSupportList:
     get:
       tags:
@@ -4445,6 +4690,8 @@ paths:
       summary: Get the active sound card output mode
       description: |-
         ...
+
+        Returns: {"index":"1","mode":"AUDIO_OUTPUT_AUX_MODE","cardId":"hw:0,1","devName":"Speaker Out","btSource":"0","audioCast":"0"}
       externalDocs:
         description: WiiM Extended HTTP API by DanBrezeanu
         url: "https://github.com/DanBrezeanu/wiim-extended-http-api"
@@ -4452,6 +4699,38 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  index:
+                    type: string
+                    description: The index of the active sound card output mode
+                  mode:
+                    type: string
+                    description: The name of the active sound card output mode
+                  cardId:
+                    type: string
+                    description: The card ID of the active sound card output mode
+                  devName:
+                    type: string
+                    description: The device name of the active sound card output mode
+                  btSource:
+                    type: string
+                    description: Unknown
+                  audioCast:
+                    type: string
+                    description: Unknown
+              example:
+                {
+                  "index": "1",
+                  "mode": "AUDIO_OUTPUT_AUX_MODE",
+                  "cardId": "hw:0,1",
+                  "devName": "Speaker Out",
+                  "btSource": "0",
+                  "audioCast": "0"
+                }
   "/setLightOperationBrightConfig:%7B%22auto_sense_enable%22:{s},%22default_bright%22:{b},%22disable%22:{d}%7D":
     get:
       tags:
@@ -4497,11 +4776,13 @@ paths:
     get:
       tags:
         - Other
-      summary: Update search
+      summary: Search for firmware updates available (check for updates)
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStartCheck
 
         Search for the firmware updates available
+
+        Returns: OK
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
@@ -4509,16 +4790,24 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "OK"
   /getMvRemoteUpdateStart:
     get:
       tags:
         - Other
-      summary: Notification updates
+      summary: Start firmware update
       description: |-
         Example: http://10.10.10.254/httpapi.asp?command=getMvRemoteUpdateStart
 
         After calling the interface, if a new version is available, the device starts to download updates. At the end of the download, the update process starts.
+
         WARNING: DO NOT POWER OFF DURING THIS PROCESS!!
+
+        Returns: OK
       externalDocs:
         description: LinkPlayAPI by n4archive
         url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
@@ -4526,6 +4815,11 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "OK"
   /getMvRemoteUpdateStatus:
     get:
       tags:
@@ -4538,7 +4832,7 @@ paths:
 
         Value	Meaning
         - 10	Under review
-        - 20  ...
+        - 20  OK
         - 21	The verification of the downloaded update file failed
         - 22	Downloading the update file failed
         - 23	The verification of the downloaded update file failed
@@ -4553,6 +4847,20 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                enum:
+                  - "10"
+                  - "20"
+                  - "21"
+                  - "22"
+                  - "23"
+                  - "25"
+                  - "27"
+                  - "30"
+              example: "20"
   /getMvRomBurnPrecent:
     get:
       tags:
@@ -4563,13 +4871,12 @@ paths:
 
         Status of updating
 
-        {
-          " status ":" 0 "," progress ":" 50 "
-        }
+        Returns: { "status" : "0", "progress" : "50"}
 
-        Fields	Meaning
-        status	State
-        progress	Progress between 0 to 100%
+        | Fields	 | Meaning |
+        | ---------|---------|
+        | status	 | State   |
+        | progress | Progress between 0 to 100% |
 
       externalDocs:
         description: LinkPlayAPI by n4archive
@@ -4578,45 +4885,22 @@ paths:
       responses:
         "200":
           description: Successful response
-  /restoreToDefault:
-    get:
-      tags:
-        - Other
-      summary: Restoring the factory setting
-      description: |-
-        Example: http://10.10.10.254/httpapi.asp?command=restoreToDefault
-
-        To restore factory settings, erasing defined configurations. The device restarts.
-      externalDocs:
-        description: LinkPlayAPI by n4archive
-        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
-      operationId: restoreToDefault
-      responses:
-        "200":
-          description: Successful response
-  "/setDeviceName:{name}":
-    get:
-      tags:
-        - Other
-      summary: Setting the name of device
-      description: |-
-        Example: http://10.10.10.254/httpapi.asp?command=setDeviceName:%s
-
-        Sets the name UPnP, DLNA and Airplay of the device (Hex)
-      externalDocs:
-        description: LinkPlayAPI by n4archive
-        url: "https://github.com/n4archive/LinkPlayAPI/blob/master/api.md"
-      operationId: setDeviceName
-      parameters:
-        - name: "name"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The new device name to set for UPnP, DLNA, and Airplay, in hexadecimal format.
-      responses:
-        "200":
-          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The current state of the update process, where "0" typically indicates that the update is in progress and "1" indicates that the update is complete.
+                  progress:
+                    type: string
+                    description: The progress of the update process as a percentage, ranging from "0" to "100".
+              example:
+                {
+                  "status": "0",
+                  "progress": "50"
+                }
   /EasyLinkResponseStop:
     get:
       tags:
@@ -4646,10 +4930,24 @@ paths:
       summary: Get LMP filter capability
       description: |-
         ...
+
+        Returns: { "version": "1.1" }
       operationId: getLMPFilterCapability
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: The version of the LMP filter capability
+              example:
+                {
+                  "version": "1.1"
+                }
   /getStreamServiceConfig:{source}:
     get:
       tags:
@@ -4683,17 +4981,6 @@ paths:
           schema:
             type: string
           description: Unknown
-      responses:
-        "200":
-          description: Successful response
-  /getsyslog:
-    get:
-      tags:
-        - Other
-      summary: Get system log
-      description: |-
-        ...
-      operationId: getsyslog
       responses:
         "200":
           description: Successful response
@@ -4793,6 +5080,7 @@ paths:
           description: Successful response
   /AutoPlaySet:
     get:
+      deprecated: true
       tags:
         - Other
       summary: Auto play setting
@@ -4809,10 +5097,76 @@ paths:
       summary: Get MV ROM download status
       description: |-
         ...
+
+        Returns: {"status":"0","count":"0","dcount":"0","wcount":"0","tsize":"0","dsize":"0","wsize":"0","csize":"0", "cdsize":"0", "cwsize":"0", "progress":"0","name":"","ver":"0","new_ver":"0"}
       operationId: getMvRomDownloadStatus
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The current status of the MV ROM download process, where "0" typically indicates that the download is in progress and "1" indicates that the download is complete.
+                  count:
+                    type: string
+                    description: The total number of items to be downloaded
+                  dcount:
+                    type: string
+                    description: The number of items that have been downloaded so far
+                  wcount:
+                    type: string
+                    description: The number of items that are currently being downloaded
+                  tsize:
+                    type: string
+                    description: The total size of the items to be downloaded, in bytes
+                  dsize:
+                    type: string
+                    description: The size of the items that have been downloaded so far, in bytes
+                  wsize:
+                    type: string
+                    description: The size of the items that are currently being downloaded, in bytes
+                  csize:
+                    type: string
+                    description: The size of the items that have been downloaded and verified, in bytes
+                  cdsize:
+                    type: string
+                    description: The size of the items that have been downloaded but not yet verified, in bytes
+                  cwsize:
+                    type: string
+                    description: The size of the items that are currently being downloaded but not yet verified, in bytes
+                  progress:
+                    type: string
+                    description: The overall progress of the MV ROM download process as a percentage, ranging from "0" to "100"
+                  name:
+                    type: string
+                    description: The name of the item currently being downloaded or processed
+                  ver:
+                    type: string
+                    description: The current version of the firmware or software being updated
+                  new_ver:
+                    type: string
+                    description: The new version of the firmware or software being updated to after the download is complete and successful verification is done.
+              example:
+                {
+                  "status": "0",
+                  "count": "0",
+                  "dcount": "0",
+                  "wcount": "0",
+                  "tsize": "0",
+                  "dsize": "0",
+                  "wsize": "0",
+                  "csize": "0",
+                  "cdsize": "0",
+                  "cwsize": "0",
+                  "progress": "0",
+                  "name": "",
+                  "ver": "0",
+                  "new_ver": "0"
+                }
   /getMvRomDownloadV2Status:
     get:
       tags:
@@ -4820,28 +5174,40 @@ paths:
       summary: Get MV ROM download status V2
       description: |-
         ...
+
+        Returns: {"status":"0","progress":"0","name":"","ver":"0","new_ver":"0"}
       operationId: getMvRomDownloadV2Status
       responses:
         "200":
           description: Successful response
-  /setHexDeviceName:{str}:
-    get:
-      tags:
-        - Other
-      summary: Set hex device name
-      description: |-
-        ...
-      operationId: setHexDeviceName
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The current status of the MV ROM download process, where "0" typically indicates that the download is in progress and "1" indicates that the download is complete.
+                  progress:
+                    type: string
+                    description: The overall progress of the MV ROM download process as a percentage, ranging from "0" to "100"
+                  name:
+                    type: string
+                    description: The name of the item currently being downloaded or processed
+                  ver:
+                    type: string
+                    description: The current version of the firmware or software being updated
+                  new_ver:
+                    type: string
+                    description: The new version of the firmware or software being updated to after the download is complete and successful verification is done.
+              example:
+                {
+                  "status": "0",
+                  "progress": "0",
+                  "name": "",
+                  "ver": "0",
+                  "new_ver": "0"
+                }
   /setHexGroupName:{str}:
     get:
       tags:
@@ -4919,6 +5285,7 @@ paths:
           description: Successful response
   /checkAccessPIN:
     get:
+      deprecated: true
       tags:
         - Other
       summary: Check access PIN
@@ -4977,6 +5344,7 @@ paths:
           description: Successful response
   /getbatteryval:
     get:
+      deprecated: true
       tags:
         - Other
       summary: Get battery value
@@ -4986,28 +5354,115 @@ paths:
       responses:
         "200":
           description: Successful response
-  /getAvsDevInfo:
-    get:
-      tags:
-        - Other
-      summary: Get AVS Device Info
-      description: |-
-        ...
-      operationId: getAvsDevInfo
-      responses:
-        "200":
-          description: Successful response
   /getAsrStatus:
     get:
       tags:
         - Other
-      summary: Get ASR Status
+      summary: Get Automatic Speech Recognition Status
       description: |-
         ...
+
+        Returns: { "times_talk_on": "0", "times_request_succeed": "0", "times_request_failed": "0", "times_vad_time_out": "0", "times_play_failed": "0", "open_failed": "0", "capture_failed": "0", "mode": "normal", "score": "0", "volume": "18", "play_status": "0", "config_score": "0", "config_interval": "0", "trigger_test_mode": "0", "trigger_mis_test_mode": "0", "trigger_recording": "0", "have_prompt": "0", "fallback_enable": "0", "profile": "near", "hands_free": "0", "status": "ok", "id": "0" }
       operationId: getAsrStatus
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  times_talk_on:
+                    type: string
+                    description: Unknown
+                  times_request_succeed:
+                    type: string
+                    description: Unknown
+                  times_request_failed:
+                    type: string
+                    description: Unknown
+                  times_vad_time_out:
+                    type: string
+                    description: Unknown
+                  times_play_failed:
+                    type: string
+                    description: Unknown
+                  open_failed:
+                    type: string
+                    description: Unknown
+                  capture_failed:
+                    type: string
+                    description: Unknown
+                  mode:
+                    type: string
+                    description: Unknown
+                  score:
+                    type: string
+                    description: Unknown
+                  volume:
+                    type: string
+                    description: Unknown
+                  play_status:
+                    type: string
+                    description: Unknown
+                  config_score:
+                    type: string
+                    description: Unknown
+                  config_interval:
+                    type: string
+                    description: Unknown
+                  trigger_test_mode:
+                    type: string
+                    description: Unknown
+                  trigger_mis_test_mode:
+                    type: string
+                    description: Unknown
+                  trigger_recording:
+                    type: string
+                    description: Unknown
+                  have_prompt:
+                    type: string
+                    description: Unknown
+                  fallback_enable:
+                    type: string
+                    description: Unknown
+                  profile:
+                    type: string
+                    description: Unknown
+                  hands_free:
+                    type: string
+                    description: Unknown
+                  status:
+                    type: string
+                    description: The status of the ASR system, typically "ok"
+                  id:
+                    type: string
+                    description: Unknown
+              example:
+                {
+                  "times_talk_on": "0",
+                  "times_request_succeed": "0",
+                  "times_request_failed": "0",
+                  "times_vad_time_out": "0",
+                  "times_play_failed": "0",
+                  "open_failed": "0",
+                  "capture_failed": "0",
+                  "mode": "normal",
+                  "score": "0",
+                  "volume": "18",
+                  "play_status": "0",
+                  "config_score": "0",
+                  "config_interval": "0",
+                  "trigger_test_mode": "0",
+                  "trigger_mis_test_mode": "0",
+                  "trigger_recording": "0",
+                  "have_prompt": "0",
+                  "fallback_enable": "0",
+                  "profile": "near",
+                  "hands_free": "0",
+                  "status": "ok",
+                  "id": "0"
+                }
   /getLPAuthCode:hostId={str}:clientId={str2}:
     get:
       tags:
@@ -5229,6 +5684,7 @@ paths:
           description: Successful response
   /get_ui_config:
     get:
+      deprecated: true
       tags:
         - Other
       summary: Get UI config
@@ -5327,6 +5783,7 @@ paths:
           description: Successful response
   /get_ui_wallpaper_list:
     get:
+      deprecated: true
       tags:
         - Other
       summary: Get UI wallpaper list
@@ -5414,17 +5871,6 @@ paths:
       responses:
         "200":
           description: Successful response
-  /getAvsMusicHDEnable:
-    get:
-      tags:
-        - Other
-      summary: Get AVS Music HD enable status
-      description: |-
-        ...
-      operationId: getAvsMusicHDEnable
-      responses:
-        "200":
-          description: Successful response
   /getAuxAutoSenseEnable:
     get:
       tags:
@@ -5432,10 +5878,20 @@ paths:
       summary: Get AUX auto-sense enable status
       description: |-
         ...
+
+        Returns: 0 or 1, where 0 means AUX auto-sense is disabled and 1 means AUX auto-sense is enabled
       operationId: getAuxAutoSenseEnable
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: integer
+                enum:
+                  - 0
+                  - 1
+              example: "1"
   /set_ui_config:{str}:
     get:
       tags:
@@ -5472,17 +5928,6 @@ paths:
       responses:
         "200":
           description: Successful response
-  /Button_Enable_GET:
-    get:
-      tags:
-        - Device control
-      summary: Get button enable status
-      description: |-
-        ...
-      operationId: buttonEnableGet
-      responses:
-        "200":
-          description: Successful response
   /setSpdifInNoiseRemove:{str}:
     get:
       tags:
@@ -5508,10 +5953,17 @@ paths:
       summary: Get channel mode
       description: |-
         ...
+
+        Returns an integer representing the current channel mode. The meaning of the values is currently unknown.
       operationId: getChannelMode
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: integer
+              example: "0"
   /setSubLPF:{str}:
     get:
       tags:
@@ -5530,17 +5982,6 @@ paths:
       responses:
         "200":
           description: Successful response
-  /getDeviceNameChangeable:
-    get:
-      tags:
-        - Other
-      summary: Get device name changeable status
-      description: |-
-        ...
-      operationId: getDeviceNameChangeable
-      responses:
-        "200":
-          description: Successful response
   /getAutoSenseEnable:
     get:
       tags:
@@ -5548,10 +5989,20 @@ paths:
       summary: Get auto-sense enable status
       description: |-
         ...
+
+        Returns: 0 or 1, where 0 means auto-sense is disabled and 1 means auto-sense is enabled
       operationId: getAutoSenseEnable
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: integer
+                enum:
+                  - 0
+                  - 1
+              example: "1"
   /StartRebootTime:1:
     get:
       tags:
@@ -5581,28 +6032,20 @@ paths:
       summary: Get MQA receiver capacity
       description: |-
         ...
+
+        Returns: 0 or 1, where 0 means MQA is not supported and 1 means MQA is supported
       operationId: getMQAReceiverCap
       responses:
         "200":
           description: Successful response
-  /setAvsMusicHDEnable:{str}:
-    get:
-      tags:
-        - Other
-      summary: Set AVS Music HD enable
-      description: |-
-        ...
-      operationId: setAvsMusicHDEnable
-      parameters:
-        - name: "str"
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Unknown
-      responses:
-        "200":
-          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: integer
+                enum:
+                  - 0
+                  - 1
+              example: "1"
   /Reload_Button_GET:
     get:
       tags:
@@ -5639,10 +6082,20 @@ paths:
       summary: Get low priority prompt disable status
       description: |-
         ...
+
+        Returns: 0 or 1, where 0 means low priority prompts are enabled and 1 means low priority prompts are disabled
       operationId: getLowPriorityPromptDisable
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: integer
+                enum:
+                  - 0
+                  - 1
+              example: "1"
   /getSoftMute:
     get:
       tags:
@@ -5661,10 +6114,17 @@ paths:
       summary: Get LINE IN maximum capacity
       description: |-
         ...
+
+        Returns: 48000:16:0, which means a maximum sampling rate of 48000 Hz, a maximum bit depth of 16 bits, and a maximum channel count of 0 (unknown)
       operationId: getLineInMaxCap
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "48000:16:0"
   /getAuxInMaxCap:
     get:
       tags:
@@ -5672,10 +6132,17 @@ paths:
       summary: Get AUX input maximum capacity
       description: |-
         ...
+
+        Returns: 48000:16:0, which means a maximum sampling rate of 48000 Hz, a maximum bit depth of 16 bits, and a maximum channel count of 0 (unknown)
       operationId: getAuxInMaxCap
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "48000:16:0"
   /getUacOutMaxCap:
     get:
       tags:
@@ -5694,10 +6161,20 @@ paths:
       summary: Get HDMI auto-sense enable
       description: |-
         ...
+
+        Returns: 0 or 1, where 0 means HDMI auto-sense is disabled and 1 means HDMI auto-sense is enabled
       operationId: getHDMIAutoSenseEnable
       responses:
         "200":
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: integer
+                enum:
+                  - 0
+                  - 1
+              example: "1"
   /setChannelMode:{n}:
     get:
       tags:
@@ -5781,10 +6258,38 @@ paths:
       summary: Get main/sub extra delay
       description: |-
         ...
+
+        Returns, without Subwoofer attached: {"category": "mainsubdelay", "body": {"errorType": "-1000", "mainSubExtraDelay": "-1000.000", "mainDelay": "-1000.000", "subDelay": "-1000.000", "errorDescribe": "unknow error"}}
       operationId: getMainSubExtraDelay
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  category:
+                    type: string
+                    example: mainsubdelay
+                  body:
+                    type: object
+                    properties:
+                      errorType:
+                        type: string
+                        example: "-1000"
+                      mainSubExtraDelay:
+                        type: string
+                        example: "-1000.000"
+                      mainDelay:
+                        type: string
+                        example: "-1000.000"
+                      subDelay:
+                        type: string
+                        example: "-1000.000"
+                      errorDescribe:
+                        type: string
+                        example: unknow error
   /Cast:Disable:
     get:
       tags:
@@ -6107,17 +6612,6 @@ paths:
       responses:
         "200":
           description: Successful response
-  /getFirmwareVersion:
-    get:
-      tags:
-        - Device control
-      summary: Get firmware version
-      description: |-
-        ...
-      operationId: getFirmwareVersion
-      responses:
-        "200":
-          description: Successful response
   /EnableSysInfo:{n}:
     get:
       tags:
@@ -6166,6 +6660,7 @@ paths:
                     example: -10
   /GetCurrentWirelessConnect:
     get:
+      deprecated: true
       tags:
         - Other
       summary: Get current wireless connection information
@@ -6298,6 +6793,7 @@ paths:
           description: Successful response
   /getSetupRouterInfo:
     get:
+      deprecated: true
       tags:
         - Other
       summary: Get setup router information
@@ -6699,6 +7195,7 @@ paths:
           description: Successful response
   /getCBLStatus:
     get:
+      deprecated: true
       tags:
         - Other
       summary: Get CBL status
@@ -6728,14 +7225,13 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                properties:
-                  cecPowerCtrl:
-                    type: integer
-                    description: Indicates if CEC power control is enabled (0 or 1)
-                    example: 1
+                type: integer
+                enum:
+                  - 0
+                  - 1
+              example: 1
   /setCecPowerCtrl:{n}:
     get:
       tags:
@@ -7070,85 +7566,6 @@ paths:
       responses:
         "200":
           description: Successful response
-  /noSendMoreDeviceEvent:1:
-    get:
-      tags:
-        - Other
-      summary: Disable sending more device events
-      description: |-
-        ...
-      externalDocs:
-        description: "More (undocumented) API calls"
-        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
-      operationId: noSendMoreDeviceEvent
-      responses:
-        "200":
-          description: Successful response
-  /getHwErrorInfo:
-    get:
-      tags:
-        - Other
-      summary: Get hardware error information
-      description: |-
-        ...
-
-        Returns: { "ethError": 0, "mfiChipError": 0, "flashSpaceError": 0, "badBlockNum": 3, "totalBlockNum": 2000, "hdmiError": 0, "temperatureSensorError": 0, "ledError": 0, "soundCardHwError": { "es9018": 0, "pcm5121": 0 } }
-      externalDocs:
-        description: "More (undocumented) API calls"
-        url: "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
-      operationId: getHwErrorInfo
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ethError:
-                    type: integer
-                    description: Ethernet error code
-                    example: 0
-                  mfiChipError:
-                    type: integer
-                    description: MFi chip error code
-                    example: 0
-                  flashSpaceError:
-                    type: integer
-                    description: Flash space error code
-                    example: 0
-                  badBlockNum:
-                    type: integer
-                    description: Number of bad blocks in flash memory
-                    example: 3
-                  totalBlockNum:
-                    type: integer
-                    description: Total number of blocks in flash memory
-                    example: 2000
-                  hdmiError:
-                    type: integer
-                    description: HDMI error code
-                    example: 0
-                  temperatureSensorError:
-                    type: integer
-                    description: Temperature sensor error code
-                    example: 0
-                  ledError:
-                    type: integer
-                    description: LED error code
-                    example: 0
-                  soundCardHwError:
-                    type: object
-                    description: Sound card hardware error codes for different components
-                    properties:
-                      es9018:
-                        type: integer
-                        description: ES9018 DAC error code
-                        example: 0
-                      pcm5121:
-                        type: integer
-                        description: PCM5121 DAC error code
-                        example: 0
   /getInputModeSupportList:
     get:
       tags:
