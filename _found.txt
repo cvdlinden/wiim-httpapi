@@ -1,29 +1,3 @@
 More (undocumented) API calls
 https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3
 
-command=getOutputDigitalFilterType:%@
-command=getOutputDigitalFilterTypeSupportList
-command=getOutputVoltage
-command=setOutputDigitalFilterType:%@
-command=setOutputVoltage:%d
-command=getPlayModeGainConfig
-command=mediaserver:scan
-command=mediaserver:udiskumount
-command=noSendMoreDeviceEvent:1
-command=setAudioOutMax32bit:%d
-command=setAudioOutputVrms:%@
-command=setCecPowerCtrl:%d
-command=setDigitalFilterType:%d
-command=setHexGroupName:%@
-command=setModeRename:%@
-command=setMusicExplicit:%d
-command=setPlayModeGainConfig:%@
-command=setPrimeToken:username=%@:token=%@:refreshToken=%@:expires_in=%ld
-command=setTuneinFavoriteState:songId=%@:statu:%d
-command=setTuneinLocation:latitude=%@:longitude=%@:serial=%@
-command=setTuneinToken:username=%@:token=%@:refreshToken=%@:expires_in=%ld:userid=%@
-command=streamServicesCapability
-command=tidallogin:oauthcode=%@
-command=wpscannel
-command=wpsclientmode
-command=wpsservermode
