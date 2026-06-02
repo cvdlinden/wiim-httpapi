@@ -1416,6 +1416,102 @@
         }
       }
     },
+    "/wpscannel": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "WPS Channel",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=wpscannel",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "wpscannel",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "Example response",
+                    "value": "OK"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wpsclientmode": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "WPS Client Mode",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=wpsclientmode",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "wpsclientmode",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "Example response",
+                    "value": "OK"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wpsservermode": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "WPS Server Mode",
+        "description": "Example: http://10.10.10.254/httpapi.asp?command=wpsservermode",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "wpsservermode",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "Example response",
+                    "value": "OK"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/EQOn": {
       "get": {
         "summary": "Turn on the EQ",
@@ -4234,6 +4330,63 @@
         }
       }
     },
+    "/setPrimeToken:username={str1}:token={str2}:refreshToken={str3}:expires_in={n}": {
+      "get": {
+        "tags": [
+          "Amazon music"
+        ],
+        "summary": "Set Amazon Prime token",
+        "description": "Makes a call to https://10.10.10.254/httpapi.asp?command=setPrimeToken:username=%@:token=%@:refreshToken=%@:expires_in=%ld",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setPrimeToken",
+        "parameters": [
+          {
+            "name": "str1",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The username for Amazon Prime"
+          },
+          {
+            "name": "str2",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The access token for Amazon Prime"
+          },
+          {
+            "name": "str3",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The refresh token for Amazon Prime"
+          },
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The expiration time in seconds for the access token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/multiroom:getSlaveList": {
       "get": {
         "tags": [
@@ -5779,6 +5932,36 @@
         "summary": "Set hex device name",
         "description": "...",
         "operationId": "setHexDeviceName",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setHexGroupName:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set hex group name",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setHexGroupName",
         "parameters": [
           {
             "name": "str",
@@ -8262,6 +8445,36 @@
         }
       }
     },
+    "/setAudioOutMax32bit:{n}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set audio output maximum 32-bit support",
+        "description": "...\n\nn: 0 or 1",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setAudioOutMax32bit",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired audio output maximum 32-bit support (0 or 1)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/getAudioOutputVrms:{str}": {
       "get": {
         "tags": [
@@ -8304,6 +8517,36 @@
           "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
         },
         "operationId": "getAudioOutputVrmsSupportList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setAudioOutputVrms:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set audio output VRMS for a specific output",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setAudioOutputVrms",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown (possibly the output type or identifier)"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response"
@@ -8359,6 +8602,36 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/setCecPowerCtrl:{n}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set CEC power control status",
+        "description": "...\n\nn: 0 or 1",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setCecPowerCtrl",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired CEC power control status (0 or 1)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
           }
         }
       }
@@ -8484,6 +8757,115 @@
         }
       }
     },
+    "/setDigitalFilterType:{n}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set digital filter type",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setDigitalFilterType",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The digital filter type to set (1, 2, or 3)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getOutputDigitalFilterType:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get current output digital filter type",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getOutputDigitalFilterType",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown (possibly the output type or identifier)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getOutputDigitalFilterTypeSupportList": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get list of supported output digital filter types",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getOutputDigitalFilterTypeSupportList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setOutputDigitalFilterType:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set output digital filter type",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setOutputDigitalFilterType",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown (possibly the output type or identifier)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/getDigitalInputAudioTypeSupport": {
       "get": {
         "tags": [
@@ -8512,6 +8894,64 @@
         }
       }
     },
+    "/getOutputVoltage": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get output voltage",
+        "description": "...\n\nReturns an integer",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getOutputVoltage",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "description": "Current output voltage",
+                  "example": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/setOutputVoltage:{n}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set output voltage",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setOutputVoltage",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired output voltage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/getFeatureCapbility": {
       "get": {
         "tags": [
@@ -8524,6 +8964,112 @@
           "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
         },
         "operationId": "getFeatureCapability",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/getPlayModeGainConfig": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get play mode gain configuration",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "getPlayModeGainConfig",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setPlayModeGainConfig:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set play mode gain configuration",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setPlayModeGainConfig",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/mediaserver:scan": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Media server scan",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "mediaserverScan",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/mediaserver:udiskumount": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Media server USB disk unmount",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "mediaserverUdiskumount",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/noSendMoreDeviceEvent:1": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Disable sending more device events",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "noSendMoreDeviceEvent",
         "responses": {
           "200": {
             "description": "Successful response"
@@ -8668,6 +9214,66 @@
         }
       }
     },
+    "/setModeRename:{str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set input mode rename information",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setModeRename",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unknown"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setMusicExplicit:{n}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set music explicit content filter",
+        "description": "...\n\nn: 0 or 1",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setMusicExplicit",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired music explicit content filter status (0 or 1)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
     "/getMvRemoteUpdateDeviceOtaInfo": {
       "get": {
         "tags": [
@@ -8746,6 +9352,279 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/setTuneinFavoriteState:songId={songId}:statu={status}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set TuneIn favorite state for a song",
+        "description": "...\n\nsongId: The ID of the song\nstatus: 0 for not favorite, 1 for favorite",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setTuneinFavoriteState",
+        "parameters": [
+          {
+            "name": "songId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the song"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "0 for not favorite, 1 for favorite"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setTuneinLocation:latitude={latitude}:longitude={longitude}:serial={serial}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set TuneIn location information",
+        "description": "...\n\nlatitude: Latitude of the location\nlongitude: Longitude of the location\nserial: Device serial number",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setTuneinLocation",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Latitude of the location"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Longitude of the location"
+          },
+          {
+            "name": "serial",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Device serial number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/setTuneinToken:username={username}:token={token}:refreshToken={refreshToken}:expires_in={expires_in}:userid={userid}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Set TuneIn authentication token information",
+        "description": "...\n\nusername: TuneIn account username\ntoken: Authentication token\nrefreshToken: Token used to refresh the authentication token\nexpires_in: Time in seconds until the token expires\nuserid: TuneIn user ID",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "setTuneinToken",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "TuneIn account username"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authentication token"
+          },
+          {
+            "name": "refreshToken",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Token used to refresh the authentication token"
+          },
+          {
+            "name": "expires_in",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Time in seconds until the token expires"
+          },
+          {
+            "name": "userid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "TuneIn user ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/streamServicesCapability": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Get streaming services capabilities",
+        "description": "...\n\nReturns: { \"version\": \"1.6\", \"encrypt\": \"1.0\", \"streamServices\": [ { \"id\": \"Prime\", \"version\": \"1.4\", \"quality\": [ \"SD\", \"HD\", \"UHD\" ] }, { ... } ] }",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "streamServicesCapability",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string",
+                      "description": "API version",
+                      "example": "1.6"
+                    },
+                    "encrypt": {
+                      "type": "string",
+                      "description": "Encryption version",
+                      "example": "1.0"
+                    },
+                    "streamServices": {
+                      "type": "array",
+                      "description": "List of supported streaming services and their capabilities",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Streaming service identifier",
+                            "example": "Prime"
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "Version of the streaming service integration",
+                            "example": "1.4"
+                          },
+                          "quality": {
+                            "type": "array",
+                            "description": "List of supported audio quality levels for this service",
+                            "items": {
+                              "type": "string",
+                              "example": "SD"
+                            }
+                          },
+                          "replayGain": {
+                            "type": "boolean",
+                            "description": "Indicates if replay gain is supported for this service (optional)",
+                            "example": true
+                          },
+                          "configurable": {
+                            "type": "boolean",
+                            "description": "Indicates if the service is configurable (optional)",
+                            "example": true
+                          },
+                          "active": {
+                            "type": "boolean",
+                            "description": "Indicates if the service is currently active (optional)",
+                            "example": true
+                          },
+                          "brand": {
+                            "type": "string",
+                            "description": "Brand associated with the service (optional)",
+                            "example": "WiiM"
+                          },
+                          "model": {
+                            "type": "string",
+                            "description": "Model associated with the service (optional)",
+                            "example": "Amp"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tidallogin:oauthcode={str}": {
+      "get": {
+        "tags": [
+          "Other"
+        ],
+        "summary": "Tidal login using OAuth code",
+        "description": "...",
+        "externalDocs": {
+          "description": "More (undocumented) API calls",
+          "url": "https://github.com/DanBrezeanu/wiim-extended-http-api/issues/3"
+        },
+        "operationId": "tidalLogin",
+        "parameters": [
+          {
+            "name": "str",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The OAuth code obtained from Tidal authentication flow"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
           }
         }
       }

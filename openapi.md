@@ -2282,6 +2282,90 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+## wpscannel
+
+<a id="opIdwpscannel"></a>
+
+`GET /wpscannel`
+
+*WPS Channel*
+
+Example: http://10.10.10.254/httpapi.asp?command=wpscannel
+
+> Example responses
+
+> Successful response
+
+```
+"OK"
+```
+
+<h3 id="wpscannel-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## wpsclientmode
+
+<a id="opIdwpsclientmode"></a>
+
+`GET /wpsclientmode`
+
+*WPS Client Mode*
+
+Example: http://10.10.10.254/httpapi.asp?command=wpsclientmode
+
+> Example responses
+
+> Successful response
+
+```
+"OK"
+```
+
+<h3 id="wpsclientmode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## wpsservermode
+
+<a id="opIdwpsservermode"></a>
+
+`GET /wpsservermode`
+
+*WPS Server Mode*
+
+Example: http://10.10.10.254/httpapi.asp?command=wpsservermode
+
+> Example responses
+
+> Successful response
+
+```
+"OK"
+```
+
+<h3 id="wpsservermode-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|string|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-equalizer">Equalizer</h1>
 
 Get and set equalizer settings
@@ -5505,6 +5589,35 @@ Note: The parameters in the command should be replaced with actual values when m
 This operation does not require authentication
 </aside>
 
+## setPrimeToken
+
+<a id="opIdsetPrimeToken"></a>
+
+`GET /setPrimeToken:username={str1}:token={str2}:refreshToken={str3}:expires_in={n}`
+
+*Set Amazon Prime token*
+
+Makes a call to https://10.10.10.254/httpapi.asp?command=setPrimeToken:username=%@:token=%@:refreshToken=%@:expires_in=%ld
+
+<h3 id="setprimetoken-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str1|path|string|true|The username for Amazon Prime|
+|str2|path|string|true|The access token for Amazon Prime|
+|str3|path|string|true|The refresh token for Amazon Prime|
+|n|path|integer|true|The expiration time in seconds for the access token|
+
+<h3 id="setprimetoken-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="linkplay-wiim-http-api-other">Other</h1>
 
 Existing commands, purpose unkown. To research further...
@@ -6378,6 +6491,32 @@ This operation does not require authentication
 |str|path|string|true|Unknown|
 
 <h3 id="sethexdevicename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setHexGroupName
+
+<a id="opIdsetHexGroupName"></a>
+
+`GET /setHexGroupName:{str}`
+
+*Set hex group name*
+
+...
+
+<h3 id="sethexgroupname-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="sethexgroupname-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -8823,6 +8962,34 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+## setAudioOutMax32bit
+
+<a id="opIdsetAudioOutMax32bit"></a>
+
+`GET /setAudioOutMax32bit:{n}`
+
+*Set audio output maximum 32-bit support*
+
+...
+
+n: 0 or 1
+
+<h3 id="setaudiooutmax32bit-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|The desired audio output maximum 32-bit support (0 or 1)|
+
+<h3 id="setaudiooutmax32bit-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## getAudioOutputVrms
 
 <a id="opIdgetAudioOutputVrms"></a>
@@ -8860,6 +9027,32 @@ This operation does not require authentication
 ...
 
 <h3 id="getaudiooutputvrmssupportlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setAudioOutputVrms
+
+<a id="opIdsetAudioOutputVrms"></a>
+
+`GET /setAudioOutputVrms:{str}`
+
+*Set audio output VRMS for a specific output*
+
+...
+
+<h3 id="setaudiooutputvrms-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown (possibly the output type or identifier)|
+
+<h3 id="setaudiooutputvrms-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -8924,6 +9117,34 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» cecPowerCtrl|integer|false|none|Indicates if CEC power control is enabled (0 or 1)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setCecPowerCtrl
+
+<a id="opIdsetCecPowerCtrl"></a>
+
+`GET /setCecPowerCtrl:{n}`
+
+*Set CEC power control status*
+
+...
+
+n: 0 or 1
+
+<h3 id="setcecpowerctrl-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|The desired CEC power control status (0 or 1)|
+
+<h3 id="setcecpowerctrl-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -9052,6 +9273,104 @@ Returns: 1, 2, or 3 corresponding to the supported digital filter types
 This operation does not require authentication
 </aside>
 
+## setDigitalFilterType
+
+<a id="opIdsetDigitalFilterType"></a>
+
+`GET /setDigitalFilterType:{n}`
+
+*Set digital filter type*
+
+...
+
+<h3 id="setdigitalfiltertype-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|The digital filter type to set (1, 2, or 3)|
+
+<h3 id="setdigitalfiltertype-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getOutputDigitalFilterType
+
+<a id="opIdgetOutputDigitalFilterType"></a>
+
+`GET /getOutputDigitalFilterType:{str}`
+
+*Get current output digital filter type*
+
+...
+
+<h3 id="getoutputdigitalfiltertype-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown (possibly the output type or identifier)|
+
+<h3 id="getoutputdigitalfiltertype-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getOutputDigitalFilterTypeSupportList
+
+<a id="opIdgetOutputDigitalFilterTypeSupportList"></a>
+
+`GET /getOutputDigitalFilterTypeSupportList`
+
+*Get list of supported output digital filter types*
+
+...
+
+<h3 id="getoutputdigitalfiltertypesupportlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setOutputDigitalFilterType
+
+<a id="opIdsetOutputDigitalFilterType"></a>
+
+`GET /setOutputDigitalFilterType:{str}`
+
+*Set output digital filter type*
+
+...
+
+<h3 id="setoutputdigitalfiltertype-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown (possibly the output type or identifier)|
+
+<h3 id="setoutputdigitalfiltertype-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## getDigitalInputAudioTypeSupport
 
 <a id="opIdgetDigitalInputAudioTypeSupport"></a>
@@ -9082,6 +9401,62 @@ Returns: 0x1
 This operation does not require authentication
 </aside>
 
+## getOutputVoltage
+
+<a id="opIdgetOutputVoltage"></a>
+
+`GET /getOutputVoltage`
+
+*Get output voltage*
+
+...
+
+Returns an integer
+
+> Example responses
+
+> 200 Response
+
+```json
+2
+```
+
+<h3 id="getoutputvoltage-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|integer|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setOutputVoltage
+
+<a id="opIdsetOutputVoltage"></a>
+
+`GET /setOutputVoltage:{n}`
+
+*Set output voltage*
+
+...
+
+<h3 id="setoutputvoltage-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|The desired output voltage|
+
+<h3 id="setoutputvoltage-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## getFeatureCapability
 
 <a id="opIdgetFeatureCapability"></a>
@@ -9093,6 +9468,112 @@ This operation does not require authentication
 ...
 
 <h3 id="getfeaturecapability-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## getPlayModeGainConfig
+
+<a id="opIdgetPlayModeGainConfig"></a>
+
+`GET /getPlayModeGainConfig`
+
+*Get play mode gain configuration*
+
+...
+
+<h3 id="getplaymodegainconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setPlayModeGainConfig
+
+<a id="opIdsetPlayModeGainConfig"></a>
+
+`GET /setPlayModeGainConfig:{str}`
+
+*Set play mode gain configuration*
+
+...
+
+<h3 id="setplaymodegainconfig-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setplaymodegainconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## mediaserverScan
+
+<a id="opIdmediaserverScan"></a>
+
+`GET /mediaserver:scan`
+
+*Media server scan*
+
+...
+
+<h3 id="mediaserverscan-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## mediaserverUdiskumount
+
+<a id="opIdmediaserverUdiskumount"></a>
+
+`GET /mediaserver:udiskumount`
+
+*Media server USB disk unmount*
+
+...
+
+<h3 id="mediaserverudiskumount-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## noSendMoreDeviceEvent
+
+<a id="opIdnoSendMoreDeviceEvent"></a>
+
+`GET /noSendMoreDeviceEvent:1`
+
+*Disable sending more device events*
+
+...
+
+<h3 id="nosendmoredeviceevent-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
@@ -9226,6 +9707,60 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+## setModeRename
+
+<a id="opIdsetModeRename"></a>
+
+`GET /setModeRename:{str}`
+
+*Set input mode rename information*
+
+...
+
+<h3 id="setmoderename-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|Unknown|
+
+<h3 id="setmoderename-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setMusicExplicit
+
+<a id="opIdsetMusicExplicit"></a>
+
+`GET /setMusicExplicit:{n}`
+
+*Set music explicit content filter*
+
+...
+
+n: 0 or 1
+
+<h3 id="setmusicexplicit-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|n|path|integer|true|The desired music explicit content filter status (0 or 1)|
+
+<h3 id="setmusicexplicit-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## getMvRemoteUpdateDeviceOtaInfo
 
 <a id="opIdgetMvRemoteUpdateDeviceOtaInfo"></a>
@@ -9282,6 +9817,195 @@ Status Code **200**
 |» imgList|[object]|false|none|List of images|
 |»» imgName|string|false|none|Image name|
 |»» imgVersion|string|false|none|Image version|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTuneinFavoriteState
+
+<a id="opIdsetTuneinFavoriteState"></a>
+
+`GET /setTuneinFavoriteState:songId={songId}:statu={status}`
+
+*Set TuneIn favorite state for a song*
+
+...
+
+songId: The ID of the song
+status: 0 for not favorite, 1 for favorite
+
+<h3 id="settuneinfavoritestate-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|songId|path|string|true|The ID of the song|
+|status|path|integer|true|0 for not favorite, 1 for favorite|
+
+<h3 id="settuneinfavoritestate-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTuneinLocation
+
+<a id="opIdsetTuneinLocation"></a>
+
+`GET /setTuneinLocation:latitude={latitude}:longitude={longitude}:serial={serial}`
+
+*Set TuneIn location information*
+
+...
+
+latitude: Latitude of the location
+longitude: Longitude of the location
+serial: Device serial number
+
+<h3 id="settuneinlocation-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|latitude|path|string|true|Latitude of the location|
+|longitude|path|string|true|Longitude of the location|
+|serial|path|string|true|Device serial number|
+
+<h3 id="settuneinlocation-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## setTuneinToken
+
+<a id="opIdsetTuneinToken"></a>
+
+`GET /setTuneinToken:username={username}:token={token}:refreshToken={refreshToken}:expires_in={expires_in}:userid={userid}`
+
+*Set TuneIn authentication token information*
+
+...
+
+username: TuneIn account username
+token: Authentication token
+refreshToken: Token used to refresh the authentication token
+expires_in: Time in seconds until the token expires
+userid: TuneIn user ID
+
+<h3 id="settuneintoken-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|username|path|string|true|TuneIn account username|
+|token|path|string|true|Authentication token|
+|refreshToken|path|string|true|Token used to refresh the authentication token|
+|expires_in|path|integer|true|Time in seconds until the token expires|
+|userid|path|string|true|TuneIn user ID|
+
+<h3 id="settuneintoken-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## streamServicesCapability
+
+<a id="opIdstreamServicesCapability"></a>
+
+`GET /streamServicesCapability`
+
+*Get streaming services capabilities*
+
+...
+
+Returns: { "version": "1.6", "encrypt": "1.0", "streamServices": [ { "id": "Prime", "version": "1.4", "quality": [ "SD", "HD", "UHD" ] }, { ... } ] }
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "version": "1.6",
+  "encrypt": "1.0",
+  "streamServices": [
+    {
+      "id": "Prime",
+      "version": "1.4",
+      "quality": [
+        "SD"
+      ],
+      "replayGain": true,
+      "configurable": true,
+      "active": true,
+      "brand": "WiiM",
+      "model": "Amp"
+    }
+  ]
+}
+```
+
+<h3 id="streamservicescapability-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+
+<h3 id="streamservicescapability-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» version|string|false|none|API version|
+|» encrypt|string|false|none|Encryption version|
+|» streamServices|[object]|false|none|List of supported streaming services and their capabilities|
+|»» id|string|false|none|Streaming service identifier|
+|»» version|string|false|none|Version of the streaming service integration|
+|»» quality|[string]|false|none|List of supported audio quality levels for this service|
+|»» replayGain|boolean|false|none|Indicates if replay gain is supported for this service (optional)|
+|»» configurable|boolean|false|none|Indicates if the service is configurable (optional)|
+|»» active|boolean|false|none|Indicates if the service is currently active (optional)|
+|»» brand|string|false|none|Brand associated with the service (optional)|
+|»» model|string|false|none|Model associated with the service (optional)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## tidalLogin
+
+<a id="opIdtidalLogin"></a>
+
+`GET /tidallogin:oauthcode={str}`
+
+*Tidal login using OAuth code*
+
+...
+
+<h3 id="tidallogin-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|str|path|string|true|The OAuth code obtained from Tidal authentication flow|
+
+<h3 id="tidallogin-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|None|
 
 <aside class="success">
 This operation does not require authentication
