@@ -5,6 +5,7 @@
 ![Version](https://img.shields.io/github/package-json/v/cvdlinden/wiim-httpapi)
 ![License](https://img.shields.io/github/license/cvdlinden/wiim-httpapi)
 
+> You can find all of the documentation and API references at: <https://cvdlinden.github.io/wiim-httpapi/>  
 > Status: Work in progress!
 
 Exploring the HTTP API for WiiM products by documenting the known endpoints.
@@ -138,7 +139,7 @@ Uses a global [js-yaml](https://www.npmjs.com/package/js-yaml) install:
 npm install -g js-yaml
 ```
 
-#### OpenAPI.yaml to OpenAPI.md (Markdown)
+<!-- #### OpenAPI.yaml to OpenAPI.md (Markdown)
 
 Use ```npm run openapi2md``` to create an Markdown version of the YAML file. It will create/overwrite the [openapi.md](openapi.md) file!
 
@@ -149,7 +150,7 @@ npm install -g widdershins
 ```
 
 * <https://github.com/Mermade/widdershins>
-* <https://techdocs.studio/blog/openapi-to-markdown>
+* <https://techdocs.studio/blog/openapi-to-markdown> -->
 
 ### Reverse proxy
 
