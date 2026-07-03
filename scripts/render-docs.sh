@@ -27,9 +27,12 @@ HTML_ONLY=0
 mkdir -p "$OUT_DIR"
 
 echo ">> Building HTML with Redocly ($SPEC -> $HTML)"
-# --yes so CI/non-interactive runs don't prompt to install; version pinned-ish
-# to the 2.x line. Node < 20 prints an EBADENGINE warning but still works.
-npx --yes @redocly/cli@2 build-docs "$SPEC" -o "$HTML"
+# --yes so CI/non-interactive runs don't prompt to install. Pinned to 2.36.0,
+# the last line verified to run on Node 18 (newer 2.37+ still WORK on Node 18
+# but print a louder EBADENGINE warning). Override with REDOCLY_VERSION on a
+# machine with Node >= 20.19. The EBADENGINE warning is non-fatal.
+REDOCLY_VERSION="${REDOCLY_VERSION:-2.36.0}"
+npx --yes "@redocly/cli@${REDOCLY_VERSION}" build-docs "$SPEC" -o "$HTML"
 
 if [ "$HTML_ONLY" -eq 1 ]; then
   echo ">> HTML only requested; done: $HTML"
