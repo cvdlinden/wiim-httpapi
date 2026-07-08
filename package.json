@@ -26,7 +26,7 @@
     "express": "^5.2.1",
     "pagefind": "^1.5.2",
     "swagger-ui-express": "^5.0.1",
-    "vitepress-plugin-pagefind": "^0.4.20",
+    "vitepress-plugin-pagefind": "^0.4.22",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
