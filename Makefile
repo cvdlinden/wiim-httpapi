@@ -1,16 +1,18 @@
 # WiiM HTTP API docs — build helpers.
 #
-#   make check   validate openapi.yaml (parse + duplicate-key detection)
-#   make html    render a readable single-file HTML (Redoc)
-#   make pdf      render HTML + PDF (Redoc + headless Chrome)
-#   make json     regenerate openapi.json from openapi.yaml
-#   make clean    remove build/ output
+#   make check                 validate openapi.yaml (parse + duplicate-key detection)
+#   make html                  render a readable single-file HTML (Redoc)
+#   make pdf                   render HTML + PDF (Redoc + headless Chrome/Firefox)
+#   make pdf ENGINE=firefox    force Firefox for the PDF step (default: auto)
+#   make json                  regenerate openapi.json from openapi.yaml
+#   make clean                 remove build/ output
 #
 # Rendering needs npx (bundled with npm); the PDF step additionally needs a
-# Chromium/Chrome binary. Each target checks for what it needs and prints a
-# clear message if a tool is missing.
+# Chromium/Chrome or Firefox binary. Each target checks for what it needs and
+# prints a clear message if a tool is missing.
 
 SPEC := openapi.yaml
+ENGINE := auto
 
 .PHONY: check html pdf json clean help
 
@@ -40,10 +42,12 @@ pdf: check
 	@if ! command -v google-chrome-stable >/dev/null 2>&1 \
 	    && ! command -v google-chrome >/dev/null 2>&1 \
 	    && ! command -v chromium >/dev/null 2>&1 \
-	    && ! command -v chromium-browser >/dev/null 2>&1; then \
-		echo "WARNING: no Chrome/Chromium found; only HTML will be produced." >&2; \
+	    && ! command -v chromium-browser >/dev/null 2>&1 \
+	    && ! command -v firefox >/dev/null 2>&1 \
+	    && ! command -v firefox-esr >/dev/null 2>&1; then \
+		echo "WARNING: no Chrome/Chromium/Firefox found; only HTML will be produced." >&2; \
 	fi
-	@./scripts/render-docs.sh
+	@./scripts/render-docs.sh --engine=$(ENGINE)
 
 # --- generated json ----------------------------------------------------
 json:
