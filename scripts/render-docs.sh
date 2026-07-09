@@ -54,8 +54,23 @@ echo ">> Building HTML with Redocly ($SPEC -> $HTML)"
 # the last line verified to run on Node 18 (newer 2.37+ still WORK on Node 18
 # but print a louder EBADENGINE warning). Override with REDOCLY_VERSION on a
 # machine with Node >= 20.19. The EBADENGINE warning is non-fatal.
+#
+# --theme.openapi.expandResponses=all is NOT cosmetic — without it, Redoc
+# renders every response body's schema behind an inactive "Schema" tab
+# (defaulting to "Example Value" instead) that only populates on a live
+# click. A static export (this HTML file, and doubly so the PDF printed
+# from it) never fires that click, so EVERY per-field description this
+# project's enrichment work adds — mode-value tables, curpos's ms-vs-µs
+# heuristic, hex/HTML decode notes, all of it — silently vanishes from
+# both outputs even though it's sitting right there in openapi.yaml.
+# Confirmed by extracting PDF text before/after: 0 matches for schema-only
+# content (e.g. "36000000", part of curpos's own description) without this
+# flag, dozens with it. Path-level `description:` prose (not inside a
+# schema) was never affected — only content living under
+# `properties.*.description` was.
 REDOCLY_VERSION="${REDOCLY_VERSION:-2.36.0}"
-npx --yes "@redocly/cli@${REDOCLY_VERSION}" build-docs "$SPEC" -o "$HTML"
+npx --yes "@redocly/cli@${REDOCLY_VERSION}" build-docs "$SPEC" -o "$HTML" \
+  --theme.openapi.expandResponses=all
 
 if [ "$HTML_ONLY" -eq 1 ]; then
   echo ">> HTML only requested; done: $HTML"
