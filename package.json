@@ -6,6 +6,8 @@
   "scripts": {
     "openapi2json": "js-yaml openapi.yaml > openapi.json",
     "generate": "npm run openapi2json",
+    "pdf": "./scripts/render-docs.sh",
+    "pdf:html": "./scripts/render-docs.sh --html",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
