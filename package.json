@@ -1,6 +1,6 @@
 {
   "name": "wiim-httpapi",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "description": "Exploring the HTTP API for WiiM products. Work in progress...",
   "main": "index.js",
   "scripts": {
@@ -26,11 +26,17 @@
     "express": "^5.2.1",
     "pagefind": "^1.5.2",
     "swagger-ui-express": "^5.0.1",
-    "vitepress-plugin-pagefind": "^0.4.20",
+    "vitepress-plugin-pagefind": "^0.4.24",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
+    "typescript": "^5.9.3",
     "vitepress": "^1.6.4",
     "vitepress-openapi": "^0.1.20"
+  },
+  "overrides": {
+    "esbuild": "^0.25.0",
+    "vite": "^6.4.2",
+    "nanoid": "^5.0.9"
   }
 }
