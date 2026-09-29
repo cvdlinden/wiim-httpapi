@@ -133,3 +133,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Rendered docs (scripts/render-docs.sh)
+build/
