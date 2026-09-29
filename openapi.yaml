@@ -221,10 +221,27 @@ paths:
       tags:
         - Playback control
       summary: Get the playback status
-      description: "Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus"
+      description: |-
+        Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatus
+
+        Note: The extended variant `getPlayerStatusEx` returns the same fields
+        (see there for its own quirks - not always supported, but preferred
+        when it is) - this is the base/canonical command both share the
+        `PlayerStatus` schema with. See that schema for the full per-field
+        documentation.
+
+        NOTE - Seems to be superseded by UPnP in practice for playback status
+        for most device types and families. It provides more data in any case.
+        At least the WiiM app uses UPnP as far as we can tell, and some
+        devices seem to *only* work properly with UPnP (using AVTransport
+        `GetInfoEx`).
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
+      x-sources:
+        - "rustywiim (src/device/capabilities.rs - every FamilyProfile defaults
+          playback_access to AccessMethod::UpnpPolled; src/device/upnp.rs's
+          GetInfoEx client)"
       responses:
         "200":
           description: Successful response
@@ -480,14 +497,33 @@ paths:
       description: |
         https://10.10.10.254/httpapi.asp?command=setPlayerCmd:loopmode:n
 
-        n = 
-        - -1: ...
-        - 0: Shuffle disabled, Repeat enabled - loop
-        - 1: Shuffle disabled, Repeat enabled - loop once
-        - 2: Shuffle enabled, Repeat enabled - loop
-        - 3: Shuffle enabled, Repeat disabled
-        - 4: Shuffle disabled, Repeat disabled
-        - 5: Shuffle enabled, Repeat enabled - loop once
+        n = same numbering as the `loop` field in getPlayerStatus's response:
+        - 0: Repeat all
+        - 1: Repeat one
+        - 2: Shuffle + repeat all
+        - 3: Shuffle only
+        - 4: Off
+        - 5: Shuffle + repeat one
+
+        Matches the LinkPlay-maintained `wiim` SDK's single `LoopMode` enum
+        (values 0-5, used identically for read and write, no vendor
+        distinction) and is confirmed against real recent-firmware
+        hardware (WiiM devices, iEAST AudioCast).
+
+        QUIRK - the official WiiM PDF documents a DIFFERENT table for this
+        command specifically (0=off, 1=repeat one, 2=shuffle+repeat,
+        -1=repeat all), which doesn't even match the PDF's own read-side
+        table for `loop` (0=repeat all, 1=repeat one, 2=shuffle loop,
+        3=shuffle no loop, 4=off). It could be a documentation error or
+	it could reflect real past firmware behavior. It does not match
+        current firmware though - best-supported theory (pywiim issue #17:
+        WiiM Ultra fw 5.2.813259 shown reporting all 6 distinct states,
+        contradicting the older 5-state WiiM-only table) is that WiiM
+        firmware used to have a genuinely asymmetric read/write protocol
+        and has since converged onto the single scheme above. Not proven
+        for every model/firmware still in the field - treat the table
+        above as what to implement against, not as something that was
+        always true.
       externalDocs:
         description: HTTP API for WiiM PRODUCTS Version 1.2
         url: "https://www.wiimhome.com/pdf/HTTP%20API%20for%20WiiM%20Products.pdf"
@@ -507,13 +543,14 @@ paths:
               - 5
             default: 4
           description: |-
-            - -1: ...
-            - 0: Shuffle disabled, Repeat enabled - loop
-            - 1: Shuffle disabled, Repeat enabled - loop once
-            - 2: Shuffle enabled, Repeat enabled - loop
-            - 3: Shuffle enabled, Repeat disabled
-            - 4: Shuffle disabled, Repeat disabled
-            - 5: Shuffle enabled, Repeat enabled - loop once
+            - 0: Repeat all
+            - 1: Repeat one
+            - 2: Shuffle + repeat all
+            - 3: Shuffle only
+            - 4: Off
+            - 5: Shuffle + repeat one
+            - -1: Legacy/older-firmware value for repeat all (see the
+              QUIRK above) - send 0 on current firmware instead
       responses:
         "200":
           $ref: "#/components/responses/StringOK"
@@ -7919,6 +7956,37 @@ paths:
       responses:
         "200":
           description: Successful response
+  /getPlayerStatusEx:
+    get:
+      tags:
+        - Playback control
+      summary: Get the extended playback status
+      description: |-
+        Makes a call to https://10.10.10.254/httpapi.asp?command=getPlayerStatusEx
+
+        Appears equivalent to `getPlayerStatus` when supported (it isn't
+        always, especially by 3rd party non-WiiM devices) and seems to be
+        preferred to `getPlayerStatus` by most clients that don't use UPnP
+        when it is.
+
+      externalDocs:
+        description: "pywiim / linkplay-cli (real-device usage)"
+        url: "https://github.com/mjcumming/pywiim"
+      x-sources:
+        - "pywiim (pywiim/api/parser.py, models.py)"
+        - "linkplay-cli (linkplay_cli/cli.py:137)"
+        - "rustywiim captures/test-devices/*.json + captures/test-sources/*.json
+          (30 real-device captures cross-diffed field-by-field between
+          getPlayerStatus and getPlayerStatusEx)"
+      parameters: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/PlayerStatus"
+      operationId: getPlayerStatusEx
 
 externalDocs:
   url: "https://github.com/cvdlinden/wiim-httpapi"
@@ -8714,32 +8782,55 @@ components:
         mode:
           type: string
           description: |-
-            0: None 
-            1: AirPlay or AirPlay 2 
-            2: DLNA streaming 
-            10: Playing network content, e.g. vTuner, Home Media Share, Amazon Music, Deezer, etc 
-            11: playing UDISK (Local USB disk on device) 16: TF card playlist 20: playback start by HTTPAPI 
-            31: Spotify Connect 
-            32: TIDAL Connect 
-            40: AUX-In/Line-In input mode 
-            41: Bluetooth input mode 
-            42: External storage 
-            43: Optical-In input mode 
-            47: Line-In #2 input mode 
-            50: Mirror 
-            51: USBDAC input mode 
-            60: Voice mail
-            99: The Device is a Guest in a Multiroom Zone
+            Source / play mode.
+            51/60/99 are from the official WiiM HTTP API PDF (see
+            externalDocs); the rest were added from other sources, each
+            with its own provenance note since confidence varies - some
+            corroborated by two or three independent projects, one (58) by
+            none at all:
+              0:  None
+              1:  AirPlay or AirPlay 2
+              2:  DLNA streaming
+              3:  QPlay - Wiim-Dashboard constants.ts only. pywiim's MODE_MAP
+                  labels this generically "wifi".
+              10: Playing network content, e.g. vTuner, Home Media Share,
+                  Amazon Music, Deezer, etc
+              11: playing UDISK (Local USB disk on device). See QUIRK
+              16: TF card playlist
+              31: Spotify Connect
+              32: TIDAL Connect
+              34: Lyrion / Squeezelite (LMS) (from pywiim MODE_MAP)
+              36: Qobuz Connect - (from pywiim MODE_MAP and
+                  Wiim-Dashboard constants.ts)
+              40: AUX-In/Line-In input mode
+              41: Bluetooth input mode
+              42: External storage
+              43: Optical-In input mode
+              44: RCA (Audio Pro line-in) (from pywiim MODE_MAP, confirmed
+                  via tcpdump on [Audio Pro] Link 2).
+              47: Line-In #2 input mode
+              49: HDMI ARC input
+              50: Mirror
+              51: USBDAC input mode
+              54: Phono
+              60: Voice mail
+              99: The Device is a Guest in a Multiroom Zone
+
+            QUIRK - mode 11 (UDISK/USB) is not always reported directly.
+            Some devices/firmware report mode 10 (network) while actually
+            playing from locally-attached USB storage, and the only way to
+            tell is a companion field: `vendor` is set to the literal string
+            "UDiskLocal" in that case.
           example: "10"
         loop:
           type: string
           description: |-
-            Is a Combination of SHUFFLE and REPEAT modes 0: SHUFFLE:
-            disabled REPEAT: enabled - loop 1: SHUFFLE: disabled
-            REPEAT: enabled - loop once 2: SHUFFLE: enabled REPEAT:
-            enabled - loop 3: SHUFFLE: enabled REPEAT: disabled 4:
-            SHUFFLE: disabled REPEAT: disabled 5: SHUFFLE: enabled
-            REPEAT: enabled - loop once
+            Combination of SHUFFLE and REPEAT modes. Uses the same
+            numbering as `setPlayerCmd:loopmode` on current firmware - see
+            that command for the full table and the real-device evidence
+            behind it (the official WiiM PDF documents an older,
+            mismatching write-side table that doesn't reflect current
+            firmware behavior).
           example: "-1"
         eq:
           type: string
@@ -8763,27 +8854,49 @@ components:
           example: "play"
         curpos:
           type: string
-          description: "Current position, in ms"
+          description: |-
+            Current position, normally in milliseconds.
+            QUIRK: streaming services (Spotify, Tidal, Qobuz) report position
+            in MICROSECONDS instead of ms on some firmware. Heuristic used by
+            pywiim: if the value exceeds 36000000 (10h in ms) treat it as us.
+            Known-ms sources include airplay, dlna, network, udisk, usb, wifi.
+            Independently reimplemented in rustywiim with the exact same
+            36000000 threshold, confirming pywiim's heuristic, but as an
+            always-ms allowlist keyed on the numeric `mode` value rather than
+            source name: modes 1 (AirPlay), 2 (DLNA), 10/20 (network/local
+            URL/WiFi), 11/42/51 (USB variants) are always treated as ms
+            regardless of magnitude; any other mode falls back to the
+            36000000 threshold check.
+            QUIRK: Bluetooth (mode 41) commonly reports curpos=0/totlen=0
+            while playing; and some firmware returns a constant garbage curpos
+            greater than totlen - treat curpos > totlen as invalid (confirmed
+            independently in rustywiim, which skips the position update
+            entirely rather than displaying it when curpos > totlen).
           example: "63634"
         offset_pts:
           type: string
-          description: "Offset position, in ms"
+          description: "Alternate/offset position; same unit and caveats as curpos"
           example: "63634"
         totlen:
           type: string
-          description: Track duration in ms. Zero when playing a live stream.
+          description: |-
+            Track duration, same unit as curpos (ms, or us for some streaming
+            sources). Zero when playing a live stream.
           example: "0"
         Title:
           type: string
-          description: hexed string of the track title
+          description: |-
+            Track title, hex-encoded UTF-8. Decode with
+            bytes.fromhex(s).decode("utf-8"), then HTML-unescape (the decoded
+            string may contain HTML entities such as &amp;).
           example: "4D6F726E696E67204C69676874"
         Artist:
           type: string
-          description: hexed string of the artist
+          description: "Artist, hex-encoded UTF-8 (decode as for Title)"
           example: "4F77656E20526965676C696E67"
         Album:
           type: string
-          description: hexed string of the album
+          description: "Album, hex-encoded UTF-8 (decode as for Title)"
           example: "4D6F726E696E67204C69676874"
         alarmflag:
           type: string
