@@ -2083,28 +2083,155 @@
         }
       }
     },
-    "/EQGetLV2SourceBand:{str}": {
+    "/EQGetLV2SourceBand:{\"source_name\":\"{source}\",\"pluginURI\":\"{pluginURI}\"}": {
       "get": {
         "tags": [
           "Equalizer"
         ],
         "summary": "Get LV2 source band",
-        "description": "...",
+        "description": "Get PEQ source band parameters for a given source and plugin URI.",
         "operationId": "eqGetLV2SourceBand",
         "parameters": [
           {
-            "name": "str",
+            "name": "source",
             "in": "path",
             "required": true,
+            "description": "The audio source name (e.g. 'wifi', or 'HDMI')",
             "schema": {
-              "type": "string"
-            },
-            "description": "Unknown"
+              "type": "string",
+              "example": "wifi"
+            }
+          },
+          {
+            "name": "pluginURI",
+            "in": "path",
+            "required": true,
+            "description": "The URI of the LV2 plugin",
+            "schema": {
+              "type": "string",
+              "example": "http://moddevices.com/plugins/caps/EqNp"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "EQLevel": {
+                      "type": "integer"
+                    },
+                    "source_name": {
+                      "type": "string"
+                    },
+                    "EQStat": {
+                      "type": "string",
+                      "description": "Global EQ state.",
+                      "enum": [
+                        "On",
+                        "Off"
+                      ],
+                      "example": "On"
+                    },
+                    "Name": {
+                      "type": "string",
+                      "description": "Name of the active preset profile. Returns an empty string if custom/unsaved PEQ parameters are set.",
+                      "example": "Some profile"
+                    },
+                    "pluginURI": {
+                      "type": "string"
+                    },
+                    "channelMode": {
+                      "type": "string",
+                      "description": "If PEQ applies to both channels, or left/right separately.",
+                      "enum": [
+                        "Stereo",
+                        "L/R"
+                      ],
+                      "example": "Stereo"
+                    },
+                    "EQBand": {
+                      "type": "array",
+                      "description": "Array of PEQ parameters for bands a through l.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "index": {
+                            "type": "integer",
+                            "description": "Zero-based index of the parameter item."
+                          },
+                          "param_name": {
+                            "type": "string",
+                            "description": "Parameter key identifier matching `{band}_{type}` (e.g. `a_mode`, `b_freq`, `a_q`, `a_gain`).\n\nKey types:\n- `*_mode`: Filter mode enum (-1.0: Off, 0.0: Low Shelf, 1.0: Peak/Bell, 2.0: High Shelf, 3.0: Low Pass, 4.0: High Pass)\n- `*_freq`: Target frequency in Hz\n- `*_q`: Width (Q factor) of the EQ curve\n- `*_gain`: Band gain in dB (positive or negative)"
+                          },
+                          "value": {
+                            "type": "number",
+                            "description": "Parameter value. Interpret based on `param_name`:\n- For `*_mode`: -1.0 (off), 0.0 (LS/low shelf), 1.0 (PK/peak), 2.0 (HS/high shelf), 3.0 (LP/low pass), 4.0 (HP/high pass)\n- For `*_freq`: Frequency in Hz\n- For `*_q`: Curve Q-factor width\n- For `*_gain`: Gain level in dB"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": "OK",
+                  "EQLevel": 1,
+                  "source_name": "wifi",
+                  "EQStat": "On",
+                  "Name": "Some profile name",
+                  "pluginURI": "http://moddevices.com/plugins/caps/EqNp",
+                  "channelMode": "Stereo",
+                  "EQBand": [
+                    {
+                      "index": 0,
+                      "param_name": "a_mode",
+                      "value": -1
+                    },
+                    {
+                      "index": 1,
+                      "param_name": "a_freq",
+                      "value": 31.3
+                    },
+                    {
+                      "index": 2,
+                      "param_name": "a_q",
+                      "value": 0.25
+                    },
+                    {
+                      "index": 3,
+                      "param_name": "a_gain",
+                      "value": 0
+                    },
+                    {
+                      "index": 4,
+                      "param_name": "b_mode",
+                      "value": 0
+                    },
+                    {
+                      "index": 5,
+                      "param_name": "b_freq",
+                      "value": 100
+                    },
+                    {
+                      "index": 6,
+                      "param_name": "b_q",
+                      "value": 0.74
+                    },
+                    {
+                      "index": 7,
+                      "param_name": "b_gain",
+                      "value": 4
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       }
