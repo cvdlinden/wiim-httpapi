@@ -23,10 +23,10 @@
   },
   "homepage": "https://github.com/cvdlinden/wiim-httpapi#readme",
   "dependencies": {
-    "express": "^5.2.1",
-    "pagefind": "^1.5.2",
+    "express": "^5.3.0",
+    "pagefind": "^1.6.0",
     "swagger-ui-express": "^5.0.1",
-    "vitepress-plugin-pagefind": "^0.4.25",
+    "vitepress-plugin-pagefind": "^0.4.27",
     "yaml": "^2.9.1"
   },
   "devDependencies": {
